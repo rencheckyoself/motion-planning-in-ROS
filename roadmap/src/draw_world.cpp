@@ -101,6 +101,11 @@ int main(int argc, char** argv)
 
     marker.points = polygon;
 
+    marker.pose.orientation.x = 0;
+    marker.pose.orientation.y = 0;
+    marker.pose.orientation.z = 0;
+    marker.pose.orientation.w = 1;
+
     marker.scale.x = 0.5;
 
     marker.color.r = r;

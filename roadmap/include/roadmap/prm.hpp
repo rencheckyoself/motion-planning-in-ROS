@@ -65,6 +65,12 @@ namespace prm
     /// \param samples the number of nodes for the road map
     RoadMap(std::vector<std::vector<rigid2d::Vector2D>> polygon_verticies, std::vector<double> xboundary, std::vector<double> yboundary, unsigned int samples);
 
+    /// \brief Wrapper function to call all nessissary functions to build the PRM
+    ///
+    void build_map();
+
+    std::vector<Node> get_nodes();
+
   private:
     std::vector<std::vector<rigid2d::Vector2D>> obstacles;
     std::vector<double> x_bounds; // x bounds of the map

@@ -61,6 +61,17 @@ namespace prm
     obstacles = polygon_verticies;
   }
 
+  void RoadMap::build_map()
+  {
+    sample_config_space();
+    connect_nodes();
+  }
+
+  std::vector<Node> RoadMap::get_nodes()
+  {
+    return nodes;
+  }
+
   // PRIVATE MEMBER FUNCTIONS
   void RoadMap::sample_config_space()
   {
@@ -96,12 +107,15 @@ namespace prm
       // Find k nearest neighbors
       std::vector<Node> knn = nearest_neighbors_bf(node);
 
+      std::cout << "Matches: " << knn.size() << "\n";
+
       // Add Edges where appropriate
       for(auto qp : knn)
       {
         // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
         if(!node.IsConnected(qp.id) && qp.distance < 0.15)
         {
+
           bool collision_occured = false;
 
           // check for path collisions with the obstacles
@@ -120,6 +134,8 @@ namespace prm
           }
         }
       }
+
+      std::cout << "Edges Created: " << node.edges.size() << "\n";
     }
   }
 
