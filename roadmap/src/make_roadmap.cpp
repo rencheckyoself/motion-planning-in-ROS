@@ -20,17 +20,31 @@
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
 
+/// \brief Convert a Vector2D into a geometry_msgs/Point
+/// \param vec point represented with a 2D vector
+/// \returns a point represented with a geometry_msgs/Point
+geometry_msgs::Point Vec2D_to_GeoPt(rigid2d::Vector2D vec)
+{
+  geometry_msgs::Point point;
+
+  point.x = vec.x;
+  point.y = vec.y;
+  point.z = 0;
+
+  return point;
+}
+
 /// \brief Create a spherical Marker based on a node struct
 /// \param node a node struct to vizualize
 /// \returns a marker to add to the MarkerArray
-visualization_msgs::Marker make_sphere_marker(prm::Node node)
+visualization_msgs::Marker make_marker(prm::Node node)
 {
   visualization_msgs::Marker marker;
 
   marker.header.frame_id = "map";
   marker.header.stamp = ros::Time::now();
 
-  marker.ns = "PRM";
+  marker.ns = "Nodes";
   marker.id = node.id;
 
   marker.type = visualization_msgs::Marker::SPHERE;
@@ -44,13 +58,50 @@ visualization_msgs::Marker make_sphere_marker(prm::Node node)
   marker.pose.orientation.z = 0;
   marker.pose.orientation.w = 1;
 
-  marker.scale.x = 0.1;
-  marker.scale.y = 0.1;
-  marker.scale.z = 0.1;
+  marker.scale.x = 0.3;
+  marker.scale.y = 0.3;
+  marker.scale.z = 0.3;
 
   marker.color.r = 1.0;
-  marker.color.b = 0.0;
-  marker.color.g = 0.0;
+  marker.color.b = 130./255.;
+  marker.color.g = 208./255.;
+  marker.color.a = 1.0;
+
+  marker.lifetime = ros::Duration();
+
+  return marker;
+}
+
+/// \brief Create a line Marker based on an edge struct
+/// \param edge an edge struct to vizualize
+/// \returns a marker to add to the MarkerArray
+visualization_msgs::Marker make_marker(prm::Edge edge)
+{
+  visualization_msgs::Marker marker;
+
+  std::vector<geometry_msgs::Point> points = {Vec2D_to_GeoPt(edge.node1), Vec2D_to_GeoPt(edge.node2)};
+
+  marker.header.frame_id = "map";
+  marker.header.stamp = ros::Time::now();
+
+  marker.ns = "Edges";
+  marker.id = edge.edge_id;
+
+  marker.type = visualization_msgs::Marker::LINE_LIST;
+  marker.action = visualization_msgs::Marker::ADD;
+
+  marker.pose.orientation.x = 0;
+  marker.pose.orientation.y = 0;
+  marker.pose.orientation.z = 0;
+  marker.pose.orientation.w = 1;
+
+  marker.points = points;
+
+  marker.scale.x = 0.1;
+
+  marker.color.r = 1.0;
+  marker.color.g = 124./255.;
+  marker.color.b = 124./255.;
   marker.color.a = 1.0;
 
   marker.lifetime = ros::Duration();
@@ -75,9 +126,9 @@ int main(int argc, char** argv)
   n.getParam("map_y_lims", map_y_lims);
   n.getParam("obstacles", obstacles);
 
-  ROS_INFO_STREAM("MAP: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
-  ROS_INFO_STREAM("MAP: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-  ROS_INFO_STREAM("Loaded Params");
+  ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
+  ROS_INFO_STREAM("PRM: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("PRM: Loaded Params");
 
   // Build Obstacles vector
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
@@ -104,29 +155,28 @@ int main(int argc, char** argv)
 
   // Initialize PRM
 
-  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims, 500);
+  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims, 100);
 
   prob_road_map.build_map();
 
   const auto all_nodes = prob_road_map.get_nodes();
+  const auto all_edges = prob_road_map.get_edges();
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
 
-  ROS_INFO_STREAM("Nodes created: " << all_nodes.size());
+  // ROS_INFO_STREAM("Nodes created: " << all_nodes.size());
 
-  // build a marker array to display the graph structure
+  // Put a spherical marker at each node
   for(auto node : all_nodes)
   {
-    ROS_INFO_STREAM("Node #" << node.id << "\t" << node.point << "\t" << node.edges.size() << " edges.");
+    markers.push_back(make_marker(node));
+  }
 
-    // Put a cylindrical marker at each node
-    markers.push_back(make_sphere_marker(node));
-
-    // for(auto edge : node.edges)
-    // {
-    //
-    // }
+  // Draw a line to show all connections.
+  for(auto edge : all_edges)
+  {
+    markers.push_back(make_marker(edge));
   }
 
   pub_marks.markers = markers;

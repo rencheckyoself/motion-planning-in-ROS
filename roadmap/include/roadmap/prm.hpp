@@ -10,10 +10,16 @@
 
 namespace prm
 {
-
   struct Edge
   {
-    int child_id = -1; // node id for the connected node
+    int edge_id = -1;
+
+    int node1_id = -1;
+    rigid2d::Vector2D node1;
+
+    int node2_id = -1;
+    rigid2d::Vector2D node2;
+
     double distance; // length of the edge
   };
 
@@ -69,7 +75,13 @@ namespace prm
     ///
     void build_map();
 
-    std::vector<Node> get_nodes();
+    /// \brief Wrapper function to get the vector of nodes
+    /// \returns the full node vector
+    std::vector<Node> get_nodes() const;
+
+    /// \brief Wrapper function to get the vector of unique edges
+    /// \returns the full edge vector
+    std::vector<Edge> get_edges() const;
 
   private:
     std::vector<std::vector<rigid2d::Vector2D>> obstacles;
@@ -77,6 +89,7 @@ namespace prm
     std::vector<double> y_bounds; // y bounds of the map
 
     std::vector<Node> nodes; // all nodes in the road map
+    std::vector<Edge> all_edges; // all edges in the road map
 
     unsigned int n = 100; // number of nodes in the map
     unsigned int k = 10; // number of nearest neighbors to find
@@ -91,8 +104,8 @@ namespace prm
 
     /// \brief Brute force k-nearest search
     /// \param reference to a node object to base the search on
-    /// \returns a vector of the k-nearest nodes to the input node
-    std::vector<Node> nearest_neighbors_bf(const Node &node);
+    /// \returns a vector of references the k-nearest nodes to the input node
+    std::vector<std::reference_wrapper<Node>> nearest_neighbors_bf(const Node &node);
   };
 }
 

@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 
   ROS_INFO_STREAM("MAP: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("MAP: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-  ROS_INFO_STREAM("Loaded Params");
+  ROS_INFO_STREAM("MAP: Loaded Params");
 
   std::vector<std::vector<geometry_msgs::Point>> polygons;
   std::vector<geometry_msgs::Point> buf_poly, map_edge;
@@ -86,7 +86,7 @@ int main(int argc, char** argv)
 
   std::string ns = "world_map";
   int id = 0;
-  float r = 1.0, g = 0.0, b = 1.0;
+  float r = 33./255., g = 36./255., b = 61./255.;
 
   for(auto polygon : polygons)
   {
@@ -109,8 +109,8 @@ int main(int argc, char** argv)
     marker.scale.x = 0.5;
 
     marker.color.r = r;
-    marker.color.b = b;
     marker.color.g = g;
+    marker.color.b = b;
     marker.color.a = 1.0;
 
     marker.lifetime = ros::Duration();
@@ -125,9 +125,9 @@ int main(int argc, char** argv)
   marker.id = id;
   marker.points = map_edge;
 
-  marker.color.r = 0;
-  marker.color.b = 0;
-  marker.color.g = 0;
+  // marker.color.r = 0;
+  // marker.color.b = 0;
+  // marker.color.g = 0;
 
   markers.push_back(marker);
 

@@ -2,6 +2,7 @@
 /// \brief A library for building a Probabilistic Road Map
 
 #include <algorithm>
+#include <functional>
 #include <iostream>
 #include <random>
 #include <unordered_set>
@@ -67,9 +68,14 @@ namespace prm
     connect_nodes();
   }
 
-  std::vector<Node> RoadMap::get_nodes()
+  std::vector<Node> RoadMap::get_nodes() const
   {
     return nodes;
+  }
+
+  std::vector<Edge> RoadMap::get_edges() const
+  {
+    return all_edges;
   }
 
   // PRIVATE MEMBER FUNCTIONS
@@ -102,20 +108,18 @@ namespace prm
 
   void RoadMap::connect_nodes()
   {
-    for(auto node : nodes)
+    int edge_cnt = 0;
+    for(auto & node : nodes)
     {
       // Find k nearest neighbors
-      std::vector<Node> knn = nearest_neighbors_bf(node);
+      const auto knn = nearest_neighbors_bf(node);
 
-      std::cout << "Matches: " << knn.size() << "\n";
-
-      // Add Edges where appropriate
-      for(auto qp : knn)
+      // Evaluate each match
+      for(auto & qp : knn)
       {
         // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
-        if(!node.IsConnected(qp.id) && qp.distance < 0.15)
+        if(!node.IsConnected(qp.get().id) && qp.get().distance > 0.15)
         {
-
           bool collision_occured = false;
 
           // check for path collisions with the obstacles
@@ -126,35 +130,50 @@ namespace prm
           {
             // Create the edge
             Edge buf_edge;
-            buf_edge.child_id = qp.id;
-            buf_edge.distance = qp.distance;
 
-            node.edges.push_back(buf_edge); // add edge to the node
-            node.id_set.insert(qp.id); // add connected node id to the unordered set
+            buf_edge.edge_id = edge_cnt;
+
+            buf_edge.node1_id = node.id;
+            buf_edge.node1 = node.point;
+
+            buf_edge.node2_id = qp.get().id;
+            buf_edge.node2 = qp.get().point;
+
+            buf_edge.distance = qp.get().distance;
+
+            all_edges.push_back(buf_edge);
+
+            // add edge to each node
+            node.edges.push_back(buf_edge);
+            qp.get().edges.push_back(buf_edge);
+
+             // add connected node id to the unordered set
+            node.id_set.insert(qp.get().id);
+            qp.get().id_set.insert(node.id);
+
+            edge_cnt++;
           }
         }
       }
-
-      std::cout << "Edges Created: " << node.edges.size() << "\n";
     }
   }
 
-  std::vector<Node> RoadMap::nearest_neighbors_bf(const Node &node)
+  std::vector<std::reference_wrapper<Node>> RoadMap::nearest_neighbors_bf(const Node &node)
   {
-    std::vector<Node> input = nodes;
-
     // calculate the distance between all nodes
-    for(auto qp : input)
+    for(auto & qp : nodes)
     {
       qp.distance = node.point.distance(qp.point);
     }
 
-    // Sort nodes by the calculated distance
-    std::sort(input.begin(), input.end());
+    // create a vector of references to the elements of the nodes vector
+    std::vector<std::reference_wrapper<Node>> input(nodes.begin(), nodes.end());
 
-    std::vector<Node> output(input.begin()+1, input.begin()+k);
+    // Sort the references by the calculated distance
+    std::sort(input.begin(), input.end(), [](std::reference_wrapper<Node> lhs, std::reference_wrapper<Node> rhs) {return lhs.get().distance < rhs.get().distance;});
+
+    std::vector<std::reference_wrapper<Node>> output(input.begin()+1, input.begin()+1+k);
 
     return output;
   }
-
 }
