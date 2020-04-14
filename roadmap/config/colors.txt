@@ -1,4 +1,0 @@
-Dark Blue: 33, 36, 61
-Salmon: 255, 124, 124
-Yellow: 255, 208, 130
-Light Blue: 136, 225, 242

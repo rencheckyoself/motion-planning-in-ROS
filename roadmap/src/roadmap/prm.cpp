@@ -37,34 +37,33 @@ namespace prm
   }
 
   // ===========================================================================
-  // RoadMap CLASS =================================================================
+  // RoadMap CLASS =============================================================
   // ===========================================================================
 
   RoadMap::RoadMap()
   {
     x_bounds = {0, 10};
     y_bounds = {0, 10};
-    n = 100;
   }
 
-  RoadMap::RoadMap(std::vector<double> xboundary,std::vector<double> yboundary, unsigned int samples)
+  RoadMap::RoadMap(std::vector<double> xboundary,std::vector<double> yboundary)
   {
-    n = samples;
     x_bounds = xboundary;
     y_bounds = yboundary;
   }
 
-  RoadMap::RoadMap(std::vector<std::vector<rigid2d::Vector2D>> polygon_verticies, std::vector<double> xboundary,std::vector<double> yboundary, unsigned int samples)
+  RoadMap::RoadMap(std::vector<std::vector<rigid2d::Vector2D>> polygon_verticies, std::vector<double> xboundary,std::vector<double> yboundary)
   {
-    n = samples;
     x_bounds = xboundary;
     y_bounds = yboundary;
     obstacles = polygon_verticies;
   }
 
-  void RoadMap::build_map(double robot_radius)
+  void RoadMap::build_map(unsigned int samples, unsigned int k_neighbors, double robot_radius)
   {
     buffer_radius = robot_radius;
+    k = k_neighbors;
+    n = samples;
     sample_config_space();
     connect_nodes();
   }
@@ -113,11 +112,10 @@ namespace prm
   {
     bool valid_node = true;
     bool collides = true;
-    // Loop through each obstacle
+
+    // Loop through each line segments
     for(auto obstacle : obstacles)
     {
-      // std::cout << "\t Obstacle " << j << " has " << obstacle.size() << "points \n";
-
       obstacle.push_back(obstacle.at(0)); // add the first vertex to the end of the list
 
       collides = true;
@@ -130,7 +128,7 @@ namespace prm
         // Vertex B
         rigid2d::Vector2D b = obstacle.at(i+1);
 
-        // Get direction of perpendicular vector
+        // Get direction of perpendicular vector pointing inward to the polygon
         rigid2d::Vector2D u = rigid2d::Vector2D(-(b.y - a.y), b.x - a.x);
         rigid2d::Vector2D n = u.normalize();
 
@@ -178,27 +176,27 @@ namespace prm
         // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
         if(!node.IsConnected(qp.get().id) && qp.get().distance > buffer_radius)
         {
-          bool collision_occured = false;
+
+          // Create a temporary edge
+          Edge buf_edge;
+
+          buf_edge.edge_id = edge_cnt;
+
+          buf_edge.node1_id = node.id;
+          buf_edge.node1 = node.point;
+
+          buf_edge.node2_id = qp.get().id;
+          buf_edge.node2 = qp.get().point;
+
+          buf_edge.distance = qp.get().distance;
 
           // check for path collisions with the obstacles
+          bool valid_edge = edge_collisions(buf_edge);
 
           // check for robot collision with the obstacles
 
-          if(!collision_occured)
+          if(valid_edge)
           {
-            // Create the edge
-            Edge buf_edge;
-
-            buf_edge.edge_id = edge_cnt;
-
-            buf_edge.node1_id = node.id;
-            buf_edge.node1 = node.point;
-
-            buf_edge.node2_id = qp.get().id;
-            buf_edge.node2 = qp.get().point;
-
-            buf_edge.distance = qp.get().distance;
-
             all_edges.push_back(buf_edge);
 
             // add edge to each node
@@ -234,4 +232,88 @@ namespace prm
 
     return output;
   }
+
+  bool RoadMap::edge_collisions(Edge edge)
+  {
+    bool valid_edge = true;
+    bool collides = true;
+    // Loop through each obstacle
+    for(auto obstacle : obstacles)
+    {
+
+      obstacle.push_back(obstacle.at(0)); // add the first vertex to the end of the list
+      collides = true;
+
+      double t_e = 0.0, t_l = 1.0;
+
+      // Loop through each line segment
+      for(unsigned int i = 0; i < obstacle.size()-1; i++)
+      {
+
+        // CHECK FOR INTERSECTIONS =============================================
+        // Vertex A
+        rigid2d::Vector2D a = obstacle.at(i);
+
+        // Vertex B
+        rigid2d::Vector2D b = obstacle.at(i+1);
+
+        // Get perpendicular vector pointing outward to the polygon
+        rigid2d::Vector2D u = rigid2d::Vector2D(b.y - a.y, -(b.x - a.x));
+        rigid2d::Vector2D n = u.normalize();
+
+        // edge vector
+        rigid2d::Vector2D s = rigid2d::Vector2D(edge.node2.x - edge.node1.x, edge.node2.y - edge.node1.y);
+
+        // vector between edge and obstalce line starts
+        rigid2d::Vector2D p0_vi = rigid2d::Vector2D(edge.node1.x - a.x, edge.node1.y - a.y);
+
+        double num = - n.dot(p0_vi);
+        double den = n.dot(s);
+
+        if(den == 0) continue; // Test for paralellism between the edge and obstacle line segment
+
+        double t = num/den;
+
+        if(den < 0) {t_e = std::max(t_e, t);} // segment is potentially entering the polygon
+        else {t_l = std::min(t_l, t);} // segment is potentially leaving the polygon
+
+        if(t_l < t_e) collides = false; // means the edge cannot intersect the polygon
+
+        // CHECK FOR BUFFER ZONES ==============================================
+        // find the shortest distance from each vertex to the edge
+        double c = ((a.x - edge.node1.x) * (s.x) + (a.y - edge.node1.y) * (s.y)) / (s.length() * s.length());
+
+        if (c >=0 && c <= 1) // means the vertex is within the bounds of the line segment
+        {
+          // point on the line closest to the vertex
+          rigid2d::Vector2D p = rigid2d::Vector2D(edge.node1.x + c*s.x, edge.node1.y + c*s.y);
+
+          // distance between vertex and line must be greater than the buffer distance
+          if(p.distance(a) <= buffer_radius)
+          {
+            collides = true;
+            break;
+          }
+        }
+      }
+
+      // if "collides" variable was never updated, this means the t_e <= t_l, implying there is a collision
+      if(collides)
+      {
+        valid_edge = false;
+        break;
+      }
+    }
+    return valid_edge;
+  }
 }
+
+// bool RoadMap::line_intersections(Edge edge, rigid2d::Vector2D polygon_line) const
+// {
+//   return false;
+// }
+//
+// bool RoadMap::robot_buffer_intersections() const
+// {
+//   return false;
+// }

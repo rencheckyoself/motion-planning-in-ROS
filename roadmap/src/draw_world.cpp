@@ -2,9 +2,12 @@
 /// \brief Node to draw the features of the real world map
 ///
 /// PARAMETERS:
-///     obstacles (std::string) the name of the odometer frame
+///     obstacles (std::vector<std::vector<std::vector<double>) a vector of polygons represented by a vector of x,y coords for the verticies
 ///     map_x_lims (std::vector<double>) [xmin, xmax] of the map
 ///     map_y_lims (std::vector<double>) [ymin, ymax] of the map
+///     r (std::vector<int>) color values
+///     g (std::vector<int>) color values
+///     b (std::vector<int>) color values
 /// PUBLISHES:
 ///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
 
@@ -30,11 +33,22 @@ int main(int argc, char** argv)
 
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
+  std::vector<double> r, g, b;
   XmlRpc::XmlRpcValue obstacles;
 
   n.getParam("map_x_lims", map_x_lims);
   n.getParam("map_y_lims", map_y_lims);
+  n.getParam("r", r);
+  n.getParam("g", g);
+  n.getParam("b", b);
   n.getParam("obstacles", obstacles);
+
+  for(unsigned int i = 0; i < r.size(); i++)
+  {
+    r.at(i) /= 255;
+    g.at(i) /= 255;
+    b.at(i) /= 255;
+  }
 
   ROS_INFO_STREAM("MAP: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("MAP: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
@@ -46,11 +60,17 @@ int main(int argc, char** argv)
 
   for(int i=0; i < obstacles.size(); i++) // loop through each obstacle
   {
-    for(int j=0; j < obstacles[i].size(); j++) // loop through each point in the obstacle
+    buf_point.x = double(obstacles[i][0][0]);
+    buf_point.y = double(obstacles[i][0][1]);
+    buf_point.z = 0;
+    buf_poly.push_back(buf_point);
+
+    for(int j=1; j < obstacles[i].size(); j++) // loop through each point in the obstacle
     {
       buf_point.x = double(obstacles[i][j][0]);
       buf_point.y = double(obstacles[i][j][1]);
       buf_point.z = 0;
+      buf_poly.push_back(buf_point);
       buf_poly.push_back(buf_point);
     }
 
@@ -69,11 +89,14 @@ int main(int argc, char** argv)
 
   buf_point.x = map_x_lims.at(1);
   map_edge.push_back(buf_point);
+  map_edge.push_back(buf_point);
 
   buf_point.y = map_y_lims.at(1);
   map_edge.push_back(buf_point);
+  map_edge.push_back(buf_point);
 
   buf_point.x = map_x_lims.at(0);
+  map_edge.push_back(buf_point);
   map_edge.push_back(buf_point);
 
   buf_point.y = map_y_lims.at(0);
@@ -86,7 +109,6 @@ int main(int argc, char** argv)
 
   std::string ns = "world_map";
   int id = 0;
-  float r = 33./255., g = 36./255., b = 61./255.;
 
   for(auto polygon : polygons)
   {
@@ -96,7 +118,7 @@ int main(int argc, char** argv)
     marker.ns = ns;
     marker.id = id;
 
-    marker.type = visualization_msgs::Marker::LINE_STRIP;
+    marker.type = visualization_msgs::Marker::LINE_LIST;
     marker.action = visualization_msgs::Marker::ADD;
 
     marker.points = polygon;
@@ -106,11 +128,11 @@ int main(int argc, char** argv)
     marker.pose.orientation.z = 0;
     marker.pose.orientation.w = 1;
 
-    marker.scale.x = 0.5;
+    marker.scale.x = 0.25;
 
-    marker.color.r = r;
-    marker.color.g = g;
-    marker.color.b = b;
+    marker.color.r = r.at(3);
+    marker.color.g = g.at(3);
+    marker.color.b = b.at(3);
     marker.color.a = 1.0;
 
     marker.lifetime = ros::Duration();
@@ -124,10 +146,6 @@ int main(int argc, char** argv)
   marker.header.stamp = ros::Time::now();
   marker.id = id;
   marker.points = map_edge;
-
-  // marker.color.r = 0;
-  // marker.color.b = 0;
-  // marker.color.g = 0;
 
   markers.push_back(marker);
 

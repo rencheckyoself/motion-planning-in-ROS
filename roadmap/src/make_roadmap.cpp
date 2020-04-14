@@ -2,9 +2,15 @@
 /// \brief Node to draw the features of the real world map
 ///
 /// PARAMETERS:
-///     obstacles (std::string) the name of the odometer frame
+///     obstacles (std::vector<std::vector<std::vector<double>) a vector of polygons represented by a vector of x,y coords for the verticies
 ///     map_x_lims (std::vector<double>) [xmin, xmax] of the map
 ///     map_y_lims (std::vector<double>) [ymin, ymax] of the map
+///     robot_radius (double) buffer radius to avoid collisions with the robot body
+///     k_nearest (unsigned int) number of neighboring verticies to match to
+///     graph_size (unsigned int) number of nodes to use to build the graph
+///     r (std::vector<int>) color values
+///     g (std::vector<int>) color values
+///     b (std::vector<int>) color values
 /// PUBLISHES:
 ///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
 
@@ -19,6 +25,10 @@
 
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
+
+
+
+static std::vector<double> r, g, b;
 
 /// \brief Convert a Vector2D into a geometry_msgs/Point
 /// \param vec point represented with a 2D vector
@@ -62,9 +72,9 @@ visualization_msgs::Marker make_marker(prm::Node node)
   marker.scale.y = 0.3;
   marker.scale.z = 0.3;
 
-  marker.color.r = 1.0;
-  marker.color.b = 130./255.;
-  marker.color.g = 208./255.;
+  marker.color.r = r.at(0);
+  marker.color.g = g.at(0);
+  marker.color.b = b.at(0);
   marker.color.a = 1.0;
 
   marker.lifetime = ros::Duration();
@@ -99,9 +109,9 @@ visualization_msgs::Marker make_marker(prm::Edge edge)
 
   marker.scale.x = 0.1;
 
-  marker.color.r = 1.0;
-  marker.color.g = 124./255.;
-  marker.color.b = 124./255.;
+  marker.color.r = r.at(2);
+  marker.color.g = g.at(2);
+  marker.color.b = b.at(2);
   marker.color.a = 1.0;
 
   marker.lifetime = ros::Duration();
@@ -122,15 +132,32 @@ int main(int argc, char** argv)
   std::vector<double> map_y_lims;
   XmlRpc::XmlRpcValue obstacles;
   double robot_radius = 0;
+  int k_nearest = 5;
+  int graph_size = 100;
 
+  n.getParam("obstacles", obstacles);
   n.getParam("map_x_lims", map_x_lims);
   n.getParam("map_y_lims", map_y_lims);
   n.getParam("robot_radius", robot_radius);
-  n.getParam("obstacles", obstacles);
+  n.getParam("k_nearest", k_nearest);
+  n.getParam("graph_size", graph_size);
+  n.getParam("r", r);
+  n.getParam("g", g);
+  n.getParam("b", b);
 
   ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("PRM: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("PRM: k_nearest: " << k_nearest);
+  ROS_INFO_STREAM("PRM: graph_size: " << graph_size);
+  ROS_INFO_STREAM("PRM: robot_radius: " << robot_radius);
   ROS_INFO_STREAM("PRM: Loaded Params");
+
+  for(unsigned int i = 0; i < r.size(); i++)
+  {
+    r.at(i) /= 255;
+    g.at(i) /= 255;
+    b.at(i) /= 255;
+  }
 
   // Build Obstacles vector
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
@@ -159,18 +186,15 @@ int main(int argc, char** argv)
   }
 
   // Initialize PRM
+  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
 
-  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims, 500);
-
-  prob_road_map.build_map(robot_radius);
+  prob_road_map.build_map(graph_size, k_nearest, robot_radius);
 
   const auto all_nodes = prob_road_map.get_nodes();
   const auto all_edges = prob_road_map.get_edges();
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
-
-  // ROS_INFO_STREAM("Nodes created: " << all_nodes.size());
 
   // Put a spherical marker at each node
   for(auto node : all_nodes)
