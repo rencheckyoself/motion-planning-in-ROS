@@ -62,8 +62,9 @@ namespace prm
     obstacles = polygon_verticies;
   }
 
-  void RoadMap::build_map()
+  void RoadMap::build_map(double robot_radius)
   {
+    buffer_radius = robot_radius;
     sample_config_space();
     connect_nodes();
   }
@@ -89,10 +90,11 @@ namespace prm
     // Sample Configuration space until n valid nodes are created
     while(cnt < n)
     {
-      buf_point.x = sampleUniformDistribution(x_bounds.at(0), x_bounds.at(1));
-      buf_point.y = sampleUniformDistribution(y_bounds.at(0), y_bounds.at(1));
+      buf_point.x = sampleUniformDistribution(x_bounds.at(0) + buffer_radius, x_bounds.at(1) - buffer_radius);
+      buf_point.y = sampleUniformDistribution(y_bounds.at(0) + buffer_radius, y_bounds.at(1) - buffer_radius);
 
-      // add collision check here
+      // Check if the node is inside an obstacle
+      valid = node_collisions(buf_point);
 
       // Add Node to the Road Map
       if(valid)
@@ -103,7 +105,63 @@ namespace prm
 
         nodes.push_back(buf_node);
       }
+
     }
+  }
+
+  bool RoadMap::node_collisions(rigid2d::Vector2D point)
+  {
+    bool valid_node = true;
+    bool collides = true;
+    // Loop through each obstacle
+    for(auto obstacle : obstacles)
+    {
+      // std::cout << "\t Obstacle " << j << " has " << obstacle.size() << "points \n";
+
+      obstacle.push_back(obstacle.at(0)); // add the first vertex to the end of the list
+
+      collides = true;
+      // Loop through each vertex
+      for(unsigned int i = 0; i < obstacle.size()-1; i++)
+      {
+        // Vertex A
+        rigid2d::Vector2D a = obstacle.at(i);
+
+        // Vertex B
+        rigid2d::Vector2D b = obstacle.at(i+1);
+
+        // Get direction of perpendicular vector
+        rigid2d::Vector2D u = rigid2d::Vector2D(-(b.y - a.y), b.x - a.x);
+        rigid2d::Vector2D n = u.normalize();
+
+        // Vector from vertex A to point
+        rigid2d::Vector2D d = rigid2d::Vector2D(point.x - a.x, point.y - a.y);
+
+        // Dot product of n and d
+        double r = d.x * n.x + d.y * n.y;
+
+        if(r == 0) // the point is on the line
+        {
+          break;
+        }
+
+        else if(r < -buffer_radius) // this means the point is outside the shape plus buffer
+        {
+          collides = false;
+          break;
+        }
+      }
+
+      // if r is >= 0 for all lines, point collides
+      if(collides)
+      {
+        valid_node = false;
+        // std::cout << "Rejected Node \n";
+        break;
+      }
+    }
+
+    return valid_node;
   }
 
   void RoadMap::connect_nodes()
@@ -118,7 +176,7 @@ namespace prm
       for(auto & qp : knn)
       {
         // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
-        if(!node.IsConnected(qp.get().id) && qp.get().distance > 0.15)
+        if(!node.IsConnected(qp.get().id) && qp.get().distance > buffer_radius)
         {
           bool collision_occured = false;
 

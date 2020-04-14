@@ -121,9 +121,11 @@ int main(int argc, char** argv)
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
   XmlRpc::XmlRpcValue obstacles;
+  double robot_radius = 0;
 
   n.getParam("map_x_lims", map_x_lims);
   n.getParam("map_y_lims", map_y_lims);
+  n.getParam("robot_radius", robot_radius);
   n.getParam("obstacles", obstacles);
 
   ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
@@ -145,9 +147,12 @@ int main(int argc, char** argv)
       buf_poly.push_back(buf_vec);
     }
 
-    buf_vec.x = double(obstacles[i][0][0]);
-    buf_vec.y = double(obstacles[i][0][1]);
-    buf_poly.push_back(buf_vec);
+    std::cout << "Points in polygon " << i << "\n";
+    for(auto poly : buf_poly)
+    {
+      std::cout << "(" << poly.x << ", " << poly.y << ")\t"  ;
+    }
+    std::cout << "\n";
 
     polygons.push_back(buf_poly);
     buf_poly.clear();
@@ -155,9 +160,9 @@ int main(int argc, char** argv)
 
   // Initialize PRM
 
-  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims, 100);
+  prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims, 500);
 
-  prob_road_map.build_map();
+  prob_road_map.build_map(robot_radius);
 
   const auto all_nodes = prob_road_map.get_nodes();
   const auto all_edges = prob_road_map.get_edges();

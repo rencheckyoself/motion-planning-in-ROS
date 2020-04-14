@@ -65,15 +65,15 @@ namespace prm
     RoadMap(std::vector<double> xboundary,std::vector<double> yboundary, unsigned int samples);
 
     /// \breif Initialization to construct a road map in a user defined area with obstacles
-    /// \param polygon_verticies a vector of vectors defining the verticies of each obstacle
+    /// \param polygon_verticies a vector of vectors defining the verticies of each obstacle in order going counter-clockwise
     /// \param xboundary a 2 element vector defining the map's x bounds
     /// \param yboundary a 2 element vector defining the map's y bounds
     /// \param samples the number of nodes for the road map
     RoadMap(std::vector<std::vector<rigid2d::Vector2D>> polygon_verticies, std::vector<double> xboundary, std::vector<double> yboundary, unsigned int samples);
 
     /// \brief Wrapper function to call all nessissary functions to build the PRM
-    ///
-    void build_map();
+    /// \param robot_radius the radius to use as a buffer around the robot for collision detection
+    void build_map(double robot_radius);
 
     /// \brief Wrapper function to get the vector of nodes
     /// \returns the full node vector
@@ -91,12 +91,19 @@ namespace prm
     std::vector<Node> nodes; // all nodes in the road map
     std::vector<Edge> all_edges; // all edges in the road map
 
+    double buffer_radius = 0;
+
     unsigned int n = 100; // number of nodes in the map
     unsigned int k = 10; // number of nearest neighbors to find
 
     /// \brief Randomly Sample the configuration space to retrieve a set of nodes for the roadmap
     ///
     void sample_config_space();
+
+    /// \brief Determine if the node was sampled from an area inside an obstacle
+    /// \param point the configuration of a new potential node
+    /// \returns true if the node is valid
+    bool node_collisions(rigid2d::Vector2D point);
 
     /// \brief Find nodes that are near each other and connect them if possible.
     ///
