@@ -4,7 +4,7 @@ This project is in progress.
 
 Currently implemented:
 
-- Probabilistic Road Map creation
+- Probabilistic Road Map creation: `launch view_world.launch`
 
 Planned additions:
 - Build a Grid for the map
