@@ -1,7 +1,3 @@
 - git:
     local-name: repo
     uri: git@github.com:rencheckyoself/turtlebot3-navigation.git
-
-- git:
-    local-name: motionplanning
-    uri: git@github.com:rencheckyoself/motion-planning-in-ROS.git
