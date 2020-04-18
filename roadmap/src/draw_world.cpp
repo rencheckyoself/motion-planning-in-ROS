@@ -31,6 +31,7 @@ int main(int argc, char** argv)
 
   ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
 
+  double cell_size = 1.0;
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
   std::vector<double> r, g, b;
@@ -42,6 +43,7 @@ int main(int argc, char** argv)
   n.getParam("g", g);
   n.getParam("b", b);
   n.getParam("obstacles", obstacles);
+  n.getParam("cell_size", cell_size);
 
   for(unsigned int i = 0; i < r.size(); i++)
   {
@@ -52,6 +54,7 @@ int main(int argc, char** argv)
 
   ROS_INFO_STREAM("MAP: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("MAP: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("MAP: cell size: " << cell_size);
   ROS_INFO_STREAM("MAP: Loaded Params");
 
   std::vector<std::vector<geometry_msgs::Point>> polygons;
@@ -60,27 +63,34 @@ int main(int argc, char** argv)
 
   for(int i=0; i < obstacles.size(); i++) // loop through each obstacle
   {
-    buf_point.x = double(obstacles[i][0][0]);
-    buf_point.y = double(obstacles[i][0][1]);
+    buf_point.x = double(obstacles[i][0][0]) * cell_size;
+    buf_point.y = double(obstacles[i][0][1]) * cell_size;
     buf_point.z = 0;
     buf_poly.push_back(buf_point);
 
     for(int j=1; j < obstacles[i].size(); j++) // loop through each point in the obstacle
     {
-      buf_point.x = double(obstacles[i][j][0]);
-      buf_point.y = double(obstacles[i][j][1]);
+      buf_point.x = double(obstacles[i][j][0]) * cell_size;
+      buf_point.y = double(obstacles[i][j][1]) * cell_size;
       buf_point.z = 0;
       buf_poly.push_back(buf_point);
       buf_poly.push_back(buf_point);
     }
 
-    buf_point.x = double(obstacles[i][0][0]);
-    buf_point.y = double(obstacles[i][0][1]);
+    buf_point.x = double(obstacles[i][0][0]) * cell_size;
+    buf_point.y = double(obstacles[i][0][1]) * cell_size;
     buf_point.z = 0;
     buf_poly.push_back(buf_point);
 
     polygons.push_back(buf_poly);
     buf_poly.clear();
+  }
+
+  // Scale Map Coordinates
+  for(unsigned int i = 0; i < map_x_lims.size(); i++)
+  {
+    map_x_lims.at(i) *= cell_size;
+    map_y_lims.at(i) *= cell_size;
   }
 
   buf_point.x = map_x_lims.at(0);
@@ -128,7 +138,7 @@ int main(int argc, char** argv)
     marker.pose.orientation.z = 0;
     marker.pose.orientation.w = 1;
 
-    marker.scale.x = 0.25;
+    marker.scale.x = 0.25 * cell_size;
 
     marker.color.r = r.at(3);
     marker.color.g = g.at(3);

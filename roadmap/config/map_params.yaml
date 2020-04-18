@@ -17,9 +17,10 @@ obstacles: [
 map_x_lims: [0, 34] # x_min, x_max
 map_y_lims: [0, 48] # y_min, y_max
 
-robot_radius: 0.5 # buffer radius for the robot
+robot_radius: 0.15 # buffer radius for the robot
 k_nearest: 10 # number of neighbors to try and create an edge to
 graph_size: 500 # number of nodes to sample
+cell_size: .2 # used to convert integer coords to any unit
 
 # colors for markers
 r: [239, 80, 79, 39]

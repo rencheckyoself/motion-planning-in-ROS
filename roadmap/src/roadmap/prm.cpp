@@ -288,7 +288,7 @@ namespace prm
           // point on the line closest to the vertex
           rigid2d::Vector2D p = rigid2d::Vector2D(edge.node1.x + c*s.x, edge.node1.y + c*s.y);
 
-          // distance between vertex and line must be greater than the buffer distance
+          // distance between vertex and line less than the buffer distance
           if(p.distance(a) <= buffer_radius)
           {
             collides = true;
@@ -297,7 +297,7 @@ namespace prm
         }
       }
 
-      // if "collides" variable was never updated, this means the t_e <= t_l, implying there is a collision
+      // if "collides" variable was never updated, this means the t_e <= t_l or it is too close to an object, implying there is a collision
       if(collides)
       {
         valid_edge = false;

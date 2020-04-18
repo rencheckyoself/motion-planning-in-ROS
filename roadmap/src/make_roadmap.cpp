@@ -1,5 +1,5 @@
 /// \file
-/// \brief Node to draw the features of the real world map
+/// \brief Node to create and draw a probabilistic road map
 ///
 /// PARAMETERS:
 ///     obstacles (std::vector<std::vector<std::vector<double>) a vector of polygons represented by a vector of x,y coords for the verticies
@@ -15,6 +15,7 @@
 ///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
 
 #include <vector>
+#include <algorithm>
 #include <XmlRpcValue.h>
 
 #include <ros/ros.h>
@@ -29,6 +30,7 @@
 
 
 static std::vector<double> r, g, b;
+static double cell_size = 1.0;
 
 /// \brief Convert a Vector2D into a geometry_msgs/Point
 /// \param vec point represented with a 2D vector
@@ -68,9 +70,9 @@ visualization_msgs::Marker make_marker(prm::Node node)
   marker.pose.orientation.z = 0;
   marker.pose.orientation.w = 1;
 
-  marker.scale.x = 0.3;
-  marker.scale.y = 0.3;
-  marker.scale.z = 0.3;
+  marker.scale.x = 0.3 * cell_size;
+  marker.scale.y = 0.3 * cell_size;
+  marker.scale.z = 0.3 * cell_size;
 
   marker.color.r = r.at(0);
   marker.color.g = g.at(0);
@@ -107,7 +109,7 @@ visualization_msgs::Marker make_marker(prm::Edge edge)
 
   marker.points = points;
 
-  marker.scale.x = 0.1;
+  marker.scale.x = 0.1 * cell_size;
 
   marker.color.r = r.at(2);
   marker.color.g = g.at(2);
@@ -131,7 +133,7 @@ int main(int argc, char** argv)
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
   XmlRpc::XmlRpcValue obstacles;
-  double robot_radius = 0;
+  double robot_radius = 0.0;
   int k_nearest = 5;
   int graph_size = 100;
 
@@ -141,16 +143,10 @@ int main(int argc, char** argv)
   n.getParam("robot_radius", robot_radius);
   n.getParam("k_nearest", k_nearest);
   n.getParam("graph_size", graph_size);
+  n.getParam("cell_size", cell_size);
   n.getParam("r", r);
   n.getParam("g", g);
   n.getParam("b", b);
-
-  ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
-  ROS_INFO_STREAM("PRM: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-  ROS_INFO_STREAM("PRM: k_nearest: " << k_nearest);
-  ROS_INFO_STREAM("PRM: graph_size: " << graph_size);
-  ROS_INFO_STREAM("PRM: robot_radius: " << robot_radius);
-  ROS_INFO_STREAM("PRM: Loaded Params");
 
   for(unsigned int i = 0; i < r.size(); i++)
   {
@@ -166,10 +162,10 @@ int main(int argc, char** argv)
 
   for(int i=0; i < obstacles.size(); i++) // loop through each obstacle
   {
-    for(int j=0; j < obstacles[i].size(); j++) // loop through each point in the obstacle
+    for(int j=0; j < obstacles[i].size(); j++) // loop through each point in the obstacle and scale coordinates
     {
-      buf_vec.x = double(obstacles[i][j][0]);
-      buf_vec.y = double(obstacles[i][j][1]);
+      buf_vec.x = double(obstacles[i][j][0]) * cell_size;
+      buf_vec.y = double(obstacles[i][j][1]) * cell_size;
 
       buf_poly.push_back(buf_vec);
     }
@@ -184,6 +180,21 @@ int main(int argc, char** argv)
     polygons.push_back(buf_poly);
     buf_poly.clear();
   }
+
+  // Scale Map Coordinates
+  for(unsigned int i = 0; i < map_x_lims.size(); i++)
+  {
+    map_x_lims.at(i) *= cell_size;
+    map_y_lims.at(i) *= cell_size;
+  }
+
+  ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
+  ROS_INFO_STREAM("PRM: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("PRM: k_nearest: " << k_nearest);
+  ROS_INFO_STREAM("PRM: graph_size: " << graph_size);
+  ROS_INFO_STREAM("PRM: robot_radius: " << robot_radius);
+  ROS_INFO_STREAM("PRM: cell size: " << cell_size);
+  ROS_INFO_STREAM("PRM: Loaded Params");
 
   // Initialize PRM
   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
