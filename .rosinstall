@@ -3,5 +3,5 @@
     uri: git@github.com:rencheckyoself/turtlebot3-navigation.git
 
 - git:
-    local-name: motionplanning
-    uri: git@github.com:rencheckyoself/motion-planning-in-ROS.git
+    local-name: nuturtlebot
+    uri: https://github.com/ME495-Navigation/nuturtlebot.git
