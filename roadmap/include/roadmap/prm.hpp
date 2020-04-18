@@ -4,7 +4,7 @@
 /// \brief A library for building a Probabilistic Road Map
 
 #include <vector>
-#include<unordered_set>
+#include <unordered_set>
 
 #include "rigid2d/rigid2d.hpp"
 
@@ -114,12 +114,6 @@ namespace prm
     /// \param edge the edge to compare against all polygons
     /// \returns true if the edge is valid
     bool edge_collisions(Edge edge);
-
-    // /// \brief determine if an edge intersects a polygon
-    // /// \param edge the edge to compare against all polygons
-    // /// \param obstacle the polgon to check
-    // /// \returns true if there was a collision
-    // bool line_intersections(Edge edge, std::vector<rigid2d::Vector2D> obstacle) const;
 
     /// \brief Brute force k-nearest search
     /// \param reference to a node object to base the search on

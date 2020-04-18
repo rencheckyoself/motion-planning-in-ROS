@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "roadmap/prm.hpp"
+#include "roadmap/collision.hpp"
 #include "rigid2d/rigid2d.hpp"
 
 namespace prm
@@ -113,48 +114,16 @@ namespace prm
     bool valid_node = true;
     bool collides = true;
 
+    int i = 0;
     // Loop through each line segments
     for(auto obstacle : obstacles)
     {
-      obstacle.push_back(obstacle.at(0)); // add the first vertex to the end of the list
-
-      collides = true;
-      // Loop through each vertex
-      for(unsigned int i = 0; i < obstacle.size()-1; i++)
-      {
-        // Vertex A
-        rigid2d::Vector2D a = obstacle.at(i);
-
-        // Vertex B
-        rigid2d::Vector2D b = obstacle.at(i+1);
-
-        // Get direction of perpendicular vector pointing inward to the polygon
-        rigid2d::Vector2D u = rigid2d::Vector2D(-(b.y - a.y), b.x - a.x);
-        rigid2d::Vector2D n = u.normalize();
-
-        // Vector from vertex A to point
-        rigid2d::Vector2D d = rigid2d::Vector2D(point.x - a.x, point.y - a.y);
-
-        // Dot product of n and d
-        double r = d.x * n.x + d.y * n.y;
-
-        if(r == 0) // the point is on the line
-        {
-          break;
-        }
-
-        else if(r < -buffer_radius) // this means the point is outside the shape plus buffer
-        {
-          collides = false;
-          break;
-        }
-      }
+      collides = collision::point_inside_convex(point, obstacle, buffer_radius);
 
       // if r is >= 0 for all lines, point collides
       if(collides)
       {
         valid_node = false;
-        // std::cout << "Rejected Node \n";
         break;
       }
     }
