@@ -93,13 +93,101 @@ namespace collision
         if(min_dist > buffer_radius) collides = false;
         else collides = true;
     }
-    
+
     return collides;
   }
 
   bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon)
   {
-    return true;
+    polygon.push_back(polygon.at(0)); // add the first vertex to the end of the list
+    bool collides = true;
+
+    double t_e = 0.0, t_l = 1.0;
+
+    // Loop through each line segment
+    for(unsigned int i = 0; i < polygon.size()-1; i++)
+    {
+      // Vertex A
+      rigid2d::Vector2D a = polygon.at(i);
+
+      // Vertex B
+      rigid2d::Vector2D b = polygon.at(i+1);
+
+      // Get perpendicular vector pointing outward to the polygon
+      rigid2d::Vector2D u = rigid2d::Vector2D(b.y - a.y, -(b.x - a.x));
+      rigid2d::Vector2D n = u.normalize();
+
+      // edge vector
+      rigid2d::Vector2D s = rigid2d::Vector2D(line_end.x - line_start.x, line_end.y - line_start.y);
+
+      // vector between edge and obstalce line starts
+      rigid2d::Vector2D p0_vi = rigid2d::Vector2D(line_start.x - a.x, line_start.y - a.y);
+
+      double num = - n.dot(p0_vi);
+      double den = n.dot(s);
+
+      if(den == 0) continue; // Test for paralellism between the edge and obstacle line segment
+
+      double t = num/den;
+
+      if(den < 0) {t_e = std::max(t_e, t);} // segment is potentially entering the polygon
+      else {t_l = std::min(t_l, t);} // segment is potentially leaving the polygon
+
+      if(t_l < t_e)
+      {
+        collides = false; // means the edge cannot intersect the polygon
+        break;
+      }
+    }
+
+    return collides;
   }
 
+  bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon, double buffer_radius)
+  {
+    polygon.push_back(polygon.at(0)); // add the first vertex to the end of the list
+    bool collides = true;
+
+    double t_e = 0.0, t_l = 1.0;
+
+    // Loop through each line segment
+    for(unsigned int i = 0; i < polygon.size()-1; i++)
+    {
+      // Vertex A
+      rigid2d::Vector2D a = polygon.at(i);
+
+      // Vertex B
+      rigid2d::Vector2D b = polygon.at(i+1);
+
+      // Get perpendicular vector pointing outward to the polygon
+      rigid2d::Vector2D u = rigid2d::Vector2D(b.y - a.y, -(b.x - a.x));
+      rigid2d::Vector2D n = u.normalize();
+
+      // edge vector
+      rigid2d::Vector2D s = rigid2d::Vector2D(line_end.x - line_start.x, line_end.y - line_start.y);
+
+      // vector between edge and obstalce line starts
+      rigid2d::Vector2D p0_vi = rigid2d::Vector2D(line_start.x - a.x, line_start.y - a.y);
+
+      double num = - n.dot(p0_vi);
+      double den = n.dot(s);
+
+      if(den == 0) continue; // Test for paralellism between the edge and obstacle line segment
+
+      double t = num/den;
+
+      if(den < 0) {t_e = std::max(t_e, t);} // segment is potentially entering the polygon
+      else {t_l = std::min(t_l, t);} // segment is potentially leaving the polygon
+
+      if(t_l < t_e) collides = false; // means the edge cannot intersect the polygon
+
+      // check the line enters the buffer radius
+      if(point_to_line_distance(line_start, line_end, a, buffer_radius))
+      {
+        collides = true;
+        break;
+      }
+    }
+    return collides;
+  }
 } // end collision

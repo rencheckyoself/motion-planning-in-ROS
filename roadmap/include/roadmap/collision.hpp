@@ -27,7 +27,7 @@ namespace collision
   /// This function will account for connected the last vertex to the first vertex by appending the first vertex
   /// to the back of the vector.
   /// \param point the point to analyze
-  /// \param polygon a vector of verticies that define the polygon
+  /// \param polygon a vector of verticies that define the polygon in order, either cw or ccw.
   /// \param buffer_radius a buffer distance to incorporate to the polygon boundary
   /// \returns True if the point is inside the polygon or inside of the buffer zone of the polygon
   bool point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius);
@@ -35,9 +35,17 @@ namespace collision
   /// \brief Determine if a line segment intersects a convex polygon
   /// \param line_start the point of the beginning of the line segment
   /// \param line_end the point of the end of the line segment
-  /// \param polygon a vector of verticies that define the polygon
+  /// \param polygon a vector of verticies that define the polygon in ccw order
   /// \returns True if there is an intersection between the line segment and polygon
   bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon);
+
+  /// \brief Determine if a line segment intersects a convex polygon or comes within a certain distance of it. This assumes the line start and end points are
+  /// known to be outside of the buffer area of the polygon
+  /// \param line_start the point of the beginning of the line segment
+  /// \param line_end the point of the end of the line segment
+  /// \param polygon a vector of verticies that define the polygon in ccw order
+  /// \returns True if there is an intersection between the line segment and polygon or if the minimum distance to the line and shape is less than the buffer radius
+  bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon, double buffer_radius);
 }
 
 #endif

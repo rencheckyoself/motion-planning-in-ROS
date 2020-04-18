@@ -114,7 +114,6 @@ namespace prm
     bool valid_node = true;
     bool collides = true;
 
-    int i = 0;
     // Loop through each line segments
     for(auto obstacle : obstacles)
     {
@@ -209,64 +208,8 @@ namespace prm
     // Loop through each obstacle
     for(auto obstacle : obstacles)
     {
+      collides = collision::line_shape_intersection(edge.node1, edge.node2, obstacle, buffer_radius);
 
-      obstacle.push_back(obstacle.at(0)); // add the first vertex to the end of the list
-      collides = true;
-
-      double t_e = 0.0, t_l = 1.0;
-
-      // Loop through each line segment
-      for(unsigned int i = 0; i < obstacle.size()-1; i++)
-      {
-
-        // CHECK FOR INTERSECTIONS =============================================
-        // Vertex A
-        rigid2d::Vector2D a = obstacle.at(i);
-
-        // Vertex B
-        rigid2d::Vector2D b = obstacle.at(i+1);
-
-        // Get perpendicular vector pointing outward to the polygon
-        rigid2d::Vector2D u = rigid2d::Vector2D(b.y - a.y, -(b.x - a.x));
-        rigid2d::Vector2D n = u.normalize();
-
-        // edge vector
-        rigid2d::Vector2D s = rigid2d::Vector2D(edge.node2.x - edge.node1.x, edge.node2.y - edge.node1.y);
-
-        // vector between edge and obstalce line starts
-        rigid2d::Vector2D p0_vi = rigid2d::Vector2D(edge.node1.x - a.x, edge.node1.y - a.y);
-
-        double num = - n.dot(p0_vi);
-        double den = n.dot(s);
-
-        if(den == 0) continue; // Test for paralellism between the edge and obstacle line segment
-
-        double t = num/den;
-
-        if(den < 0) {t_e = std::max(t_e, t);} // segment is potentially entering the polygon
-        else {t_l = std::min(t_l, t);} // segment is potentially leaving the polygon
-
-        if(t_l < t_e) collides = false; // means the edge cannot intersect the polygon
-
-        // CHECK FOR BUFFER ZONES ==============================================
-        // find the shortest distance from each vertex to the edge
-        double c = ((a.x - edge.node1.x) * (s.x) + (a.y - edge.node1.y) * (s.y)) / (s.length() * s.length());
-
-        if (c >=0 && c <= 1) // means the vertex is within the bounds of the line segment
-        {
-          // point on the line closest to the vertex
-          rigid2d::Vector2D p = rigid2d::Vector2D(edge.node1.x + c*s.x, edge.node1.y + c*s.y);
-
-          // distance between vertex and line less than the buffer distance
-          if(p.distance(a) <= buffer_radius)
-          {
-            collides = true;
-            break;
-          }
-        }
-      }
-
-      // if "collides" variable was never updated, this means the t_e <= t_l or it is too close to an object, implying there is a collision
       if(collides)
       {
         valid_edge = false;
@@ -276,13 +219,3 @@ namespace prm
     return valid_edge;
   }
 }
-
-// bool RoadMap::line_intersections(Edge edge, rigid2d::Vector2D polygon_line) const
-// {
-//   return false;
-// }
-//
-// bool RoadMap::robot_buffer_intersections() const
-// {
-//   return false;
-// }
