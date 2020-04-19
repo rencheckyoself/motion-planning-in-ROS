@@ -127,8 +127,9 @@ include_directories(
 
 ## Declare a C++ library
 add_library(${PROJECT_NAME}
-  src/${PROJECT_NAME}/prm.cpp
 	src/${PROJECT_NAME}/collision.cpp
+  src/${PROJECT_NAME}/prm.cpp
+	src/${PROJECT_NAME}/utility.cpp
 )
 
 ## Add cmake target dependencies of the library

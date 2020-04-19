@@ -4,10 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <iostream>
-#include <random>
-#include <unordered_set>
 #include <vector>
-#include <iostream>
 
 #include "roadmap/collision.hpp"
 #include "rigid2d/rigid2d.hpp"

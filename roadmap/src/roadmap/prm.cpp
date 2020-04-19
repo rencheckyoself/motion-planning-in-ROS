@@ -167,11 +167,18 @@ namespace prm
           {
             all_edges.push_back(buf_edge);
 
-            // add edge to each node
+            // add edge to node
             node.edges.push_back(buf_edge);
+
+            // switch 1 and 2 and add to second node
+            buf_edge.node1_id = buf_edge.node2_id;
+            buf_edge.node1 = buf_edge.node2;
+            buf_edge.node2_id = node.id;
+            buf_edge.node2 = node.point;
+
             qp.get().edges.push_back(buf_edge);
 
-             // add connected node id to the unordered set
+            // add connected node ids to the unordered sets
             node.id_set.insert(qp.get().id);
             qp.get().id_set.insert(node.id);
 

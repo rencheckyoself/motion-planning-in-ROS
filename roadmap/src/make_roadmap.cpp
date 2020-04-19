@@ -26,8 +26,7 @@
 
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
-
-
+#include "roadmap/utility.hpp"
 
 static std::vector<double> r, g, b;
 static double cell_size = 1.0;
@@ -35,7 +34,7 @@ static double cell_size = 1.0;
 /// \brief Convert a Vector2D into a geometry_msgs/Point
 /// \param vec point represented with a 2D vector
 /// \returns a point represented with a geometry_msgs/Point
-geometry_msgs::Point Vec2D_to_GeoPt(rigid2d::Vector2D vec)
+static geometry_msgs::Point Vec2D_to_GeoPt(rigid2d::Vector2D vec)
 {
   geometry_msgs::Point point;
 
@@ -49,7 +48,7 @@ geometry_msgs::Point Vec2D_to_GeoPt(rigid2d::Vector2D vec)
 /// \brief Create a spherical Marker based on a node struct
 /// \param node a node struct to vizualize
 /// \returns a marker to add to the MarkerArray
-visualization_msgs::Marker make_marker(prm::Node node)
+static visualization_msgs::Marker make_marker(prm::Node node)
 {
   visualization_msgs::Marker marker;
 
@@ -87,7 +86,7 @@ visualization_msgs::Marker make_marker(prm::Node node)
 /// \brief Create a line Marker based on an edge struct
 /// \param edge an edge struct to vizualize
 /// \returns a marker to add to the MarkerArray
-visualization_msgs::Marker make_marker(prm::Edge edge)
+static visualization_msgs::Marker make_marker(prm::Edge edge)
 {
   visualization_msgs::Marker marker;
 
@@ -157,29 +156,9 @@ int main(int argc, char** argv)
 
   // Build Obstacles vector
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
-  std::vector<rigid2d::Vector2D> buf_poly, map_edge;
-  rigid2d::Vector2D buf_vec;
+  rigid2d::Vector2D buf_vec; // for some reason commenting out this line breaks the connection to rigid2d...
 
-  for(int i=0; i < obstacles.size(); i++) // loop through each obstacle
-  {
-    for(int j=0; j < obstacles[i].size(); j++) // loop through each point in the obstacle and scale coordinates
-    {
-      buf_vec.x = double(obstacles[i][j][0]) * cell_size;
-      buf_vec.y = double(obstacles[i][j][1]) * cell_size;
-
-      buf_poly.push_back(buf_vec);
-    }
-
-    std::cout << "Points in polygon " << i << "\n";
-    for(auto poly : buf_poly)
-    {
-      std::cout << "(" << poly.x << ", " << poly.y << ")\t"  ;
-    }
-    std::cout << "\n";
-
-    polygons.push_back(buf_poly);
-    buf_poly.clear();
-  }
+  polygons = utility::parse_obstacle_data(obstacles, cell_size);
 
   // Scale Map Coordinates
   for(unsigned int i = 0; i < map_x_lims.size(); i++)
