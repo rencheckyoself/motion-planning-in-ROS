@@ -26,7 +26,7 @@
 int main(int argc, char** argv)
 {
 
-  ros::init(argc, argv, "draw_map");
+  ros::init(argc, argv, "draw_world");
   ros::NodeHandle n;
 
   ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);

@@ -55,16 +55,16 @@ namespace prm
   {
   public:
 
-    /// \breif Initialization to construct a road map in an empty 10x10 area with 100 samples
+    /// \brief Initialization to construct a road map in an empty 10x10 area with 100 samples
     RoadMap();
 
-    /// \breif Initialization to construct a road map in an empty user defined area
+    /// \brief Initialization to construct a road map in an empty user defined area
     /// \param xboundary a 2 element vector defining the map's x bounds
     /// \param yboundary a 2 element vector defining the map's y bounds
     /// \param samples the number of nodes for the road map
     RoadMap(std::vector<double> xboundary,std::vector<double> yboundary);
 
-    /// \breif Initialization to construct a road map in a user defined area with obstacles
+    /// \brief Initialization to construct a road map in a user defined area with obstacles
     /// \param polygon_verticies a vector of vectors defining the verticies of each obstacle in order going counter-clockwise
     /// \param xboundary a 2 element vector defining the map's x bounds
     /// \param yboundary a 2 element vector defining the map's y bounds
@@ -85,7 +85,7 @@ namespace prm
     std::vector<Edge> get_edges() const;
 
   private:
-    std::vector<std::vector<rigid2d::Vector2D>> obstacles;
+    std::vector<std::vector<rigid2d::Vector2D>> obstacles; // obstacles in the map
     std::vector<double> x_bounds; // x bounds of the map
     std::vector<double> y_bounds; // y bounds of the map
 

@@ -123,8 +123,7 @@ static visualization_msgs::Marker make_marker(prm::Edge edge)
 /// \brief main function to create the real world map
 int main(int argc, char** argv)
 {
-
-  ros::init(argc, argv, "draw_map");
+  ros::init(argc, argv, "make_roadmap");
   ros::NodeHandle n;
 
   ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
@@ -175,7 +174,6 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("PRM: cell size: " << cell_size);
   ROS_INFO_STREAM("PRM: Loaded Params");
 
-  // Initialize PRM
   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
 
   prob_road_map.build_map(graph_size, k_nearest, robot_radius);
