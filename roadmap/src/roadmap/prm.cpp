@@ -112,15 +112,14 @@ namespace prm
   bool RoadMap::node_collisions(rigid2d::Vector2D point)
   {
     bool valid_node = true;
-    bool collides = true;
 
     // Loop through each line segments
     for(auto obstacle : obstacles)
     {
-      collides = collision::point_inside_convex(point, obstacle, buffer_radius);
+      auto collides = collision::point_inside_convex(point, obstacle, buffer_radius);
 
       // if r is >= 0 for all lines, point collides
-      if(collides)
+      if(collides.at(0))
       {
         valid_node = false;
         break;

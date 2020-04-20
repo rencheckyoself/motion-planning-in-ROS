@@ -38,4 +38,25 @@ namespace utility
 
     return polygons;
   }
+
+  std::vector<rigid2d::Vector2D> create_map_vector(std::vector<double> map_x_lims, std::vector<double> map_y_lims)
+  {
+    rigid2d::Vector2D buf_point;
+    std::vector<rigid2d::Vector2D> map_boarder;
+
+    buf_point.x = map_x_lims.at(0);
+    buf_point.y = map_y_lims.at(0);
+    map_boarder.push_back(buf_point);
+
+    buf_point.x = map_x_lims.at(1);
+    map_boarder.push_back(buf_point);
+
+    buf_point.y = map_y_lims.at(1);
+    map_boarder.push_back(buf_point);
+
+    buf_point.x = map_x_lims.at(0);
+    map_boarder.push_back(buf_point);
+
+    return map_boarder;
+  }
 }

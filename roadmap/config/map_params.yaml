@@ -21,6 +21,7 @@ robot_radius: 0.15 # buffer radius for the robot
 k_nearest: 10 # number of neighbors to try and create an edge to
 graph_size: 500 # number of nodes to sample
 cell_size: .2 # used to convert integer coords to any unit
+grid_res: 1 # grid resolution must be >= 1.
 
 # colors for markers
 r: [239, 80, 79, 39]

@@ -22,7 +22,7 @@
 #include "visualization_msgs/Marker.h"
 
 #include "rigid2d/rigid2d.hpp"
-#include "roadmap/prm.hpp"
+#include "roadmap/grid.hpp"
 #include "roadmap/utility.hpp"
 
 static std::vector<double> r, g, b;
@@ -40,8 +40,7 @@ int main(int argc, char** argv)
   std::vector<double> map_y_lims;
   XmlRpc::XmlRpcValue obstacles;
   double robot_radius = 0.0;
-  int k_nearest = 5;
-  int graph_size = 100;
+  int grid_res = 1;
 
   n.getParam("obstacles", obstacles);
   n.getParam("map_x_lims", map_x_lims);
@@ -59,20 +58,14 @@ int main(int argc, char** argv)
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
   rigid2d::Vector2D buf_vec; // for some reason commenting out this line breaks the connection to rigid2d...
 
-  polygons = utility::parse_obstacle_data(obstacles, cell_size);
-
-  // Scale Map Coordinates
-  for(unsigned int i = 0; i < map_x_lims.size(); i++)
-  {
-    map_x_lims.at(i) *= cell_size;
-    map_y_lims.at(i) *= cell_size;
-  }
+  polygons = utility::parse_obstacle_data(obstacles, 1);
 
   // Initialize Grid
   grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
 
-  grid_world.build_grid(grid_res, robot_radius);
+  grid_world.build_grid(cell_size, grid_res, robot_radius);
 
-  occ_grid = grid_world.get_grid();
+  // auto occ_grid = grid_world.get_grid();
 
   //Publish the grid
+}

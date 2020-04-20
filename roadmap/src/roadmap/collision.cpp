@@ -41,17 +41,20 @@ namespace collision
     return dist <= threshold ;
   }
 
-  bool point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius)
+  std::vector<bool> point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius)
   {
 
     unsigned int left = 0, right = 0;
     unsigned int poly_size = polygon.size();
 
-    bool collides = true, quit_early = false;
+    bool quit_early = false;
 
     double min_dist = 10000.0;
 
     polygon.push_back(polygon.at(0)); // add the first vertex to the end of the list
+
+    // first element is the collision information, second is the cause.
+    std::vector<bool> output = {true, true};
 
     // Loop through each vertex
     for(unsigned int i = 0; i < poly_size; i++)
@@ -77,21 +80,26 @@ namespace collision
       else // the point is on the line
       {
         quit_early = true;
-        collides = true;
         break;
       }
 
       min_dist = std::min(point_to_line_distance(a, b, point), min_dist);
     }
 
-
     if(left < poly_size && right < poly_size && !quit_early) // this means the point is outside the shape
     {
-        if(min_dist > buffer_radius) collides = false;
-        else collides = true;
+        if(min_dist > buffer_radius)
+        {
+          output.at(0) = false;
+        }
+        else
+        {
+          output.at(0) = true;
+          output.at(1) = false;
+        }
     }
 
-    return collides;
+    return output;
   }
 
   bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon)

@@ -29,8 +29,8 @@ namespace collision
   /// \param point the point to analyze
   /// \param polygon a vector of verticies that define the polygon in order, either cw or ccw.
   /// \param buffer_radius a buffer distance to incorporate to the polygon boundary
-  /// \returns True if the point is inside the polygon or inside of the buffer zone of the polygon
-  bool point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius);
+  /// \returns a 2 element vector, first element is true if there is a collision, second element describes the cause: True for inside the shape, False for outside the shape, but in the buffer zone.
+  std::vector<bool> point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius);
 
   /// \brief Determine if a line segment intersects a convex polygon
   /// \param line_start the point of the beginning of the line segment
