@@ -8,10 +8,11 @@ This project is in progress.
   Brief Package Descriptions:
   - `roadmap`: A package with tools to generate various types of graph structured Road Maps. Currently, it supports PRMs and Grids
 
-Planned additions:
-- Global Planning using Theta*, D* Lite, Potential Fields
-- Local Planning with DWA and MPC
+  Planned additions:
+  - Global Planning using Theta*, D* Lite, Potential Fields
+  - Local Planning with DWA and MPC
 
+  See the [Full API](https://rencheckyoself.github.io/motion-planning-in-ROS/) for more info. 
 
 ## How to use:
 

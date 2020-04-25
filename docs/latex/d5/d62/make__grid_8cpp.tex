@@ -1,0 +1,35 @@
+\hypertarget{make__grid_8cpp}{}\section{roadmap/src/make\+\_\+grid.cpp File Reference}
+\label{make__grid_8cpp}\index{roadmap/src/make\+\_\+grid.\+cpp@{roadmap/src/make\+\_\+grid.\+cpp}}
+
+
+Node to create and draw a grid.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Occupancy\+Grid.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/grid.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/utility.\+hpp\char`\"{}}\newline
+Include dependency graph for make\+\_\+grid.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dc/d24/make__grid_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{make__grid_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{make__grid_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node to create and draw a grid. 
+
+P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body cell\+\_\+size (double) scaling factor for the map grid\+\_\+res (double) scaling factor for the grid cell size P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers 

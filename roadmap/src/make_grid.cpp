@@ -1,4 +1,4 @@
-// \file
+/// \file
 /// \brief Node to create and draw a grid
 ///
 /// PARAMETERS:
