@@ -1,29 +1,32 @@
+# General Map Parameters
+# The map bounds and obstacle locations should be provided in unitless integers
+obstacles: [[[12.0,6.0], [14.5, 3.5], [17.0, 5.5], [17.0, 8.5], [14.0,8.0]],
+    [[24.0,6.0], [26.0,3.5], [31.0,7.5], [24.5,9.5]],
+    [[34.0,26.0], [10.0,26.0], [10.0,12.0], [34.0,12.0]],
+    [[0.0,26.0], [0.0,6.0], [4.0,6.0], [4.0,26.0]],
+    [[4.0,32.0], [6.0,30.0], [8.0,32.0]],
+    [[17.0,32.0], [18.0,30.0], [19.0,32.0]],
+    [[0.0,36.0], [0.0,32.0], [29.0,32.0], [29.0,36.0]],
+    [[34.0,36.0], [33.0,34.0], [34.0,32.0]],
+    [[6.0,44.0], [2.0,43.0], [2.0,39.0], [6.0,38.0], [8.0,41.0]],
+    [[11.0,48.0], [17.0,41.0], [14.0,48.0]],
+    [[30.0,48.0], [22.0,40.0], [32.0,48.0]]] # [x,y] position for each vertex of each obstacle
 
-obstacles: [
-  [[12.0,6.0], [14.5, 3.5], [17.0, 5.5], [17.0, 8.5], [14.0,8.0]],
-  [[24.0,6.0], [26.0,3.5], [31.0,7.5], [24.5,9.5]],
-  [[34.0,26.0], [10.0,26.0], [10.0,12.0], [34.0,12.0]],
-  [[0.0,26.0], [0.0,6.0], [4.0,6.0], [4.0,26.0]],
-  [[4.0,32.0], [6.0,30.0], [8.0,32.0]],
-  [[17.0,32.0], [18.0,30.0], [19.0,32.0]],
-  [[0.0,36.0], [0.0,32.0], [29.0,32.0], [29.0,36.0]],
-  [[34.0,36.0], [33.0,34.0], [34.0,32.0]],
-  [[6.0,44.0], [2.0,43.0], [2.0,39.0], [6.0,38.0], [8.0,41.0]],
-  [[11.0,48.0], [17.0,41.0], [14.0,48.0]],
-  [[30.0,48.0], [22.0,40.0], [32.0,48.0]] ]
+map_x_lims: [0, 34] # x_min, x_max of the map
+map_y_lims: [0, 48] # y_min, y_max of the map
 
-  # [x,y] position for each vertex of each obstacle
+cell_size: 0.2 # the desired cell size in meters
 
-map_x_lims: [0, 34] # x_min, x_max
-map_y_lims: [0, 48] # y_min, y_max
+robot_radius: 0.15 # buffer radius in meters for the robot
 
-robot_radius: 0.15 # buffer radius for the robot
-k_nearest: 10 # number of neighbors to try and create an edge to
-graph_size: 500 # number of nodes to sample
-cell_size: .2 # used to convert integer coords to any unit
-grid_res: 1 # grid resolution must be >= 1.
+# PRM SPECIFIC PARAMS
+graph_size: 500 # number of nodes to use for the PRM
+k_nearest: 10 # number of neighbors to try and create an edge to for the PRM nodes
 
-# colors for markers
+# GRID SPECIFIC PARAMS
+grid_res: 5 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
+
+# color presets for markers
 r: [239, 80, 79, 39]
 g: [255, 216, 152, 39]
 b: [251, 144, 202, 39]

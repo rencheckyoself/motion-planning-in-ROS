@@ -8,6 +8,18 @@
 namespace collision
 {
 
+  /// \brief Used to return information from the point to line distance function
+  struct DistRes
+  {
+    bool inside_segment; ///< True if the point lies inbetween the line segment bounds, False otherwise.
+    double distance = 0; ///< Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex
+
+    /// \brief Create the result of the point to line distance function
+    /// \param status True if the point is within the line segment bounds
+    /// \param dist Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex
+    DistRes(bool status, double dist);
+  };
+
   /// \brief Determine if a point is within a certain distance to a line
   /// \param line_start the point of the beginning of the line segment
   /// \param line_end the point of the end of the line segment
@@ -21,7 +33,7 @@ namespace collision
   /// \param line_end the point of the end of the line segment
   /// \param point the point to calculate the distance for
   /// \returns The shortest distance between the point and the line if the point is within the line segment or the minimum between the distances to the line_start or line_end
-  double point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point);
+  DistRes point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point);
 
   /// \brief Determine if a point is inside of a convex polygon, the points must be provided in order either cw or ccw.
   /// This function will account for connected the last vertex to the first vertex by appending the first vertex
@@ -44,6 +56,7 @@ namespace collision
   /// \param line_start the point of the beginning of the line segment
   /// \param line_end the point of the end of the line segment
   /// \param polygon a vector of verticies that define the polygon in ccw order
+  /// \param buffer_radius a buffer distance to incorporate to the polygon boundary
   /// \returns True if there is an intersection between the line segment and polygon or if the minimum distance to the line and shape is less than the buffer radius
   bool line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector<rigid2d::Vector2D> polygon, double buffer_radius);
 }

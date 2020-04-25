@@ -57,6 +57,7 @@
   <build_export_depend>rviz</build_export_depend>
 
   <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
   <depend>rigid2d</depend>
   <depend>visualization_msgs</depend>
 

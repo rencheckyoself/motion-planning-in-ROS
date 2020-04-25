@@ -11,7 +11,13 @@
 
 namespace collision
 {
-  double point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point)
+  DistRes::DistRes(bool status, double dist)
+  {
+    inside_segment = status;
+    distance = dist;
+  }
+
+  DistRes point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point)
   {
     // edge vector
     rigid2d::Vector2D s = rigid2d::Vector2D(line_end.x - line_start.x, line_end.y - line_start.y);
@@ -24,26 +30,25 @@ namespace collision
       // point on the line closest to the vertex
       rigid2d::Vector2D p = rigid2d::Vector2D(line_start.x + c*s.x, line_start.y + c*s.y);
 
-      return p.distance(point);
+      return DistRes(true, p.distance(point));
     }
     else
     {
-      return std::min(point.distance(line_start), point.distance(line_end));
+      return DistRes(false, std::min(point.distance(line_start), point.distance(line_end)));
     }
   }
 
   bool point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point, double threshold)
   {
 
-    double dist = point_to_line_distance(line_start, line_end, point);
+    auto dist = point_to_line_distance(line_start, line_end, point);
 
     // true if the distance between vertex and line less than the buffer distance
-    return dist <= threshold ;
+    return dist.distance <= threshold ;
   }
 
   std::vector<bool> point_inside_convex(rigid2d::Vector2D point, std::vector<rigid2d::Vector2D> polygon, double buffer_radius)
   {
-
     unsigned int left = 0, right = 0;
     unsigned int poly_size = polygon.size();
 
@@ -75,25 +80,30 @@ namespace collision
       // Dot product of n and d
       double r = d.x * n.x + d.y * n.y;
 
+      auto calc_distance = point_to_line_distance(a, b, point);
+
       if(r > 0) right++;
       else if(r < 0) left++;
-      else // the point is on the line
+      else if(r == 0 && calc_distance.inside_segment) // the point is on the line
       {
+        // std::cout << "Point is on the line. \n";
         quit_early = true;
         break;
       }
 
-      min_dist = std::min(point_to_line_distance(a, b, point), min_dist);
+      min_dist = std::min(calc_distance.distance, min_dist);
     }
 
     if(left < poly_size && right < poly_size && !quit_early) // this means the point is outside the shape
     {
         if(min_dist > buffer_radius)
         {
+          // std::cout << "Point is OUTSIDE of the shape and OUTSIDE the buffer.\n";
           output.at(0) = false;
         }
         else
         {
+          // std::cout << "Point is OUTSIDE of the shape but INSIDE the buffer. \n";
           output.at(0) = true;
           output.at(1) = false;
         }

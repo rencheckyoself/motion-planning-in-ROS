@@ -22,7 +22,6 @@
 
 #include "rigid2d/rigid2d.hpp"
 
-/// \brief main function to create the real world map
 int main(int argc, char** argv)
 {
 

@@ -120,7 +120,6 @@ static visualization_msgs::Marker make_marker(prm::Edge edge)
   return marker;
 }
 
-/// \brief main function to create the real world map
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "make_roadmap");

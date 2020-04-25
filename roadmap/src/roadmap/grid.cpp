@@ -54,28 +54,31 @@ namespace grid
     // update the map dimensions and obstacle coordinates based on the grid resolution
     grid_resize();
 
-    // scale buffer radius to integer grid size and add half of cell diagonal to stay conservative
-    double grid_buffer = (buffer_radius/cell_size) + (std::sqrt(2) * 0.5);
+    // scale buffer radius to the integer grid size and add half of cell diagonal to stay conservative
+    double grid_buffer = (buffer_radius/cell_size)*grid_res + (std::sqrt(2) * 0.5);
 
     rigid2d::Vector2D cell_center;
 
     int occupied = 100, in_buffer = 50, free = 0;
 
+    std::vector<signed char> grid_row;
+
     // Loop through each cell on the grid and determine if the center is inside a polygon or inside the buffer zone
-    for(int i = 0; i < grid_dimensions.at(0); i++) { // x coord
+    for(int i = 0; i < grid_dimensions.at(1); i++) // y coord
+    {
+      for(int j = 0; j < grid_dimensions.at(0); j++) // x coord
+      {
 
-      std::vector<int> grid_row;
-
-      for(int j = 0; j < grid_dimensions.at(1); j++) { // y coord
-
-        cell_center.x = i * 0.5;
-        cell_center.y = j * 0.5;
+        cell_center.x = j + 0.5;
+        cell_center.y = i + 0.5;
 
         grid_row.push_back(free); // add the cell to the array
 
+        std::vector<bool> occ_result;
+
         for(auto obstacle : scaled_map.obstacles)
         {
-          auto occ_result = collision::point_inside_convex(cell_center, obstacle, grid_buffer);
+          occ_result = collision::point_inside_convex(cell_center, obstacle, grid_buffer);
 
           if(occ_result.at(0) && occ_result.at(1)) // if the point is inside the obstacle
           {
@@ -86,16 +89,15 @@ namespace grid
           {
             if(buffer_radius == 0) grid_row.at(j) = occupied; // apply the correct color
             else grid_row.at(j) = in_buffer;
-
-            break;
-          }
-          else // check if cell is near the map edges
-          {
-            auto boarder_res = cell_near_boarder(cell_center);
-
-
           }
 
+        }
+
+        // if there was no obstacle collision and a buffer has been set, check the map boarder
+        if(!occ_result.at(0) && buffer_radius != 0)
+        {
+          auto boarder_res = cell_near_boarder(cell_center, grid_buffer);
+          if(boarder_res) grid_row.at(j) = in_buffer;
         }
       }
 
@@ -105,9 +107,25 @@ namespace grid
     }
   }
 
-  std::vector<int> Grid::get_grid()
+  std::vector<signed char> Grid::get_grid() const
   {
+    // collapse 2d vector into row major order
+    std::vector<signed char> output;
 
+    for(const auto row : occ_data)
+    {
+      for(const auto point : row)
+      {
+        output.push_back(point);
+      }
+    }
+
+    return output;
+  }
+
+  std::vector<int> Grid::get_grid_dimensions() const
+  {
+    return grid_dimensions;
   }
 
   // Private Functions =========================================================
@@ -121,7 +139,7 @@ namespace grid
 
     std::for_each(scaled_map.map_vector.begin(), scaled_map.map_vector.end(), [&](rigid2d::Vector2D &n){ n.x *= grid_res; n.y *= grid_res;});
 
-    for(auto obstacle : scaled_map.obstacles)
+    for(auto & obstacle : scaled_map.obstacles)
     {
       std::for_each(obstacle.begin(), obstacle.end(), [&](rigid2d::Vector2D &n){ n.x *= grid_res; n.y *= grid_res;});
     }
@@ -131,11 +149,19 @@ namespace grid
     grid_dimensions.push_back(scaled_map.y_bounds.at(1) - scaled_map.y_bounds.at(0));
   }
 
-  bool Grid::cell_near_boarder(rigid2d::Vector2D center)
+  bool Grid::cell_near_boarder(rigid2d::Vector2D center, double threshold)
   {
-    bool collides = true;
+    bool collides = false;
 
-    
+    auto boarder = scaled_map.map_vector;
+
+    boarder.push_back(scaled_map.map_vector.at(0));
+
+    for(unsigned int i = 0; i < scaled_map.map_vector.size(); i++)
+    {
+      collides = collision::point_to_line_distance(boarder.at(i), boarder.at(i+1), center, threshold);
+      if(collides) return collides;
+    }
 
     return collides;
   }

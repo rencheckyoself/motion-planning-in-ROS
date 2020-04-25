@@ -17,9 +17,7 @@
 
 #include <ros/ros.h>
 
-#include "geometry_msgs/Point.h"
-#include "visualization_msgs/MarkerArray.h"
-#include "visualization_msgs/Marker.h"
+#include "nav_msgs/OccupancyGrid.h"
 
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/grid.hpp"
@@ -28,13 +26,12 @@
 static std::vector<double> r, g, b;
 static double cell_size = 1.0;
 
-/// \brief main function to create the real world map
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "make_roadmap");
   ros::NodeHandle n;
 
-  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
+  ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 1, true);
 
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
@@ -51,8 +48,12 @@ int main(int argc, char** argv)
 
   ROS_INFO_STREAM("GRID: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("GRID: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-  ROS_INFO_STREAM("GRID: grid res: " << grid_res);
+
   ROS_INFO_STREAM("GRID: cell size: " << cell_size);
+
+  if(grid_res < 1) ROS_FATAL_STREAM("GRID: Tried grid res: " << grid_res <<". Grid resolution must be >= 1" );
+  else ROS_INFO_STREAM("GRID: grid res: " << grid_res);
+
 
   // Build Obstacles vector
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
@@ -65,7 +66,32 @@ int main(int argc, char** argv)
 
   grid_world.build_grid(cell_size, grid_res, robot_radius);
 
-  // auto occ_grid = grid_world.get_grid();
+  auto occ_grid = grid_world.get_grid();
+  auto grid_dims = grid_world.get_grid_dimensions();
 
   //Publish the grid
+
+  nav_msgs::OccupancyGrid occ_msg;
+
+  occ_msg.header.frame_id = "map";
+  occ_msg.header.stamp = ros::Time::now();
+
+  occ_msg.info.map_load_time = ros::Time::now();
+  occ_msg.info.resolution = cell_size/grid_res;
+  occ_msg.info.height = grid_dims.at(1);
+  occ_msg.info.width = grid_dims.at(0);
+
+  occ_msg.info.origin.position.x = 0;
+  occ_msg.info.origin.position.y = 0;
+  occ_msg.info.origin.position.z = 0;
+  occ_msg.info.origin.orientation.x = 0;
+  occ_msg.info.origin.orientation.y = 0;
+  occ_msg.info.origin.orientation.z = 0;
+  occ_msg.info.origin.orientation.w = 1;
+
+  occ_msg.data = occ_grid;
+
+  pub_map.publish(occ_msg);
+
+  ros::spin();
 }

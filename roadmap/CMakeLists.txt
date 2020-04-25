@@ -12,6 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
 	geometry_msgs
+	nav_msgs
 	rigid2d
   roscpp
   rviz
@@ -110,7 +111,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES ${PROJECT_NAME}
- CATKIN_DEPENDS geometry_msgs roscpp rviz visualization_msgs
+ CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rviz visualization_msgs
 #  DEPENDS system_lib
 )
 
