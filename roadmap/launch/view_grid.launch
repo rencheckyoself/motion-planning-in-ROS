@@ -1,0 +1,11 @@
+<launch>
+<!-- This launch file is used to draw the grid map in rviz -->
+
+  <rosparam command="load" file="$(find roadmap)/config/map_params.yaml"/>
+
+  <!-- launch-prefix="gdb -ex run -''-args" -->
+  <node name="make_grid" pkg="roadmap" type="make_grid" output="screen"/>
+  <node name="draw_world" pkg="roadmap" type="draw_world" output="screen"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find roadmap)/config/default.rviz"/>
+</launch>

@@ -1,0 +1,123 @@
+\hypertarget{classprm_1_1RoadMap}{}\section{prm\+:\+:Road\+Map Class Reference}
+\label{classprm_1_1RoadMap}\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+
+
+A class to build a Probabilistic Road Maps based on provided Map information.  
+
+
+
+
+{\ttfamily \#include $<$prm.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a877e89a3bd0b0df936181c94aaeacb59}\label{classprm_1_1RoadMap_a877e89a3bd0b0df936181c94aaeacb59}} 
+\hyperlink{classprm_1_1RoadMap_a877e89a3bd0b0df936181c94aaeacb59}{Road\+Map} ()
+\begin{DoxyCompactList}\small\item\em Initialization to construct a road map in an empty 10x10 area with 100 samples. \end{DoxyCompactList}\item 
+\hyperlink{classprm_1_1RoadMap_a95a183725f0ee0f2b0ce2643aa1ed870}{Road\+Map} (std\+::vector$<$ double $>$ xboundary, std\+::vector$<$ double $>$ yboundary)
+\begin{DoxyCompactList}\small\item\em Initialization to construct a road map in an empty user defined area. \end{DoxyCompactList}\item 
+\hyperlink{classprm_1_1RoadMap_a1c44e6fa58b91b3b79bcf56e414dff44}{Road\+Map} (std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$$>$ polygon\+\_\+verticies, std\+::vector$<$ double $>$ xboundary, std\+::vector$<$ double $>$ yboundary)
+\begin{DoxyCompactList}\small\item\em Initialization to construct a road map in a user defined area with obstacles. \end{DoxyCompactList}\item 
+void \hyperlink{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}{build\+\_\+map} (unsigned int samples, unsigned int k\+\_\+neighbors, double robot\+\_\+radius)
+\begin{DoxyCompactList}\small\item\em Wrapper function to call all nessissary functions to build the P\+RM. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{structprm_1_1Node}{Node} $>$ \hyperlink{classprm_1_1RoadMap_a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0}{get\+\_\+nodes} () const
+\begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of nodes. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ \hyperlink{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}{get\+\_\+edges} () const
+\begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of unique edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A class to build a Probabilistic Road Maps based on provided Map information. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a95a183725f0ee0f2b0ce2643aa1ed870}\label{classprm_1_1RoadMap_a95a183725f0ee0f2b0ce2643aa1ed870}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!Road\+Map@{Road\+Map}}
+\index{Road\+Map@{Road\+Map}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{Road\+Map()}{RoadMap()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily prm\+::\+Road\+Map\+::\+Road\+Map (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{xboundary,  }\item[{std\+::vector$<$ double $>$}]{yboundary }\end{DoxyParamCaption})}
+
+
+
+Initialization to construct a road map in an empty user defined area. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xboundary} & a 2 element vector defining the map\textquotesingle{}s x bounds \\
+\hline
+{\em yboundary} & a 2 element vector defining the map\textquotesingle{}s y bounds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a1c44e6fa58b91b3b79bcf56e414dff44}\label{classprm_1_1RoadMap_a1c44e6fa58b91b3b79bcf56e414dff44}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!Road\+Map@{Road\+Map}}
+\index{Road\+Map@{Road\+Map}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{Road\+Map()}{RoadMap()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily prm\+::\+Road\+Map\+::\+Road\+Map (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$$>$}]{polygon\+\_\+verticies,  }\item[{std\+::vector$<$ double $>$}]{xboundary,  }\item[{std\+::vector$<$ double $>$}]{yboundary }\end{DoxyParamCaption})}
+
+
+
+Initialization to construct a road map in a user defined area with obstacles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em polygon\+\_\+verticies} & a vector of vectors defining the verticies of each obstacle in order going counter-\/clockwise \\
+\hline
+{\em xboundary} & a 2 element vector defining the map\textquotesingle{}s x bounds \\
+\hline
+{\em yboundary} & a 2 element vector defining the map\textquotesingle{}s y bounds \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}\label{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!build\+\_\+map@{build\+\_\+map}}
+\index{build\+\_\+map@{build\+\_\+map}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{build\+\_\+map()}{build\_map()}}
+{\footnotesize\ttfamily void prm\+::\+Road\+Map\+::build\+\_\+map (\begin{DoxyParamCaption}\item[{unsigned int}]{samples,  }\item[{unsigned int}]{k\+\_\+neighbors,  }\item[{double}]{robot\+\_\+radius }\end{DoxyParamCaption})}
+
+
+
+Wrapper function to call all nessissary functions to build the P\+RM. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em samples} & the number of nodes for the road map \\
+\hline
+{\em k\+\_\+neighbors} & the amount of neighbors to try and create an edge to \\
+\hline
+{\em robot\+\_\+radius} & the radius to use as a buffer around the robot for collision detection \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}\label{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!get\+\_\+edges@{get\+\_\+edges}}
+\index{get\+\_\+edges@{get\+\_\+edges}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{get\+\_\+edges()}{get\_edges()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ prm\+::\+Road\+Map\+::get\+\_\+edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Wrapper function to get the vector of unique edges. 
+
+\begin{DoxyReturn}{Returns}
+the full edge vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0}\label{classprm_1_1RoadMap_a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!get\+\_\+nodes@{get\+\_\+nodes}}
+\index{get\+\_\+nodes@{get\+\_\+nodes}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{get\+\_\+nodes()}{get\_nodes()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{structprm_1_1Node}{Node} $>$ prm\+::\+Road\+Map\+::get\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Wrapper function to get the vector of nodes. 
+
+\begin{DoxyReturn}{Returns}
+the full node vector 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+roadmap/include/roadmap/\hyperlink{prm_8hpp}{prm.\+hpp}\item 
+roadmap/src/roadmap/\hyperlink{prm_8cpp}{prm.\+cpp}\end{DoxyCompactItemize}

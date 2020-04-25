@@ -1,0 +1,36 @@
+\hypertarget{make__roadmap_8cpp}{}\section{roadmap/src/make\+\_\+roadmap.cpp File Reference}
+\label{make__roadmap_8cpp}\index{roadmap/src/make\+\_\+roadmap.\+cpp@{roadmap/src/make\+\_\+roadmap.\+cpp}}
+
+
+Node to create and draw a probabilistic road map.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/utility.\+hpp\char`\"{}}\newline
+Include dependency graph for make\+\_\+roadmap.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/d6e/make__roadmap_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{make__roadmap_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{make__roadmap_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node to create and draw a probabilistic road map. 
+
+P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body k\+\_\+nearest (unsigned int) number of neighboring verticies to match to graph\+\_\+size (unsigned int) number of nodes to use to build the graph r (std\+::vector$<$int$>$) color values g (std\+::vector$<$int$>$) color values b (std\+::vector$<$int$>$) color values P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers 

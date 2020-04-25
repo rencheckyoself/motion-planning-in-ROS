@@ -1,0 +1,11 @@
+<launch>
+<!-- This launch file is used to draw the world map in rviz -->
+
+  <rosparam command="load" file="$(find roadmap)/config/map_params.yaml"/>
+
+  <!-- launch-prefix="gdb -''-args" -->
+  <node name="make_roadmap" pkg="roadmap" type="make_roadmap" output="screen" />
+  <node name="draw_world" pkg="roadmap" type="draw_world" output="screen"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args=" -d $(find roadmap)/config/prm.rviz"/>
+</launch>

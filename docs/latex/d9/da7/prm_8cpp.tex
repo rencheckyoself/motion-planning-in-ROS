@@ -1,0 +1,56 @@
+\hypertarget{prm_8cpp}{}\section{roadmap/src/roadmap/prm.cpp File Reference}
+\label{prm_8cpp}\index{roadmap/src/roadmap/prm.\+cpp@{roadmap/src/roadmap/prm.\+cpp}}
+
+
+A library for building a Probabilistic Road Map.  
+
+
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/collision.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+Include dependency graph for prm.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/d55/prm_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{prm_8cpp_a88d1f8babd798649cc2fe9a223e48778}{prm\+::sample\+Uniform\+Distribution} (double llim, double ulim)
+\begin{DoxyCompactList}\small\item\em Sample a random value between the provided limits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A library for building a Probabilistic Road Map. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{prm_8cpp_file_a88d1f8babd798649cc2fe9a223e48778}\label{prm_8cpp_file_a88d1f8babd798649cc2fe9a223e48778}} 
+\index{prm.\+cpp@{prm.\+cpp}!sample\+Uniform\+Distribution@{sample\+Uniform\+Distribution}}
+\index{sample\+Uniform\+Distribution@{sample\+Uniform\+Distribution}!prm.\+cpp@{prm.\+cpp}}
+\subsubsection{\texorpdfstring{sample\+Uniform\+Distribution()}{sampleUniformDistribution()}}
+{\footnotesize\ttfamily double prm\+::sample\+Uniform\+Distribution (\begin{DoxyParamCaption}\item[{double}]{llim,  }\item[{double}]{ulim }\end{DoxyParamCaption})}
+
+
+
+Sample a random value between the provided limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em llim} & the lower bound of the range \\
+\hline
+{\em ulim} & the upper bound of the range \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a random value 
+\end{DoxyReturn}

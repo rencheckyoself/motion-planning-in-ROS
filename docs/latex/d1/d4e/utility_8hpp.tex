@@ -1,0 +1,79 @@
+\hypertarget{utility_8hpp}{}\section{roadmap/include/roadmap/utility.hpp File Reference}
+\label{utility_8hpp}\index{roadmap/include/roadmap/utility.\+hpp@{roadmap/include/roadmap/utility.\+hpp}}
+
+
+A library of utility functions for the various nodes and libraries of this package.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+Include dependency graph for utility.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=341pt]{d1/d48/utility_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d7/d68/utility_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$ $>$ \hyperlink{utility_8hpp_a146978c7eb3e5b6e8604499596442f9e}{utility\+::parse\+\_\+obstacle\+\_\+data} (Xml\+Rpc\+::\+Xml\+Rpc\+Value obstacles, double cell\+\_\+size)
+\begin{DoxyCompactList}\small\item\em converts obstacle data from a Y\+A\+ML file into a vector of vectors. T\+O\+DO\+: changes this to a template based output \end{DoxyCompactList}\item 
+std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{utility_8hpp_a9eb7f849405aea8fd6215f962f7d77a2}{utility\+::create\+\_\+map\+\_\+vector} (std\+::vector$<$ double $>$ map\+\_\+x\+\_\+lims, std\+::vector$<$ double $>$ map\+\_\+y\+\_\+lims)
+\begin{DoxyCompactList}\small\item\em gerenate a vector of the 4 map verticies \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A library of utility functions for the various nodes and libraries of this package. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{utility_8hpp_file_a9eb7f849405aea8fd6215f962f7d77a2}\label{utility_8hpp_file_a9eb7f849405aea8fd6215f962f7d77a2}} 
+\index{utility.\+hpp@{utility.\+hpp}!create\+\_\+map\+\_\+vector@{create\+\_\+map\+\_\+vector}}
+\index{create\+\_\+map\+\_\+vector@{create\+\_\+map\+\_\+vector}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{create\+\_\+map\+\_\+vector()}{create\_map\_vector()}}
+{\footnotesize\ttfamily std\+::vector$<$ rigid2d\+::\+Vector2D $>$ utility\+::create\+\_\+map\+\_\+vector (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{map\+\_\+x\+\_\+lims,  }\item[{std\+::vector$<$ double $>$}]{map\+\_\+y\+\_\+lims }\end{DoxyParamCaption})}
+
+
+
+gerenate a vector of the 4 map verticies 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+\_\+x\+\_\+lims} & the x axis limits of the map \\
+\hline
+{\em map\+\_\+y\+\_\+lims} & the y axis limits of the map \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of the map verticies in ccw order 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_a146978c7eb3e5b6e8604499596442f9e}\label{utility_8hpp_file_a146978c7eb3e5b6e8604499596442f9e}} 
+\index{utility.\+hpp@{utility.\+hpp}!parse\+\_\+obstacle\+\_\+data@{parse\+\_\+obstacle\+\_\+data}}
+\index{parse\+\_\+obstacle\+\_\+data@{parse\+\_\+obstacle\+\_\+data}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{parse\+\_\+obstacle\+\_\+data()}{parse\_obstacle\_data()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$ $>$ utility\+::parse\+\_\+obstacle\+\_\+data (\begin{DoxyParamCaption}\item[{Xml\+Rpc\+::\+Xml\+Rpc\+Value}]{obstacles,  }\item[{double}]{cell\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+converts obstacle data from a Y\+A\+ML file into a vector of vectors. T\+O\+DO\+: changes this to a template based output 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obstacles} & the a list of lists containing obstacle vertices \\
+\hline
+{\em cell\+\_\+size} & a scaling factor to apply to the vertex coordinates. Use 1 if you do not want to scale them. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of vectors containing obstacle vertices 
+\end{DoxyReturn}

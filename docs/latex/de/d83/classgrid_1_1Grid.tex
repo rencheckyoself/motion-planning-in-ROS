@@ -1,0 +1,163 @@
+\hypertarget{classgrid_1_1Grid}{}\section{grid\+:\+:Grid Class Reference}
+\label{classgrid_1_1Grid}\index{grid\+::\+Grid@{grid\+::\+Grid}}
+
+
+Class to create a \hyperlink{classgrid_1_1Grid}{Grid} overlay for provided \hyperlink{structgrid_1_1Map}{Map} information.  
+
+
+
+
+{\ttfamily \#include $<$grid.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_afcee115a9437842956e1efe9e202c302}\label{classgrid_1_1Grid_afcee115a9437842956e1efe9e202c302}} 
+\hyperlink{classgrid_1_1Grid_afcee115a9437842956e1efe9e202c302}{Grid} ()
+\begin{DoxyCompactList}\small\item\em Initialization to construct a grid in an empty 10x10 area. \end{DoxyCompactList}\item 
+\hyperlink{classgrid_1_1Grid_a39cd30c1ee231fde7f5a3f228a326ac1}{Grid} (std\+::vector$<$ double $>$ xboundary, std\+::vector$<$ double $>$ yboundary)
+\begin{DoxyCompactList}\small\item\em Initialization to construct a grid in an empty user defined area. \end{DoxyCompactList}\item 
+\hyperlink{classgrid_1_1Grid_a3fd6c9bb56bc7ae63d6126312e001f23}{Grid} (std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$$>$ polygon\+\_\+verticies, std\+::vector$<$ double $>$ xboundary, std\+::vector$<$ double $>$ yboundary)
+\begin{DoxyCompactList}\small\item\em Initialization to construct a grid in a user defined area with obstacles. \end{DoxyCompactList}\item 
+void \hyperlink{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}{build\+\_\+grid} (double cell\+\_\+size, unsigned int grid\+\_\+res, double robot\+\_\+radius)
+\begin{DoxyCompactList}\small\item\em Function to call all nessissary functions to build the grid. \end{DoxyCompactList}\item 
+std\+::vector$<$ signed char $>$ \hyperlink{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}{get\+\_\+grid} () const
+\begin{DoxyCompactList}\small\item\em convert the grid data into a in row major order with the first element corresponding to the lower left corner. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}{get\+\_\+grid\+\_\+dimensions} () const
+\begin{DoxyCompactList}\small\item\em get the height and width of the grid \end{DoxyCompactList}\item 
+rigid2d\+::\+Vector2D \hyperlink{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8cdfc4}{grid\+\_\+to\+\_\+world} (rigid2d\+::\+Vector2D grid\+\_\+coord)
+\begin{DoxyCompactList}\small\item\em convert from grid coordinates (integers) to world coordinates (meters) \end{DoxyCompactList}\item 
+rigid2d\+::\+Vector2D \hyperlink{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}{world\+\_\+to\+\_\+grid} (rigid2d\+::\+Vector2D world\+\_\+coord)
+\begin{DoxyCompactList}\small\item\em convert from world coordinates to grid coordinates \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class to create a \hyperlink{classgrid_1_1Grid}{Grid} overlay for provided \hyperlink{structgrid_1_1Map}{Map} information. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classgrid_1_1Grid_a39cd30c1ee231fde7f5a3f228a326ac1}\label{classgrid_1_1Grid_a39cd30c1ee231fde7f5a3f228a326ac1}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily grid\+::\+Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{std\+::vector$<$ double $>$}]{xboundary,  }\item[{std\+::vector$<$ double $>$}]{yboundary }\end{DoxyParamCaption})}
+
+
+
+Initialization to construct a grid in an empty user defined area. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xboundary} & a 2 element vector defining the map\textquotesingle{}s x bounds in integer coordinates \\
+\hline
+{\em yboundary} & a 2 element vector defining the map\textquotesingle{}s y bounds in integer coordinates \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgrid_1_1Grid_a3fd6c9bb56bc7ae63d6126312e001f23}\label{classgrid_1_1Grid_a3fd6c9bb56bc7ae63d6126312e001f23}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily grid\+::\+Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$$>$}]{polygon\+\_\+verticies,  }\item[{std\+::vector$<$ double $>$}]{xboundary,  }\item[{std\+::vector$<$ double $>$}]{yboundary }\end{DoxyParamCaption})}
+
+
+
+Initialization to construct a grid in a user defined area with obstacles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em polygon\+\_\+verticies} & a vector of vectors defining the verticies of each obstacle in integer coordinates and in order going counter-\/clockwise \\
+\hline
+{\em xboundary} & a 2 element vector defining the map\textquotesingle{}s x bounds in integer coordinates \\
+\hline
+{\em yboundary} & a 2 element vector defining the map\textquotesingle{}s y bounds in integer coordinates \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}\label{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!build\+\_\+grid@{build\+\_\+grid}}
+\index{build\+\_\+grid@{build\+\_\+grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{build\+\_\+grid()}{build\_grid()}}
+{\footnotesize\ttfamily void grid\+::\+Grid\+::build\+\_\+grid (\begin{DoxyParamCaption}\item[{double}]{cell\+\_\+size,  }\item[{unsigned int}]{grid\+\_\+res,  }\item[{double}]{robot\+\_\+radius }\end{DoxyParamCaption})}
+
+
+
+Function to call all nessissary functions to build the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell\+\_\+size} & the desired distance the distance for the cell length/height in meters \\
+\hline
+{\em grid\+\_\+res} & scaling factor to create the occupancy grid with a finer resolution that the existing cell\+\_\+size. Use 1 to make the grid equal to the current cell size Use 2 to double the resolution. \\
+\hline
+{\em robot\+\_\+radius} & the radius to use as a buffer around the robot for collision detection \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}\label{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+grid@{get\+\_\+grid}}
+\index{get\+\_\+grid@{get\+\_\+grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+grid()}{get\_grid()}}
+{\footnotesize\ttfamily std\+::vector$<$ signed char $>$ grid\+::\+Grid\+::get\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+convert the grid data into a in row major order with the first element corresponding to the lower left corner. 
+
+\begin{DoxyReturn}{Returns}
+grid occupancy data in row major order 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}\label{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+grid\+\_\+dimensions@{get\+\_\+grid\+\_\+dimensions}}
+\index{get\+\_\+grid\+\_\+dimensions@{get\+\_\+grid\+\_\+dimensions}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+grid\+\_\+dimensions()}{get\_grid\_dimensions()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ grid\+::\+Grid\+::get\+\_\+grid\+\_\+dimensions (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get the height and width of the grid 
+
+\begin{DoxyReturn}{Returns}
+the grid dimensions in number of cells 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8cdfc4}\label{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8cdfc4}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!grid\+\_\+to\+\_\+world@{grid\+\_\+to\+\_\+world}}
+\index{grid\+\_\+to\+\_\+world@{grid\+\_\+to\+\_\+world}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{grid\+\_\+to\+\_\+world()}{grid\_to\_world()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D grid\+::\+Grid\+::grid\+\_\+to\+\_\+world (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{grid\+\_\+coord }\end{DoxyParamCaption})}
+
+
+
+convert from grid coordinates (integers) to world coordinates (meters) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid\+\_\+coord} & grid location to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matching world coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}\label{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!world\+\_\+to\+\_\+grid@{world\+\_\+to\+\_\+grid}}
+\index{world\+\_\+to\+\_\+grid@{world\+\_\+to\+\_\+grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{world\+\_\+to\+\_\+grid()}{world\_to\_grid()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D grid\+::\+Grid\+::world\+\_\+to\+\_\+grid (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{world\+\_\+coord }\end{DoxyParamCaption})}
+
+
+
+convert from world coordinates to grid coordinates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+\_\+coord} & world location to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+matching grid coordinate 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+roadmap/include/roadmap/\hyperlink{grid_8hpp}{grid.\+hpp}\item 
+roadmap/src/roadmap/\hyperlink{grid_8cpp}{grid.\+cpp}\end{DoxyCompactItemize}

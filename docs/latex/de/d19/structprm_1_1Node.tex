@@ -1,0 +1,86 @@
+\hypertarget{structprm_1_1Node}{}\section{prm\+:\+:Node Struct Reference}
+\label{structprm_1_1Node}\index{prm\+::\+Node@{prm\+::\+Node}}
+
+
+A struct to define a node and interact with it.  
+
+
+
+
+{\ttfamily \#include $<$prm.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{structprm_1_1Node_a166ab395f8fcb59f5d5367ca45f7bf51}{Is\+Connected} (int node\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Determine if a node is connected to this one. \end{DoxyCompactList}\item 
+bool \hyperlink{structprm_1_1Node_ad414f13a52664be229be3a594613fb45}{operator$<$} (const \hyperlink{structprm_1_1Node}{Node} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Compares the distance value of this node object and another. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structprm_1_1Node_a538d85b9f504bdb39268bd3168fd9211}\label{structprm_1_1Node_a538d85b9f504bdb39268bd3168fd9211}} 
+int \hyperlink{structprm_1_1Node_a538d85b9f504bdb39268bd3168fd9211}{id} = -\/1
+\begin{DoxyCompactList}\small\item\em unique node ID \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structprm_1_1Node_afcf2b1941863d8d9a60874a30b9d2938}\label{structprm_1_1Node_afcf2b1941863d8d9a60874a30b9d2938}} 
+rigid2d\+::\+Vector2D \hyperlink{structprm_1_1Node_afcf2b1941863d8d9a60874a30b9d2938}{point}
+\begin{DoxyCompactList}\small\item\em x,y location relative to the world \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structprm_1_1Node_abf983b6e36e98f9caf0766b1e8c5500a}\label{structprm_1_1Node_abf983b6e36e98f9caf0766b1e8c5500a}} 
+std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ \hyperlink{structprm_1_1Node_abf983b6e36e98f9caf0766b1e8c5500a}{edges}
+\begin{DoxyCompactList}\small\item\em edges connecting to nearby nodes \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structprm_1_1Node_a23d5570a4b85f7403399444e68d5aa52}\label{structprm_1_1Node_a23d5570a4b85f7403399444e68d5aa52}} 
+std\+::unordered\+\_\+set$<$ int $>$ \hyperlink{structprm_1_1Node_a23d5570a4b85f7403399444e68d5aa52}{id\+\_\+set}
+\begin{DoxyCompactList}\small\item\em nodes that should be connected \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structprm_1_1Node_af137867e3fb1f9b0d3e43ef3fd8ddecd}\label{structprm_1_1Node_af137867e3fb1f9b0d3e43ef3fd8ddecd}} 
+double \hyperlink{structprm_1_1Node_af137867e3fb1f9b0d3e43ef3fd8ddecd}{weight} = 0
+\begin{DoxyCompactList}\small\item\em weight to determine if map is properly sampled \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structprm_1_1Node_a4db5966bcf026eaa4f2cd07ea22bcb4f}\label{structprm_1_1Node_a4db5966bcf026eaa4f2cd07ea22bcb4f}} 
+double \hyperlink{structprm_1_1Node_a4db5966bcf026eaa4f2cd07ea22bcb4f}{distance} =0
+\begin{DoxyCompactList}\small\item\em the distance to a node, used to find k-\/nearest nodes \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A struct to define a node and interact with it. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structprm_1_1Node_a166ab395f8fcb59f5d5367ca45f7bf51}\label{structprm_1_1Node_a166ab395f8fcb59f5d5367ca45f7bf51}} 
+\index{prm\+::\+Node@{prm\+::\+Node}!Is\+Connected@{Is\+Connected}}
+\index{Is\+Connected@{Is\+Connected}!prm\+::\+Node@{prm\+::\+Node}}
+\subsubsection{\texorpdfstring{Is\+Connected()}{IsConnected()}}
+{\footnotesize\ttfamily bool prm\+::\+Node\+::\+Is\+Connected (\begin{DoxyParamCaption}\item[{int}]{node\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Determine if a node is connected to this one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+id} & ID to check for a connection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if a connection exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structprm_1_1Node_ad414f13a52664be229be3a594613fb45}\label{structprm_1_1Node_ad414f13a52664be229be3a594613fb45}} 
+\index{prm\+::\+Node@{prm\+::\+Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!prm\+::\+Node@{prm\+::\+Node}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool prm\+::\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structprm_1_1Node}{Node} \&}]{rhs }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Compares the distance value of this node object and another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & pointer to another node object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this node has a smaller distance 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+roadmap/include/roadmap/\hyperlink{prm_8hpp}{prm.\+hpp}\end{DoxyCompactItemize}

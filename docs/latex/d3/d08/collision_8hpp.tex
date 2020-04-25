@@ -1,0 +1,162 @@
+\hypertarget{collision_8hpp}{}\section{roadmap/include/roadmap/collision.hpp File Reference}
+\label{collision_8hpp}\index{roadmap/include/roadmap/collision.\+hpp@{roadmap/include/roadmap/collision.\+hpp}}
+
+
+A library containing functions to detect various types of collisions.  
+
+
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+Include dependency graph for collision.\+hpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{d9/d9b/collision_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d5b/collision_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structcollision_1_1DistRes}{collision\+::\+Dist\+Res}
+\begin{DoxyCompactList}\small\item\em Used to return information from the point to line distance function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{collision_8hpp_aabf5aea7b02c454140c9bb242ca6e944}{collision\+::point\+\_\+to\+\_\+line\+\_\+distance} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, rigid2d\+::\+Vector2D point, double threshold)
+\begin{DoxyCompactList}\small\item\em Determine if a point is within a certain distance to a line. \end{DoxyCompactList}\item 
+Dist\+Res \hyperlink{collision_8hpp_a7ac784d9a63acc273489e7e61c45416a}{collision\+::point\+\_\+to\+\_\+line\+\_\+distance} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, rigid2d\+::\+Vector2D point)
+\begin{DoxyCompactList}\small\item\em Determine if a point is within a certain distance to a line. \end{DoxyCompactList}\item 
+std\+::vector$<$ bool $>$ \hyperlink{collision_8hpp_af534ea532917e73ac2b28ca11c6cdf9f}{collision\+::point\+\_\+inside\+\_\+convex} (rigid2d\+::\+Vector2D point, std\+::vector$<$ rigid2d\+::\+Vector2D $>$ polygon, double buffer\+\_\+radius)
+\begin{DoxyCompactList}\small\item\em Determine if a point is inside of a convex polygon, the points must be provided in order either cw or ccw. This function will account for connected the last vertex to the first vertex by appending the first vertex to the back of the vector. \end{DoxyCompactList}\item 
+bool \hyperlink{collision_8hpp_a70c9083464a3dd4bc7c32dabe857e331}{collision\+::line\+\_\+shape\+\_\+intersection} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, std\+::vector$<$ rigid2d\+::\+Vector2D $>$ polygon)
+\begin{DoxyCompactList}\small\item\em Determine if a line segment intersects a convex polygon. \end{DoxyCompactList}\item 
+bool \hyperlink{collision_8hpp_abf9b390bd1d767fe39f7d4806fae6b62}{collision\+::line\+\_\+shape\+\_\+intersection} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, std\+::vector$<$ rigid2d\+::\+Vector2D $>$ polygon, double buffer\+\_\+radius)
+\begin{DoxyCompactList}\small\item\em Determine if a line segment intersects a convex polygon or comes within a certain distance of it. This assumes the line start and end points are known to be outside of the buffer area of the polygon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A library containing functions to detect various types of collisions. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{collision_8hpp_file_a70c9083464a3dd4bc7c32dabe857e331}\label{collision_8hpp_file_a70c9083464a3dd4bc7c32dabe857e331}} 
+\index{collision.\+hpp@{collision.\+hpp}!line\+\_\+shape\+\_\+intersection@{line\+\_\+shape\+\_\+intersection}}
+\index{line\+\_\+shape\+\_\+intersection@{line\+\_\+shape\+\_\+intersection}!collision.\+hpp@{collision.\+hpp}}
+\subsubsection{\texorpdfstring{line\+\_\+shape\+\_\+intersection()}{line\_shape\_intersection()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool collision\+::line\+\_\+shape\+\_\+intersection (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{line\+\_\+start,  }\item[{rigid2d\+::\+Vector2D}]{line\+\_\+end,  }\item[{std\+::vector$<$ rigid2d\+::\+Vector2D $>$}]{polygon }\end{DoxyParamCaption})}
+
+
+
+Determine if a line segment intersects a convex polygon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+start} & the point of the beginning of the line segment \\
+\hline
+{\em line\+\_\+end} & the point of the end of the line segment \\
+\hline
+{\em polygon} & a vector of verticies that define the polygon in ccw order \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is an intersection between the line segment and polygon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{collision_8hpp_file_abf9b390bd1d767fe39f7d4806fae6b62}\label{collision_8hpp_file_abf9b390bd1d767fe39f7d4806fae6b62}} 
+\index{collision.\+hpp@{collision.\+hpp}!line\+\_\+shape\+\_\+intersection@{line\+\_\+shape\+\_\+intersection}}
+\index{line\+\_\+shape\+\_\+intersection@{line\+\_\+shape\+\_\+intersection}!collision.\+hpp@{collision.\+hpp}}
+\subsubsection{\texorpdfstring{line\+\_\+shape\+\_\+intersection()}{line\_shape\_intersection()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool collision\+::line\+\_\+shape\+\_\+intersection (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{line\+\_\+start,  }\item[{rigid2d\+::\+Vector2D}]{line\+\_\+end,  }\item[{std\+::vector$<$ rigid2d\+::\+Vector2D $>$}]{polygon,  }\item[{double}]{buffer\+\_\+radius }\end{DoxyParamCaption})}
+
+
+
+Determine if a line segment intersects a convex polygon or comes within a certain distance of it. This assumes the line start and end points are known to be outside of the buffer area of the polygon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+start} & the point of the beginning of the line segment \\
+\hline
+{\em line\+\_\+end} & the point of the end of the line segment \\
+\hline
+{\em polygon} & a vector of verticies that define the polygon in ccw order \\
+\hline
+{\em buffer\+\_\+radius} & a buffer distance to incorporate to the polygon boundary \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is an intersection between the line segment and polygon or if the minimum distance to the line and shape is less than the buffer radius 
+\end{DoxyReturn}
+\mbox{\Hypertarget{collision_8hpp_file_af534ea532917e73ac2b28ca11c6cdf9f}\label{collision_8hpp_file_af534ea532917e73ac2b28ca11c6cdf9f}} 
+\index{collision.\+hpp@{collision.\+hpp}!point\+\_\+inside\+\_\+convex@{point\+\_\+inside\+\_\+convex}}
+\index{point\+\_\+inside\+\_\+convex@{point\+\_\+inside\+\_\+convex}!collision.\+hpp@{collision.\+hpp}}
+\subsubsection{\texorpdfstring{point\+\_\+inside\+\_\+convex()}{point\_inside\_convex()}}
+{\footnotesize\ttfamily std\+::vector$<$ bool $>$ collision\+::point\+\_\+inside\+\_\+convex (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{point,  }\item[{std\+::vector$<$ rigid2d\+::\+Vector2D $>$}]{polygon,  }\item[{double}]{buffer\+\_\+radius }\end{DoxyParamCaption})}
+
+
+
+Determine if a point is inside of a convex polygon, the points must be provided in order either cw or ccw. This function will account for connected the last vertex to the first vertex by appending the first vertex to the back of the vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & the point to analyze \\
+\hline
+{\em polygon} & a vector of verticies that define the polygon in order, either cw or ccw. \\
+\hline
+{\em buffer\+\_\+radius} & a buffer distance to incorporate to the polygon boundary \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a 2 element vector, first element is true if there is a collision, second element describes the cause\+: True for inside the shape, False for outside the shape, but in the buffer zone. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{collision_8hpp_file_aabf5aea7b02c454140c9bb242ca6e944}\label{collision_8hpp_file_aabf5aea7b02c454140c9bb242ca6e944}} 
+\index{collision.\+hpp@{collision.\+hpp}!point\+\_\+to\+\_\+line\+\_\+distance@{point\+\_\+to\+\_\+line\+\_\+distance}}
+\index{point\+\_\+to\+\_\+line\+\_\+distance@{point\+\_\+to\+\_\+line\+\_\+distance}!collision.\+hpp@{collision.\+hpp}}
+\subsubsection{\texorpdfstring{point\+\_\+to\+\_\+line\+\_\+distance()}{point\_to\_line\_distance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool collision\+::point\+\_\+to\+\_\+line\+\_\+distance (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{line\+\_\+start,  }\item[{rigid2d\+::\+Vector2D}]{line\+\_\+end,  }\item[{rigid2d\+::\+Vector2D}]{point,  }\item[{double}]{threshold }\end{DoxyParamCaption})}
+
+
+
+Determine if a point is within a certain distance to a line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+start} & the point of the beginning of the line segment \\
+\hline
+{\em line\+\_\+end} & the point of the end of the line segment \\
+\hline
+{\em point} & the point to calculate the distance for \\
+\hline
+{\em threshold} & the distance threshold to compare against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the distance between the point and the line is L\+E\+SS T\+H\+AN the provided threshold 
+\end{DoxyReturn}
+\mbox{\Hypertarget{collision_8hpp_file_a7ac784d9a63acc273489e7e61c45416a}\label{collision_8hpp_file_a7ac784d9a63acc273489e7e61c45416a}} 
+\index{collision.\+hpp@{collision.\+hpp}!point\+\_\+to\+\_\+line\+\_\+distance@{point\+\_\+to\+\_\+line\+\_\+distance}}
+\index{point\+\_\+to\+\_\+line\+\_\+distance@{point\+\_\+to\+\_\+line\+\_\+distance}!collision.\+hpp@{collision.\+hpp}}
+\subsubsection{\texorpdfstring{point\+\_\+to\+\_\+line\+\_\+distance()}{point\_to\_line\_distance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Dist\+Res collision\+::point\+\_\+to\+\_\+line\+\_\+distance (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{line\+\_\+start,  }\item[{rigid2d\+::\+Vector2D}]{line\+\_\+end,  }\item[{rigid2d\+::\+Vector2D}]{point }\end{DoxyParamCaption})}
+
+
+
+Determine if a point is within a certain distance to a line. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line\+\_\+start} & the point of the beginning of the line segment \\
+\hline
+{\em line\+\_\+end} & the point of the end of the line segment \\
+\hline
+{\em point} & the point to calculate the distance for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The shortest distance between the point and the line if the point is within the line segment or the minimum between the distances to the line\+\_\+start or line\+\_\+end 
+\end{DoxyReturn}
