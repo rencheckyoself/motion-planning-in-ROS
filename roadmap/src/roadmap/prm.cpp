@@ -66,7 +66,39 @@ namespace prm
     k = k_neighbors;
     n = samples;
     sample_config_space();
-    connect_nodes();
+
+    for(auto & node : nodes)
+    {
+      connect_node(node);
+    }
+  }
+
+  bool RoadMap::add_node(rigid2d::Vector2D point)
+  {
+    Node output;
+
+    std::cout << point;
+
+    // check if provided point is valid
+    bool valid = node_collisions(point);
+
+    // Add Node to the Road Map or return false
+    if(valid)
+    {
+      output.id = node_cnt;
+      output.point = point;
+      node_cnt++;
+      nodes.push_back(output);
+
+      connect_node(output);
+
+      return true;
+    }
+    else
+    {
+      std::cout << "Provided Point is invalid!" << std::endl;
+      return false;
+    }
   }
 
   std::vector<Node> RoadMap::get_nodes() const
@@ -82,13 +114,12 @@ namespace prm
   // PRIVATE MEMBER FUNCTIONS
   void RoadMap::sample_config_space()
   {
-    unsigned int cnt = 0;
     Node buf_node;
     rigid2d::Vector2D buf_point;
     bool valid = true;
 
     // Sample Configuration space until n valid nodes are created
-    while(cnt < n)
+    while(node_cnt < n)
     {
       buf_point.x = sampleUniformDistribution(x_bounds.at(0) + buffer_radius, x_bounds.at(1) - buffer_radius);
       buf_point.y = sampleUniformDistribution(y_bounds.at(0) + buffer_radius, y_bounds.at(1) - buffer_radius);
@@ -99,9 +130,9 @@ namespace prm
       // Add Node to the Road Map
       if(valid)
       {
-        buf_node.id = cnt;
+        buf_node.id = node_cnt;
         buf_node.point = buf_point;
-        cnt++;
+        node_cnt++;
 
         nodes.push_back(buf_node);
       }
@@ -118,7 +149,6 @@ namespace prm
     {
       auto collides = collision::point_inside_convex(point, obstacle, buffer_radius);
 
-      // if r is >= 0 for all lines, point collides
       if(collides.at(0))
       {
         valid_node = false;
@@ -129,60 +159,57 @@ namespace prm
     return valid_node;
   }
 
-  void RoadMap::connect_nodes()
+
+  void RoadMap::connect_node(Node &node)
   {
-    int edge_cnt = 0;
-    for(auto & node : nodes)
+    // Find k nearest neighbors
+    const auto knn = nearest_neighbors_bf(node);
+
+    // Evaluate each match
+    for(auto & qp : knn)
     {
-      // Find k nearest neighbors
-      const auto knn = nearest_neighbors_bf(node);
-
-      // Evaluate each match
-      for(auto & qp : knn)
+      // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
+      if(!node.IsConnected(qp.get().id) && qp.get().distance > buffer_radius)
       {
-        // If the edge does not exist and if the two nodes are atleast 15cm apart, create an edge
-        if(!node.IsConnected(qp.get().id) && qp.get().distance > buffer_radius)
+
+        // Create a temporary edge
+        Edge buf_edge;
+
+        buf_edge.edge_id = edge_cnt;
+
+        buf_edge.node1_id = node.id;
+        buf_edge.node1 = node.point;
+
+        buf_edge.node2_id = qp.get().id;
+        buf_edge.node2 = qp.get().point;
+
+        buf_edge.distance = qp.get().distance;
+
+        // check for path collisions with the obstacles
+        bool valid_edge = edge_collisions(buf_edge);
+
+        // check for robot collision with the obstacles
+
+        if(valid_edge)
         {
+          all_edges.push_back(buf_edge);
 
-          // Create a temporary edge
-          Edge buf_edge;
+          // add edge to node
+          node.edges.push_back(buf_edge);
 
-          buf_edge.edge_id = edge_cnt;
+          // switch 1 and 2 and add to second node
+          buf_edge.node1_id = buf_edge.node2_id;
+          buf_edge.node1 = buf_edge.node2;
+          buf_edge.node2_id = node.id;
+          buf_edge.node2 = node.point;
 
-          buf_edge.node1_id = node.id;
-          buf_edge.node1 = node.point;
+          qp.get().edges.push_back(buf_edge);
 
-          buf_edge.node2_id = qp.get().id;
-          buf_edge.node2 = qp.get().point;
+          // add connected node ids to the unordered sets
+          node.id_set.insert(qp.get().id);
+          qp.get().id_set.insert(node.id);
 
-          buf_edge.distance = qp.get().distance;
-
-          // check for path collisions with the obstacles
-          bool valid_edge = edge_collisions(buf_edge);
-
-          // check for robot collision with the obstacles
-
-          if(valid_edge)
-          {
-            all_edges.push_back(buf_edge);
-
-            // add edge to node
-            node.edges.push_back(buf_edge);
-
-            // switch 1 and 2 and add to second node
-            buf_edge.node1_id = buf_edge.node2_id;
-            buf_edge.node1 = buf_edge.node2;
-            buf_edge.node2_id = node.id;
-            buf_edge.node2 = node.point;
-
-            qp.get().edges.push_back(buf_edge);
-
-            // add connected node ids to the unordered sets
-            node.id_set.insert(qp.get().id);
-            qp.get().id_set.insert(node.id);
-
-            edge_cnt++;
-          }
+          edge_cnt++;
         }
       }
     }

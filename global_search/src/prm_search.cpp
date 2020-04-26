@@ -11,10 +11,8 @@
 ///     r (std::vector<int>) color values
 ///     g (std::vector<int>) color values
 ///     b (std::vector<int>) color values
-/// PUBLISHES:
-///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
-
 #include <vector>
+#include <algorithm>
 #include <XmlRpcValue.h>
 
 #include <ros/ros.h>
@@ -37,8 +35,8 @@ int main(int argc, char** argv)
 
   ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
 
-  std::vector<double> map_x_lims;
-  std::vector<double> map_y_lims;
+  std::vector<double> map_x_lims, map_y_lims;
+  std::vector<double> start, goal;
   XmlRpc::XmlRpcValue obstacles;
   double robot_radius = 0.0;
   int k_nearest = 5;
@@ -54,6 +52,9 @@ int main(int argc, char** argv)
   n.getParam("r", r);
   n.getParam("g", g);
   n.getParam("b", b);
+
+  n.getParam("start", start);
+  n.getParam("goal", goal);
 
   std::vector<std::vector<double>> colors;
 
@@ -79,17 +80,42 @@ int main(int argc, char** argv)
     map_y_lims.at(i) *= cell_size;
   }
 
-  ROS_INFO_STREAM("PRM: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
-  ROS_INFO_STREAM("PRM: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-  ROS_INFO_STREAM("PRM: k_nearest: " << k_nearest);
-  ROS_INFO_STREAM("PRM: graph_size: " << graph_size);
-  ROS_INFO_STREAM("PRM: robot_radius: " << robot_radius);
-  ROS_INFO_STREAM("PRM: cell size: " << cell_size);
-  ROS_INFO_STREAM("PRM: Loaded Params");
+  // convert start/goal to vector2D
+  rigid2d::Vector2D start_pt(start.at(0) * cell_size, start.at(1) * cell_size);
+  rigid2d::Vector2D goal_pt(goal.at(0) * cell_size, goal.at(1) * cell_size);
+
+  ROS_INFO_STREAM("PRMSRCH: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
+  ROS_INFO_STREAM("PRMSRCH: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("PRMSRCH: k_nearest: " << k_nearest);
+  ROS_INFO_STREAM("PRMSRCH: graph_size: " << graph_size);
+  ROS_INFO_STREAM("PRMSRCH: robot_radius: " << robot_radius);
+  ROS_INFO_STREAM("PRMSRCH: cell size: " << cell_size);
+  ROS_INFO_STREAM("PRMSRCH: start coordinate: " << start_pt);
+  ROS_INFO_STREAM("PRMSRCH: goal coordinate: " << goal_pt);
+  ROS_INFO_STREAM("PRMSRCH: Loaded Params");
+
+
 
   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
 
   prob_road_map.build_map(graph_size, k_nearest, robot_radius);
+
+  bool resultS, resultG = 0;
+
+  // Add in the start and goal
+  resultS = prob_road_map.add_node(start_pt);
+  resultG = prob_road_map.add_node(goal_pt);
+
+  if(!resultS)
+  {
+    ROS_FATAL_STREAM("PRMSRCH: Invalid start node. \n Given start: " << start_pt);
+    ros::shutdown();
+  }
+  else if(!resultG)
+  {
+    ROS_FATAL_STREAM("PRMSRCH: Invalid goal node. \n Given goal: " << goal_pt);
+    ros::shutdown();
+  }
 
   const auto all_nodes = prob_road_map.get_nodes();
   const auto all_edges = prob_road_map.get_edges();
@@ -109,8 +135,14 @@ int main(int argc, char** argv)
     markers.push_back(utility::make_marker(edge, cell_size, colors.at(2)));
   }
 
+  // Draw Start and Goal
+  unsigned int node_cnt = all_nodes.size();
+  markers.push_back(utility::make_marker(all_nodes.at(node_cnt-2), cell_size*2, std::vector<double>({0, 1, 0}))); // start
+  markers.push_back(utility::make_marker(all_nodes.at(node_cnt-1), cell_size*2, std::vector<double>({1, 0, 0}))); // goal
+
   pub_marks.markers = markers;
   pub_markers.publish(pub_marks);
 
   ros::spin();
+
 }

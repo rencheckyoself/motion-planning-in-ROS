@@ -86,6 +86,11 @@ namespace prm
     /// \returns the full edge vector
     std::vector<Edge> get_edges() const;
 
+    /// \brief Add a user defined node into the graph and create the edges
+    /// \param point the x,y coordinates for the new node
+    /// \returns True if the node was successfully added
+    bool add_node(rigid2d::Vector2D point);
+
   private:
     std::vector<std::vector<rigid2d::Vector2D>> obstacles; ///< obstacles in the map
     std::vector<double> x_bounds; ///< x bounds of the map
@@ -99,6 +104,9 @@ namespace prm
     unsigned int n = 100; ///< number of nodes in the map
     unsigned int k = 10; ///< number of nearest neighbors to find
 
+    unsigned int edge_cnt = 0; ///< number of edges in the graph
+    unsigned int node_cnt = 0; ///< number of nodes in the graph
+
     /// \brief Randomly Sample the configuration space to retrieve a set of nodes for the roadmap
     ///
     void sample_config_space();
@@ -107,6 +115,10 @@ namespace prm
     /// \param point the configuration of a new potential node
     /// \returns true if the node is valid
     bool node_collisions(rigid2d::Vector2D point);
+
+    /// \brief Find nodes that are near the provided reference and connect them if possible.
+    /// \param node reference to a node
+    void connect_node(Node & node);
 
     /// \brief Find nodes that are near each other and connect them if possible.
     ///
