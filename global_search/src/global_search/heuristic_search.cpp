@@ -33,8 +33,8 @@ namespace hsearch
 
   bool SearchNode::operator<(const SearchNode &rhs) const
   {
-    if(f_val == rhs.f_val) return h_val < rhs.h_val;
-    else return f_val < rhs.f_val;
+    if(f_val == rhs.f_val) return h_val > rhs.h_val;
+    else return f_val > rhs.f_val;
   }
 
   std::ostream & operator<<(std::ostream & os, const SearchNode & n)
@@ -70,11 +70,14 @@ namespace hsearch
 
     while(open_list.size() != 0)
     {
-      std::cout << "open_list size: " << open_list.size() << std::endl;
+      // std::cout << "open_list size: " << open_list.size() << std::endl;
       // Get the node with the minimum total cost
-      std::pop_heap(open_list.begin(), open_list.end());
+      std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
       auto cur_s = open_list.back();
       open_list.pop_back();
+
+      // std::cout << "Current Node Cost: " << cur_s.f_val << std::endl;
+      // std::cout << "End Node Cost: " << open_list.back().f_val << std::endl;
 
       // std::cout << "Current Node: " << cur_s.node_p->point << "\n";
 
@@ -93,11 +96,11 @@ namespace hsearch
       for(auto node_id : cur_s.node_p->id_set)
       {
 
-        std::cout << "s' ID: " << node_id << "\n";
+        // std::cout << "s' ID: " << node_id << "\n";
 
         auto result = std::find_if(closed_list.begin(), closed_list.end(), [node_id](SearchNode n) {return n.node_p->id == node_id;});
 
-        std::cout << "On closed list? " << result - closed_list.begin() << "\n";
+        // std::cout << "On closed list? " << result - closed_list.begin() << "\n";
 
         // Check if the node is not on the closed list and try to update/create it
         if(result == closed_list.end())
@@ -105,7 +108,7 @@ namespace hsearch
 
           result = std::find_if(open_list.begin(), open_list.end(), [node_id](SearchNode n) {return n.node_p->id == node_id;});
 
-          std::cout << "On open list? " << result - open_list.begin() << "\n";
+          // std::cout << "On open list? " << result - open_list.begin() << "\n";
 
           SearchNode neighbor;
 
@@ -135,10 +138,10 @@ namespace hsearch
             open_list.at(std::distance(open_list.begin(),result)) = neighbor;
           }
 
-          std::cout << neighbor;
+          // std::cout << neighbor;
 
           // Update the heap order
-          push_heap(open_list.begin(), open_list.end());
+          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
         }
       }
     }
