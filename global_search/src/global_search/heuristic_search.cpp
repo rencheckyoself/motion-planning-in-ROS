@@ -78,7 +78,6 @@ namespace hsearch
 
       // std::cout << "Current Node Cost: " << cur_s.f_val << std::endl;
       // std::cout << "End Node Cost: " << open_list.back().f_val << std::endl;
-
       // std::cout << "Current Node: " << cur_s.node_p->point << "\n";
 
       // check if cur_s is the goal

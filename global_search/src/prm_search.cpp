@@ -150,10 +150,10 @@ int main(int argc, char** argv)
   }
 
   // Draw a line to show all connections.
-  // for(auto edge : all_edges)
-  // {
-  //   markers.push_back(utility::make_marker(edge, cell_size, colors.at(2)));
-  // }
+  for(auto edge : all_edges)
+  {
+    markers.push_back(utility::make_marker(edge, cell_size/2, colors.at(2)));
+  }
 
   // Draw Start and Goal
   markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0}))); // start
