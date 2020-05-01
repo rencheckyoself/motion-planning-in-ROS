@@ -21,6 +21,7 @@
 #include "visualization_msgs/MarkerArray.h"
 #include "visualization_msgs/Marker.h"
 
+#include "global_search/heuristic_search.hpp"
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
 #include "roadmap/utility.hpp"
@@ -94,8 +95,6 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("PRMSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("PRMSRCH: Loaded Params");
 
-
-
   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
 
   prob_road_map.build_map(graph_size, k_nearest, robot_radius);
@@ -117,32 +116,57 @@ int main(int argc, char** argv)
     ros::shutdown();
   }
 
-  const auto all_nodes = prob_road_map.get_nodes();
-  const auto all_edges = prob_road_map.get_edges();
+  auto all_nodes = prob_road_map.get_nodes();
+  auto all_edges = prob_road_map.get_edges();
+  unsigned int node_cnt = all_nodes.size();
+
+  prm::Node start_node = all_nodes.at(node_cnt-2);
+  prm::Node goal_node = all_nodes.at(node_cnt-1);
+
+  std::cout << start_node.edges.size() << "\n";
+
+  hsearch::AStar a_star_search(&all_nodes);
+
+  bool search_result = a_star_search.ComputeShortestPath(start_node, goal_node);
+  ROS_INFO_STREAM("PRMSRCH: Search Complete!\n");
+
+  if(!search_result)
+  {
+    ROS_FATAL_STREAM("PRMSRCH: Search failed to find a path given the start and goal.\n");
+    ros::shutdown();
+  }
+
+  std::vector<rigid2d::Vector2D> path = a_star_search.get_path();
+
+  ROS_INFO_STREAM("PRMSRCH: Final Path has " << path.size() << " nodes.");
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
 
   // Put a spherical marker at each node
-  for(auto node : all_nodes)
+  for(auto it = all_nodes.begin(); it < all_nodes.end()-2; it++)
   {
-    markers.push_back(utility::make_marker(node, cell_size, colors.at(0)));
+    markers.push_back(utility::make_marker(*it, cell_size, colors.at(0)));
   }
 
   // Draw a line to show all connections.
-  for(auto edge : all_edges)
-  {
-    markers.push_back(utility::make_marker(edge, cell_size, colors.at(2)));
-  }
+  // for(auto edge : all_edges)
+  // {
+  //   markers.push_back(utility::make_marker(edge, cell_size, colors.at(2)));
+  // }
 
   // Draw Start and Goal
-  unsigned int node_cnt = all_nodes.size();
-  markers.push_back(utility::make_marker(all_nodes.at(node_cnt-2), cell_size*2, std::vector<double>({0, 1, 0}))); // start
-  markers.push_back(utility::make_marker(all_nodes.at(node_cnt-1), cell_size*2, std::vector<double>({1, 0, 0}))); // goal
+  markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0}))); // start
+  markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0}))); // goal
+
+  // Draw final path
+  for(auto it = path.begin(); it < path.end()-1; it++)
+  {
+    markers.push_back(utility::make_marker(*it, *(it+1), it-path.begin(), cell_size, std::vector<double>({0, 0, 1})));
+  }
 
   pub_marks.markers = markers;
   pub_markers.publish(pub_marks);
 
   ros::spin();
-
 }

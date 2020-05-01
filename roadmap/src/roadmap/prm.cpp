@@ -77,8 +77,6 @@ namespace prm
   {
     Node output;
 
-    std::cout << point;
-
     // check if provided point is valid
     bool valid = node_collisions(point);
 
@@ -88,10 +86,11 @@ namespace prm
       output.id = node_cnt;
       output.point = point;
       node_cnt++;
-      nodes.push_back(output);
 
       connect_node(output);
 
+      nodes.push_back(output);
+      
       return true;
     }
     else

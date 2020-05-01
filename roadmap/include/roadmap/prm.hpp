@@ -31,8 +31,8 @@ namespace prm
     rigid2d::Vector2D point; ///< x,y location relative to the world
     std::vector<Edge> edges; ///< edges connecting to nearby nodes
     std::unordered_set<int> id_set; ///< nodes that should be connected
-    double weight = 0; ///< weight to determine if map is properly sampled
 
+    double weight = 0; ///< weight to determine if map is properly sampled
     double distance=0; ///< the distance to a node, used to find k-nearest nodes
 
     /// \brief Determine if a node is connected to this one

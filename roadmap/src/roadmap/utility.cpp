@@ -139,4 +139,38 @@ namespace utility
 
     return marker;
   }
+
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color)
+  {
+    visualization_msgs::Marker marker;
+
+    std::vector<geometry_msgs::Point> points = {Vec2D_to_GeoPt(pt1), Vec2D_to_GeoPt(pt2)};
+
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time::now();
+
+    marker.ns = "Path";
+    marker.id = marker_id;
+
+    marker.type = visualization_msgs::Marker::LINE_LIST;
+    marker.action = visualization_msgs::Marker::ADD;
+
+    marker.pose.orientation.x = 0;
+    marker.pose.orientation.y = 0;
+    marker.pose.orientation.z = 0;
+    marker.pose.orientation.w = 1;
+
+    marker.points = points;
+
+    marker.scale.x = 0.1 * scale;
+
+    marker.color.r = color.at(0);
+    marker.color.g = color.at(1);
+    marker.color.b = color.at(2);
+    marker.color.a = 1.0;
+
+    marker.lifetime = ros::Duration();
+
+    return marker;
+  }
 }

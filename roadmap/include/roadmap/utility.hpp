@@ -49,6 +49,15 @@ namespace utility
   /// \param color the r,g,b color values in a vector
   /// \returns a marker to add to the MarkerArray
   visualization_msgs::Marker make_marker(prm::Edge edge, double scale, std::vector<double> color);
+
+  /// \brief Create a line Marker between two points
+  /// \param pt1 a set of x,y coordinates
+  /// \param pt2 a set of x,y coordinates
+  /// \param marker_id a unique id for the marker
+  /// \param scale the amount to scale the preset marker size (should be graph cell size)
+  /// \param color the r,g,b color values in a vector
+  /// \returns a marker to add to the MarkerArray
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color);
 }
 
 #endif // UTILITY_INCLUDE_GAURD_HPP
