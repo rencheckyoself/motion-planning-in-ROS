@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_5fbounds',['x_bounds',['../d9/d0a/structgrid_1_1Map.html#a44918e798d8fa1400ddf52bc52ce4c6f',1,'grid::Map']]]
+  ['known_5fmap',['known_map',['../d0/dde/classhsearch_1_1HSearch.html#ad43c076b2d52f4e58dbf29efdb15d1b6',1,'hsearch::HSearch']]]
 ];

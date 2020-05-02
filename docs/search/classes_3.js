@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['map',['Map',['../d9/d0a/structgrid_1_1Map.html',1,'grid']]]
+  ['grid',['Grid',['../de/d83/classgrid_1_1Grid.html',1,'grid']]]
 ];

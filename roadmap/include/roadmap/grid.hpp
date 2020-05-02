@@ -22,7 +22,7 @@ namespace grid
     /// \brief default constructor
     Map() {};
 
-    /// \bried Fully construct the map
+    /// \brief Fully construct the map
     /// \param obs obstacles in the map
     /// \param x bounds of the map
     /// \param y bounds of the map

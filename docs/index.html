@@ -72,22 +72,30 @@ $(function() {
 <li>Local Planning with DWA and MPC</li>
 </ul>
 <p>See the <a href="https://rencheckyoself.github.io/motion-planning-in-ROS/">Full API</a> for more info.</p>
-<h2>How to use:</h2>
+<h2>How to use</h2>
 <h3>Probabilistic Road Maps</h3>
-<p>To generate a PRM launch <code>view_prm.launch</code>. This will create a new PRM and visualize it in Rviz.</p>
-<p>Change the parameters in <code>config/map_params.yaml</code> to customize the components of the map.</p>
+<p>To generate a PRM launch <code>roadmap view_prm.launch</code>. This will create a new PRM and visualize it in Rviz.</p>
+<p>Change the parameters in <code>roadmap/config/map_params.yaml</code> to customize the components of the map.</p>
 <p>The following image was taken using a cell size of 0.2m with a buffer radius of 0.15m. The graph consists of 500 nodes trying to connect to the 10 nearest neighbors. </p><div class="image">
 <img src="prm_example.png" alt="prm_example.png"/>
 <div class="caption">
 prm_example</div></div>
  <h3>Grids</h3>
-<p>To generate a grid, launch <code>view_grid.launch</code>. This will create a new grid and visualize it in Rviz.</p>
-<p>Change the parameters in <code>config/map_params.yaml</code> to customize the components of the map.</p>
+<p>To generate a grid, launch <code>roadmap view_grid.launch</code>. This will create a new grid and visualize it in Rviz.</p>
+<p>Change the parameters in <code>roadmap/config/map_params.yaml</code> to customize the components of the map.</p>
 <p>The following image was taken using a cell size of 0.2m with a buffer radius of 0.15m. The grid has a 5 times finer resolution than the provided map, with black cells as the actual obstacle, gray cells representing cells inside the buffer zone, and white representing the free space.</p>
 <div class="image">
 <img src="grid_example.png" alt="grid_example.png"/>
 <div class="caption">
 grid_example</div></div>
+ <h3>Heuristic Search on a Known Map (A* and Theta*)</h3>
+<p>To view the algorithm in action, launch <code>global_search plan_prm.launch</code>. This will create a PRM graph, apply A* and Theta* search to it, and visualize the results it in Rviz.</p>
+<p>Change the parameters in <code>roadmap/config/map_params.yaml</code> to customize the components of the map. Change the parameters in <code>global_search/config/search_params.yaml</code> to change the start and goal locations.</p>
+<p>The following image was taken using a cell size of 0.2m with a buffer radius of 0.15m. The graph consists of 500 nodes trying to connect to the 10 nearest neighbors. The green node is the start and the red node is the goal. The black line is the path determined by A* and the orange line is the path determined by Theta*.</p>
+<div class="image">
+<img src="global_search/documentation/Thetastar_v_Astar.png" alt="known_search_example"/>
+</div>
+<h2>Background</h2>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

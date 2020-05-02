@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['edge_5fid',['edge_id',['../d4/db8/structprm_1_1Edge.html#ac0e99ee22ee177b40873843765182041',1,'prm::Edge']]],
-  ['edges',['edges',['../de/d19/structprm_1_1Node.html#abf983b6e36e98f9caf0766b1e8c5500a',1,'prm::Node']]]
+  ['closed_5flist',['closed_list',['../d0/dde/classhsearch_1_1HSearch.html#ae85581fef9d5887f154d2d3b9ea3a06e',1,'hsearch::HSearch']]],
+  ['created_5fgraph_5fp',['created_graph_p',['../d0/dde/classhsearch_1_1HSearch.html#a92b4944c741acab45fc3c71661f1aa42',1,'hsearch::HSearch']]]
 ];

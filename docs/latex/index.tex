@@ -15,19 +15,30 @@ Planned additions\+:
 
 See the \href{https://rencheckyoself.github.io/motion-planning-in-ROS/}{\tt Full A\+PI} for more info.
 
-\subsection*{How to use\+:}
+\subsection*{How to use}
 
 \subsubsection*{Probabilistic Road Maps}
 
-To generate a P\+RM launch {\ttfamily view\+\_\+prm.\+launch}. This will create a new P\+RM and visualize it in Rviz.
+To generate a P\+RM launch {\ttfamily roadmap view\+\_\+prm.\+launch}. This will create a new P\+RM and visualize it in Rviz.
 
-Change the parameters in {\ttfamily config/map\+\_\+params.\+yaml} to customize the components of the map.
+Change the parameters in {\ttfamily roadmap/config/map\+\_\+params.\+yaml} to customize the components of the map.
 
 The following image was taken using a cell size of 0.\+2m with a buffer radius of 0.\+15m. The graph consists of 500 nodes trying to connect to the 10 nearest neighbors.  \subsubsection*{Grids}
 
-To generate a grid, launch {\ttfamily view\+\_\+grid.\+launch}. This will create a new grid and visualize it in Rviz.
+To generate a grid, launch {\ttfamily roadmap view\+\_\+grid.\+launch}. This will create a new grid and visualize it in Rviz.
 
-Change the parameters in {\ttfamily config/map\+\_\+params.\+yaml} to customize the components of the map.
+Change the parameters in {\ttfamily roadmap/config/map\+\_\+params.\+yaml} to customize the components of the map.
 
 The following image was taken using a cell size of 0.\+2m with a buffer radius of 0.\+15m. The grid has a 5 times finer resolution than the provided map, with black cells as the actual obstacle, gray cells representing cells inside the buffer zone, and white representing the free space.
 
+ \subsubsection*{Heuristic Search on a Known Map (A$\ast$ and Theta$\ast$)}
+
+To view the algorithm in action, launch {\ttfamily global\+\_\+search plan\+\_\+prm.\+launch}. This will create a P\+RM graph, apply A$\ast$ and Theta$\ast$ search to it, and visualize the results it in Rviz.
+
+Change the parameters in {\ttfamily roadmap/config/map\+\_\+params.\+yaml} to customize the components of the map. Change the parameters in {\ttfamily global\+\_\+search/config/search\+\_\+params.\+yaml} to change the start and goal locations.
+
+The following image was taken using a cell size of 0.\+2m with a buffer radius of 0.\+15m. The graph consists of 500 nodes trying to connect to the 10 nearest neighbors. The green node is the start and the red node is the goal. The black line is the path determined by A$\ast$ and the orange line is the path determined by Theta$\ast$.
+
+
+
+\subsection*{Background}

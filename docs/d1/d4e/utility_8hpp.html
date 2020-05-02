@@ -73,12 +73,16 @@ $(function() {
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;vector&gt;</code><br />
 <code>#include &lt;XmlRpcValue.h&gt;</code><br />
+<code>#include &quot;visualization_msgs/MarkerArray.h&quot;</code><br />
+<code>#include &quot;visualization_msgs/Marker.h&quot;</code><br />
 <code>#include &quot;rigid2d/rigid2d.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="../../da/d34/prm_8hpp_source.html">roadmap/prm.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for utility.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d1/d48/utility_8hpp__incl.png" border="0" usemap="#roadmap_2include_2roadmap_2utility_8hpp" alt=""/></div>
 <map name="roadmap_2include_2roadmap_2utility_8hpp" id="roadmap_2include_2roadmap_2utility_8hpp">
+<area shape="rect" id="node7" href="../../da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="480,102,603,129"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -86,9 +90,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d7/d68/utility_8hpp__dep__incl.png" border="0" usemap="#roadmap_2include_2roadmap_2utility_8hppdep" alt=""/></div>
 <map name="roadmap_2include_2roadmap_2utility_8hppdep" id="roadmap_2include_2roadmap_2utility_8hppdep">
-<area shape="rect" id="node2" href="../../d5/d62/make__grid_8cpp.html" title="Node to create and draw a grid. " alt="" coords="5,102,188,129"/>
-<area shape="rect" id="node3" href="../../d2/d55/make__roadmap_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="212,102,424,129"/>
-<area shape="rect" id="node4" href="../../d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="448,95,596,136"/>
+<area shape="rect" id="node2" href="../../d4/d48/prm__search_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="5,95,156,136"/>
+<area shape="rect" id="node3" href="../../d5/d62/make__grid_8cpp.html" title="Node to create and draw a grid. " alt="" coords="180,102,363,129"/>
+<area shape="rect" id="node4" href="../../d2/d55/make__roadmap_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="387,102,599,129"/>
+<area shape="rect" id="node5" href="../../d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="623,95,771,136"/>
 </map>
 </div>
 </div>
@@ -102,6 +107,18 @@ Functions</h2></td></tr>
 <tr class="memitem:a9eb7f849405aea8fd6215f962f7d77a2"><td class="memItemLeft" align="right" valign="top">std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d4e/utility_8hpp.html#a9eb7f849405aea8fd6215f962f7d77a2">utility::create_map_vector</a> (std::vector&lt; double &gt; map_x_lims, std::vector&lt; double &gt; map_y_lims)</td></tr>
 <tr class="memdesc:a9eb7f849405aea8fd6215f962f7d77a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">gerenate a vector of the 4 map verticies  <a href="../../d1/d4e/utility_8hpp.html#a9eb7f849405aea8fd6215f962f7d77a2">More...</a><br /></td></tr>
 <tr class="separator:a9eb7f849405aea8fd6215f962f7d77a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e91b69142b37805ef41aee106cddf8f"><td class="memItemLeft" align="right" valign="top">geometry_msgs::Point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d4e/utility_8hpp.html#a1e91b69142b37805ef41aee106cddf8f">utility::Vec2D_to_GeoPt</a> (rigid2d::Vector2D vec)</td></tr>
+<tr class="memdesc:a1e91b69142b37805ef41aee106cddf8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a Vector2D into a geometry_msgs/Point.  <a href="../../d1/d4e/utility_8hpp.html#a1e91b69142b37805ef41aee106cddf8f">More...</a><br /></td></tr>
+<tr class="separator:a1e91b69142b37805ef41aee106cddf8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3740bbfe90dd11be460ac36c7533158"><td class="memItemLeft" align="right" valign="top">visualization_msgs::Marker&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d4e/utility_8hpp.html#ae3740bbfe90dd11be460ac36c7533158">utility::make_marker</a> (<a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> node, double scale, std::vector&lt; double &gt; color)</td></tr>
+<tr class="memdesc:ae3740bbfe90dd11be460ac36c7533158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a spherical Marker based on a node struct.  <a href="../../d1/d4e/utility_8hpp.html#ae3740bbfe90dd11be460ac36c7533158">More...</a><br /></td></tr>
+<tr class="separator:ae3740bbfe90dd11be460ac36c7533158"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da197197906040138249e8b184fde69"><td class="memItemLeft" align="right" valign="top">visualization_msgs::Marker&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d4e/utility_8hpp.html#a0da197197906040138249e8b184fde69">utility::make_marker</a> (<a class="el" href="../../d4/db8/structprm_1_1Edge.html">prm::Edge</a> edge, double scale, std::vector&lt; double &gt; color)</td></tr>
+<tr class="memdesc:a0da197197906040138249e8b184fde69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a line Marker based on an edge struct.  <a href="../../d1/d4e/utility_8hpp.html#a0da197197906040138249e8b184fde69">More...</a><br /></td></tr>
+<tr class="separator:a0da197197906040138249e8b184fde69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae28ad60711c8cac4368b60ad407721d6"><td class="memItemLeft" align="right" valign="top">visualization_msgs::Marker&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/d4e/utility_8hpp.html#ae28ad60711c8cac4368b60ad407721d6">utility::make_marker</a> (rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector&lt; double &gt; color)</td></tr>
+<tr class="memdesc:ae28ad60711c8cac4368b60ad407721d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a line Marker between two points.  <a href="../../d1/d4e/utility_8hpp.html#ae28ad60711c8cac4368b60ad407721d6">More...</a><br /></td></tr>
+<tr class="separator:ae28ad60711c8cac4368b60ad407721d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A library of utility functions for the various nodes and libraries of this package. </p>
@@ -144,6 +161,155 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="file_ae3740bbfe90dd11be460ac36c7533158"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ae3740bbfe90dd11be460ac36c7533158">&#9670;&nbsp;</a></span>make_marker() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">visualization_msgs::Marker utility::make_marker </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a>&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a spherical Marker based on a node struct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>a node struct to vizualize </td></tr>
+    <tr><td class="paramname">scale</td><td>the amount to scale the preset marker size (should be graph cell size) </td></tr>
+    <tr><td class="paramname">color</td><td>the r,g,b color values in a vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a marker to add to the MarkerArray </dd></dl>
+
+</div>
+</div>
+<a id="file_a0da197197906040138249e8b184fde69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a0da197197906040138249e8b184fde69">&#9670;&nbsp;</a></span>make_marker() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">visualization_msgs::Marker utility::make_marker </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/db8/structprm_1_1Edge.html">prm::Edge</a>&#160;</td>
+          <td class="paramname"><em>edge</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a line Marker based on an edge struct. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">edge</td><td>an edge struct to vizualize </td></tr>
+    <tr><td class="paramname">scale</td><td>the amount to scale the preset marker size (should be graph cell size) </td></tr>
+    <tr><td class="paramname">color</td><td>the r,g,b color values in a vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a marker to add to the MarkerArray </dd></dl>
+
+</div>
+</div>
+<a id="file_ae28ad60711c8cac4368b60ad407721d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_ae28ad60711c8cac4368b60ad407721d6">&#9670;&nbsp;</a></span>make_marker() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">visualization_msgs::Marker utility::make_marker </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>pt1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>pt2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>marker_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>scale</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; double &gt;&#160;</td>
+          <td class="paramname"><em>color</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a line Marker between two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pt1</td><td>a set of x,y coordinates </td></tr>
+    <tr><td class="paramname">pt2</td><td>a set of x,y coordinates </td></tr>
+    <tr><td class="paramname">marker_id</td><td>a unique id for the marker </td></tr>
+    <tr><td class="paramname">scale</td><td>the amount to scale the preset marker size (should be graph cell size) </td></tr>
+    <tr><td class="paramname">color</td><td>the r,g,b color values in a vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a marker to add to the MarkerArray </dd></dl>
+
+</div>
+</div>
 <a id="file_a146978c7eb3e5b6e8604499596442f9e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#file_a146978c7eb3e5b6e8604499596442f9e">&#9670;&nbsp;</a></span>parse_obstacle_data()</h2>
 
@@ -179,6 +345,33 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>a vector of vectors containing obstacle vertices </dd></dl>
+
+</div>
+</div>
+<a id="file_a1e91b69142b37805ef41aee106cddf8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a1e91b69142b37805ef41aee106cddf8f">&#9670;&nbsp;</a></span>Vec2D_to_GeoPt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">geometry_msgs::Point utility::Vec2D_to_GeoPt </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>vec</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert a Vector2D into a geometry_msgs/Point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vec</td><td>point represented with a 2D vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a point represented with a geometry_msgs/Point </dd></dl>
 
 </div>
 </div>

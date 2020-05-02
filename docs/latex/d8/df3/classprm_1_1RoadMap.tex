@@ -24,7 +24,9 @@ void \hyperlink{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}{build\+\_
 std\+::vector$<$ \hyperlink{structprm_1_1Node}{Node} $>$ \hyperlink{classprm_1_1RoadMap_a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0}{get\+\_\+nodes} () const
 \begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of nodes. \end{DoxyCompactList}\item 
 std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ \hyperlink{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}{get\+\_\+edges} () const
-\begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of unique edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of unique edges. \end{DoxyCompactList}\item 
+bool \hyperlink{classprm_1_1RoadMap_a45f658affb0061cdfe9de396fdbd7268}{add\+\_\+node} (rigid2d\+::\+Vector2D point)
+\begin{DoxyCompactList}\small\item\em Add a user defined node into the graph and create the edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -70,6 +72,24 @@ Initialization to construct a road map in a user defined area with obstacles.
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a45f658affb0061cdfe9de396fdbd7268}\label{classprm_1_1RoadMap_a45f658affb0061cdfe9de396fdbd7268}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!add\+\_\+node@{add\+\_\+node}}
+\index{add\+\_\+node@{add\+\_\+node}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{add\+\_\+node()}{add\_node()}}
+{\footnotesize\ttfamily bool prm\+::\+Road\+Map\+::add\+\_\+node (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{point }\end{DoxyParamCaption})}
+
+
+
+Add a user defined node into the graph and create the edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & the x,y coordinates for the new node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node was successfully added 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}\label{classprm_1_1RoadMap_ab81f9c73d7539b570a2164369144c41f}} 
 \index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!build\+\_\+map@{build\+\_\+map}}
 \index{build\+\_\+map@{build\+\_\+map}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}

@@ -1,5 +1,6 @@
 <map id="roadmap/src/roadmap/grid.cpp" name="roadmap/src/roadmap/grid.cpp">
-<area shape="rect" id="node8" href="$d3/d08/collision_8hpp.html" title="A library containing functions to detect various types of collisions. " alt="" coords="851,95,999,121"/>
-<area shape="rect" id="node10" href="$dc/d8a/grid_8hpp.html" title="A library for building an occupancy grid. " alt="" coords="445,95,568,121"/>
-<area shape="rect" id="node11" href="$d1/d4e/utility_8hpp.html" title="A library of utility functions for the various nodes and libraries of this package. " alt="" coords="643,95,775,121"/>
+<area shape="rect" id="node8" href="$d3/d08/collision_8hpp.html" title="A library containing functions to detect various types of collisions. " alt="" coords="273,177,421,203"/>
+<area shape="rect" id="node10" href="$dc/d8a/grid_8hpp.html" title="A library for building an occupancy grid. " alt="" coords="597,177,720,203"/>
+<area shape="rect" id="node11" href="$d1/d4e/utility_8hpp.html" title="A library of utility functions for the various nodes and libraries of this package. " alt="" coords="838,95,970,121"/>
+<area shape="rect" id="node15" href="$da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="744,177,867,203"/>
 </map>

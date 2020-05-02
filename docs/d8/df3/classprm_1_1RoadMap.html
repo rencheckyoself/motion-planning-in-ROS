@@ -96,6 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9be7cb5cac090269e00125cc7dc0cfd6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d4/db8/structprm_1_1Edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a9be7cb5cac090269e00125cc7dc0cfd6">get_edges</a> () const</td></tr>
 <tr class="memdesc:a9be7cb5cac090269e00125cc7dc0cfd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wrapper function to get the vector of unique edges.  <a href="#a9be7cb5cac090269e00125cc7dc0cfd6">More...</a><br /></td></tr>
 <tr class="separator:a9be7cb5cac090269e00125cc7dc0cfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45f658affb0061cdfe9de396fdbd7268"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a45f658affb0061cdfe9de396fdbd7268">add_node</a> (rigid2d::Vector2D point)</td></tr>
+<tr class="memdesc:a45f658affb0061cdfe9de396fdbd7268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a user defined node into the graph and create the edges.  <a href="#a45f658affb0061cdfe9de396fdbd7268">More...</a><br /></td></tr>
+<tr class="separator:a45f658affb0061cdfe9de396fdbd7268"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to build a Probabilistic Road Maps based on provided Map information. </p>
@@ -182,6 +185,33 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a45f658affb0061cdfe9de396fdbd7268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f658affb0061cdfe9de396fdbd7268">&#9670;&nbsp;</a></span>add_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool prm::RoadMap::add_node </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add a user defined node into the graph and create the edges. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>the x,y coordinates for the new node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the node was successfully added </dd></dl>
+
+</div>
+</div>
 <a id="ab81f9c73d7539b570a2164369144c41f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab81f9c73d7539b570a2164369144c41f">&#9670;&nbsp;</a></span>build_map()</h2>
 

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['collision_2ecpp',['collision.cpp',['../df/d69/collision_8cpp.html',1,'']]],
-  ['collision_2ehpp',['collision.hpp',['../d3/d08/collision_8hpp.html',1,'']]],
-  ['create_5fmap_5fvector',['create_map_vector',['../d1/d4e/utility_8hpp.html#a9eb7f849405aea8fd6215f962f7d77a2',1,'utility']]]
+  ['buffer_5fradius',['buffer_radius',['../da/dce/classhsearch_1_1ThetaStar.html#aba51580af01b2cdd040b94de00046271',1,'hsearch::ThetaStar']]],
+  ['build_5fgrid',['build_grid',['../de/d83/classgrid_1_1Grid.html#adcba03289a5d2de6e209b2a3ded5d5ac',1,'grid::Grid']]],
+  ['build_5fmap',['build_map',['../d8/df3/classprm_1_1RoadMap.html#ab81f9c73d7539b570a2164369144c41f',1,'prm::RoadMap']]]
 ];

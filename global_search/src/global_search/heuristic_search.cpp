@@ -253,10 +253,15 @@ namespace hsearch
       auto par_id = s.parent_p->id;
       auto result = std::find_if(closed_list.begin(), closed_list.end(), [par_id](SearchNode n) {return n.node_p->id == par_id;});
 
+      if(result == closed_list.end())
+      {
+        result = std::find_if(open_list.begin(), open_list.end(), [par_id](SearchNode n) {return n.node_p->id == par_id;});
+      }
+
       cost = f(*result, sp);
 
       // If the path from par(s) to s' is cheaper than the existing one, update it.
-      if(cost.at(0) < sp.f_val)
+      if(cost.at(0) <= sp.f_val)
       {
         sp.f_val = cost.at(0);
         sp.g_val = cost.at(1);

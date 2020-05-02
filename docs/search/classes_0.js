@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['distres',['DistRes',['../df/da1/structcollision_1_1DistRes.html',1,'collision']]]
+  ['astar',['AStar',['../d4/d52/classhsearch_1_1AStar.html',1,'hsearch']]]
 ];

@@ -143,12 +143,12 @@ int main(int argc, char** argv)
   if(!search_result_astar)
   {
     ROS_FATAL_STREAM("PRMSRCH: A* Search failed to find a path given the start and goal.\n");
-    ros::shutdown();
+    // ros::shutdown();
   }
   else if(!search_result_tstar)
   {
     ROS_FATAL_STREAM("PRMSRCH: Theta* Search failed to find a path given the start and goal.\n");
-    ros::shutdown();
+    // ros::shutdown();
   }
 
   // Retrieve the path

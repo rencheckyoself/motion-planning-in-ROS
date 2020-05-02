@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['edge',['Edge',['../d4/db8/structprm_1_1Edge.html',1,'prm']]]
+  ['distres',['DistRes',['../df/da1/structcollision_1_1DistRes.html',1,'collision']]]
 ];

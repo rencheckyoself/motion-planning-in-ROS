@@ -7,13 +7,16 @@ A library of utility functions for the various nodes and libraries of this packa
 
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
 Include dependency graph for utility.\+hpp\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=341pt]{d1/d48/utility_8hpp__incl}
+\includegraphics[width=350pt]{d1/d48/utility_8hpp__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:
@@ -30,7 +33,15 @@ This graph shows which files directly or indirectly include this file\+:
 std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$ $>$ \hyperlink{utility_8hpp_a146978c7eb3e5b6e8604499596442f9e}{utility\+::parse\+\_\+obstacle\+\_\+data} (Xml\+Rpc\+::\+Xml\+Rpc\+Value obstacles, double cell\+\_\+size)
 \begin{DoxyCompactList}\small\item\em converts obstacle data from a Y\+A\+ML file into a vector of vectors. T\+O\+DO\+: changes this to a template based output \end{DoxyCompactList}\item 
 std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{utility_8hpp_a9eb7f849405aea8fd6215f962f7d77a2}{utility\+::create\+\_\+map\+\_\+vector} (std\+::vector$<$ double $>$ map\+\_\+x\+\_\+lims, std\+::vector$<$ double $>$ map\+\_\+y\+\_\+lims)
-\begin{DoxyCompactList}\small\item\em gerenate a vector of the 4 map verticies \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em gerenate a vector of the 4 map verticies \end{DoxyCompactList}\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{utility_8hpp_a1e91b69142b37805ef41aee106cddf8f}{utility\+::\+Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt} (rigid2d\+::\+Vector2D vec)
+\begin{DoxyCompactList}\small\item\em Convert a Vector2D into a geometry\+\_\+msgs/\+Point. \end{DoxyCompactList}\item 
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_ae3740bbfe90dd11be460ac36c7533158}{utility\+::make\+\_\+marker} (\hyperlink{structprm_1_1Node}{prm\+::\+Node} node, double scale, std\+::vector$<$ double $>$ color)
+\begin{DoxyCompactList}\small\item\em Create a spherical Marker based on a node struct. \end{DoxyCompactList}\item 
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_a0da197197906040138249e8b184fde69}{utility\+::make\+\_\+marker} (\hyperlink{structprm_1_1Edge}{prm\+::\+Edge} edge, double scale, std\+::vector$<$ double $>$ color)
+\begin{DoxyCompactList}\small\item\em Create a line Marker based on an edge struct. \end{DoxyCompactList}\item 
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_ae28ad60711c8cac4368b60ad407721d6}{utility\+::make\+\_\+marker} (rigid2d\+::\+Vector2D pt1, rigid2d\+::\+Vector2D pt2, int marker\+\_\+id, double scale, std\+::vector$<$ double $>$ color)
+\begin{DoxyCompactList}\small\item\em Create a line Marker between two points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -59,6 +70,76 @@ gerenate a vector of the 4 map verticies
 \begin{DoxyReturn}{Returns}
 a vector of the map verticies in ccw order 
 \end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_ae3740bbfe90dd11be460ac36c7533158}\label{utility_8hpp_file_ae3740bbfe90dd11be460ac36c7533158}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
+\index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Node}{prm\+::\+Node}}]{node,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+
+
+
+Create a spherical Marker based on a node struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & a node struct to vizualize \\
+\hline
+{\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
+\hline
+{\em color} & the r,g,b color values in a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a marker to add to the Marker\+Array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_a0da197197906040138249e8b184fde69}\label{utility_8hpp_file_a0da197197906040138249e8b184fde69}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
+\index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Edge}{prm\+::\+Edge}}]{edge,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+
+
+
+Create a line Marker based on an edge struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & an edge struct to vizualize \\
+\hline
+{\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
+\hline
+{\em color} & the r,g,b color values in a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a marker to add to the Marker\+Array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_ae28ad60711c8cac4368b60ad407721d6}\label{utility_8hpp_file_ae28ad60711c8cac4368b60ad407721d6}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
+\index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{pt1,  }\item[{rigid2d\+::\+Vector2D}]{pt2,  }\item[{int}]{marker\+\_\+id,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+
+
+
+Create a line Marker between two points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pt1} & a set of x,y coordinates \\
+\hline
+{\em pt2} & a set of x,y coordinates \\
+\hline
+{\em marker\+\_\+id} & a unique id for the marker \\
+\hline
+{\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
+\hline
+{\em color} & the r,g,b color values in a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a marker to add to the Marker\+Array 
+\end{DoxyReturn}
 \mbox{\Hypertarget{utility_8hpp_file_a146978c7eb3e5b6e8604499596442f9e}\label{utility_8hpp_file_a146978c7eb3e5b6e8604499596442f9e}} 
 \index{utility.\+hpp@{utility.\+hpp}!parse\+\_\+obstacle\+\_\+data@{parse\+\_\+obstacle\+\_\+data}}
 \index{parse\+\_\+obstacle\+\_\+data@{parse\+\_\+obstacle\+\_\+data}!utility.\+hpp@{utility.\+hpp}}
@@ -78,4 +159,22 @@ converts obstacle data from a Y\+A\+ML file into a vector of vectors. T\+O\+DO\+
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 a vector of vectors containing obstacle vertices 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_a1e91b69142b37805ef41aee106cddf8f}\label{utility_8hpp_file_a1e91b69142b37805ef41aee106cddf8f}} 
+\index{utility.\+hpp@{utility.\+hpp}!Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt@{Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt}}
+\index{Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt@{Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt()}{Vec2D\_to\_GeoPt()}}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Point utility\+::\+Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{vec }\end{DoxyParamCaption})}
+
+
+
+Convert a Vector2D into a geometry\+\_\+msgs/\+Point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & point represented with a 2D vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a point represented with a geometry\+\_\+msgs/\+Point 
 \end{DoxyReturn}

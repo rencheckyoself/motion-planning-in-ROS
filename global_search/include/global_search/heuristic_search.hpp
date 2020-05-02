@@ -12,14 +12,15 @@
 namespace hsearch
 {
 
-  // Used to track if a node is on the open or closed list
+  /// \brief Used to track if a node is New, on the open, or on the closed list
   enum status {New, Open, Closed};
 
+  /// \brief Information used by a search algorithm
   struct SearchNode
   {
     std::shared_ptr<prm::Node> node_p; ///< contains info about ID, location and, neighbors
 
-    int search_id = 0;
+    int search_id = 0; ///< a unique id for the search node created
 
     double f_val; ///< total node cost
     double g_val; ///< path cost from start to this
@@ -29,9 +30,11 @@ namespace hsearch
 
     status state; ///< current status of the node
 
+    /// \brief Default constructor
     SearchNode() {};
 
     /// \brief Create a new start node
+    /// \param n reference to a graph Node 
     SearchNode(const prm::Node & n);
 
     /// \brief Custom function used for proper sorting of the open list.
@@ -43,11 +46,6 @@ namespace hsearch
     /// \param rhs another SearchNode to compare against
     /// \returns True if this node is greater than rhs
     bool operator>(const SearchNode &rhs) const;
-
-    /// \brief Custom function to evaluate node equality.
-    /// \param rhs another SearchNode to compare against
-    /// \returns True if this node is the same as rhs
-    // bool operator==(const SearchNode &rhs) const;
   };
 
   /// \brief Overload the cout operator to print the info in a SearchNode
@@ -55,16 +53,6 @@ namespace hsearch
   /// \param n a SearchNode reference
   /// \returns an output stream
   std::ostream & operator<<(std::ostream & os, const SearchNode & n);
-
-  /// \brief the Path 1 cost between a node and its neighbor
-  /// \param s the current node being expanded
-  /// \param sp the neighbor node being evaluated
-  double path1_cost(SearchNode s, SearchNode sp);
-
-  /// \brief the Path 2 cost between a node and its neighbor
-  /// \param s the current node being expanded
-  /// \param sp the neighbor node being evaluated
-  double path2_cost(SearchNode s, SearchNode sp);
 
   /// \brief The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find
   /// the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for
@@ -77,9 +65,12 @@ namespace hsearch
     HSearch() {};
 
     /// \brief Initialize the search with a precontructed graph
+    /// \param node_list a pointer to a graph
     HSearch(std::vector<prm::Node>* node_list);
 
     /// \brief Initialize the search with a precontructed graph
+    /// \param node_list a pointer to a graph
+    /// \param map the known map used to create the graph
     HSearch(std::vector<prm::Node>* node_list, grid::Map map);
 
     /// \brief Use default destructor for this and all derived classes
@@ -120,12 +111,13 @@ namespace hsearch
     void assemble_path(SearchNode goal);
 
     /// \brief calculate the total cost of a node
-    /// \param n a node
+    /// \param s the potential parent node
+    /// \param sp the node to calculate the cost for
     /// \returns the total cost
     std::vector<double> f(SearchNode s, SearchNode sp);
 
     /// \brief calculate the actual path cost
-    /// \param s the parent node
+    /// \param s the potential parent node
     /// \param sp the node to calculate the cost for
     /// \returns the actual path cost from start to sp
     double g(SearchNode s, SearchNode sp);
@@ -137,12 +129,12 @@ namespace hsearch
 
     /// \brief Compare the current node and its neighbor
     /// \param s the current node
-    /// \param s the neioghbor node
+    /// \param sp the neioghbor node
     void UpdateVertex(SearchNode s, SearchNode sp);
 
   };
 
-  ///
+  /// \brief A* Search class derived from the HSearch class
   class AStar : public HSearch
   {
   public:
@@ -158,6 +150,7 @@ namespace hsearch
     void ComputeCost(SearchNode &s, SearchNode &sp);
   };
 
+  /// \brief Theta* any-angle path planner derived from the HSearch class
   class ThetaStar : public HSearch
   {
   public:
