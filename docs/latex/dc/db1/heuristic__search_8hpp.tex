@@ -1,0 +1,81 @@
+\hypertarget{heuristic__search_8hpp}{}\section{global\+\_\+search/include/global\+\_\+search/heuristic\+\_\+search.hpp File Reference}
+\label{heuristic__search_8hpp}\index{global\+\_\+search/include/global\+\_\+search/heuristic\+\_\+search.\+hpp@{global\+\_\+search/include/global\+\_\+search/heuristic\+\_\+search.\+hpp}}
+
+
+A library containing classes to perform various types of search algorithms.  
+
+
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/grid.\+hpp\char`\"{}}\newline
+Include dependency graph for heuristic\+\_\+search.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d2/d80/heuristic__search_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d0/d88/heuristic__search_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structhsearch_1_1SearchNode}{hsearch\+::\+Search\+Node}
+\begin{DoxyCompactList}\small\item\em Information used by a search algorithm. \end{DoxyCompactList}\item 
+class \hyperlink{classhsearch_1_1HSearch}{hsearch\+::\+H\+Search}
+\begin{DoxyCompactList}\small\item\em The base class to define a heuristic based search algorithm. This class has no Compute\+Cost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the Compute\+Shortest\+Path method is virtual. \end{DoxyCompactList}\item 
+class \hyperlink{classhsearch_1_1AStar}{hsearch\+::\+A\+Star}
+\begin{DoxyCompactList}\small\item\em A$\ast$ Search class derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class. \end{DoxyCompactList}\item 
+class \hyperlink{classhsearch_1_1ThetaStar}{hsearch\+::\+Theta\+Star}
+\begin{DoxyCompactList}\small\item\em Theta$\ast$ any-\/angle path planner derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}\label{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}} 
+enum \hyperlink{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}{hsearch\+::status} \{ {\bfseries New}, 
+{\bfseries Open}, 
+{\bfseries Closed}
+ \}\begin{DoxyCompactList}\small\item\em Used to track if a node is New, on the open, or on the closed list. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{heuristic__search_8hpp_a18e6565e8bc131f1b0121fe1c3d70f90}{hsearch\+::operator$<$$<$} (std\+::ostream \&os, const Search\+Node \&n)
+\begin{DoxyCompactList}\small\item\em Overload the cout operator to print the info in a \hyperlink{structhsearch_1_1SearchNode}{Search\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A library containing classes to perform various types of search algorithms. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{heuristic__search_8hpp_file_a18e6565e8bc131f1b0121fe1c3d70f90}\label{heuristic__search_8hpp_file_a18e6565e8bc131f1b0121fe1c3d70f90}} 
+\index{heuristic\+\_\+search.\+hpp@{heuristic\+\_\+search.\+hpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!heuristic\+\_\+search.\+hpp@{heuristic\+\_\+search.\+hpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& hsearch\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{n }\end{DoxyParamCaption})}
+
+
+
+Overload the cout operator to print the info in a Search\+Node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em n} & a Search\+Node reference \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an output stream 
+\end{DoxyReturn}

@@ -1,0 +1,102 @@
+\hypertarget{classhsearch_1_1ThetaStar}{}\section{hsearch\+:\+:Theta\+Star Class Reference}
+\label{classhsearch_1_1ThetaStar}\index{hsearch\+::\+Theta\+Star@{hsearch\+::\+Theta\+Star}}
+
+
+Theta$\ast$ any-\/angle path planner derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class.  
+
+
+
+
+{\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
+
+
+
+Inheritance diagram for hsearch\+:\+:Theta\+Star\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{d9/db2/classhsearch_1_1ThetaStar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for hsearch\+:\+:Theta\+Star\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{da/d4f/classhsearch_1_1ThetaStar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhsearch_1_1ThetaStar_a9c3540ce3c1e93b8053eb97e62d71145}{Theta\+Star} (std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$node\+\_\+list, \hyperlink{structgrid_1_1Map}{grid\+::\+Map} map, double buffer)
+\begin{DoxyCompactList}\small\item\em Constructor to initialize a Theta Star Search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classhsearch_1_1ThetaStar_a852af6d668cbb3f58079125ba5740853}{Compute\+Cost} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&sp)
+\begin{DoxyCompactList}\small\item\em calculates the path 1 or path 2 cost between the two nodes \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhsearch_1_1ThetaStar_aba51580af01b2cdd040b94de00046271}\label{classhsearch_1_1ThetaStar_aba51580af01b2cdd040b94de00046271}} 
+double \hyperlink{classhsearch_1_1ThetaStar_aba51580af01b2cdd040b94de00046271}{buffer\+\_\+radius}
+\begin{DoxyCompactList}\small\item\em buffer radius when considering line of sight \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Theta$\ast$ any-\/angle path planner derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhsearch_1_1ThetaStar_a9c3540ce3c1e93b8053eb97e62d71145}\label{classhsearch_1_1ThetaStar_a9c3540ce3c1e93b8053eb97e62d71145}} 
+\index{hsearch\+::\+Theta\+Star@{hsearch\+::\+Theta\+Star}!Theta\+Star@{Theta\+Star}}
+\index{Theta\+Star@{Theta\+Star}!hsearch\+::\+Theta\+Star@{hsearch\+::\+Theta\+Star}}
+\subsubsection{\texorpdfstring{Theta\+Star()}{ThetaStar()}}
+{\footnotesize\ttfamily hsearch\+::\+Theta\+Star\+::\+Theta\+Star (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$}]{node\+\_\+list,  }\item[{\hyperlink{structgrid_1_1Map}{grid\+::\+Map}}]{map,  }\item[{double}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Constructor to initialize a Theta Star Search. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+list} & pointer to a vector of Nodes that create a graph \\
+\hline
+{\em map} & a known the map used to create the graph \\
+\hline
+{\em buffer} & a buffer radius to account for in line of sight checks \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhsearch_1_1ThetaStar_a852af6d668cbb3f58079125ba5740853}\label{classhsearch_1_1ThetaStar_a852af6d668cbb3f58079125ba5740853}} 
+\index{hsearch\+::\+Theta\+Star@{hsearch\+::\+Theta\+Star}!Compute\+Cost@{Compute\+Cost}}
+\index{Compute\+Cost@{Compute\+Cost}!hsearch\+::\+Theta\+Star@{hsearch\+::\+Theta\+Star}}
+\subsubsection{\texorpdfstring{Compute\+Cost()}{ComputeCost()}}
+{\footnotesize\ttfamily void hsearch\+::\+Theta\+Star\+::\+Compute\+Cost (\begin{DoxyParamCaption}\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{s,  }\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{sp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+calculates the path 1 or path 2 cost between the two nodes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the current node being expanded \\
+\hline
+{\em sp} & the neighbor node being evaluated \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classhsearch_1_1HSearch_a5d325955c4faedaca0c68155fd1f7e69}{hsearch\+::\+H\+Search}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}

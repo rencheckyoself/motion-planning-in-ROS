@@ -1,0 +1,57 @@
+\hypertarget{heuristic__search_8cpp}{}\section{global\+\_\+search/src/global\+\_\+search/heuristic\+\_\+search.cpp File Reference}
+\label{heuristic__search_8cpp}\index{global\+\_\+search/src/global\+\_\+search/heuristic\+\_\+search.\+cpp@{global\+\_\+search/src/global\+\_\+search/heuristic\+\_\+search.\+cpp}}
+
+
+A library containing classes to perform various types of search algorithms.  
+
+
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include \char`\"{}global\+\_\+search/heuristic\+\_\+search.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/collision.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/grid.\+hpp\char`\"{}}\newline
+Include dependency graph for heuristic\+\_\+search.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d48/heuristic__search_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::ostream \& \hyperlink{heuristic__search_8hpp_a18e6565e8bc131f1b0121fe1c3d70f90}{hsearch\+::operator$<$$<$} (std\+::ostream \&os, const Search\+Node \&n)
+\begin{DoxyCompactList}\small\item\em Overload the cout operator to print the info in a \hyperlink{structhsearch_1_1SearchNode}{Search\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A library containing classes to perform various types of search algorithms. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{heuristic__search_8hpp_file_a18e6565e8bc131f1b0121fe1c3d70f90}\label{heuristic__search_8hpp_file_a18e6565e8bc131f1b0121fe1c3d70f90}} 
+\index{heuristic\+\_\+search.\+cpp@{heuristic\+\_\+search.\+cpp}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!heuristic\+\_\+search.\+cpp@{heuristic\+\_\+search.\+cpp}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily std\+::ostream \& hsearch\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{n }\end{DoxyParamCaption})}
+
+
+
+Overload the cout operator to print the info in a Search\+Node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & the output stream \\
+\hline
+{\em n} & a Search\+Node reference \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an output stream 
+\end{DoxyReturn}

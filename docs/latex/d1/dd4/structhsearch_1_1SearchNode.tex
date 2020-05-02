@@ -1,0 +1,113 @@
+\hypertarget{structhsearch_1_1SearchNode}{}\section{hsearch\+:\+:Search\+Node Struct Reference}
+\label{structhsearch_1_1SearchNode}\index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
+
+
+Information used by a search algorithm.  
+
+
+
+
+{\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a1e461dc25eef2e8de76dd7bd70042e22}\label{structhsearch_1_1SearchNode_a1e461dc25eef2e8de76dd7bd70042e22}} 
+\hyperlink{structhsearch_1_1SearchNode_a1e461dc25eef2e8de76dd7bd70042e22}{Search\+Node} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{structhsearch_1_1SearchNode_abc34e7eab1d4b3d269f9b360b77936a5}{Search\+Node} (const \hyperlink{structprm_1_1Node}{prm\+::\+Node} \&n)
+\begin{DoxyCompactList}\small\item\em Create a new start node. \end{DoxyCompactList}\item 
+bool \hyperlink{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}{operator$<$} (const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list. \end{DoxyCompactList}\item 
+bool \hyperlink{structhsearch_1_1SearchNode_a492955fe1a5cdfae1dc0474232cb7175}{operator$>$} (const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}\label{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}} 
+std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}{node\+\_\+p}
+\begin{DoxyCompactList}\small\item\em contains info about ID, location and, neighbors \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}\label{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}} 
+int \hyperlink{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}{search\+\_\+id} = 0
+\begin{DoxyCompactList}\small\item\em a unique id for the search node created \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}\label{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}} 
+double \hyperlink{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}{f\+\_\+val}
+\begin{DoxyCompactList}\small\item\em total node cost \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}\label{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}} 
+double \hyperlink{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}{g\+\_\+val}
+\begin{DoxyCompactList}\small\item\em path cost from start to this \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}\label{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}} 
+double \hyperlink{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}{h\+\_\+val}
+\begin{DoxyCompactList}\small\item\em estimated cost from this to goal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}\label{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}} 
+std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}{parent\+\_\+p}
+\begin{DoxyCompactList}\small\item\em the parent of this node \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}\label{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}} 
+\hyperlink{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}{status} \hyperlink{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}{state}
+\begin{DoxyCompactList}\small\item\em current status of the node \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Information used by a search algorithm. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_abc34e7eab1d4b3d269f9b360b77936a5}\label{structhsearch_1_1SearchNode_abc34e7eab1d4b3d269f9b360b77936a5}} 
+\index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}!Search\+Node@{Search\+Node}}
+\index{Search\+Node@{Search\+Node}!hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
+\subsubsection{\texorpdfstring{Search\+Node()}{SearchNode()}}
+{\footnotesize\ttfamily hsearch\+::\+Search\+Node\+::\+Search\+Node (\begin{DoxyParamCaption}\item[{const \hyperlink{structprm_1_1Node}{prm\+::\+Node} \&}]{n }\end{DoxyParamCaption})}
+
+
+
+Create a new start node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & reference to a graph Node \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}\label{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}} 
+\index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool hsearch\+::\+Search\+Node\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Custom function used for proper sorting of the open list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & another \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} to compare against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this node is less than rhs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a492955fe1a5cdfae1dc0474232cb7175}\label{structhsearch_1_1SearchNode_a492955fe1a5cdfae1dc0474232cb7175}} 
+\index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool hsearch\+::\+Search\+Node\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Custom function used for proper sorting of the open list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & another \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} to compare against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this node is greater than rhs 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}

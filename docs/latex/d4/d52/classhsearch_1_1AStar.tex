@@ -1,0 +1,93 @@
+\hypertarget{classhsearch_1_1AStar}{}\section{hsearch\+:\+:A\+Star Class Reference}
+\label{classhsearch_1_1AStar}\index{hsearch\+::\+A\+Star@{hsearch\+::\+A\+Star}}
+
+
+A$\ast$ Search class derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class.  
+
+
+
+
+{\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
+
+
+
+Inheritance diagram for hsearch\+:\+:A\+Star\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{db/db4/classhsearch_1_1AStar__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for hsearch\+:\+:A\+Star\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=271pt]{d6/d18/classhsearch_1_1AStar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classhsearch_1_1AStar_ad3897420abd92fefbd9e9270689418b8}{A\+Star} (std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$node\+\_\+list)
+\begin{DoxyCompactList}\small\item\em Initialize the search with the created graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classhsearch_1_1AStar_a3a9a3c398437d9efe0b9943c29a8672b}{Compute\+Cost} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&sp)
+\begin{DoxyCompactList}\small\item\em calculates the path 1 cost between the two nodes \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A$\ast$ Search class derived from the \hyperlink{classhsearch_1_1HSearch}{H\+Search} class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhsearch_1_1AStar_ad3897420abd92fefbd9e9270689418b8}\label{classhsearch_1_1AStar_ad3897420abd92fefbd9e9270689418b8}} 
+\index{hsearch\+::\+A\+Star@{hsearch\+::\+A\+Star}!A\+Star@{A\+Star}}
+\index{A\+Star@{A\+Star}!hsearch\+::\+A\+Star@{hsearch\+::\+A\+Star}}
+\subsubsection{\texorpdfstring{A\+Star()}{AStar()}}
+{\footnotesize\ttfamily hsearch\+::\+A\+Star\+::\+A\+Star (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$}]{node\+\_\+list }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initialize the search with the created graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node\+\_\+list} & pointer to a vector of Nodes that create a graph \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhsearch_1_1AStar_a3a9a3c398437d9efe0b9943c29a8672b}\label{classhsearch_1_1AStar_a3a9a3c398437d9efe0b9943c29a8672b}} 
+\index{hsearch\+::\+A\+Star@{hsearch\+::\+A\+Star}!Compute\+Cost@{Compute\+Cost}}
+\index{Compute\+Cost@{Compute\+Cost}!hsearch\+::\+A\+Star@{hsearch\+::\+A\+Star}}
+\subsubsection{\texorpdfstring{Compute\+Cost()}{ComputeCost()}}
+{\footnotesize\ttfamily void hsearch\+::\+A\+Star\+::\+Compute\+Cost (\begin{DoxyParamCaption}\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{s,  }\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&}]{sp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+calculates the path 1 cost between the two nodes 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & the current node being expanded \\
+\hline
+{\em sp} & the neighbor node being evaluated \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classhsearch_1_1HSearch_a5d325955c4faedaca0c68155fd1f7e69}{hsearch\+::\+H\+Search}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}

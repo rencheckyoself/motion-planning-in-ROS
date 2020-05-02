@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$d0/dde/classhsearch_1_1HSearch.html" title="The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion wh..." alt="" coords="5,31,132,57"/>
+<area shape="rect" id="node2" href="$d4/d52/classhsearch_1_1AStar.html" title="A* Search class derived from the HSearch class. " alt="" coords="192,5,301,32"/>
+<area shape="rect" id="node3" href="$da/dce/classhsearch_1_1ThetaStar.html" title="Theta* any&#45;angle path planner derived from the HSearch class. " alt="" coords="180,56,313,83"/>
+</map>

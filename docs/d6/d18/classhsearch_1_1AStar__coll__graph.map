@@ -1,0 +1,5 @@
+<map id="hsearch::AStar" name="hsearch::AStar">
+<area shape="rect" id="node2" href="$d0/dde/classhsearch_1_1HSearch.html" title="The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion wh..." alt="" coords="84,95,211,121"/>
+<area shape="rect" id="node3" href="$d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. " alt="" coords="5,5,153,32"/>
+<area shape="rect" id="node4" href="$d9/d0a/structgrid_1_1Map.html" title="Contains information about a bound map. " alt="" coords="177,5,253,32"/>
+</map>
