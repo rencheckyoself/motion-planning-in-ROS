@@ -18,6 +18,15 @@ namespace grid
     std::vector<double> y_bounds; ///< y bounds of the map
 
     std::vector<rigid2d::Vector2D> map_vector; ///< a vector of the map verticies in ccw order
+
+    /// \brief default constructor
+    Map() {};
+
+    /// \bried Fully construct the map
+    /// \param obs obstacles in the map
+    /// \param x bounds of the map
+    /// \param y bounds of the map
+    Map(std::vector<std::vector<rigid2d::Vector2D>> obs, std::vector<double> x, std::vector<double> y);
   };
 
   /// \brief Class to create a Grid overlay for provided Map information

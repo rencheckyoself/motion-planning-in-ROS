@@ -16,6 +16,15 @@
 namespace grid
 {
 
+  Map::Map(std::vector<std::vector<rigid2d::Vector2D>> obs, std::vector<double> x, std::vector<double> y)
+  {
+    obstacles = obs;
+    x_bounds = x;
+    y_bounds = y;
+
+    map_vector = utility::create_map_vector(x_bounds, y_bounds);
+  }
+
   // ===========================================================================
   // Grid CLASS ================================================================
   // ===========================================================================

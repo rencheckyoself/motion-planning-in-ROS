@@ -8,7 +8,9 @@
 
 #include "global_search/heuristic_search.hpp"
 #include "rigid2d/rigid2d.hpp"
+#include "roadmap/collision.hpp"
 #include "roadmap/prm.hpp"
+#include "roadmap/grid.hpp"
 
 namespace hsearch
 {
@@ -46,6 +48,12 @@ namespace hsearch
   HSearch::HSearch(std::vector<prm::Node>* node_list)
   {
     created_graph_p = node_list;
+  }
+
+  HSearch::HSearch(std::vector<prm::Node>* node_list, grid::Map map)
+  {
+    created_graph_p = node_list;
+    known_map = map;
   }
 
   bool HSearch::ComputeShortestPath(const prm::Node & s_start, const prm::Node & s_goal)
@@ -215,5 +223,62 @@ namespace hsearch
 
       sp.parent_p = s.node_p;
     }
+  }
+
+  ThetaStar::ThetaStar(std::vector<prm::Node> * node_list, grid::Map map, double buffer) : HSearch(node_list, map)
+  {
+    buffer_radius = buffer;
+  }
+
+  void ThetaStar::ComputeCost(SearchNode &s, SearchNode &sp)
+  {
+    std::vector<double> cost;
+
+    bool collision = true;
+
+    // Check for the start node
+    if(s.parent_p != nullptr)
+    {
+      for(auto obstacle : known_map.obstacles)
+      {
+        collision = collision::line_shape_intersection(s.parent_p->point, sp.node_p->point, obstacle, buffer_radius);
+
+        if(collision) break;
+      }
+    }
+
+    if(!collision) // there is line of sight, so evaluate path 2
+    {
+      // find the parent node
+      auto par_id = s.parent_p->id;
+      auto result = std::find_if(closed_list.begin(), closed_list.end(), [par_id](SearchNode n) {return n.node_p->id == par_id;});
+
+      cost = f(*result, sp);
+
+      // If the path from par(s) to s' is cheaper than the existing one, update it.
+      if(cost.at(0) < sp.f_val)
+      {
+        sp.f_val = cost.at(0);
+        sp.g_val = cost.at(1);
+        sp.h_val = cost.at(2);
+
+        sp.parent_p = s.parent_p;
+      }
+    }
+    else // use path 1
+    {
+      cost = f(s, sp);
+
+      // If the path from s to s' is cheaper than the existing one, update it.
+      if(cost.at(0) < sp.f_val)
+      {
+        sp.f_val = cost.at(0);
+        sp.g_val = cost.at(1);
+        sp.h_val = cost.at(2);
+
+        sp.parent_p = s.node_p;
+      }
+    }
+
   }
 }

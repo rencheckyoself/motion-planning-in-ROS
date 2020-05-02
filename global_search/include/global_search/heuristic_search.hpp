@@ -7,6 +7,7 @@
 #include <cmath>
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
+#include "roadmap/grid.hpp"
 
 namespace hsearch
 {
@@ -65,15 +66,21 @@ namespace hsearch
   /// \param sp the neighbor node being evaluated
   double path2_cost(SearchNode s, SearchNode sp);
 
+  /// \brief The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find
+  /// the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for
+  /// finding the shortest path, which is why the ComputeShortestPath method is virtual.
   class HSearch
   {
   public:
 
-    /// \breif default constructor
+    /// \brief default constructor
     HSearch() {};
 
-    /// \breif Initialize the search with a precontructed graph
+    /// \brief Initialize the search with a precontructed graph
     HSearch(std::vector<prm::Node>* node_list);
+
+    /// \brief Initialize the search with a precontructed graph
+    HSearch(std::vector<prm::Node>* node_list, grid::Map map);
 
     /// \brief Use default destructor for this and all derived classes
     virtual ~HSearch() = default;
@@ -90,6 +97,8 @@ namespace hsearch
 
   protected:
     std::vector<prm::Node>* created_graph_p; ///< pointer to a vector of created nodes
+
+    grid::Map known_map; ///< Contains all known obstacles and the bounds of the map.
 
     std::vector<SearchNode> open_list; ///< the open list for the current search
     std::vector<SearchNode> closed_list; ///< the closed list for the current search
@@ -133,18 +142,17 @@ namespace hsearch
 
   };
 
+  ///
   class AStar : public HSearch
   {
   public:
-
-    AStar() {};
 
     /// \brief Initialize the search with the created graph
     /// \param node_list pointer to a vector of Nodes that create a graph
     AStar(std::vector<prm::Node> * node_list) : HSearch(node_list) {};
 
   protected:
-    /// \calculates the path 1 cost between the two nodes
+    /// \brief calculates the path 1 cost between the two nodes
     /// \param s the current node being expanded
     /// \param sp the neighbor node being evaluated
     void ComputeCost(SearchNode &s, SearchNode &sp);
@@ -152,9 +160,19 @@ namespace hsearch
 
   class ThetaStar : public HSearch
   {
+  public:
+
+    /// \brief Constructor to initialize a Theta Star Search
+    /// \param node_list pointer to a vector of Nodes that create a graph
+    /// \param map a known the map used to create the graph
+    /// \param buffer a buffer radius to account for in line of sight checks
+    ThetaStar(std::vector<prm::Node> * node_list, grid::Map map, double buffer);
 
   protected:
-    /// \calculates the path 1 or path 2 cost between the two nodes
+
+    double buffer_radius; ///<buffer radius when considering line of sight
+
+    /// \brief calculates the path 1 or path 2 cost between the two nodes
     /// \param s the current node being expanded
     /// \param sp the neighbor node being evaluated
     void ComputeCost(SearchNode &s, SearchNode &sp);

@@ -95,8 +95,8 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("PRMSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("PRMSRCH: Loaded Params");
 
+  // Create the PRM
   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);
-
   prob_road_map.build_map(graph_size, k_nearest, robot_radius);
 
   bool resultS, resultG = 0;
@@ -116,6 +116,7 @@ int main(int argc, char** argv)
     ros::shutdown();
   }
 
+  // Retrieve the PRM
   auto all_nodes = prob_road_map.get_nodes();
   auto all_edges = prob_road_map.get_edges();
   unsigned int node_cnt = all_nodes.size();
@@ -123,22 +124,39 @@ int main(int argc, char** argv)
   prm::Node start_node = all_nodes.at(node_cnt-2);
   prm::Node goal_node = all_nodes.at(node_cnt-1);
 
-  std::cout << start_node.edges.size() << "\n";
+  grid::Map map(polygons, map_x_lims, map_y_lims);
 
+  // Configure the A* and Theta* searches
   hsearch::AStar a_star_search(&all_nodes);
 
-  bool search_result = a_star_search.ComputeShortestPath(start_node, goal_node);
+  hsearch::ThetaStar t_star_search(&all_nodes, map, robot_radius);
+
+  // conduct A* search
+  bool search_result_astar = a_star_search.ComputeShortestPath(start_node, goal_node);
   ROS_INFO_STREAM("PRMSRCH: Search Complete!\n");
 
-  if(!search_result)
+  // conduct Theta* search
+  bool search_result_tstar = t_star_search.ComputeShortestPath(start_node, goal_node);
+  ROS_INFO_STREAM("PRMSRCH: Search Complete!\n");
+
+  // Check for failure
+  if(!search_result_astar)
   {
-    ROS_FATAL_STREAM("PRMSRCH: Search failed to find a path given the start and goal.\n");
+    ROS_FATAL_STREAM("PRMSRCH: A* Search failed to find a path given the start and goal.\n");
+    ros::shutdown();
+  }
+  else if(!search_result_tstar)
+  {
+    ROS_FATAL_STREAM("PRMSRCH: Theta* Search failed to find a path given the start and goal.\n");
     ros::shutdown();
   }
 
-  std::vector<rigid2d::Vector2D> path = a_star_search.get_path();
+  // Retrieve the path
+  std::vector<rigid2d::Vector2D> a_path = a_star_search.get_path();
+  std::vector<rigid2d::Vector2D> t_path = t_star_search.get_path();
 
-  ROS_INFO_STREAM("PRMSRCH: Final Path has " << path.size() << " nodes.");
+  ROS_INFO_STREAM("PRMSRCH: A* Path has " << a_path.size() << " nodes.");
+  ROS_INFO_STREAM("PRMSRCH: Theta* Path has " << t_path.size() << " nodes.");
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
@@ -159,10 +177,18 @@ int main(int argc, char** argv)
   markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0}))); // start
   markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0}))); // goal
 
-  // Draw final path
-  for(auto it = path.begin(); it < path.end()-1; it++)
+  // Draw A* path
+  for(auto it = a_path.begin(); it < a_path.end()-1; it++)
   {
-    markers.push_back(utility::make_marker(*it, *(it+1), it-path.begin(), cell_size, std::vector<double>({0, 0, 1})));
+    markers.push_back(utility::make_marker(*it, *(it+1), it-a_path.begin(), cell_size, std::vector<double>({0, 0, 0})));
+  }
+
+  auto start_id = a_path.size();
+
+  // Draw Theta* path
+  for(auto it = t_path.begin(); it < t_path.end()-1; it++)
+  {
+    markers.push_back(utility::make_marker(*it, *(it+1), start_id + (it-t_path.begin()), cell_size, colors.at(4)));
   }
 
   pub_marks.markers = markers;

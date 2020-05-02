@@ -27,6 +27,6 @@ k_nearest: 10 # number of neighbors to try and create an edge to for the PRM nod
 grid_res: 5 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
 
 # color presets for markers
-r: [239, 80, 79, 39]
-g: [255, 216, 152, 39]
-b: [251, 144, 202, 39]
+r: [239, 80, 79, 39, 255]
+g: [255, 216, 152, 39, 153]
+b: [251, 144, 202, 39, 0]

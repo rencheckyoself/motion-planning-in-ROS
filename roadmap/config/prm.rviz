@@ -36,12 +36,12 @@ Visualization Manager:
   Class: ""
   Displays:
     - Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 1
       Name: Axes
       Radius: 0.10000000149011612
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Alpha: 0.25
       Cell Size: 0.20000000298023224
       Class: rviz/Grid
@@ -67,6 +67,7 @@ Visualization Manager:
       Namespaces:
         Edges: true
         Nodes: true
+        Path: true
         world_map: true
       Queue Size: 100
       Value: true
