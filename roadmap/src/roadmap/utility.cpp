@@ -71,6 +71,34 @@ namespace utility
     return point;
   }
 
+  nav_msgs::OccupancyGrid make_grid_msg(grid::Grid *grid, double cell_size, double res)
+  {
+    auto occ_grid = grid->get_grid_flatten();
+    auto grid_dims = grid->get_grid_dimensions();
+
+    nav_msgs::OccupancyGrid occ_msg;
+
+    occ_msg.header.frame_id = "map";
+    occ_msg.header.stamp = ros::Time::now();
+
+    occ_msg.info.map_load_time = ros::Time::now();
+    occ_msg.info.resolution = cell_size/res;
+    occ_msg.info.height = grid_dims.at(1);
+    occ_msg.info.width = grid_dims.at(0);
+
+    occ_msg.info.origin.position.x = 0;
+    occ_msg.info.origin.position.y = 0;
+    occ_msg.info.origin.position.z = 0;
+    occ_msg.info.origin.orientation.x = 0;
+    occ_msg.info.origin.orientation.y = 0;
+    occ_msg.info.origin.orientation.z = 0;
+    occ_msg.info.origin.orientation.w = 1;
+
+    occ_msg.data = occ_grid;
+
+    return occ_msg;
+  }
+
   visualization_msgs::Marker make_marker(prm::Node node, double scale, std::vector<double> color)
   {
     visualization_msgs::Marker marker;

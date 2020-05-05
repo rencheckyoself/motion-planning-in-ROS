@@ -1,5 +1,5 @@
 /// \file
-/// \brief Node to create and draw a probabilistic road map
+/// \brief Node to create, draw, and plan on a probabilistic road map
 ///
 /// PARAMETERS:
 ///     obstacles (std::vector<std::vector<std::vector<double>) a vector of polygons represented by a vector of x,y coords for the verticies
@@ -11,6 +11,7 @@
 ///     r (std::vector<int>) color values
 ///     g (std::vector<int>) color values
 ///     b (std::vector<int>) color values
+
 #include <vector>
 #include <algorithm>
 #include <XmlRpcValue.h>
@@ -31,7 +32,7 @@ static double cell_size = 1.0;
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "make_roadmap");
+  ros::init(argc, argv, "prm_search");
   ros::NodeHandle n;
 
   ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);

@@ -3,8 +3,8 @@
 # goal: [3,7]
 
 # # Easy
-# start: [7, 3]
-# goal: [7, 26]
+start: [7, 3]
+goal: [7, 26]
 
 # # Moderate
 # start: [20, 45]

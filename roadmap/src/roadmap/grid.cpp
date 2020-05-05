@@ -116,7 +116,12 @@ namespace grid
     }
   }
 
-  std::vector<signed char> Grid::get_grid() const
+  std::vector<std::vector<signed char>> Grid::get_grid() const
+  {
+    return occ_data;
+  }
+
+  std::vector<signed char> Grid::get_grid_flatten() const
   {
     // collapse 2d vector into row major order
     std::vector<signed char> output;

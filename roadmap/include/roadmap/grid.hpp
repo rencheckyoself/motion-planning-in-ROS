@@ -56,9 +56,13 @@ namespace grid
     /// \param robot_radius the radius to use as a buffer around the robot for collision detection
     void build_grid(double cell_size, unsigned int grid_res, double robot_radius);
 
+    /// \brief retrieve the built grid
+    /// \returns grid occupancy data as a vector of vectors.
+    std::vector<std::vector<signed char>> get_grid() const;
+
     /// \brief convert the grid data into a in row major order with the first element corresponding to the lower left corner.
     /// \returns grid occupancy data in row major order
-    std::vector<signed char> get_grid() const;
+    std::vector<signed char> get_grid_flatten() const;
 
     /// \brief get the height and width of the grid
     /// \returns the grid dimensions in number of cells

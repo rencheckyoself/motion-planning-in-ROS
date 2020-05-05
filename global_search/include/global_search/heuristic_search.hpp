@@ -34,7 +34,7 @@ namespace hsearch
     SearchNode() {};
 
     /// \brief Create a new start node
-    /// \param n reference to a graph Node 
+    /// \param n reference to a graph Node
     SearchNode(const prm::Node & n);
 
     /// \brief Custom function used for proper sorting of the open list.
@@ -56,7 +56,7 @@ namespace hsearch
 
   /// \brief The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find
   /// the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for
-  /// finding the shortest path, which is why the ComputeShortestPath method is virtual.
+  /// finding the shortest path, which is why the ComputeShortestPath method is virtual. Currently this class will only plan against a precontructed graph.
   class HSearch
   {
   public:
@@ -97,7 +97,7 @@ namespace hsearch
     std::vector<rigid2d::Vector2D> final_path; ///<assemble the final path based on the goal node
 
     SearchNode start; ///< the start node for the current search
-    rigid2d::Vector2D goal_loc; ///< the start node for the current search
+    rigid2d::Vector2D goal_loc; ///< the goal node for the current search
 
     int id_cnt = 1; ///<tracks # nodes seen during search
 
@@ -169,6 +169,27 @@ namespace hsearch
     /// \param s the current node being expanded
     /// \param sp the neighbor node being evaluated
     void ComputeCost(SearchNode &s, SearchNode &sp);
+  };
+
+
+  /// \brief a generic class to perform iterative search
+  class IterSearch
+  {
+  public:
+
+    /// \brief Default Constructor
+    IterSearch();
+
+    /// \brief provide the search with the beginning state of the map
+    /// \param reference to an existing grid
+    IterSearch(grid::Grid & grid_world);
+
+    /// \brief Use default destructor for this and all derived classes
+    virtual ~IterSearch() = default;
+
+
+    virtual bool ComputeShortestPath();
+  protected:
   };
 
 }

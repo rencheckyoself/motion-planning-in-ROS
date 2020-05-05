@@ -7,18 +7,18 @@
 
 #include <XmlRpcValue.h>
 
+#include "nav_msgs/OccupancyGrid.h"
+
 #include "visualization_msgs/MarkerArray.h"
 #include "visualization_msgs/Marker.h"
 
-#include "rigid2d/rigid2d.hpp"
+#include "roadmap/grid.hpp"
 #include "roadmap/prm.hpp"
+#include "rigid2d/rigid2d.hpp"
 
 
 namespace utility
 {
-
-
-
   /// \brief converts obstacle data from a YAML file into a vector of vectors. TODO: changes this to a template based output
   /// \param obstacles the a list of lists containing obstacle vertices
   /// \param cell_size a scaling factor to apply to the vertex coordinates. Use 1 if you do not want to scale them.
@@ -35,6 +35,13 @@ namespace utility
   /// \param vec point represented with a 2D vector
   /// \returns a point represented with a geometry_msgs/Point
   geometry_msgs::Point Vec2D_to_GeoPt(rigid2d::Vector2D vec);
+
+  /// \brief Consruct a message for rviz to display a grid
+  /// \param grid a pointer to a built grid::Grid
+  /// \param cell_size the size of a cell in meters
+  /// \param res the resolution of the grid
+  /// \returns an OccupancyGrid message to publish
+  nav_msgs::OccupancyGrid make_grid_msg(grid::Grid *grid, double cell_size, double res);
 
   /// \brief Create a spherical Marker based on a node struct
   /// \param node a node struct to vizualize
