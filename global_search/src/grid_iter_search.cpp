@@ -43,7 +43,6 @@ int main(int argc, char** argv)
   double cell_size = 1.0;
   int grid_res = 1;
 
-
   n.getParam("obstacles", obstacles);
   n.getParam("map_x_lims", map_x_lims);
   n.getParam("map_y_lims", map_y_lims);
@@ -82,7 +81,22 @@ int main(int argc, char** argv)
 
   // Create an empty grid of free cells
   std::vector<std::vector<signed char>> free_map;
-  free_map.resize(grid_dims.at(1), std::vector<signed char>(grid_dims.at(0), 48));
+  free_map.resize(grid_dims.at(1), std::vector<signed char>(grid_dims.at(0), 0));
+
+  // convert start/goal to vector2D
+  rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
+  rigid2d::Vector2D goal_pt(goal.at(0) * grid_res, goal.at(1) * grid_res);
+
+  ROS_INFO_STREAM("GDSRCH: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
+  ROS_INFO_STREAM("GDSRCH: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
+  ROS_INFO_STREAM("GDSRCH: robot_radius: " << robot_radius);
+  ROS_INFO_STREAM("GDSRCH: grid_res: " << grid_res);
+  ROS_INFO_STREAM("GDSRCH: cell size: " << cell_size);
+  ROS_INFO_STREAM("GDSRCH: start coordinate: " << start_pt);
+  ROS_INFO_STREAM("GDSRCH: goal coordinate: " << goal_pt);
+  ROS_INFO_STREAM("GDSRCH: Loaded Params");
+
+
 
   // Initialize the search the empty map
 
@@ -92,19 +106,9 @@ int main(int argc, char** argv)
 
 
 
-  // convert start/goal to vector2D
+//   convert start/goal to vector2D
 //   rigid2d::Vector2D start_pt(start.at(0) * cell_size, start.at(1) * cell_size);
 //   rigid2d::Vector2D goal_pt(goal.at(0) * cell_size, goal.at(1) * cell_size);
-//
-//   ROS_INFO_STREAM("PRMSRCH: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
-//   ROS_INFO_STREAM("PRMSRCH: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
-//   ROS_INFO_STREAM("PRMSRCH: k_nearest: " << k_nearest);
-//   ROS_INFO_STREAM("PRMSRCH: graph_size: " << graph_size);
-//   ROS_INFO_STREAM("PRMSRCH: robot_radius: " << robot_radius);
-//   ROS_INFO_STREAM("PRMSRCH: cell size: " << cell_size);
-//   ROS_INFO_STREAM("PRMSRCH: start coordinate: " << start_pt);
-//   ROS_INFO_STREAM("PRMSRCH: goal coordinate: " << goal_pt);
-//   ROS_INFO_STREAM("PRMSRCH: Loaded Params");
 //
 //   // Create the PRM
 //   prm::RoadMap prob_road_map(polygons, map_x_lims, map_y_lims);

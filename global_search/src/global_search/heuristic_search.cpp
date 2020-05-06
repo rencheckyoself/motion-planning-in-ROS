@@ -18,30 +18,30 @@ namespace hsearch
   SearchNode::SearchNode(const prm::Node & n)
   {
     node_p = std::make_shared<prm::Node>(n);
-    f_val = HUGE_VAL;
-    g_val = HUGE_VAL;
-    h_val = HUGE_VAL;
+  }
 
-    parent_p = nullptr;
-
-    state = New;
+  void SearchNode::CalcKey(double km)
+  {
+    auto buf = std::min(g_val, rhs_val);
+    key_val.k1 = buf + h_val + km;
+    key_val.k2 = buf;
   }
 
   bool SearchNode::operator>(const SearchNode &rhs) const
   {
-    if(f_val == rhs.f_val) return h_val > rhs.h_val;
-    else return f_val > rhs.f_val;
+    if(key_val.k1 == rhs.key_val.k1) return key_val.k2 > rhs.key_val.k2;
+    else return key_val.k1 > rhs.key_val.k1;
   }
 
   bool SearchNode::operator<(const SearchNode &rhs) const
   {
-    if(f_val == rhs.f_val) return h_val > rhs.h_val;
-    else return f_val > rhs.f_val;
+    if(key_val.k1 == rhs.key_val.k1) return key_val.k2 < rhs.key_val.k2;
+    else return key_val.k1 < rhs.key_val.k1;
   }
 
   std::ostream & operator<<(std::ostream & os, const SearchNode & n)
   {
-    os << "Node ID: " << n.node_p->id << "\n\t" << "Cur Cost: " << n.f_val << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
+    os << "Node ID: " << n.node_p->id << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
     return os;
   }
 
@@ -69,7 +69,9 @@ namespace hsearch
     start.state = Open;
     start.g_val = 0;
     start.h_val = h(start);
-    start.f_val = 0;
+    // start.f_val = 0;
+
+    start.CalcKey();
 
     start.parent_p = nullptr;
 
@@ -215,11 +217,12 @@ namespace hsearch
   {
     auto cost = f(s, sp);
     // If the path from s to s' is cheaper than the existing one, update it.
-    if(cost.at(0) < sp.f_val)
+    if(cost.at(0) < sp.key_val.k1)
     {
-      sp.f_val = cost.at(0);
       sp.g_val = cost.at(1);
       sp.h_val = cost.at(2);
+
+      sp.CalcKey(); // update the key values
 
       sp.parent_p = s.node_p;
     }
@@ -261,11 +264,12 @@ namespace hsearch
       cost = f(*result, sp);
 
       // If the path from par(s) to s' is cheaper than the existing one, update it.
-      if(cost.at(0) <= sp.f_val)
+      if(cost.at(0) < sp.key_val.k1)
       {
-        sp.f_val = cost.at(0);
         sp.g_val = cost.at(1);
         sp.h_val = cost.at(2);
+
+        sp.CalcKey(); // update the key values
 
         sp.parent_p = s.parent_p;
       }
@@ -275,11 +279,12 @@ namespace hsearch
       cost = f(s, sp);
 
       // If the path from s to s' is cheaper than the existing one, update it.
-      if(cost.at(0) < sp.f_val)
+      if(cost.at(0) < sp.key_val.k1)
       {
-        sp.f_val = cost.at(0);
         sp.g_val = cost.at(1);
         sp.h_val = cost.at(2);
+
+        sp.CalcKey(); // update the key values
 
         sp.parent_p = s.node_p;
       }

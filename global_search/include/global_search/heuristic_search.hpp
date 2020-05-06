@@ -15,20 +15,31 @@ namespace hsearch
   /// \brief Used to track if a node is New, on the open, or on the closed list
   enum status {New, Open, Closed};
 
+  /// \brief the key values for a given node
+  struct Key
+  {
+    double k1 = HUGE_VAL; ///< min(g(s), rhs(s)) + h(s, goal) => similar to f cost in non-incremental search
+    double k2 = HUGE_VAL; ///< min(g(s), rhs(s)) => tie breaking condition
+  };
+
   /// \brief Information used by a search algorithm
   struct SearchNode
   {
-    std::shared_ptr<prm::Node> node_p; ///< contains info about ID, location and, neighbors
+    std::shared_ptr<prm::Node> node_p = nullptr; ///< contains info about ID, location and, neighbors
 
     int search_id = 0; ///< a unique id for the search node created
 
-    double f_val; ///< total node cost
-    double g_val; ///< path cost from start to this
-    double h_val; ///< estimated cost from this to goal
+    double f_val = HUGE_VAL; ///< total node cost
+    double g_val = HUGE_VAL; ///< path cost from start to this
+    double h_val = HUGE_VAL; ///< estimated cost from this to goal
 
-    std::shared_ptr<prm::Node> parent_p; ///< the parent of this node
+    double rhs_val = HUGE_VAL; ///< another estimate of the start distance used for incremental search methods
 
-    status state; ///< current status of the node
+    Key key_val;
+
+    std::shared_ptr<prm::Node> parent_p = nullptr; ///< the parent of this node
+
+    status state = New;; ///< current status of the node
 
     /// \brief Default constructor
     SearchNode() {};
@@ -36,6 +47,10 @@ namespace hsearch
     /// \brief Create a new start node
     /// \param n reference to a graph Node
     SearchNode(const prm::Node & n);
+
+    /// \brief Update the key values for a node
+    /// \param km (optional) the key modifier used in an incremental D* search, defaults to 0
+    void CalcKey(double km = 0);
 
     /// \brief Custom function used for proper sorting of the open list.
     /// \param rhs another SearchNode to compare against
@@ -173,7 +188,7 @@ namespace hsearch
 
 
   /// \brief a generic class to perform iterative search
-  class IterSearch
+  class IterSearch : public HSearch
   {
   public:
 
@@ -181,15 +196,25 @@ namespace hsearch
     IterSearch();
 
     /// \brief provide the search with the beginning state of the map
-    /// \param reference to an existing grid
-    IterSearch(grid::Grid & grid_world);
+    /// \param grid_world reference to an existing grid
+    /// \param start_loc the location of the starting point in integer coordinates on the provided grid
+    /// \param goal_loc the location of the goal point in integer coordinates on the provided grid
+    IterSearch(grid::Grid & grid_world, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);
 
     /// \brief Use default destructor for this and all derived classes
     virtual ~IterSearch() = default;
 
 
-    virtual bool ComputeShortestPath();
+    bool ComputeShortestPath();
+
+    /// \brief Update a node
+    void UpdateVertex(SearchNode & u);
+
+
+
   protected:
+
+
   };
 
 }
