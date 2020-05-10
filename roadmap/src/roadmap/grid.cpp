@@ -10,6 +10,7 @@
 
 #include "roadmap/collision.hpp"
 #include "roadmap/grid.hpp"
+#include "roadmap/prm.hpp"
 #include "roadmap/utility.hpp"
 #include "rigid2d/rigid2d.hpp"
 
@@ -35,6 +36,7 @@ namespace grid
     og_map.y_bounds = {0, 10};
 
     og_map.map_vector = utility::create_map_vector(og_map.x_bounds, og_map.y_bounds);
+
   }
 
   Grid::Grid(std::vector<double> xboundary,std::vector<double> yboundary)
@@ -83,7 +85,7 @@ namespace grid
 
         grid_row.push_back(free); // add the cell to the array
 
-        std::vector<bool> occ_result;
+        std::vector<bool> occ_result = {false, false}; // assume no collision
 
         for(auto obstacle : scaled_map.obstacles)
         {
@@ -99,7 +101,6 @@ namespace grid
             if(buffer_radius == 0) grid_row.at(j) = occupied; // apply the correct color
             else grid_row.at(j) = in_buffer;
           }
-
         }
 
         // if there was no obstacle collision and a buffer has been set, check the map boarder
@@ -114,6 +115,123 @@ namespace grid
       occ_data.push_back(grid_row);
       grid_row.clear();
     }
+  }
+
+  void Grid::generate_centers_graph()
+  {
+
+    int cnt= 0;
+
+    nodes.clear();
+    all_edges.clear();
+
+    // Loop through each cell on the grid and create the node corresponding to it
+    for(int i = 0; i < grid_dimensions.at(1); i++) // y coord
+    {
+      std::vector<prm::Node> row;
+      for(int j = 0; j < grid_dimensions.at(0); j++) // x coord
+      {
+        rigid2d::Vector2D grid_coord(j,i);
+
+        rigid2d::Vector2D world_coord = grid_to_world(grid_coord);
+
+        prm::Node buf;
+
+        buf.id = cnt;
+        buf.point = world_coord;
+
+        row.push_back(buf);
+
+        cnt++;
+      }
+      nodes.push_back(row);
+    }
+
+    cnt = 0;
+
+    // Loop through each node and create edges to the 8 neighbors connections
+    for(int i = 0; i < grid_dimensions.at(1); i++) // y coord
+    {
+      for(int j = 0; j < grid_dimensions.at(0); j++) // x coord
+      {
+
+        prm::Node& node = nodes.at(i).at(j);
+
+        // Check the 8 Neighboring Nodes
+        for(int m = -1; m < 2; m++) //y shift
+        {
+          for(int n = -1; n < 2; n++) //x shift
+          {
+            // skip over the 0 shift and any shift that is out of bounds
+            if(m == 0 && n == 0) continue;
+            else if((j + n) < 0 || (j + n) >= grid_dimensions.at(0)) continue;
+            else if((i + m) < 0 || (i + m) >= grid_dimensions.at(1)) continue;
+            else
+            {
+              prm::Node& neighbor = nodes.at(i+m).at(j+n); // get the reference to the neighbor node
+
+              if(!node.IsConnected(neighbor.id))
+              {
+                prm::Edge buf_edge;
+
+                buf_edge.edge_id = cnt;
+
+                buf_edge.node1_id = node.id;
+                buf_edge.node1 = node.point;
+                buf_edge.node2_id = neighbor.id;
+                buf_edge.node2 = neighbor.point;
+
+                buf_edge.distance = node.point.distance(neighbor.point);
+
+                // add to main list
+                all_edges.push_back(buf_edge);
+
+                // Add to Node
+                node.edges.push_back(buf_edge);
+                node.id_set.insert(neighbor.id);
+
+                // switch 1 and 2 and add to second node
+                buf_edge.node1_id = buf_edge.node2_id;
+                buf_edge.node1 = buf_edge.node2;
+                buf_edge.node2_id = node.id;
+                buf_edge.node2 = node.point;
+
+                neighbor.edges.push_back(buf_edge);
+                neighbor.id_set.insert(node.id);
+
+                cnt++;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  std::vector<std::vector<prm::Node>> Grid::get_nodes() const
+  {
+    return nodes;
+  }
+
+  std::vector<prm::Node> Grid::get_nodes_flatten() const
+  {
+    // collapse 2d vector into row major order
+    std::vector<prm::Node> output;
+
+    for(const auto row : nodes)
+    {
+      for(const auto point : row)
+      {
+        output.push_back(point);
+      }
+    }
+
+    return output;
+  }
+
+  std::vector<prm::Edge> Grid::get_edges() const
+  {
+    return all_edges;
   }
 
   std::vector<std::vector<signed char>> Grid::get_grid() const
@@ -142,7 +260,17 @@ namespace grid
     return grid_dimensions;
   }
 
+  rigid2d::Vector2D Grid::grid_to_world(rigid2d::Vector2D grid_coord)
+  {
+    double ratio = cell_size/ static_cast<double>(grid_res);
+
+    double shift = 0.5 * ratio;
+
+    return rigid2d::Vector2D(grid_coord.x * ratio + shift, grid_coord.y * ratio + shift);
+  }
+
   // Private Functions =========================================================
+
   void Grid::grid_resize()
   {
     scaled_map = og_map;

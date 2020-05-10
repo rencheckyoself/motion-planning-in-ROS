@@ -5,6 +5,8 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <unordered_map>
+#include <vector>
 
 #include "global_search/heuristic_search.hpp"
 #include "rigid2d/rigid2d.hpp"
@@ -45,6 +47,8 @@ namespace hsearch
     return os;
   }
 
+  // =========================== HSearch =======================================
+
   HSearch::HSearch(std::vector<prm::Node>* node_list)
   {
     created_graph_p = node_list;
@@ -69,8 +73,6 @@ namespace hsearch
     start.state = Open;
     start.g_val = 0;
     start.h_val = h(start);
-    // start.f_val = 0;
-
     start.CalcKey();
 
     start.parent_p = nullptr;
@@ -213,6 +215,8 @@ namespace hsearch
     return pt1.distance(goal_loc);
   }
 
+  // =========================== A* ============================================
+
   void AStar::ComputeCost(SearchNode &s, SearchNode &sp)
   {
     auto cost = f(s, sp);
@@ -227,6 +231,8 @@ namespace hsearch
       sp.parent_p = s.node_p;
     }
   }
+
+  // =========================== Theta* ========================================
 
   ThetaStar::ThetaStar(std::vector<prm::Node> * node_list, grid::Map map, double buffer) : HSearch(node_list, map)
   {
@@ -289,6 +295,36 @@ namespace hsearch
         sp.parent_p = s.node_p;
       }
     }
+
+  }
+
+  // =========================== IterSearch ====================================
+
+  IterSearch::IterSearch(grid::Grid &grid_world, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc) : HSearch()
+  {
+    // Use the provided grid_world to create a graph of the cell centers and initialize a grid of SearchNodes
+
+    // Loop through each cell in the grid and create an unordered map of SearchNodes.
+
+    auto grid_dims = grid_world.get_grid_dimensions();
+
+    grid_world.generate_centers_graph();
+
+    auto grid_graph = grid_world.get_nodes();
+
+    std::cout << "Graph Dims " << grid_graph.size() << grid_graph.at(0).size() << "\n";
+    std::cout << "Grid Dims " << grid_dims.at(1) << grid_dims.at(0) << "\n";
+
+    for(int i = 0 ; i < grid_dims.at(1); i++) // integer y-coord
+    {
+      for(int j = 0 ; j < grid_dims.at(0); j++) //integer x-coord
+      {
+        SearchNode s(grid_graph.at(i).at(j));
+        s.search_id = s.node_p->id;
+        standby.insert({s.search_id, s});
+      }
+    }
+  
 
   }
 }

@@ -16,7 +16,6 @@ map_x_lims: [0, 34] # x_min, x_max of the map
 map_y_lims: [0, 48] # y_min, y_max of the map
 
 cell_size: 0.2 # the desired cell size in meters
-
 robot_radius: 0.15 # buffer radius in meters for the robot
 
 # PRM SPECIFIC PARAMS
@@ -24,7 +23,7 @@ graph_size: 500 # number of nodes to use for the PRM
 k_nearest: 10 # number of neighbors to try and create an edge to for the PRM nodes
 
 # GRID SPECIFIC PARAMS
-grid_res: 5 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
+grid_res: 1 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
 
 # color presets for markers
 r: [239, 80, 79, 39, 255]

@@ -32,6 +32,7 @@ int main(int argc, char** argv)
   ros::NodeHandle n;
 
   ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 1, true);
+  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
 
   std::vector<double> map_x_lims;
   std::vector<double> map_y_lims;
@@ -45,7 +46,20 @@ int main(int argc, char** argv)
   n.getParam("robot_radius", robot_radius);
   n.getParam("cell_size", cell_size);
   n.getParam("grid_res", grid_res);
+  n.getParam("r", r);
+  n.getParam("g", g);
+  n.getParam("b", b);
 
+  std::vector<std::vector<double>> colors;
+
+  for(unsigned int i = 0; i < r.size(); i++)
+  {
+    r.at(i) /= 255;
+    g.at(i) /= 255;
+    b.at(i) /= 255;
+
+    colors.push_back({r.at(i), g.at(i), b.at(i)});
+  }
   ROS_INFO_STREAM("GRID: x_lims: " << map_x_lims.at(0) << ", " << map_x_lims.at(1));
   ROS_INFO_STREAM("GRID: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
 
@@ -62,13 +76,38 @@ int main(int argc, char** argv)
   polygons = utility::parse_obstacle_data(obstacles, 1);
 
   // Initialize Grid
-  grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
+  // grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
+  grid::Grid grid_world(map_x_lims, map_y_lims);
+
 
   grid_world.build_grid(cell_size, grid_res, robot_radius);
 
   auto occ_msg = utility::make_grid_msg(&grid_world, cell_size, grid_res);
-
   pub_map.publish(occ_msg);
+
+  // Uncomment to also display the graph corresponding to the grid //
+  // grid_world.generate_centers_graph();
+  // auto all_nodes = grid_world.get_nodes();
+  // auto all_edges = grid_world.get_edges();
+  //
+  // std::vector<visualization_msgs::Marker> markers;
+  // visualization_msgs::MarkerArray pub_marks;
+  //
+  // // Put a spherical marker at each node
+  // for(auto node : all_nodes)
+  // {
+  //   markers.push_back(utility::make_marker(node, cell_size, colors.at(0)));
+  // }
+  //
+  // // Draw a line to show all connections.
+  // for(auto edge : all_edges)
+  // {
+  //   markers.push_back(utility::make_marker(edge, cell_size, colors.at(2)));
+  // }
+  //
+
+  // pub_marks.markers = markers;
+  // pub_markers.publish(pub_marks);
 
   ros::spin();
 }

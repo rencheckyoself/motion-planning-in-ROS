@@ -3,8 +3,11 @@
 /// \file
 /// \brief A library containing classes to perform various types of search algorithms
 
-#include <memory>
 #include <cmath>
+#include <memory>
+#include <unordered_map>
+#include <vector>
+
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/prm.hpp"
 #include "roadmap/grid.hpp"
@@ -88,6 +91,11 @@ namespace hsearch
     /// \param map the known map used to create the graph
     HSearch(std::vector<prm::Node>* node_list, grid::Map map);
 
+    /// \brief Initialize the search with a precontructed graph
+    /// \param node_list a pointer to a graph
+    /// \param map the known map used to create the graph
+    HSearch(grid::Map map);
+
     /// \brief Use default destructor for this and all derived classes
     virtual ~HSearch() = default;
 
@@ -141,12 +149,6 @@ namespace hsearch
     /// \param sp the node to estimate the cost from
     /// \returns the estimated cost
     double h(SearchNode sp);
-
-    /// \brief Compare the current node and its neighbor
-    /// \param s the current node
-    /// \param sp the neioghbor node
-    void UpdateVertex(SearchNode s, SearchNode sp);
-
   };
 
   /// \brief A* Search class derived from the HSearch class
@@ -204,16 +206,19 @@ namespace hsearch
     /// \brief Use default destructor for this and all derived classes
     virtual ~IterSearch() = default;
 
-
+    /// \brief The main loop for to find the shortest path
+    /// \returns True if a path was found, otherwise False
     bool ComputeShortestPath();
-
-    /// \brief Update a node
-    void UpdateVertex(SearchNode & u);
-
-
 
   protected:
 
+    std::unordered_map<int, SearchNode> standby;
+
+    /// \brief Update a node
+    /// \param u the node to update
+    void UpdateVertex(SearchNode & u);
+
+    void ComputeCost(SearchNode &s, SearchNode &sp) {};
 
   };
 

@@ -75,13 +75,14 @@ int main(int argc, char** argv)
 
   // Initialize Grid that represents the fully known map
   grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
-
   grid_world.build_grid(cell_size, grid_res, robot_radius);
-  auto grid_dims = grid_world.get_grid_dimensions();
 
-  // Create an empty grid of free cells
-  std::vector<std::vector<signed char>> free_map;
-  free_map.resize(grid_dims.at(1), std::vector<signed char>(grid_dims.at(0), 0));
+
+  // Initialize an empty grid of free cells
+  grid::Grid free_grid(map_x_lims, map_y_lims);
+  free_grid.build_grid(cell_size, grid_res, robot_radius);
+
+  auto grid_dims = free_grid.get_grid_dimensions();
 
   // convert start/goal to vector2D
   rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
@@ -96,14 +97,14 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("GDSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("GDSRCH: Loaded Params");
 
+  // Initialize the search on the empty map
 
-
-  // Initialize the search the empty map
+  hsearch::IterSearch test(free_grid, start_pt, goal_pt);
 
   // Do an intial pass at the plan
 
   // start loop and scan for changes
-
+  // print the results
 
 
 //   convert start/goal to vector2D

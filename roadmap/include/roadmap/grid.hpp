@@ -7,6 +7,7 @@
 #include <unordered_set>
 
 #include "rigid2d/rigid2d.hpp"
+#include "roadmap/prm.hpp"
 
 namespace grid
 {
@@ -56,6 +57,18 @@ namespace grid
     /// \param robot_radius the radius to use as a buffer around the robot for collision detection
     void build_grid(double cell_size, unsigned int grid_res, double robot_radius);
 
+    /// \brief Function to generate an 8 neighbor connected graph structure based on grid cell center locations
+    void generate_centers_graph();
+
+    /// \brief Retrive the nodes in a 2D vector in the shape of the grid
+    std::vector<std::vector<prm::Node>> get_nodes() const;
+
+    /// \brief Retrive the nodes in row major order
+    std::vector<prm::Node> get_nodes_flatten() const;
+
+    /// \brief Retrive the unique edges in the graph
+    std::vector<prm::Edge> get_edges() const;
+
     /// \brief retrieve the built grid
     /// \returns grid occupancy data as a vector of vectors.
     std::vector<std::vector<signed char>> get_grid() const;
@@ -88,6 +101,9 @@ namespace grid
     double buffer_radius = 0.0; ///< buffer distance to incorporate when detecting collisions
     unsigned int grid_res = 1; ///< scale the cell size
     double cell_size = 1.0; ///< meters per grid cell
+
+    std::vector<std::vector<prm::Node>> nodes; ///< all nodes in the grid
+    std::vector<prm::Edge> all_edges; ///< all edges between the grid
 
     std::vector<std::vector<signed char>> occ_data; ///< occupancy grid data, 0 is free, 50 is buffer zone, 100 is occupied
 
