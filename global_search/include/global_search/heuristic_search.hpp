@@ -145,7 +145,7 @@ namespace hsearch
 
     /// \brief build the final path based on all of the saved pointers
     /// \param goal the goal node determined by the search
-    void assemble_path(SearchNode goal);
+    virtual void assemble_path(SearchNode goal);
 
     /// \brief calculate the total cost of a node
     /// \param s the potential parent node
@@ -234,6 +234,10 @@ namespace hsearch
     int goal_id; ///< ID of the SearchNode conttaining the goal of the search
 
     std::vector<rigid2d::Vector2D> expanded_nodes; ///< a list of points that were expanded (popped off the open list) during the most recent search
+
+    /// \brief build the final path based on all of the saved pointers
+    /// \param goal the goal SearchNode
+    void assemble_path(SearchNode goal);
 
     /// \brief Update a node
     /// \param u the id of a node to update

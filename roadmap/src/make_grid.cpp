@@ -23,8 +23,7 @@
 #include "roadmap/grid.hpp"
 #include "roadmap/utility.hpp"
 
-static std::vector<double> r, g, b;
-static double cell_size = 1.0;
+
 
 int main(int argc, char** argv)
 {
@@ -39,6 +38,8 @@ int main(int argc, char** argv)
   XmlRpc::XmlRpcValue obstacles;
   double robot_radius = 0.0;
   int grid_res = 1;
+  std::vector<double> r, g, b;
+  double cell_size = 1.0;
 
   n.getParam("obstacles", obstacles);
   n.getParam("map_x_lims", map_x_lims);
@@ -76,9 +77,7 @@ int main(int argc, char** argv)
   polygons = utility::parse_obstacle_data(obstacles, 1);
 
   // Initialize Grid
-  // grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
-  grid::Grid grid_world(map_x_lims, map_y_lims);
-
+  grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
 
   grid_world.build_grid(cell_size, grid_res, robot_radius);
 

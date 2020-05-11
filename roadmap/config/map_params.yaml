@@ -23,7 +23,7 @@ graph_size: 500 # number of nodes to use for the PRM
 k_nearest: 10 # number of neighbors to try and create an edge to for the PRM nodes
 
 # GRID SPECIFIC PARAMS
-grid_res: 2 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
+grid_res: 1 # grid resolution must be >= 1. A value of 2 will create a grid with twice the resolution of the given map dimensions
 
 # color presets for markers
 r: [239, 80, 79, 39, 255]

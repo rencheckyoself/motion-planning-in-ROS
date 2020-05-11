@@ -62,8 +62,8 @@ namespace hsearch
   std::ostream & operator<<(std::ostream & os, const SearchNode & n)
   {
 
-    if(n.parent_p != nullptr) os << "Node ID: " << n.node_p->id << "\n\tPoint" << n.node_p->point << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
-    else os << "Node ID: " << n.node_p->id << "\n\tPoint" << n.node_p->point << "\n\t" << "Cur Cost: " << n.key_val.k1 <<  std::endl;
+    if(n.parent_p != nullptr) os << "Node ID: " << n.node_p->id << "\n\tPoint: " << n.node_p->point.x << ", " << n.node_p->point.y << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
+    else os << "Node ID: " << n.node_p->id << "\n\tPoint: " << n.node_p->point.x << ", " << n.node_p->point.y << "\n\t" << "G Val: " << n.g_val << "\n\t" << "RHS Val: " << n.rhs_val << std::endl;
 
     return os;
   }
@@ -74,12 +74,6 @@ namespace hsearch
   {
     created_graph_p = node_list;
   }
-
-  // HSearch::HSearch(std::vector<prm::Node>* node_list, grid::Map map)
-  // {
-  //   created_graph_p = node_list;
-  //   known_map = map;
-  // }
 
   bool HSearch::ComputeShortestPath(const prm::Node & s_start, const prm::Node & s_goal)
   {
@@ -161,20 +155,11 @@ namespace hsearch
 
           if (neighbor.state == New) // add node to the heap
           {
-            if (neighbor.node_p->point == goal_loc)
-            {
-                std::cout << neighbor;
-            }
             neighbor.state = Open;
             open_list.push_back(neighbor);
           }
           else // update the node already in the heap
           {
-            if (neighbor.node_p->point == goal_loc)
-            {
-                std::cout << neighbor;
-            }
-
             open_list.at(std::distance(open_list.begin(),result)) = neighbor;
           }
           // std::cout << neighbor;
@@ -375,6 +360,8 @@ namespace hsearch
 
     expanded_nodes.clear();
 
+    std::cout << "Start ID: " << start_id << "\n";
+
     while(open_list.size() != 0)
     {
 
@@ -390,7 +377,7 @@ namespace hsearch
       // Check the exit condition
       if(cur_s.key_val > get_goal_key() && goal_is_consistent())
       {
-        assemble_path();
+        assemble_path(cur_s);
         result = true;
         break;
       }
@@ -400,16 +387,19 @@ namespace hsearch
       if(cur_s.g_val > cur_s.rhs_val)
       {
         cur_s.g_val = cur_s.rhs_val;
+        standby.at(cur_s.search_id) = cur_s;
 
         // loop through neighbors
         for(const auto & sp_id : cur_s.node_p->id_set)
         {
+          // std::cout << "Evaluating Node ID: " << sp_id << "\n";
           UpdateVertex(sp_id);
         }
       }
       else
       {
         cur_s.g_val = HUGE_VAL;
+        standby.at(cur_s.search_id) = cur_s;
 
         // loop through neighbors and self
         for(const auto & sp_id : cur_s.node_p->id_set)
@@ -427,6 +417,24 @@ namespace hsearch
     return result;
   }
 
+  void LPAStar::assemble_path(SearchNode goal)
+  {
+    // add the goal to the path
+    final_path.push_back(goal.node_p->point);
+
+    auto cur_node = goal;
+
+    // follow the parent points back to the starting node and store each location
+    while (cur_node.parent_p != nullptr)
+    {
+      final_path.push_back(cur_node.parent_p->point);
+
+      auto next_id = cur_node.parent_p->id;
+
+      cur_node = *locate_node(next_id);
+    }
+  }
+
   void LPAStar::UpdateVertex(int u_id)
   {
     // First get a pointer to the node in one of the lists
@@ -437,6 +445,7 @@ namespace hsearch
     {
       for(const auto sp_id : u->node_p->id_set)
       {
+        // std::cout << "\tLooking at Neighbor " << sp_id << "\n";
         auto sp = locate_node(sp_id);
 
         ComputeCost(*sp, *u);
@@ -446,6 +455,8 @@ namespace hsearch
       u->CalcKey();
     }
 
+    // std::cout << *u;
+    // std::cout << "Consistency: "<< is_consistent(*u) << "\n";
 
     // Check for consistency,
     if(is_consistent(*u))
@@ -473,12 +484,15 @@ namespace hsearch
 
   void LPAStar::ComputeCost(SearchNode &sp, SearchNode &u)
   {
-
     double buf = sp.g_val + edge_cost(sp, u);
 
-    std::cout << "edge cost: " << edge_cost(sp, u) << "\n";
 
-    if(buf < u.rhs_val) u.rhs_val = buf;
+
+    if(buf < u.rhs_val)
+    {
+      u.rhs_val = buf;
+      u.parent_p = sp.node_p;
+    }
   }
 
   double LPAStar::edge_cost(SearchNode &sp, SearchNode &u)

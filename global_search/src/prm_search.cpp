@@ -111,7 +111,8 @@ int main(int argc, char** argv)
     ROS_FATAL_STREAM("PRMSRCH: Invalid start node. \n Given start: " << start_pt);
     ros::shutdown();
   }
-  else if(!resultG)
+
+  if(!resultG)
   {
     ROS_FATAL_STREAM("PRMSRCH: Invalid goal node. \n Given goal: " << goal_pt);
     ros::shutdown();
