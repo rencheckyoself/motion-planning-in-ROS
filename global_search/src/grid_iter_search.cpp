@@ -81,6 +81,10 @@ int main(int argc, char** argv)
   // Initialize an empty grid of free cells
   grid::Grid free_grid(map_x_lims, map_y_lims);
   free_grid.build_grid(cell_size, grid_res, robot_radius);
+  free_grid.generate_centers_graph();
+
+  auto grid_graph = free_grid.get_nodes();
+  auto grid_graph_flat = free_grid.get_nodes_flatten();
 
   auto grid_dims = free_grid.get_grid_dimensions();
 
@@ -97,9 +101,13 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("GDSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("GDSRCH: Loaded Params");
 
+  // CHECK TO MAKE SURE GRID COORDS ARE NOT IN OBSTACLE OR BUFFER
+
   // Initialize the search on the empty map
 
-  hsearch::IterSearch test(free_grid, start_pt, goal_pt);
+  hsearch::LPAStar test(&grid_graph, &free_grid, start_pt, goal_pt);
+
+  std::cout << "Result: " << test.ComputeShortestPath() << "\n";
 
   // Do an intial pass at the plan
 

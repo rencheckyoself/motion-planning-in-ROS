@@ -23,6 +23,16 @@ namespace hsearch
   {
     double k1 = HUGE_VAL; ///< min(g(s), rhs(s)) + h(s, goal) => similar to f cost in non-incremental search
     double k2 = HUGE_VAL; ///< min(g(s), rhs(s)) => tie breaking condition
+
+    /// \brief Custom function used for proper sorting of the open list by comparing the key values.
+    /// \param rhs another Key to compare against
+    /// \returns True if this Key is less than rhs
+    bool operator<(const Key &rhs) const;
+
+    /// \brief Custom function used for proper sorting of the open list by comparing the key values.
+    /// \param rhs another Key to compare against
+    /// \returns True if this Key is less than rhs
+    bool operator>(const Key &rhs) const;
   };
 
   /// \brief Information used by a search algorithm
@@ -55,12 +65,12 @@ namespace hsearch
     /// \param km (optional) the key modifier used in an incremental D* search, defaults to 0
     void CalcKey(double km = 0);
 
-    /// \brief Custom function used for proper sorting of the open list.
+    /// \brief Custom function used for proper sorting of the open list by comparing the key values.
     /// \param rhs another SearchNode to compare against
     /// \returns True if this node is less than rhs
     bool operator<(const SearchNode &rhs) const;
 
-    /// \brief Custom function used for proper sorting of the open list.
+    /// \brief Custom function used for proper sorting of the open list by comparing the key values.
     /// \param rhs another SearchNode to compare against
     /// \returns True if this node is greater than rhs
     bool operator>(const SearchNode &rhs) const;
@@ -71,6 +81,12 @@ namespace hsearch
   /// \param n a SearchNode reference
   /// \returns an output stream
   std::ostream & operator<<(std::ostream & os, const SearchNode & n);
+
+  /// \brief Overload the cout operator to print the info in a Key
+  /// \param os the output stream
+  /// \param n a Key reference
+  /// \returns an output stream
+  std::ostream & operator<<(std::ostream & os, const Key & k);
 
   /// \brief The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find
   /// the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for
@@ -89,7 +105,7 @@ namespace hsearch
     /// \brief Initialize the search with a precontructed graph
     /// \param node_list a pointer to a graph
     /// \param map the known map used to create the graph
-    HSearch(std::vector<prm::Node>* node_list, grid::Map map);
+    // HSearch(std::vector<prm::Node>* node_list, grid::Map map);
 
     /// \brief Initialize the search with a precontructed graph
     /// \param node_list a pointer to a graph
@@ -111,8 +127,6 @@ namespace hsearch
 
   protected:
     std::vector<prm::Node>* created_graph_p; ///< pointer to a vector of created nodes
-
-    grid::Map known_map; ///< Contains all known obstacles and the bounds of the map.
 
     std::vector<SearchNode> open_list; ///< the open list for the current search
     std::vector<SearchNode> closed_list; ///< the closed list for the current search
@@ -180,6 +194,8 @@ namespace hsearch
 
   protected:
 
+    grid::Map known_map; ///< Contains all known obstacles and the bounds of the map.
+
     double buffer_radius; ///<buffer radius when considering line of sight
 
     /// \brief calculates the path 1 or path 2 cost between the two nodes
@@ -188,23 +204,19 @@ namespace hsearch
     void ComputeCost(SearchNode &s, SearchNode &sp);
   };
 
-
-  /// \brief a generic class to perform iterative search
-  class IterSearch : public HSearch
+  /// \brief a generic class to perform LPA* search
+  class LPAStar : public HSearch
   {
   public:
 
     /// \brief Default Constructor
-    IterSearch();
+    LPAStar();
 
     /// \brief provide the search with the beginning state of the map
-    /// \param grid_world reference to an existing grid
+    /// \param grid_graph reference to an existing grid
     /// \param start_loc the location of the starting point in integer coordinates on the provided grid
     /// \param goal_loc the location of the goal point in integer coordinates on the provided grid
-    IterSearch(grid::Grid & grid_world, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);
-
-    /// \brief Use default destructor for this and all derived classes
-    virtual ~IterSearch() = default;
+    LPAStar(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);
 
     /// \brief The main loop for to find the shortest path
     /// \returns True if a path was found, otherwise False
@@ -212,16 +224,52 @@ namespace hsearch
 
   protected:
 
-    std::unordered_map<int, SearchNode> standby;
+    std::vector<std::vector<prm::Node>>* created_graph_p; ///< pointer to a 2D vector of created nodes
+
+    grid::Grid* known_grid_p; ///<pointer to the known grid containing current occupancy data
+
+    std::unordered_map<int, SearchNode> standby; ///< all nodes not on the open list
+
+    int start_id; ///< ID of the SearchNode conttaining the start of the search
+    int goal_id; ///< ID of the SearchNode conttaining the goal of the search
+
+    std::vector<rigid2d::Vector2D> expanded_nodes; ///< a list of points that were expanded (popped off the open list) during the most recent search
 
     /// \brief Update a node
-    /// \param u the node to update
-    void UpdateVertex(SearchNode & u);
+    /// \param u the id of a node to update
+    void UpdateVertex(int u);
 
-    void ComputeCost(SearchNode &s, SearchNode &sp) {};
+    /// \brief a function used to compute the cost for a pair of nodes
+    /// \param s the current node being expanded
+    /// \param sp the neighbor node being evaluated
+    void ComputeCost(SearchNode &s, SearchNode &sp);
 
+    /// \brief a function used calculate traversal cost between 2 nodes based on the known_map.
+    /// Uses the stored point in each node to determine if a cell is free or occupied. If one is occupied the cost
+    /// is set to HUGE_VAL, otherwise use the straight line distance.
+    /// \param s the current node being expanded
+    /// \param sp the neighbor node being evaluated
+    /// \returns the cost to traverse from sp to s
+    double edge_cost(SearchNode &s, SearchNode &sp);
+
+    /// \brief Locate a node in the open list or standby
+    /// \param u_id the id of a node to find
+    /// \returns a pointer to the node
+    SearchNode* locate_node(int u_id);
+
+    /// \brief Get a reference to the goal node
+    /// \returns goal key
+    Key get_goal_key();
+
+    /// \brief Check the local consistency of a node
+    /// \returns true if the goal is locally consistent, otherwise false
+    bool goal_is_consistent();
+
+    /// \brief Determine if a node is locally is consistent
+    /// \param u a node to evaluate
+    /// \returns True if the node is locally consistent
+    bool is_consistent(SearchNode u) const;
   };
-
 }
 
 #endif //HSEARCH_INCLUDE_GUARD_HPP

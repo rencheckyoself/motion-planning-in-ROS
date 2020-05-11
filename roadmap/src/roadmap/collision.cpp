@@ -163,6 +163,8 @@ namespace collision
     polygon.push_back(polygon.at(0)); // add the first vertex to the end of the list
     bool collides = true;
 
+    bool intsec_test = true;
+
     double t_e = 0.0, t_l = 1.0;
 
     // Loop through each line segment
@@ -187,14 +189,23 @@ namespace collision
       double num = - n.dot(p0_vi);
       double den = n.dot(s);
 
-      if(den == 0) continue; // Test for paralellism between the edge and obstacle line segment
+      if(den == 0)  // Test for paralellism between the edge and obstacle line segment
+      {
+        // Shift the s vector slightly to break parallelism
+        s += rigid2d::Vector2D(line_end.x/1000.0, line_end.y/1000.0);
+        den = n.dot(s);
+      }
 
       double t = num/den;
 
       if(den < 0) {t_e = std::max(t_e, t);} // segment is potentially entering the polygon
       else {t_l = std::min(t_l, t);} // segment is potentially leaving the polygon
 
-      if(t_l < t_e) collides = false; // means the edge cannot intersect the polygon
+      if(t_l < t_e && intsec_test) // means the edge cannot intersect a convex polygon
+      {
+        collides = false;
+        intsec_test = false;
+      }
 
       // check the line enters the buffer radius
       if(point_to_line_distance(line_start, line_end, a, buffer_radius))
@@ -203,6 +214,7 @@ namespace collision
         break;
       }
     }
+
     return collides;
   }
 } // end collision

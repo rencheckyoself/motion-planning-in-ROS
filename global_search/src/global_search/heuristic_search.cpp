@@ -17,6 +17,18 @@
 namespace hsearch
 {
 
+  bool Key::operator<(const Key &rhs) const
+  {
+    if(k1 == rhs.k1) return k2 < rhs.k2;
+    else return k1 < rhs.k1;
+  }
+
+  bool Key::operator>(const Key &rhs) const
+  {
+    if(k1 == rhs.k1) return k2 > rhs.k2;
+    else return k1 > rhs.k1;
+  }
+
   SearchNode::SearchNode(const prm::Node & n)
   {
     node_p = std::make_shared<prm::Node>(n);
@@ -41,9 +53,18 @@ namespace hsearch
     else return key_val.k1 < rhs.key_val.k1;
   }
 
+  std::ostream & operator<<(std::ostream & os, const Key & k)
+  {
+    os << "Key: " << k.k1 << ", " << k.k2 << std::endl;
+    return os;
+  }
+
   std::ostream & operator<<(std::ostream & os, const SearchNode & n)
   {
-    os << "Node ID: " << n.node_p->id << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
+
+    if(n.parent_p != nullptr) os << "Node ID: " << n.node_p->id << "\n\tPoint" << n.node_p->point << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
+    else os << "Node ID: " << n.node_p->id << "\n\tPoint" << n.node_p->point << "\n\t" << "Cur Cost: " << n.key_val.k1 <<  std::endl;
+
     return os;
   }
 
@@ -54,15 +75,14 @@ namespace hsearch
     created_graph_p = node_list;
   }
 
-  HSearch::HSearch(std::vector<prm::Node>* node_list, grid::Map map)
-  {
-    created_graph_p = node_list;
-    known_map = map;
-  }
+  // HSearch::HSearch(std::vector<prm::Node>* node_list, grid::Map map)
+  // {
+  //   created_graph_p = node_list;
+  //   known_map = map;
+  // }
 
   bool HSearch::ComputeShortestPath(const prm::Node & s_start, const prm::Node & s_goal)
   {
-
     goal_loc = s_goal.point;
 
     // Initialize the start node
@@ -141,20 +161,27 @@ namespace hsearch
 
           if (neighbor.state == New) // add node to the heap
           {
+            if (neighbor.node_p->point == goal_loc)
+            {
+                std::cout << neighbor;
+            }
             neighbor.state = Open;
             open_list.push_back(neighbor);
           }
           else // update the node already in the heap
           {
+            if (neighbor.node_p->point == goal_loc)
+            {
+                std::cout << neighbor;
+            }
+
             open_list.at(std::distance(open_list.begin(),result)) = neighbor;
           }
-
           // std::cout << neighbor;
-
-          // Update the heap order
-          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
         }
       }
+      // Update the heap order
+      push_heap(open_list.begin(), open_list.end(), std::greater<>{});
     }
     return false;
   }
@@ -234,8 +261,9 @@ namespace hsearch
 
   // =========================== Theta* ========================================
 
-  ThetaStar::ThetaStar(std::vector<prm::Node> * node_list, grid::Map map, double buffer) : HSearch(node_list, map)
+  ThetaStar::ThetaStar(std::vector<prm::Node> * node_list, grid::Map map, double buffer) : HSearch(node_list)
   {
+    known_map = map;
     buffer_radius = buffer;
   }
 
@@ -251,13 +279,13 @@ namespace hsearch
       for(auto obstacle : known_map.obstacles)
       {
         collision = collision::line_shape_intersection(s.parent_p->point, sp.node_p->point, obstacle, buffer_radius);
-
         if(collision) break;
       }
     }
 
     if(!collision) // there is line of sight, so evaluate path 2
     {
+
       // find the parent node
       auto par_id = s.parent_p->id;
       auto result = std::find_if(closed_list.begin(), closed_list.end(), [par_id](SearchNode n) {return n.node_p->id == par_id;});
@@ -298,33 +326,212 @@ namespace hsearch
 
   }
 
-  // =========================== IterSearch ====================================
+  // =========================== LPA* ==========================================
 
-  IterSearch::IterSearch(grid::Grid &grid_world, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc) : HSearch()
+  LPAStar::LPAStar(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc) : HSearch()
   {
+    // populate class attributes
+    this->goal_loc = base_grid->grid_to_world(goal_loc);
+    created_graph_p = grid_graph;
+    known_grid_p = base_grid;
+
     // Use the provided grid_world to create a graph of the cell centers and initialize a grid of SearchNodes
-
     // Loop through each cell in the grid and create an unordered map of SearchNodes.
-
-    auto grid_dims = grid_world.get_grid_dimensions();
-
-    grid_world.generate_centers_graph();
-
-    auto grid_graph = grid_world.get_nodes();
-
-    std::cout << "Graph Dims " << grid_graph.size() << grid_graph.at(0).size() << "\n";
-    std::cout << "Grid Dims " << grid_dims.at(1) << grid_dims.at(0) << "\n";
+    auto grid_dims = base_grid->get_grid_dimensions();
 
     for(int i = 0 ; i < grid_dims.at(1); i++) // integer y-coord
     {
       for(int j = 0 ; j < grid_dims.at(0); j++) //integer x-coord
       {
-        SearchNode s(grid_graph.at(i).at(j));
+        SearchNode s(grid_graph->at(i).at(j));
         s.search_id = s.node_p->id;
+        s.h_val = h(s);
         standby.insert({s.search_id, s});
       }
     }
-  
 
+    // Get start Node ID
+    start_id = grid_graph->at(start_loc.y).at(start_loc.x).id;
+
+    // Get goal Node ID
+    goal_id = grid_graph->at(goal_loc.y).at(goal_loc.x).id;
+
+    // Get the start node from the standby list
+    start = standby.at(start_id);
+    standby.erase(start_id);
+
+    start.rhs_val = 0;
+    start.CalcKey();
+    start.state = Open;
+
+    // Add start node to the open list
+    open_list.push_back(start);
+    std::make_heap(open_list.begin(), open_list.end(), std::greater<>{});
   }
+
+  bool LPAStar::ComputeShortestPath()
+  {
+    bool result = false;
+
+    expanded_nodes.clear();
+
+    while(open_list.size() != 0)
+    {
+
+      // Get the node at the top of the open list
+      std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
+      auto cur_s = open_list.back();
+      open_list.pop_back();
+
+      // Put the node back on standby
+      cur_s.state = Closed;
+      standby.insert({cur_s.search_id, cur_s});
+
+      // Check the exit condition
+      if(cur_s.key_val > get_goal_key() && goal_is_consistent())
+      {
+        assemble_path();
+        result = true;
+        break;
+      }
+
+      expanded_nodes.push_back(cur_s.node_p->point);
+
+      if(cur_s.g_val > cur_s.rhs_val)
+      {
+        cur_s.g_val = cur_s.rhs_val;
+
+        // loop through neighbors
+        for(const auto & sp_id : cur_s.node_p->id_set)
+        {
+          UpdateVertex(sp_id);
+        }
+      }
+      else
+      {
+        cur_s.g_val = HUGE_VAL;
+
+        // loop through neighbors and self
+        for(const auto & sp_id : cur_s.node_p->id_set)
+        {
+          UpdateVertex(sp_id);
+        }
+
+        UpdateVertex(cur_s.search_id);
+      }
+
+      // Update the open list
+      push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+
+    }
+    return result;
+  }
+
+  void LPAStar::UpdateVertex(int u_id)
+  {
+    // First get a pointer to the node in one of the lists
+    auto u = locate_node(u_id);
+
+    // Scan the predecessors of u and set the min cost to the rhs val
+    if(u_id != start_id)
+    {
+      for(const auto sp_id : u->node_p->id_set)
+      {
+        auto sp = locate_node(sp_id);
+
+        ComputeCost(*sp, *u);
+      }
+
+      u->h_val = h(*u);
+      u->CalcKey();
+    }
+
+
+    // Check for consistency,
+    if(is_consistent(*u))
+    {
+      // make sure the node is not on the open list, if it is remove it and place it in standby
+      auto it_vec = std::find_if(open_list.begin(), open_list.end(), [u_id](SearchNode n) {return n.search_id == u_id;});
+      if(it_vec != open_list.end())
+      {
+        u->state = Closed;
+        standby.insert({u->search_id, *u});
+        open_list.erase(it_vec); // this line deletes the node the pointer u, is pointing to. u is now no longer useable after this line
+      }
+    }
+    else // the node is not consistent, and should be placed on the open list, if not already there
+    {
+      auto it_map = standby.find(u_id);
+      if(it_map != standby.end())
+      {
+        u->state = Open;
+        open_list.push_back(*u);
+        standby.erase(u->search_id); // this line deletes the node the pointer u, is pointing to. u is now no longer useable after this line
+      }
+    }
+  }
+
+  void LPAStar::ComputeCost(SearchNode &sp, SearchNode &u)
+  {
+
+    double buf = sp.g_val + edge_cost(sp, u);
+
+    std::cout << "edge cost: " << edge_cost(sp, u) << "\n";
+
+    if(buf < u.rhs_val) u.rhs_val = buf;
+  }
+
+  double LPAStar::edge_cost(SearchNode &sp, SearchNode &u)
+  {
+
+    // convert the world coords stored in each node to grid coords
+
+    auto sp_grid_pt = known_grid_p->world_to_grid(sp.node_p->point);
+    auto u_grid_pt = known_grid_p->world_to_grid(u.node_p->point);
+
+    // retrieve the occupancy data
+
+    auto sp_occ = known_grid_p->get_grid().at(sp_grid_pt.y).at(sp_grid_pt.x);
+    auto u_occ = known_grid_p->get_grid().at(u_grid_pt.y).at(u_grid_pt.x);
+
+    // caculate the cost
+    if(sp_occ == 0 && u_occ == 0)   return sp.node_p->point.distance(u.node_p->point);
+    else return HUGE_VAL;
+  }
+
+  bool LPAStar::goal_is_consistent()
+  {
+    return is_consistent( *locate_node(goal_id) );
+  }
+
+  bool LPAStar::is_consistent(SearchNode u) const
+  {
+    return u.g_val == u.rhs_val;
+  }
+
+  SearchNode* LPAStar::locate_node(int u_id)
+  {
+    auto it_map = standby.find(u_id);
+
+    if(it_map == standby.end())
+    {
+      auto it_vec = std::find_if(open_list.begin(), open_list.end(), [u_id](SearchNode n) {return n.search_id == u_id;});
+      return &(*it_vec);
+    }
+    else
+    {
+      return &(it_map->second);
+    }
+  }
+
+  Key LPAStar::get_goal_key()
+  {
+    SearchNode* g = locate_node(goal_id);
+
+    g->h_val = h(*g);
+    g->CalcKey();
+
+    return g->key_val;
+  }
+
 }

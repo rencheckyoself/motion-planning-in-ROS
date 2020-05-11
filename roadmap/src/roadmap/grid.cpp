@@ -263,10 +263,18 @@ namespace grid
   rigid2d::Vector2D Grid::grid_to_world(rigid2d::Vector2D grid_coord)
   {
     double ratio = cell_size/ static_cast<double>(grid_res);
+    double shift = 0.5;
 
-    double shift = 0.5 * ratio;
+    return rigid2d::Vector2D((grid_coord.x + shift) * ratio, (grid_coord.y + shift) * ratio);
+  }
 
-    return rigid2d::Vector2D(grid_coord.x * ratio + shift, grid_coord.y * ratio + shift);
+  rigid2d::Vector2D Grid::world_to_grid(rigid2d::Vector2D world_coord)
+  {
+    double ratio = cell_size/ static_cast<double>(grid_res);
+
+    double shift = 0.5;
+
+    return rigid2d::Vector2D((world_coord.x/ratio) - shift, (world_coord.y/ratio) - shift);
   }
 
   // Private Functions =========================================================

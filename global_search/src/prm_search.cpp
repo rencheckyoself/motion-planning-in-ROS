@@ -134,11 +134,11 @@ int main(int argc, char** argv)
 
   // conduct A* search
   bool search_result_astar = a_star_search.ComputeShortestPath(start_node, goal_node);
-  ROS_INFO_STREAM("PRMSRCH: Search Complete!\n");
+  ROS_INFO_STREAM("PRMSRCH: A* Search Complete!\n");
 
   // conduct Theta* search
   bool search_result_tstar = t_star_search.ComputeShortestPath(start_node, goal_node);
-  ROS_INFO_STREAM("PRMSRCH: Search Complete!\n");
+  ROS_INFO_STREAM("PRMSRCH: Theta* Search Complete!\n");
 
   // Check for failure
   if(!search_result_astar)
