@@ -125,6 +125,10 @@ namespace hsearch
     /// \returns the final path determined by the search
     std::vector<rigid2d::Vector2D> get_path();
 
+    /// \brief Get all of the nodes expanded during the search
+    /// \returns a vector of points that were expanded
+    std::vector<rigid2d::Vector2D> get_expanded_nodes();
+
   protected:
     std::vector<prm::Node>* created_graph_p; ///< pointer to a vector of created nodes
 
@@ -132,6 +136,8 @@ namespace hsearch
     std::vector<SearchNode> closed_list; ///< the closed list for the current search
 
     std::vector<rigid2d::Vector2D> final_path; ///<assemble the final path based on the goal node
+
+    std::vector<rigid2d::Vector2D> expanded_nodes; ///< a list of points that were expanded (popped off the open list) during the most recent search
 
     SearchNode start; ///< the start node for the current search
     rigid2d::Vector2D goal_loc; ///< the goal node for the current search
@@ -232,8 +238,6 @@ namespace hsearch
 
     int start_id; ///< ID of the SearchNode conttaining the start of the search
     int goal_id; ///< ID of the SearchNode conttaining the goal of the search
-
-    std::vector<rigid2d::Vector2D> expanded_nodes; ///< a list of points that were expanded (popped off the open list) during the most recent search
 
     /// \brief build the final path based on all of the saved pointers
     /// \param goal the goal SearchNode

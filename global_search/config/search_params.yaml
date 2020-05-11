@@ -2,9 +2,13 @@
 # start: [3,3]
 # goal: [3,7]
 
+# # Test
+# start: [3, 3]
+# goal: [3, 4]
+
 # # Easy
 start: [7, 3]
-goal: [7, 26]
+goal: [7, 15]
 
 # # Moderate
 # start: [20, 45]

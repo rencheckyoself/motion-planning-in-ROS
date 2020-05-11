@@ -62,7 +62,7 @@ namespace hsearch
   std::ostream & operator<<(std::ostream & os, const SearchNode & n)
   {
 
-    if(n.parent_p != nullptr) os << "Node ID: " << n.node_p->id << "\n\tPoint: " << n.node_p->point.x << ", " << n.node_p->point.y << "\n\t" << "Cur Cost: " << n.key_val.k1 << "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
+    if(n.parent_p != nullptr) os << "Node ID: " << n.node_p->id << "\n\tPoint: " << n.node_p->point.x << ", " << n.node_p->point.y << "\n\t" << "G Val: " << n.g_val << "\n\t" << "RHS Val: " << n.rhs_val <<  "\n\t" << "Parent ID: " << n.parent_p->id << std::endl;
     else os << "Node ID: " << n.node_p->id << "\n\tPoint: " << n.node_p->point.x << ", " << n.node_p->point.y << "\n\t" << "G Val: " << n.g_val << "\n\t" << "RHS Val: " << n.rhs_val << std::endl;
 
     return os;
@@ -164,9 +164,9 @@ namespace hsearch
           }
           // std::cout << neighbor;
         }
+        // Update the heap order
+        push_heap(open_list.begin(), open_list.end(), std::greater<>{});
       }
-      // Update the heap order
-      push_heap(open_list.begin(), open_list.end(), std::greater<>{});
     }
     return false;
   }
@@ -204,6 +204,11 @@ namespace hsearch
   std::vector<rigid2d::Vector2D> HSearch::get_path()
   {
     return final_path;
+  }
+
+  std::vector<rigid2d::Vector2D> HSearch::get_expanded_nodes()
+  {
+    return expanded_nodes;
   }
 
   std::vector<double> HSearch::f(SearchNode s, SearchNode sp)
@@ -361,6 +366,7 @@ namespace hsearch
     expanded_nodes.clear();
 
     std::cout << "Start ID: " << start_id << "\n";
+    std::cout << "Goal ID: " << goal_id << "\n";
 
     while(open_list.size() != 0)
     {
@@ -374,10 +380,21 @@ namespace hsearch
       cur_s.state = Closed;
       standby.insert({cur_s.search_id, cur_s});
 
+      bool cond1 = cur_s.key_val > get_goal_key();
+      bool cond2 = goal_is_consistent();
+
+
+      std::cout << "Open List Size: " << open_list.size() << "\n";
+
+      // std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
+      //
+      // std::cout << "K Condition:\t" << cond1 << std::endl;
+      // std::cout << "G Condition:\t" << cond2 << std::endl;
       // Check the exit condition
-      if(cur_s.key_val > get_goal_key() && goal_is_consistent())
+      if(cond1 && cond2)
       {
-        assemble_path(cur_s);
+        auto g_fin = locate_node(goal_id);
+        assemble_path(*g_fin);
         result = true;
         break;
       }
@@ -386,20 +403,18 @@ namespace hsearch
 
       if(cur_s.g_val > cur_s.rhs_val)
       {
-        cur_s.g_val = cur_s.rhs_val;
-        standby.at(cur_s.search_id) = cur_s;
+        standby.at(cur_s.search_id).g_val = standby.at(cur_s.search_id).rhs_val;
 
         // loop through neighbors
         for(const auto & sp_id : cur_s.node_p->id_set)
         {
-          // std::cout << "Evaluating Node ID: " << sp_id << "\n";
           UpdateVertex(sp_id);
+          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
         }
       }
       else
       {
-        cur_s.g_val = HUGE_VAL;
-        standby.at(cur_s.search_id) = cur_s;
+        standby.at(cur_s.search_id).g_val = HUGE_VAL;
 
         // loop through neighbors and self
         for(const auto & sp_id : cur_s.node_p->id_set)
@@ -409,10 +424,6 @@ namespace hsearch
 
         UpdateVertex(cur_s.search_id);
       }
-
-      // Update the open list
-      push_heap(open_list.begin(), open_list.end(), std::greater<>{});
-
     }
     return result;
   }
@@ -423,10 +434,22 @@ namespace hsearch
     final_path.push_back(goal.node_p->point);
 
     auto cur_node = goal;
+    std::cout << "Assemble Path =========================================\n";
 
     // follow the parent points back to the starting node and store each location
+    // Select the neighbor node with the minimum cost
     while (cur_node.parent_p != nullptr)
     {
+      // std::cout << "Scanning neighbors =========================================\n";
+      // std::cout << cur_node;
+      for(const auto n_id : cur_node.node_p->id_set)
+      {
+        auto neighbor = *locate_node(n_id);
+        ComputeCost(neighbor, cur_node);
+      }
+
+      // std::cout << cur_node;
+
       final_path.push_back(cur_node.parent_p->point);
 
       auto next_id = cur_node.parent_p->id;
@@ -440,12 +463,16 @@ namespace hsearch
     // First get a pointer to the node in one of the lists
     auto u = locate_node(u_id);
 
+    // std::cout << "Evaluating Node " << u_id << "================= \n";
+    // std::cout << *u;
+    // std::cout << "Old Key: " << u->key_val;
+
     // Scan the predecessors of u and set the min cost to the rhs val
     if(u_id != start_id)
     {
       for(const auto sp_id : u->node_p->id_set)
       {
-        // std::cout << "\tLooking at Neighbor " << sp_id << "\n";
+        // std::cout << "\n\tLooking at Neighbor" << sp_id << "...";
         auto sp = locate_node(sp_id);
 
         ComputeCost(*sp, *u);
@@ -455,8 +482,9 @@ namespace hsearch
       u->CalcKey();
     }
 
+    // std::cout << "\nAfter Update: \n";
     // std::cout << *u;
-    // std::cout << "Consistency: "<< is_consistent(*u) << "\n";
+    // std::cout << "New Key: " << u->key_val;
 
     // Check for consistency,
     if(is_consistent(*u))
@@ -486,10 +514,9 @@ namespace hsearch
   {
     double buf = sp.g_val + edge_cost(sp, u);
 
-
-
     if(buf < u.rhs_val)
     {
+      std::cout << "Updated RHS";
       u.rhs_val = buf;
       u.parent_p = sp.node_p;
     }

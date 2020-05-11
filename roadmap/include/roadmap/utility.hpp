@@ -50,6 +50,13 @@ namespace utility
   /// \returns a marker to add to the MarkerArray
   visualization_msgs::Marker make_marker(prm::Node node, double scale, std::vector<double> color);
 
+  /// \brief Create a Points Marker based on a list of x,y coordinates
+  /// \param point_list a list of points to vizualize
+  /// \param scale the amount to scale the preset marker size (should be graph cell size)
+  /// \param color the r,g,b color values in a vector
+  /// \returns a marker to add to the MarkerArray
+  visualization_msgs::Marker make_marker(std::vector<rigid2d::Vector2D> point_list, double scale, std::vector<double> color);
+
   /// \brief Create a line Marker based on an edge struct
   /// \param edge an edge struct to vizualize
   /// \param scale the amount to scale the preset marker size (should be graph cell size)

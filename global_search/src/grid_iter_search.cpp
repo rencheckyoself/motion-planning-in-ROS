@@ -83,17 +83,20 @@ int main(int argc, char** argv)
   // Initialize Grid that represents the fully known map
   grid::Grid grid_world(polygons, map_x_lims, map_y_lims);
   grid_world.build_grid(cell_size, grid_res, robot_radius);
+  grid_world.generate_centers_graph();
 
+  auto grid_graph = grid_world.get_nodes();
+  auto grid_graph_flat = grid_world.get_nodes_flatten();
+  auto grid_dims = grid_world.get_grid_dimensions();
 
   // Initialize an empty grid of free cells
   grid::Grid free_grid(map_x_lims, map_y_lims);
   free_grid.build_grid(cell_size, grid_res, robot_radius);
   free_grid.generate_centers_graph();
 
-  auto grid_graph = free_grid.get_nodes();
-  auto grid_graph_flat = free_grid.get_nodes_flatten();
-
-  auto grid_dims = free_grid.get_grid_dimensions();
+  // auto grid_graph = free_grid.get_nodes();
+  // auto grid_graph_flat = free_grid.get_nodes_flatten();
+  // auto grid_dims = free_grid.get_grid_dimensions();
 
   // convert start/goal to vector2D
   rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
@@ -121,7 +124,7 @@ int main(int argc, char** argv)
   }
 
   // Initialize the search on the empty map
-  hsearch::LPAStar lpa_search(&grid_graph, &free_grid, start_pt, goal_pt);
+  hsearch::LPAStar lpa_search(&grid_graph, &grid_world, start_pt, goal_pt);
 
   // Do an intial pass at the plan
   bool lpa_res = lpa_search.ComputeShortestPath();
@@ -135,9 +138,12 @@ int main(int argc, char** argv)
 
 
   // Retrieve the path
-  std::vector<rigid2d::Vector2D> a_path = lpa_search.get_path();
+  std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
 
-  ROS_INFO_STREAM("GDSRCH: LPA* Path has " << a_path.size() << " nodes.");
+  // get analysis info
+  auto lpa_expands = lpa_search.get_expanded_nodes();
+
+  ROS_INFO_STREAM("GDSRCH: LPA* Path has " << lpa_path.size() << " nodes.");
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
@@ -150,10 +156,13 @@ int main(int argc, char** argv)
   markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0}))); // goal
 
   // Draw LPA* path
-  for(auto it = a_path.begin(); it < a_path.end()-1; it++)
+  for(auto it = lpa_path.begin(); it < lpa_path.end()-1; it++)
   {
-    markers.push_back(utility::make_marker(*it, *(it+1), it-a_path.begin(), cell_size, std::vector<double>({0, 0, 0})));
+    markers.push_back(utility::make_marker(*it, *(it+1), it-lpa_path.begin(), cell_size, std::vector<double>({0, 0, 0})));
   }
+
+  // Draw Expanded Nodes
+  markers.push_back(utility::make_marker(lpa_expands, cell_size, std::vector<double>({0, 0, 1})));
 
   auto occ_msg = utility::make_grid_msg(&grid_world, cell_size, grid_res);
   pub_map.publish(occ_msg);

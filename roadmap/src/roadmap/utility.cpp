@@ -99,6 +99,50 @@ namespace utility
     return occ_msg;
   }
 
+  visualization_msgs::Marker make_marker(std::vector<rigid2d::Vector2D> point_list, double scale, std::vector<double> color)
+  {
+    visualization_msgs::Marker marker;
+
+    std::vector<geometry_msgs::Point> geo_points;
+
+    // Convert the points
+    for(const auto p : point_list)
+    {
+      geo_points.push_back(Vec2D_to_GeoPt(p));
+    }
+
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time::now();
+
+    marker.ns = "Expanded Nodes";
+    marker.id = 0;
+
+    marker.type = visualization_msgs::Marker::POINTS;
+    marker.action = visualization_msgs::Marker::ADD;
+
+    marker.pose.position.x = 0;
+    marker.pose.position.y = 0;
+    marker.pose.position.z = 0;
+    marker.pose.orientation.x = 0;
+    marker.pose.orientation.y = 0;
+    marker.pose.orientation.z = 0;
+    marker.pose.orientation.w = 1;
+
+    marker.points = geo_points;
+
+    marker.scale.x = 0.3 * scale;
+    marker.scale.y = 0.3 * scale;
+
+    marker.color.r = color.at(0);
+    marker.color.g = color.at(1);
+    marker.color.b = color.at(2);
+    marker.color.a = 1.0;
+
+    marker.lifetime = ros::Duration();
+
+    return marker;
+  }
+
   visualization_msgs::Marker make_marker(prm::Node node, double scale, std::vector<double> color)
   {
     visualization_msgs::Marker marker;
