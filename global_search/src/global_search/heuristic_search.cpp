@@ -383,8 +383,37 @@ namespace hsearch
       bool cond1 = cur_s.key_val > get_goal_key();
       bool cond2 = goal_is_consistent();
 
+      // cur_s = *locate_node(1415);
+      //
+      // std::vector<std::vector<signed char>> grid_buf = known_grid_p->get_grid();
+      //
+      // rigid2d::Vector2D sp_grid_pt = known_grid_p->world_to_grid(cur_s.node_p->point);
+      //
+      // signed char sp_occ = grid_buf.at(std::ceil(sp_grid_pt.y)).at(std::ceil(sp_grid_pt.x));
+      // std::cout << "\tPoint: " << sp_grid_pt.x << ", " << sp_grid_pt.y;
+      // std::cout << "\tTest: " << int(sp_occ) << std::endl;
+      //
+      // unsigned int xbuf = static_cast<unsigned int>(sp_grid_pt.x);
+      // unsigned int ybuf = static_cast<unsigned int>(sp_grid_pt.y);
+      //
+      // sp_occ = grid_buf.at(ybuf).at(xbuf);
+      // std::cout << "\tPoint: " << xbuf << ", " << ybuf;
+      // std::cout << "\tTest: " << int(sp_occ) << std::endl;
+      //
+      // if (xbuf == 21 && ybuf == 41)
+      // {
+      //   signed char test_occ = grid_buf.at(41).at(21);
+      //   std::cout << "\tTest Compare: " << int(test_occ) << std::endl;
+      //   std::cout << "\t" << cur_s.node_p->point;
+      // }
+      //
+      // if(sp_occ != 0)
+      // {
+      //   std::cout << cur_s;
+      //   std::cout << cur_s.key_val;
+      // }
 
-      std::cout << "Open List Size: " << open_list.size() << "\n";
+      // std::cout << "Open List Size: " << open_list.size() << "\n";
 
       // std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
       //
@@ -516,7 +545,7 @@ namespace hsearch
 
     if(buf < u.rhs_val)
     {
-      std::cout << "Updated RHS";
+      // std::cout << "Updated RHS";
       u.rhs_val = buf;
       u.parent_p = sp.node_p;
     }
@@ -530,10 +559,13 @@ namespace hsearch
     auto sp_grid_pt = known_grid_p->world_to_grid(sp.node_p->point);
     auto u_grid_pt = known_grid_p->world_to_grid(u.node_p->point);
 
+
     // retrieve the occupancy data
 
     auto sp_occ = known_grid_p->get_grid().at(sp_grid_pt.y).at(sp_grid_pt.x);
     auto u_occ = known_grid_p->get_grid().at(u_grid_pt.y).at(u_grid_pt.x);
+
+    // std::cout << "Edge from " << sp_grid_pt.x << ", " << sp_grid_pt.y << " to "  << u_grid_pt.x << ", " << u_grid_pt.y << ": " << int(sp_occ) << ", " << int(u_occ) << std::endl;
 
     // caculate the cost
     if(sp_occ == 0 && u_occ == 0)   return sp.node_p->point.distance(u.node_p->point);

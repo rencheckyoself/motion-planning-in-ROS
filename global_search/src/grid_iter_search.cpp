@@ -162,6 +162,11 @@ int main(int argc, char** argv)
   }
 
   // Draw Expanded Nodes
+
+  lpa_expands.clear();
+  lpa_expands.push_back(rigid2d::Vector2D(21.0,41.0));
+  lpa_expands.push_back(rigid2d::Vector2D(20.0,41.0));
+
   markers.push_back(utility::make_marker(lpa_expands, cell_size, std::vector<double>({0, 0, 1})));
 
   auto occ_msg = utility::make_grid_msg(&grid_world, cell_size, grid_res);

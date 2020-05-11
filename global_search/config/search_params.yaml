@@ -7,12 +7,12 @@
 # goal: [3, 4]
 
 # # Easy
-start: [7, 3]
-goal: [7, 15]
+# start: [7, 3]
+# goal: [7, 26]
 
 # # Moderate
-# start: [20, 45]
-# goal: [31,43]
+start: [20,45]
+goal: [31,43]
 
 # # Hard
 # start: [3, 3]
