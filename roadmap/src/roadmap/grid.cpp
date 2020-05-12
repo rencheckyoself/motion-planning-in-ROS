@@ -274,7 +274,7 @@ namespace grid
 
     double shift = 0.5;
 
-    return rigid2d::Vector2D(std::ceil((world_coord.x/ratio) - shift), std::ceil((world_coord.y/ratio) - shift));
+    return rigid2d::Vector2D(std::round((world_coord.x/ratio) - shift), std::round((world_coord.y/ratio) - shift));
   }
 
   // Private Functions =========================================================

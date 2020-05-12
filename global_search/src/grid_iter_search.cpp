@@ -32,8 +32,11 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "grid_iter_search");
   ros::NodeHandle n;
 
-  ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 1, true);
-  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1, true);
+  ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 1);
+  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1);
+
+  std::vector<visualization_msgs::Marker> markers;
+  visualization_msgs::MarkerArray pub_marks;
 
   std::vector<double> map_x_lims, map_y_lims;
   std::vector<double> start, goal;
@@ -85,18 +88,13 @@ int main(int argc, char** argv)
   grid_world.build_grid(cell_size, grid_res, robot_radius);
   grid_world.generate_centers_graph();
 
-  auto grid_graph = grid_world.get_nodes();
-  auto grid_graph_flat = grid_world.get_nodes_flatten();
-  auto grid_dims = grid_world.get_grid_dimensions();
-
   // Initialize an empty grid of free cells
   grid::Grid free_grid(map_x_lims, map_y_lims);
   free_grid.build_grid(cell_size, grid_res, robot_radius);
   free_grid.generate_centers_graph();
 
-  // auto grid_graph = free_grid.get_nodes();
-  // auto grid_graph_flat = free_grid.get_nodes_flatten();
-  // auto grid_dims = free_grid.get_grid_dimensions();
+  auto grid_graph = free_grid.get_nodes();
+  auto grid_dims = free_grid.get_grid_dimensions();
 
   // convert start/goal to vector2D
   rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
@@ -126,54 +124,85 @@ int main(int argc, char** argv)
   // Initialize the search on the empty map
   hsearch::LPAStar lpa_search(&grid_graph, &grid_world, start_pt, goal_pt);
 
-  // Do an intial pass at the plan
-  bool lpa_res = lpa_search.ComputeShortestPath();
-  ROS_INFO_STREAM("GDSRCH: Search Complete!\n");
-
-  // Check for failure
-  if(!lpa_res)
-  {
-    ROS_FATAL_STREAM("GDSRCH: LPA* Search failed to find a path for the current map configuration.\n");
-  }
-
-
-  // Retrieve the path
-  std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
-
-  // get analysis info
-  auto lpa_expands = lpa_search.get_expanded_nodes();
-
-  ROS_INFO_STREAM("GDSRCH: LPA* Path has " << lpa_path.size() << " nodes.");
-
-  std::vector<visualization_msgs::Marker> markers;
-  visualization_msgs::MarkerArray pub_marks;
+  // Buffer variables to save all the markers to detele/update
+  std::vector<visualization_msgs::Marker> path_markers;
+  visualization_msgs::Marker exp_nodes;
 
   auto start_node = free_grid.get_nodes().at(start_pt.y).at(start_pt.x);
   auto goal_node = free_grid.get_nodes().at(goal_pt.y).at(goal_pt.x);
 
-  // Draw Start and Goal
-  markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0}))); // start
-  markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0}))); // goal
+  ros::Rate frames(0.1);
 
-  // Draw LPA* path
-  for(auto it = lpa_path.begin(); it < lpa_path.end()-1; it++)
+  bool new_info = true;
+
+  // Start loop
+  for(int i = 0; i < grid_dims.at(1); i += 2)
   {
-    markers.push_back(utility::make_marker(*it, *(it+1), it-lpa_path.begin(), cell_size, std::vector<double>({0, 0, 0})));
+    ros::spinOnce();
+
+    if(new_info)
+    {
+      // Plan path
+      bool lpa_res = lpa_search.ComputeShortestPath();
+      ROS_INFO_STREAM("GDSRCH: Search Complete!\n");
+
+      // Check for failure
+      if(!lpa_res)
+      {
+        ROS_FATAL_STREAM("GDSRCH: LPA* Search failed to find a path for the current map configuration.\n");
+      }
+    }
+
+    // retrieve results
+    std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
+    auto lpa_expands = lpa_search.get_expanded_nodes();
+
+    // VIZUALIZE THE RESULTS
+
+    // Draw Start and Goal
+    markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0})));
+    markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0})));
+
+    // Draw LPA* path
+    for(auto it = lpa_path.begin(); it < lpa_path.end()-1; it++)
+    {
+      visualization_msgs::Marker buf = utility::make_marker(*it, *(it+1), it-lpa_path.begin(), cell_size, std::vector<double>({0, 0, 0}));
+      path_markers.push_back(buf);
+      markers.push_back(buf);
+    }
+
+    // Draw Expanded Nodes
+    exp_nodes = utility::make_marker(lpa_expands, cell_size, colors.at(2));
+    markers.push_back(exp_nodes);
+
+
+    pub_marks.markers = markers;
+    pub_markers.publish(pub_marks);
+
+    // Draw the Occ Grid
+    auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
+    pub_map.publish(occ_msg);
+
+    // sleep til next loop
+    frames.sleep();
+
+    // Check for map updates -- Update LPA* two grid rows at a time.
+
+    // If changed:
+    // Update the map pass to search with the changes
+    // Update all of the effected verticies
+    // vizualize new map
+    // clear exist path and expanded vizualization
+
+    // Do an intial pass at the plan
+
+    // get analysis info
+
+    markers.clear();
+    path_markers.clear();
+
   }
 
-  // Draw Expanded Nodes
 
-  lpa_expands.clear();
-  lpa_expands.push_back(rigid2d::Vector2D(21.0,41.0));
-  lpa_expands.push_back(rigid2d::Vector2D(20.0,41.0));
 
-  markers.push_back(utility::make_marker(lpa_expands, cell_size, std::vector<double>({0, 0, 1})));
-
-  auto occ_msg = utility::make_grid_msg(&grid_world, cell_size, grid_res);
-  pub_map.publish(occ_msg);
-
-  pub_marks.markers = markers;
-  pub_markers.publish(pub_marks);
-
-  ros::spin();
 }

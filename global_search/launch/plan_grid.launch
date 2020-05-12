@@ -6,9 +6,14 @@
 
   <!-- launch-prefix="gdb -''-args"   launch-prefix="gdb -ex run -''-args"-->
   <node name="grid_iter_search" pkg="global_search" type="grid_iter_search"  output="screen"/>
+
+  <node name="make_grid" pkg="roadmap" type="make_grid" output="screen">
+    <remap from="grip_map" to="knowm_grid_map"/>
+  </node>
+
   <node name="draw_world" pkg="roadmap" type="draw_world" output="screen"/>
 
   <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 map" />
 
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args=" -d $(find roadmap)/config/default.rviz"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args=" -d $(find global_search)/config/grid_plan.rviz"/>
 </launch>

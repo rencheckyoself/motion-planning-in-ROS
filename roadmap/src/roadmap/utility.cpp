@@ -130,8 +130,8 @@ namespace utility
 
     marker.points = geo_points;
 
-    marker.scale.x = 0.3 * scale;
-    marker.scale.y = 0.3 * scale;
+    marker.scale.x = 0.5 * scale;
+    marker.scale.y = 0.5 * scale;
 
     marker.color.r = color.at(0);
     marker.color.g = color.at(1);
