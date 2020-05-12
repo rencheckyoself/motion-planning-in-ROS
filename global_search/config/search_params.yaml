@@ -11,9 +11,9 @@
 # goal: [7, 26]
 
 # # Moderate
-start: [20,45]
-goal: [31,43]
+# start: [20,45]
+# goal: [31,43]
 
 # # Hard
-# start: [3, 3]
-# goal: [3, 46]
+start: [3, 3]
+goal: [3, 46]

@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <numeric>
 #include <unordered_map>
 #include <vector>
 
@@ -363,7 +364,7 @@ namespace hsearch
   {
     bool result = false;
 
-    expanded_nodes.clear();
+    // expanded_nodes.clear();
 
     std::cout << "Start ID: " << start_id << "\n";
     std::cout << "Goal ID: " << goal_id << "\n";
@@ -383,7 +384,7 @@ namespace hsearch
       bool cond1 = cur_s.key_val > get_goal_key();
       bool cond2 = goal_is_consistent();
 
-      // std::cout << "Open List Size: " << open_list.size() << "\n";
+      std::cout << "CSP: Open List Size: " << open_list.size() << "\n";
 
       // std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
       //
@@ -418,9 +419,13 @@ namespace hsearch
         for(const auto & sp_id : cur_s.node_p->id_set)
         {
           UpdateVertex(sp_id);
+          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+
         }
 
         UpdateVertex(cur_s.search_id);
+        push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+
       }
     }
     return result;
@@ -428,13 +433,47 @@ namespace hsearch
 
   bool LPAStar::MapChange(std::vector<std::pair<rigid2d::Vector2D, signed char>> points)
   {
-    bool changed = known_grid_p->update_grid(points);
+    // make the updates to the occupancy data to effect the edge cost calculation
+    auto updates_made = known_grid_p->update_grid(points);
 
-    // if(changed)
-    // {
-    //
-    // }
+    // determine if any changes were made
+    auto tot_chng = std::accumulate(updates_made.begin(), updates_made.end(), 0);
 
+    std::cout << "Sum: " << tot_chng << "====================================" << std::endl;
+
+    bool changed = false;
+
+    if(tot_chng > 0)
+    {
+      changed = true;
+
+      expanded_nodes.clear();
+
+      for(auto it = updates_made.begin(); it < updates_made.end(); it++)
+      {
+        int i = std::distance(updates_made.begin(), it);
+
+        if(*it == 1)
+        {
+          const auto point = points.at(i);
+
+          std::cout << "Updating Node " << created_graph_p->at(point.first.y).at(point.first.x).id << std::endl;
+
+          std::cout << "\tGrid Coords: " << known_grid_p->world_to_grid(created_graph_p->at(point.first.y).at(point.first.x).point) << std::endl;
+
+          // Loop through all of the neighbors of the cell and find the new best connection given the map update
+          for(const auto& v_id : created_graph_p->at(point.first.y).at(point.first.x).id_set)
+          {
+            UpdateVertex(v_id);
+            push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+          }
+
+          // expanded_nodes.clear();
+          std::cout << "MU: Open List Size: " << open_list.size() << "\n";
+          std::cout << "MU: Expd List Size: " << expanded_nodes.size() << "\n";
+        }
+      }
+    }
     return changed;
   }
 
@@ -475,9 +514,12 @@ namespace hsearch
 
     expanded_nodes.push_back(u->node_p->point);
 
-    // std::cout << "Evaluating Node " << u_id << "================= \n";
-    // std::cout << *u;
-    // std::cout << "Old Key: " << u->key_val;
+    if(u_id == 173)
+    {
+      std::cout << "Evaluating Node " << u_id << "================= \n";
+      std::cout << *u;
+      std::cout << "Old Key: " << u->key_val;
+    }
 
     // Scan the predecessors of u and set the min cost to the rhs val
     if(u_id != start_id)

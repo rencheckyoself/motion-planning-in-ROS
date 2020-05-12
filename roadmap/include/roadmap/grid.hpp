@@ -63,8 +63,8 @@ namespace grid
 
     /// \brief Update the existing occupancy data with new information - Note this does not update the stored Map variables, so calling "build_grid" will revert the occ data based on the map used to create the grid.
     /// \param points pairs of grid cell locations and new occupancy data to potentially update.
-    /// \returns True if the information in points actually caused a change in the occupancy data from free to occupied, otherwise False.
-    bool update_grid(std::vector<std::pair<rigid2d::Vector2D, signed char>> points);
+    /// \returns a vector of boolean values: True if the new point info actually caused a change in the occupancy data from free to occupied, otherwise False.
+    std::vector<int> update_grid(std::vector<std::pair<rigid2d::Vector2D, signed char>> points);
 
     /// \brief Retrive the nodes in a 2D vector in the shape of the grid
     /// \returns the nodes in a structure matching the grid

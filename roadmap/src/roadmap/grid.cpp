@@ -208,9 +208,9 @@ namespace grid
     }
   }
 
-  bool Grid::update_grid(std::vector<std::pair<rigid2d::Vector2D, signed char>> points)
+  std::vector<int> Grid::update_grid(std::vector<std::pair<rigid2d::Vector2D, signed char>> points)
   {
-    bool output = false;
+    std::vector<int> output;
 
     for (const auto & point : points)
     {
@@ -220,10 +220,13 @@ namespace grid
       {
         occ_data.at(point.first.y).at(point.first.x) = point.second;
 
-        if(cur == 0 && point.second != 0) output = true;
-        else if(cur !=0 && point.second == 0) output = true;
+        if(cur == 0 && point.second != 0) output.push_back(1);
+        else if(cur !=0 && point.second == 0) output.push_back(1);
+        else output.push_back(0);
       }
+      else output.push_back(0);
     }
+
     return output;
   }
 
