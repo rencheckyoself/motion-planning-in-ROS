@@ -32,8 +32,8 @@ int main(int argc, char** argv)
   ros::init(argc, argv, "grid_iter_search");
   ros::NodeHandle n;
 
-  ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 1);
-  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 1);
+  ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 2);
+  ros::Publisher pub_markers = n.advertise<visualization_msgs::MarkerArray>("visualization_marker_array", 2);
 
   std::vector<visualization_msgs::Marker> markers;
   visualization_msgs::MarkerArray pub_marks;
@@ -122,7 +122,7 @@ int main(int argc, char** argv)
   }
 
   // Initialize the search on the empty map
-  hsearch::LPAStar lpa_search(&grid_graph, &grid_world, start_pt, goal_pt);
+  hsearch::LPAStar lpa_search(&grid_graph, &free_grid, start_pt, goal_pt);
 
   // Buffer variables to save all the markers to detele/update
   std::vector<visualization_msgs::Marker> path_markers;
@@ -131,15 +131,19 @@ int main(int argc, char** argv)
   auto start_node = free_grid.get_nodes().at(start_pt.y).at(start_pt.x);
   auto goal_node = free_grid.get_nodes().at(goal_pt.y).at(goal_pt.x);
 
-  ros::Rate frames(0.1);
+  ros::Rate frames(1);
 
   bool new_info = true;
+  bool test = true;
+
+  auto known_occ = grid_world.get_grid();
+
+  int i = 0;
 
   // Start loop
-  for(int i = 0; i < grid_dims.at(1); i += 2)
+  while(ros::ok())
   {
-    ros::spinOnce();
-
+    std::cout << i << "\tTest: " << test << "\n";
     if(new_info)
     {
       // Plan path
@@ -152,6 +156,9 @@ int main(int argc, char** argv)
         ROS_FATAL_STREAM("GDSRCH: LPA* Search failed to find a path for the current map configuration.\n");
       }
     }
+
+    new_info = false;
+    test = false;
 
     // retrieve results
     std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
@@ -183,23 +190,45 @@ int main(int argc, char** argv)
     auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
     pub_map.publish(occ_msg);
 
+    ros::spinOnce();
+
     // sleep til next loop
     frames.sleep();
 
     // Check for map updates -- Update LPA* two grid rows at a time.
+    if(i < grid_dims.at(1))
+    {
+      std::vector<std::pair<rigid2d::Vector2D, signed char>> map_update;
 
-    // If changed:
-    // Update the map pass to search with the changes
-    // Update all of the effected verticies
-    // vizualize new map
-    // clear exist path and expanded vizualization
+      // Simulate a sensor by extracting information from the known grid 2 rows at a time
+      auto row = known_occ.at(i);
+      for(auto it = row.begin(); it < row.end(); it++)
+      {
+        int k = std::distance(row.begin(), it);
+        map_update.push_back(std::make_pair(rigid2d::Vector2D(k, i), *it));
+      }
 
-    // Do an intial pass at the plan
+      if(!map_update.empty())
+      {
+        test = lpa_search.MapChange(map_update);
+      }
 
-    // get analysis info
+      // If meaningful change was detected
+      if(test)
+      {
+        // Inform LPA where changes took place and update all of the effected verticies
+
+        // vizualize new map
+
+        // clear exist path and expanded vizualization
+
+      }
+    }
+
 
     markers.clear();
     path_markers.clear();
+    i++;
 
   }
 

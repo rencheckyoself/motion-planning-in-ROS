@@ -426,6 +426,18 @@ namespace hsearch
     return result;
   }
 
+  bool LPAStar::MapChange(std::vector<std::pair<rigid2d::Vector2D, signed char>> points)
+  {
+    bool changed = known_grid_p->update_grid(points);
+
+    // if(changed)
+    // {
+    //
+    // }
+
+    return changed;
+  }
+
   void LPAStar::assemble_path(SearchNode goal)
   {
     // add the goal to the path

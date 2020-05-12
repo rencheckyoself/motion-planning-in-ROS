@@ -208,6 +208,25 @@ namespace grid
     }
   }
 
+  bool Grid::update_grid(std::vector<std::pair<rigid2d::Vector2D, signed char>> points)
+  {
+    bool output = false;
+
+    for (const auto & point : points)
+    {
+      const auto cur = occ_data.at(point.first.y).at(point.first.x);
+
+      if(cur != point.second)
+      {
+        occ_data.at(point.first.y).at(point.first.x) = point.second;
+
+        if(cur == 0 && point.second != 0) output = true;
+        else if(cur !=0 && point.second == 0) output = true;
+      }
+    }
+    return output;
+  }
+
   std::vector<std::vector<prm::Node>> Grid::get_nodes() const
   {
     return nodes;

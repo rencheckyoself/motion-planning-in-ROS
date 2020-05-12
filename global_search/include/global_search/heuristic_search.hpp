@@ -228,6 +228,11 @@ namespace hsearch
     /// \returns True if a path was found, otherwise False
     bool ComputeShortestPath();
 
+    /// \brief Take in simulated sensor information and determine if there is a change in the map
+    /// \param points pairs of grid cell locations and new occupancy data to potentially update.
+    /// \returns True if the information in points actually caused a change in the occupancy data from free to occupied, otherwise False.
+    bool MapChange(std::vector<std::pair<rigid2d::Vector2D, signed char>> points);
+
   protected:
 
     std::vector<std::vector<prm::Node>>* created_graph_p; ///< pointer to a 2D vector of created nodes
