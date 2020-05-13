@@ -197,7 +197,7 @@ int main(int argc, char** argv)
     frames.sleep();
 
     // Check for map updates -- Update LPA* two grid rows at a time.
-    if(i == 5)//grid_dims.at(1))
+    if(i < grid_dims.at(1))
     {
       std::vector<std::pair<rigid2d::Vector2D, signed char>> map_update;
 

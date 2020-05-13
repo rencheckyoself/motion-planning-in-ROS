@@ -20,13 +20,13 @@ namespace hsearch
 
   bool Key::operator<(const Key &rhs) const
   {
-    if(k1 == rhs.k1) return k2 < rhs.k2;
+    if(rigid2d::almost_equal(k1, rhs.k1)) return k2 < rhs.k2;
     else return k1 < rhs.k1;
   }
 
   bool Key::operator>(const Key &rhs) const
   {
-    if(k1 == rhs.k1) return k2 > rhs.k2;
+    if(rigid2d::almost_equal(k1, rhs.k1)) return k2 > rhs.k2;
     else return k1 > rhs.k1;
   }
 
@@ -44,13 +44,13 @@ namespace hsearch
 
   bool SearchNode::operator>(const SearchNode &rhs) const
   {
-    if(key_val.k1 == rhs.key_val.k1) return key_val.k2 > rhs.key_val.k2;
+    if(rigid2d::almost_equal(key_val.k1, rhs.key_val.k1)) return key_val.k2 > rhs.key_val.k2;
     else return key_val.k1 > rhs.key_val.k1;
   }
 
   bool SearchNode::operator<(const SearchNode &rhs) const
   {
-    if(key_val.k1 == rhs.key_val.k1) return key_val.k2 < rhs.key_val.k2;
+    if(rigid2d::almost_equal(key_val.k1, rhs.key_val.k1)) return key_val.k2 < rhs.key_val.k2;
     else return key_val.k1 < rhs.key_val.k1;
   }
 
@@ -364,14 +364,13 @@ namespace hsearch
   {
     bool result = false;
 
-    // expanded_nodes.clear();
-
+    expanded_nodes.clear();
+    std::cout << "\n\n\n\n\n\n\n\nSTARTING NEW SEARCH =========================================== \n =============================================================== \n";
     std::cout << "Start ID: " << start_id << "\n";
     std::cout << "Goal ID: " << goal_id << "\n";
 
     while(open_list.size() != 0)
     {
-
       // Get the node at the top of the open list
       std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
       auto cur_s = open_list.back();
@@ -386,8 +385,10 @@ namespace hsearch
 
       std::cout << "CSP: Open List Size: " << open_list.size() << "\n";
 
-      // std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
-      //
+      std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
+      // std::cout << cur_s;
+      // std::cout << cur_s.key_val;
+      // std::cout << get_goal_key();
       // std::cout << "K Condition:\t" << cond1 << std::endl;
       // std::cout << "G Condition:\t" << cond2 << std::endl;
 
@@ -457,20 +458,20 @@ namespace hsearch
         {
           const auto point = points.at(i);
 
-          std::cout << "Updating Node " << created_graph_p->at(point.first.y).at(point.first.x).id << std::endl;
-
-          std::cout << "\tGrid Coords: " << known_grid_p->world_to_grid(created_graph_p->at(point.first.y).at(point.first.x).point) << std::endl;
+          // std::cout << "Updating Nodes around Node: " << created_graph_p->at(point.first.y).at(point.first.x).id;
+          // std::cout << "\tGrid Coords: " << known_grid_p->world_to_grid(created_graph_p->at(point.first.y).at(point.first.x).point) << std::endl;
 
           // Loop through all of the neighbors of the cell and find the new best connection given the map update
           for(const auto& v_id : created_graph_p->at(point.first.y).at(point.first.x).id_set)
           {
+            // recalculate RHS based on the new cost of the parent?
+
             UpdateVertex(v_id);
             push_heap(open_list.begin(), open_list.end(), std::greater<>{});
           }
 
-          // expanded_nodes.clear();
-          std::cout << "MU: Open List Size: " << open_list.size() << "\n";
-          std::cout << "MU: Expd List Size: " << expanded_nodes.size() << "\n";
+          // std::cout << "MU: Open List Size: " << open_list.size() << "\n";
+          // std::cout << "MU: Expd List Size: " << expanded_nodes.size() << "\n";
         }
       }
     }
@@ -479,6 +480,9 @@ namespace hsearch
 
   void LPAStar::assemble_path(SearchNode goal)
   {
+
+    final_path.clear();
+
     // add the goal to the path
     final_path.push_back(goal.node_p->point);
 
@@ -491,12 +495,17 @@ namespace hsearch
     {
       // std::cout << "Scanning neighbors =========================================\n";
       // std::cout << cur_node;
+
+      cur_node.rhs_val = HUGE_VAL;
+
       for(const auto n_id : cur_node.node_p->id_set)
       {
+        // std::cout << "\n\tLooking at Neighbor" << n_id << "...";
         auto neighbor = *locate_node(n_id);
         ComputeCost(neighbor, cur_node);
       }
 
+      // std::cout << "\nAfter Update: \n";
       // std::cout << cur_node;
 
       final_path.push_back(cur_node.parent_p->point);
@@ -514,16 +523,16 @@ namespace hsearch
 
     expanded_nodes.push_back(u->node_p->point);
 
-    if(u_id == 173)
-    {
-      std::cout << "Evaluating Node " << u_id << "================= \n";
-      std::cout << *u;
-      std::cout << "Old Key: " << u->key_val;
-    }
+    // std::cout << "Evaluating Node " << u_id << "================= \n";
+    // std::cout << *u;
+    // std::cout << "Old Key: " << u->key_val;
 
     // Scan the predecessors of u and set the min cost to the rhs val
+
     if(u_id != start_id)
     {
+      u->rhs_val = HUGE_VAL; //Ensures the following for loop with set the rhs to min given the most current info
+
       for(const auto sp_id : u->node_p->id_set)
       {
         // std::cout << "\n\tLooking at Neighbor" << sp_id << "...";
@@ -531,6 +540,8 @@ namespace hsearch
 
         ComputeCost(*sp, *u);
       }
+
+      // If rhs is INF set parent to null?
 
       u->h_val = h(*u);
       u->CalcKey();
@@ -568,6 +579,8 @@ namespace hsearch
   {
     double buf = sp.g_val + edge_cost(sp, u);
 
+    // std::cout << "G: " << sp.g_val << " Cost: " << edge_cost(sp, u) << " ...";
+
     if(buf < u.rhs_val)
     {
       // std::cout << "Updated RHS";
@@ -604,7 +617,8 @@ namespace hsearch
 
   bool LPAStar::is_consistent(SearchNode u) const
   {
-    return u.g_val == u.rhs_val;
+    if(u.g_val == HUGE_VAL && u.rhs_val == HUGE_VAL) return true;
+    else return rigid2d::almost_equal(u.g_val, u.rhs_val);
   }
 
   SearchNode* LPAStar::locate_node(int u_id)
