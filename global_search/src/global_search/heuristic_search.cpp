@@ -78,6 +78,7 @@ namespace hsearch
 
   bool HSearch::ComputeShortestPath(const prm::Node & s_start, const prm::Node & s_goal)
   {
+
     goal_loc = s_goal.point;
 
     // Initialize the start node
@@ -97,6 +98,8 @@ namespace hsearch
 
     while(open_list.size() != 0)
     {
+      if(!std::is_heap(open_list.begin(), open_list.end(), std::greater<>{}))  std::make_heap(open_list.begin(), open_list.end(), std::greater<>{});
+
       // std::cout << "open_list size: " << open_list.size() << std::endl;
       // Get the node with the minimum total cost
       std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
@@ -371,21 +374,23 @@ namespace hsearch
 
     while(open_list.size() != 0)
     {
-      // Get the node at the top of the open list
-      std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
-      auto cur_s = open_list.back();
-      open_list.pop_back();
 
-      // Put the node back on standby
-      cur_s.state = Closed;
-      standby.insert({cur_s.search_id, cur_s});
+      if(!std::is_heap(open_list.begin(), open_list.end(), std::greater<>{}))
+      {
+        std::cout << "Why was this not a heap?!?!\n";
+        std::make_heap(open_list.begin(), open_list.end(), std::greater<>{});
+      }
+      // Get the node at the top of the open list
+      auto cur_s = open_list.at(0);
+
+
 
       bool cond1 = cur_s.key_val > get_goal_key();
       bool cond2 = goal_is_consistent();
 
       std::cout << "CSP: Open List Size: " << open_list.size() << "\n";
-
       std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
+
       // std::cout << cur_s;
       // std::cout << cur_s.key_val;
       // std::cout << get_goal_key();
@@ -395,11 +400,22 @@ namespace hsearch
       // Check the exit condition
       if(cond1 && cond2)
       {
+        // Put the node back on the open list
+        // push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+
         auto g_fin = locate_node(goal_id);
         assemble_path(*g_fin);
         result = true;
         break;
       }
+
+      //Remove the node from the open list and put it on standby
+      std::pop_heap(open_list.begin(), open_list.end(), std::greater<>{});
+      open_list.back();
+      open_list.pop_back();
+
+      cur_s.state = Closed;
+      standby.insert({cur_s.search_id, cur_s});
 
       if(cur_s.g_val > cur_s.rhs_val)
       {
@@ -409,24 +425,19 @@ namespace hsearch
         for(const auto & sp_id : cur_s.node_p->id_set)
         {
           UpdateVertex(sp_id);
-          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
         }
       }
       else
       {
-        standby.at(cur_s.search_id).g_val = HUGE_VAL;
+        standby.at(cur_s.search_id).g_val = BIG_NUM;
 
         // loop through neighbors and self
         for(const auto & sp_id : cur_s.node_p->id_set)
         {
           UpdateVertex(sp_id);
-          push_heap(open_list.begin(), open_list.end(), std::greater<>{});
-
         }
 
         UpdateVertex(cur_s.search_id);
-        push_heap(open_list.begin(), open_list.end(), std::greater<>{});
-
       }
     }
     return result;
@@ -467,12 +478,14 @@ namespace hsearch
             // recalculate RHS based on the new cost of the parent?
 
             UpdateVertex(v_id);
-            push_heap(open_list.begin(), open_list.end(), std::greater<>{});
           }
 
+          // UpdateVertex(created_graph_p->at(point.first.y).at(point.first.x).id);
           // std::cout << "MU: Open List Size: " << open_list.size() << "\n";
           // std::cout << "MU: Expd List Size: " << expanded_nodes.size() << "\n";
         }
+
+        // UpdateVertex(goal_id);
       }
     }
     return changed;
@@ -496,7 +509,7 @@ namespace hsearch
       // std::cout << "Scanning neighbors =========================================\n";
       // std::cout << cur_node;
 
-      cur_node.rhs_val = HUGE_VAL;
+      cur_node.rhs_val = BIG_NUM;
 
       for(const auto n_id : cur_node.node_p->id_set)
       {
@@ -531,7 +544,7 @@ namespace hsearch
 
     if(u_id != start_id)
     {
-      u->rhs_val = HUGE_VAL; //Ensures the following for loop with set the rhs to min given the most current info
+      u->rhs_val = BIG_NUM; //Ensures the following for loop with set the rhs to min given the most current info
 
       for(const auto sp_id : u->node_p->id_set)
       {
@@ -561,6 +574,7 @@ namespace hsearch
         u->state = Closed;
         standby.insert({u->search_id, *u});
         open_list.erase(it_vec); // this line deletes the node the pointer u, is pointing to. u is now no longer useable after this line
+        push_heap(open_list.begin(), open_list.end(), std::greater<>{});
       }
     }
     else // the node is not consistent, and should be placed on the open list, if not already there
@@ -573,6 +587,8 @@ namespace hsearch
         standby.erase(u->search_id); // this line deletes the node the pointer u, is pointing to. u is now no longer useable after this line
       }
     }
+
+    push_heap(open_list.begin(), open_list.end(), std::greater<>{});
   }
 
   void LPAStar::ComputeCost(SearchNode &sp, SearchNode &u)
@@ -597,7 +613,6 @@ namespace hsearch
     auto sp_grid_pt = known_grid_p->world_to_grid(sp.node_p->point);
     auto u_grid_pt = known_grid_p->world_to_grid(u.node_p->point);
 
-
     // retrieve the occupancy data
 
     auto sp_occ = known_grid_p->get_grid().at(sp_grid_pt.y).at(sp_grid_pt.x);
@@ -606,8 +621,8 @@ namespace hsearch
     // std::cout << "Edge from " << sp_grid_pt.x << ", " << sp_grid_pt.y << " to "  << u_grid_pt.x << ", " << u_grid_pt.y << ": " << int(sp_occ) << ", " << int(u_occ) << std::endl;
 
     // caculate the cost
-    if(sp_occ == 0 && u_occ == 0)   return sp.node_p->point.distance(u.node_p->point);
-    else return HUGE_VAL;
+    if(sp_occ == 0 && u_occ == 0) return sp.node_p->point.distance(u.node_p->point);
+    else return BIG_NUM;
   }
 
   bool LPAStar::goal_is_consistent()
@@ -617,8 +632,8 @@ namespace hsearch
 
   bool LPAStar::is_consistent(SearchNode u) const
   {
-    if(u.g_val == HUGE_VAL && u.rhs_val == HUGE_VAL) return true;
-    else return rigid2d::almost_equal(u.g_val, u.rhs_val);
+    // if(u.g_val == BIG_NUM && u.rhs_val == BIG_NUM) return true;
+    return rigid2d::almost_equal(u.g_val, u.rhs_val);
   }
 
   SearchNode* LPAStar::locate_node(int u_id)

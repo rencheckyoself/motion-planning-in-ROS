@@ -3,6 +3,8 @@
 /// \file
 /// \brief A library containing classes to perform various types of search algorithms
 
+#define BIG_NUM 10000.0
+
 #include <cmath>
 #include <memory>
 #include <unordered_map>
@@ -21,8 +23,8 @@ namespace hsearch
   /// \brief the key values for a given node
   struct Key
   {
-    double k1 = HUGE_VAL; ///< min(g(s), rhs(s)) + h(s, goal) => similar to f cost in non-incremental search
-    double k2 = HUGE_VAL; ///< min(g(s), rhs(s)) => tie breaking condition
+    double k1 = BIG_NUM; ///< min(g(s), rhs(s)) + h(s, goal) => similar to f cost in non-incremental search
+    double k2 = BIG_NUM; ///< min(g(s), rhs(s)) => tie breaking condition
 
     /// \brief Custom function used for proper sorting of the open list by comparing the key values.
     /// \param rhs another Key to compare against
@@ -42,11 +44,11 @@ namespace hsearch
 
     int search_id = 0; ///< a unique id for the search node created
 
-    double f_val = HUGE_VAL; ///< total node cost
-    double g_val = HUGE_VAL; ///< path cost from start to this
-    double h_val = HUGE_VAL; ///< estimated cost from this to goal
+    double f_val = BIG_NUM; ///< total node cost
+    double g_val = BIG_NUM; ///< path cost from start to this
+    double h_val = BIG_NUM; ///< estimated cost from this to goal
 
-    double rhs_val = HUGE_VAL; ///< another estimate of the start distance used for incremental search methods
+    double rhs_val = BIG_NUM; ///< another estimate of the start distance used for incremental search methods
 
     Key key_val;
 

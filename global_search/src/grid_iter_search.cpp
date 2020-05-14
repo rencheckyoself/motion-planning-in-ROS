@@ -137,12 +137,15 @@ int main(int argc, char** argv)
 
   auto known_occ = grid_world.get_grid();
 
-  int i = 0;
+  int i = 38;
 
   frames.sleep(); // short pause to give rviz to load
 
   auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
   pub_map.publish(occ_msg);
+
+  std::vector<rigid2d::Vector2D> lpa_path;
+  std::vector<rigid2d::Vector2D> lpa_expands;
 
   // Start loop
   while(ros::ok())
@@ -159,15 +162,22 @@ int main(int argc, char** argv)
       {
         ROS_FATAL_STREAM("GDSRCH: LPA* Search failed to find a path for the current map configuration.\n");
       }
+
+      // retrieve results
+      lpa_path = lpa_search.get_path();
+      lpa_expands = lpa_search.get_expanded_nodes();
+
+      // Draw Expanded Nodes
+      exp_nodes = utility::make_marker(lpa_expands, cell_size, colors.at(2));
+      markers.push_back(exp_nodes);
     }
 
     new_info = false;
 
     // retrieve results
-    std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
-    auto lpa_expands = lpa_search.get_expanded_nodes();
+    // std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
+    // auto lpa_expands = lpa_search.get_expanded_nodes();
 
-    std::cout << "LP: Expd List Size: " << lpa_expands.size() << "\n";
 
     // VIZUALIZE THE RESULTS
 
@@ -183,20 +193,21 @@ int main(int argc, char** argv)
       markers.push_back(buf);
     }
 
-    // Draw Expanded Nodes
-    exp_nodes = utility::make_marker(lpa_expands, cell_size, colors.at(2));
-    markers.push_back(exp_nodes);
+    if(lpa_expands.empty())
+    {
+      exp_nodes.action = visualization_msgs::Marker::DELETE;
+      markers.push_back(exp_nodes);
+    }
 
     pub_marks.markers = markers;
     pub_markers.publish(pub_marks);
 
-    // Draw the Occ Grid
     ros::spinOnce();
 
     // sleep til next loop
     frames.sleep();
 
-    // Check for map updates -- Update LPA* two grid rows at a time.
+    // Check for map updates -- Update LPA* one grid row at a time
     if(i < grid_dims.at(1))
     {
       std::vector<std::pair<rigid2d::Vector2D, signed char>> map_update;
@@ -210,42 +221,17 @@ int main(int argc, char** argv)
         map_update.push_back(std::make_pair(rigid2d::Vector2D(k, i), *it));
       }
 
-      if(!map_update.empty())
-      {
-        // Inform LPA* of the "sensor" readings and update all of the effected verticies
-        new_info = lpa_search.MapChange(map_update);
-      }
-
-      // If meaningful change was detected
-      if(new_info)
-      {
-        // vizualize new map
-        auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
-        pub_map.publish(occ_msg);
-
-        // clear existing path and expanded vizualizations
-        exp_nodes.action = visualization_msgs::Marker::DELETE;
-
-        for(auto & m : path_markers)
-        {
-          m.action = visualization_msgs::Marker::DELETE;
-        }
-
-        path_markers.push_back(exp_nodes);
-
-        pub_marks.markers = path_markers;
-        pub_markers.publish(pub_marks);
-
-      }
+      // Inform LPA* of the "sensor" readings and update all of the effected verticies
+      if(!map_update.empty()) new_info = lpa_search.MapChange(map_update);
     }
 
+    // vizualize map
+    auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
+    pub_map.publish(occ_msg);
 
     markers.clear();
+    lpa_expands.clear();
     path_markers.clear();
     i++;
-
   }
-
-
-
 }
