@@ -11,7 +11,11 @@
 ///     r (std::vector<int>) color values
 ///     g (std::vector<int>) color values
 ///     b (std::vector<int>) color values
-
+///     start std::vector<double> two double values representing the x,y of the start point
+///     goal std::vector<double> two double values representing the x,y of the goal point
+/// PUBLISHES:
+///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
+///     /grid_map (nav_msgs::OccupancyGrid) occupancy data
 #include <vector>
 #include <algorithm>
 #include <XmlRpcValue.h>

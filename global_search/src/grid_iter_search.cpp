@@ -11,6 +11,11 @@
 ///     r (std::vector<int>) color values
 ///     g (std::vector<int>) color values
 ///     b (std::vector<int>) color values
+///     start std::vector<double> two double values representing the x,y of the start point
+///     goal std::vector<double> two double values representing the x,y of the goal point
+/// PUBLISHES:
+///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
+///     /grid_map (nav_msgs::OccupancyGrid) occupancy data
 
 #include <vector>
 #include <algorithm>
@@ -150,7 +155,9 @@ int main(int argc, char** argv)
   // Start loop
   while(ros::ok())
   {
-    std::cout << i << "\tNew Info?: " << new_info << "\n";
+    // std::cout << i << "\tNew Info?: " << new_info << "\n";
+
+    // If there is new map information, update the path as needed
     if(new_info)
     {
       // Plan path
@@ -174,11 +181,6 @@ int main(int argc, char** argv)
 
     new_info = false;
 
-    // retrieve results
-    // std::vector<rigid2d::Vector2D> lpa_path = lpa_search.get_path();
-    // auto lpa_expands = lpa_search.get_expanded_nodes();
-
-
     // VIZUALIZE THE RESULTS
 
     // Draw Start and Goal
@@ -193,6 +195,7 @@ int main(int argc, char** argv)
       markers.push_back(buf);
     }
 
+    // clear blue squares if needed
     if(lpa_expands.empty())
     {
       exp_nodes.action = visualization_msgs::Marker::DELETE;

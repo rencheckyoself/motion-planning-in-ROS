@@ -10,6 +10,7 @@
 ///     grid_res (double) scaling factor for the grid cell size
 /// PUBLISHES:
 ///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
+///     /grid_map (nav_msgs::OccupancyGrid) occupancy data
 
 #include <vector>
 #include <algorithm>
