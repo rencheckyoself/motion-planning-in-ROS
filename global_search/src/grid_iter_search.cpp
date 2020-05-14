@@ -136,13 +136,13 @@ int main(int argc, char** argv)
   auto start_node = free_grid.get_nodes().at(start_pt.y).at(start_pt.x);
   auto goal_node = free_grid.get_nodes().at(goal_pt.y).at(goal_pt.x);
 
-  ros::Rate frames(0.5);
+  ros::Rate frames(2);
 
   bool new_info = true;
 
   auto known_occ = grid_world.get_grid();
 
-  int i = 38;
+  int i = 0;
 
   frames.sleep(); // short pause to give rviz to load
 
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
       lpa_expands = lpa_search.get_expanded_nodes();
 
       // Draw Expanded Nodes
-      exp_nodes = utility::make_marker(lpa_expands, cell_size, colors.at(2));
+      exp_nodes = utility::make_marker(lpa_expands, cell_size/grid_res, colors.at(2));
       markers.push_back(exp_nodes);
     }
 
@@ -205,6 +205,10 @@ int main(int argc, char** argv)
     pub_marks.markers = markers;
     pub_markers.publish(pub_marks);
 
+    // vizualize map
+    auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
+    pub_map.publish(occ_msg);
+
     ros::spinOnce();
 
     // sleep til next loop
@@ -227,10 +231,6 @@ int main(int argc, char** argv)
       // Inform LPA* of the "sensor" readings and update all of the effected verticies
       if(!map_update.empty()) new_info = lpa_search.MapChange(map_update);
     }
-
-    // vizualize map
-    auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
-    pub_map.publish(occ_msg);
 
     markers.clear();
     lpa_expands.clear();

@@ -368,28 +368,26 @@ namespace hsearch
     bool result = false;
 
     expanded_nodes.clear();
-    std::cout << "\n\n\n\n\n\n\n\nSTARTING NEW SEARCH =========================================== \n =============================================================== \n";
-    std::cout << "Start ID: " << start_id << "\n";
-    std::cout << "Goal ID: " << goal_id << "\n";
+    std::cout << "\n\nSTARTING NEW SEARCH =========================================== \n =============================================================== \n";
+    // std::cout << "Start ID: " << start_id << "\n";
+    // std::cout << "Goal ID: " << goal_id << "\n";
 
     while(open_list.size() != 0)
     {
 
       if(!std::is_heap(open_list.begin(), open_list.end(), std::greater<>{}))
       {
-        std::cout << "Why was this not a heap?!?!\n";
         std::make_heap(open_list.begin(), open_list.end(), std::greater<>{});
       }
+
       // Get the node at the top of the open list
       auto cur_s = open_list.at(0);
-
-
 
       bool cond1 = cur_s.key_val > get_goal_key();
       bool cond2 = goal_is_consistent();
 
-      std::cout << "CSP: Open List Size: " << open_list.size() << "\n";
-      std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
+      // std::cout << "CSP: Open List Size: " << open_list.size() << "\n";
+      // std::cout << "Picked Node " << cur_s.search_id << " off the open list \n";
 
       // std::cout << cur_s;
       // std::cout << cur_s.key_val;
@@ -400,9 +398,6 @@ namespace hsearch
       // Check the exit condition
       if(cond1 && cond2)
       {
-        // Put the node back on the open list
-        // push_heap(open_list.begin(), open_list.end(), std::greater<>{});
-
         auto g_fin = locate_node(goal_id);
         assemble_path(*g_fin);
         result = true;
@@ -451,7 +446,7 @@ namespace hsearch
     // determine if any changes were made
     auto tot_chng = std::accumulate(updates_made.begin(), updates_made.end(), 0);
 
-    std::cout << "Sum: " << tot_chng << "====================================" << std::endl;
+    // std::cout << "Sum: " << tot_chng << "====================================" << std::endl;
 
     bool changed = false;
 
@@ -479,13 +474,9 @@ namespace hsearch
 
             UpdateVertex(v_id);
           }
-
-          // UpdateVertex(created_graph_p->at(point.first.y).at(point.first.x).id);
           // std::cout << "MU: Open List Size: " << open_list.size() << "\n";
           // std::cout << "MU: Expd List Size: " << expanded_nodes.size() << "\n";
         }
-
-        // UpdateVertex(goal_id);
       }
     }
     return changed;
@@ -500,7 +491,7 @@ namespace hsearch
     final_path.push_back(goal.node_p->point);
 
     auto cur_node = goal;
-    std::cout << "Assemble Path =========================================\n";
+    std::cout << "Assembling Path...\n";
 
     // follow the parent points back to the starting node and store each location
     // Select the neighbor node with the minimum cost
