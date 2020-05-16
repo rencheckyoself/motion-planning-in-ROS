@@ -99,6 +99,46 @@ namespace utility
     return occ_msg;
   }
 
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D robot, double scale, std::vector<double> color)
+  {
+    visualization_msgs::Marker marker;
+
+    geometry_msgs::Point geo_robot;
+
+    // Convert the point
+    geo_robot = Vec2D_to_GeoPt(robot);
+
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time::now();
+
+    marker.ns = "Robot";
+    marker.id = 0;
+
+    marker.type = visualization_msgs::Marker::CUBE;
+    marker.action = visualization_msgs::Marker::ADD;
+
+    marker.pose.position.x = geo_robot.x;
+    marker.pose.position.y = geo_robot.y;
+    marker.pose.position.z = geo_robot.z;
+    marker.pose.orientation.x = 0;
+    marker.pose.orientation.y = 0;
+    marker.pose.orientation.z = 0;
+    marker.pose.orientation.w = 1;
+
+    marker.scale.x = 0.3 * scale;
+    marker.scale.y = 0.3 * scale;
+    marker.scale.z = 0.3 * scale;
+
+    marker.color.r = color.at(0);
+    marker.color.g = color.at(1);
+    marker.color.b = color.at(2);
+    marker.color.a = 1.0;
+
+    marker.lifetime = ros::Duration();
+
+    return marker;
+  }
+
   visualization_msgs::Marker make_marker(std::vector<rigid2d::Vector2D> point_list, double scale, std::vector<double> color)
   {
     visualization_msgs::Marker marker;
@@ -212,7 +252,7 @@ namespace utility
     return marker;
   }
 
-  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color)
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color, std::string ns)
   {
     visualization_msgs::Marker marker;
 
@@ -221,7 +261,7 @@ namespace utility
     marker.header.frame_id = "map";
     marker.header.stamp = ros::Time::now();
 
-    marker.ns = "Path";
+    marker.ns = ns;
     marker.id = marker_id;
 
     marker.type = visualization_msgs::Marker::LINE_LIST;

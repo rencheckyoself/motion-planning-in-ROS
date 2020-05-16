@@ -17,3 +17,5 @@
 # # Hard
 start: [3, 3]
 goal: [3, 46]
+
+sensor_range: 0.6 # distance (in m) the robot can sense

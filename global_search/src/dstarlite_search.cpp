@@ -13,6 +13,7 @@
 ///     b (std::vector<int>) color values
 ///     start std::vector<double> two double values representing the x,y of the start point
 ///     goal std::vector<double> two double values representing the x,y of the goal point
+///     sensor_range (double) double value representing the range of a simulated sensor fixed to the center of the robot
 /// PUBLISHES:
 ///     /visualization_marker_array (visualization_msgs::MarkerArray) markers
 ///     /grid_map (nav_msgs::OccupancyGrid) occupancy data
@@ -34,7 +35,7 @@
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "grid_iter_search");
+  ros::init(argc, argv, "dstarlite_search");
   ros::NodeHandle n;
 
   ros::Publisher pub_map = n.advertise<nav_msgs::OccupancyGrid>("grip_map", 2);
@@ -50,6 +51,7 @@ int main(int argc, char** argv)
   int grid_res = 1;
   std::vector<double> r, g, b;
   double cell_size = 1.0;
+  double sensor_range = cell_size*3;
 
   n.getParam("obstacles", obstacles);
   n.getParam("map_x_lims", map_x_lims);
@@ -63,6 +65,7 @@ int main(int argc, char** argv)
 
   n.getParam("start", start);
   n.getParam("goal", goal);
+  n.getParam("sensor_range", sensor_range);
 
   std::vector<std::vector<double>> colors;
 
@@ -101,6 +104,9 @@ int main(int argc, char** argv)
   auto grid_graph = free_grid.get_nodes();
   auto grid_dims = free_grid.get_grid_dimensions();
 
+  // convert the sensor range to grid cells
+  int sensor_range_grid = std::round((sensor_range * grid_res) / cell_size);
+
   // convert start/goal to vector2D
   rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
   rigid2d::Vector2D goal_pt(goal.at(0) * grid_res, goal.at(1) * grid_res);
@@ -109,6 +115,7 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("GDSRCH: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
   ROS_INFO_STREAM("GDSRCH: robot_radius: " << robot_radius);
   ROS_INFO_STREAM("GDSRCH: cell size: " << cell_size);
+  ROS_INFO_STREAM("GDSRCH: Sensor Range: " << sensor_range_grid);
   ROS_INFO_STREAM("GDSRCH: start coordinate: " << start_pt);
   ROS_INFO_STREAM("GDSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("GDSRCH: Loaded Params");
@@ -127,7 +134,7 @@ int main(int argc, char** argv)
   }
 
   // Initialize the search on the empty map
-  hsearch::LPAStar lpa_search(&grid_graph, &free_grid, start_pt, goal_pt);
+  hsearch::DStarLite dsl_search(&grid_graph, &free_grid, start_pt, goal_pt);
 
   // Buffer variables to save all the markers to detele/update
   std::vector<visualization_msgs::Marker> path_markers;
@@ -136,21 +143,25 @@ int main(int argc, char** argv)
   auto start_node = free_grid.get_nodes().at(start_pt.y).at(start_pt.x);
   auto goal_node = free_grid.get_nodes().at(goal_pt.y).at(goal_pt.x);
 
+  rigid2d::Vector2D robot_pos = start_node.point; // set the robot position with the corrrect world coordinates
+
   ros::Rate frames(2);
 
   bool new_info = true;
 
   auto known_occ = grid_world.get_grid();
 
-  int i = 0;
-
   frames.sleep(); // short pause to give rviz to load
 
   auto occ_msg = utility::make_grid_msg(&free_grid, cell_size, grid_res);
   pub_map.publish(occ_msg);
 
-  std::vector<rigid2d::Vector2D> lpa_path;
-  std::vector<rigid2d::Vector2D> lpa_expands;
+
+  std::vector<rigid2d::Vector2D> traversed_path;
+  std::vector<rigid2d::Vector2D> dsl_path;
+  std::vector<rigid2d::Vector2D> dsl_expands;
+
+  traversed_path.push_back(robot_pos);
 
   // Start loop
   while(ros::ok())
@@ -161,42 +172,71 @@ int main(int argc, char** argv)
     if(new_info)
     {
       // Plan path
-      bool lpa_res = lpa_search.ComputeShortestPath();
+      bool dsl_res = dsl_search.ComputeShortestPath();
       ROS_INFO_STREAM("GDSRCH: Search Complete!\n");
 
       // Check for failure
-      if(!lpa_res)
+      if(!dsl_res)
       {
-        ROS_FATAL_STREAM("GDSRCH: LPA* Search failed to find a path for the current map configuration.\n");
+        ROS_FATAL_STREAM("GDSRCH: D* Lite Search failed to find a path for the current map configuration.\n");
       }
 
       // retrieve results
-      lpa_path = lpa_search.get_path();
-      lpa_expands = lpa_search.get_expanded_nodes();
+      dsl_path = dsl_search.get_path();
+      dsl_expands = dsl_search.get_expanded_nodes();
+
+      ROS_INFO_STREAM("DSLSRCH: D* Lite Path has " << dsl_path.size() << " nodes.");
 
       // Draw Expanded Nodes
-      exp_nodes = utility::make_marker(lpa_expands, cell_size/grid_res, colors.at(2));
+      exp_nodes = utility::make_marker(dsl_expands, cell_size/grid_res, colors.at(2));
       markers.push_back(exp_nodes);
+
+      std::reverse(dsl_path.begin(), dsl_path.end());
+
+      if(dsl_path.back() != robot_pos)
+      {
+        ROS_FATAL_STREAM("The robot has teleported between path searches!");
+        robot_pos = dsl_path.back();
+      }
     }
 
     new_info = false;
 
     // VIZUALIZE THE RESULTS
 
+    // Draw the robot
+    markers.push_back(utility::make_marker(robot_pos, cell_size*2, std::vector<double>({0, 0, 1})));
+
     // Draw Start and Goal
     markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0})));
     markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0})));
 
-    // Draw LPA* path
-    for(auto it = lpa_path.begin(); it < lpa_path.end()-1; it++)
+    // Draw D* Lite path
+    for(auto it = dsl_path.begin(); it < dsl_path.end()-1; it++)
     {
-      visualization_msgs::Marker buf = utility::make_marker(*it, *(it+1), it-lpa_path.begin(), cell_size, std::vector<double>({0, 0, 0}));
+      visualization_msgs::Marker buf = utility::make_marker(*it, *(it+1), it-dsl_path.begin(), cell_size, colors.at(4));
       path_markers.push_back(buf);
       markers.push_back(buf);
     }
 
-    // clear blue squares if needed
-    if(lpa_expands.empty())
+    // Draw the path that has been traversed by the robot
+
+    ROS_INFO_STREAM(traversed_path.size());
+    traversed_path.push_back(robot_pos);
+    if(traversed_path.size() > 1)
+    {
+      for(auto it = traversed_path.begin(); it < traversed_path.end()-1; it++)
+      {
+        int ns_id = (it-traversed_path.begin());
+
+        visualization_msgs::Marker buf = utility::make_marker(*it, *(it+1), ns_id, cell_size, std::vector<double>({0, 0, 0}), "Trav");
+        path_markers.push_back(buf);
+        markers.push_back(buf);
+      }
+    }
+
+    // clear expanded nodes if needed
+    if(dsl_expands.empty())
     {
       exp_nodes.action = visualization_msgs::Marker::DELETE;
       markers.push_back(exp_nodes);
@@ -214,27 +254,58 @@ int main(int argc, char** argv)
     // sleep til next loop
     frames.sleep();
 
-    // Check for map updates -- Update LPA* one grid row at a time
-    if(i < grid_dims.at(1))
+    // If the robot has not reached the goal yet, move and update the map
+    if(dsl_path.size() > 1)
     {
+      // traversed_path.push_back(robot_pos);
+      dsl_path.pop_back();
+      robot_pos = dsl_path.back();
+
+      // Check for map updates -- Update based on the sensor range param
       std::vector<std::pair<rigid2d::Vector2D, signed char>> map_update;
 
-      // Simulate a sensor by extracting information from the known grid 1 rows at a time
-      auto row = known_occ.at(i);
-      for(auto it = row.begin(); it < row.end(); it++)
-      {
-        int k = std::distance(row.begin(), it);
+      rigid2d::Vector2D robot_grid = free_grid.world_to_grid(robot_pos);
 
-        map_update.push_back(std::make_pair(rigid2d::Vector2D(k, i), *it));
+      // Simulate a sensor by extracting information from the known grid
+      for(int j = -sensor_range_grid; j < sensor_range_grid; j++)
+      {
+        int yi = robot_grid.y+j;
+
+        if(yi < 0 || yi >= grid_dims.at(1)) continue;
+
+        for(int k = -sensor_range_grid; k < sensor_range_grid; k++)
+        {
+
+          int xi = robot_grid.x+k;
+          if(xi < 0 || xi >= grid_dims.at(0)) continue;
+
+          map_update.push_back(std::make_pair(rigid2d::Vector2D(xi, yi), known_occ.at(yi).at(xi)));
+        }
       }
 
+      ROS_INFO_STREAM("Updating " << map_update.size() << " Cells.");
+
       // Inform LPA* of the "sensor" readings and update all of the effected verticies
-      if(!map_update.empty()) new_info = lpa_search.MapChange(map_update);
+      if(!map_update.empty())
+      {
+        
+        new_info = dsl_search.MapChange(map_update);
+      }
     }
 
+    // Reset the paths
     markers.clear();
-    lpa_expands.clear();
+    for(auto & marker : path_markers)
+    {
+      marker.action = visualization_msgs::Marker::DELETE;
+      markers.push_back(marker);
+    }
+
+    pub_marks.markers = markers;
+    pub_markers.publish(pub_marks);
+
+    markers.clear();
+    dsl_expands.clear();
     path_markers.clear();
-    i++;
   }
 }

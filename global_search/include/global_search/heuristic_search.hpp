@@ -246,6 +246,8 @@ namespace hsearch
     int start_id; ///< ID of the SearchNode conttaining the start of the search
     int goal_id; ///< ID of the SearchNode conttaining the goal of the search
 
+    double km = 0; ///<Key modifier used by D* Lite
+
     /// \brief build the final path based on all of the saved pointers
     /// \param goal the goal SearchNode
     void assemble_path(SearchNode goal);
@@ -284,6 +286,27 @@ namespace hsearch
     /// \param u a node to evaluate
     /// \returns True if the node is locally consistent
     bool is_consistent(SearchNode u) const;
+  };
+
+  class DStarLite : public LPAStar
+  {
+  public:
+
+    /// \brief Default Constructor
+    DStarLite();
+
+    /// \brief provide the search with the beginning state of the map
+    /// \param grid_graph reference to an existing grid
+    /// \param start_loc the location of the robot in integer coordinates on the provided grid
+    /// \param goal_loc the location of the goal point in integer coordinates on the provided grid
+    DStarLite(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);
+
+    /// \brief update the location the search will plan to with the robot's current location, also updates km. Should be called directly before updating the map
+    /// \param robot_loc the location of the robot in integer coordinates on the provided grid
+    void UpdateRobotLoc(rigid2d::Vector2D robot_loc);
+
+  protected:
+
   };
 }
 

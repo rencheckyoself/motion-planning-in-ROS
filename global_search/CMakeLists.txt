@@ -140,7 +140,8 @@ add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_prm_search src/prm_search.cpp)
-add_executable(${PROJECT_NAME}_grid_iter_search src/grid_iter_search.cpp)
+add_executable(${PROJECT_NAME}_lpastar_search src/lpastar_search.cpp)
+add_executable(${PROJECT_NAME}_dstarlite_search src/dstarlite_search.cpp)
 
 
 ## Rename C++ executable without prefix
@@ -148,15 +149,24 @@ add_executable(${PROJECT_NAME}_grid_iter_search src/grid_iter_search.cpp)
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 set_target_properties(${PROJECT_NAME}_prm_search PROPERTIES OUTPUT_NAME prm_search PREFIX "")
-set_target_properties(${PROJECT_NAME}_grid_iter_search PROPERTIES OUTPUT_NAME grid_iter_search PREFIX "")
+set_target_properties(${PROJECT_NAME}_lpastar_search PROPERTIES OUTPUT_NAME lpastar_search PREFIX "")
+set_target_properties(${PROJECT_NAME}_dstarlite_search PROPERTIES OUTPUT_NAME dstarlite_search PREFIX "")
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(${PROJECT_NAME}_prm_search ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(${PROJECT_NAME}_grid_iter_search ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_lpastar_search ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_dstarlite_search ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_grid_iter_search
+target_link_libraries(${PROJECT_NAME}_dstarlite_search
+  ${catkin_LIBRARIES}
+	${PROJECT_NAME}
+	${rigid2d_LIBRARIES}
+	${roadmap_LIBRARIES}
+)
+
+target_link_libraries(${PROJECT_NAME}_lpastar_search
   ${catkin_LIBRARIES}
 	${PROJECT_NAME}
 	${rigid2d_LIBRARIES}
@@ -186,7 +196,7 @@ target_link_libraries(${PROJECT_NAME}_prm_search
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
-install(TARGETS ${PROJECT_NAME}_prm_search ${PROJECT_NAME}_grid_iter_search
+install(TARGETS ${PROJECT_NAME}_dstarlite_search ${PROJECT_NAME}_lpastar_search ${PROJECT_NAME}_prm_search
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

@@ -43,6 +43,13 @@ namespace utility
   /// \returns an OccupancyGrid message to publish
   nav_msgs::OccupancyGrid make_grid_msg(grid::Grid *grid, double cell_size, double res);
 
+  /// \brief Create a Cube Marker based on a point
+  /// \param robot an x,y location of a robot
+  /// \param scale the amount to scale the preset marker size (should be graph cell size)
+  /// \param color the r,g,b color values in a vector
+  /// \returns a marker to add to the MarkerArray
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D robot, double scale, std::vector<double> color);
+
   /// \brief Create a spherical Marker based on a node struct
   /// \param node a node struct to vizualize
   /// \param scale the amount to scale the preset marker size (should be graph cell size)
@@ -70,8 +77,9 @@ namespace utility
   /// \param marker_id a unique id for the marker
   /// \param scale the amount to scale the preset marker size (should be graph cell size)
   /// \param color the r,g,b color values in a vector
+  /// \param ns the namespace of the line segment, defaults to "Path"
   /// \returns a marker to add to the MarkerArray
-  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color);
+  visualization_msgs::Marker make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector<double> color, std::string ns="Path");
 }
 
 #endif // UTILITY_INCLUDE_GAURD_HPP

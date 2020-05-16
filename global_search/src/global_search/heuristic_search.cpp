@@ -325,9 +325,10 @@ namespace hsearch
   LPAStar::LPAStar(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc) : HSearch()
   {
     // populate class attributes
-    this->goal_loc = base_grid->grid_to_world(goal_loc);
     created_graph_p = grid_graph;
     known_grid_p = base_grid;
+
+    this->goal_loc = known_grid_p->grid_to_world(goal_loc);
 
     // Use the provided grid_world to create a graph of the cell centers and initialize a grid of SearchNodes
     // Loop through each cell in the grid and create an unordered map of SearchNodes.
@@ -470,8 +471,6 @@ namespace hsearch
           // Loop through all of the neighbors of the cell and find the new best connection given the map update
           for(const auto& v_id : created_graph_p->at(point.first.y).at(point.first.x).id_set)
           {
-            // recalculate RHS based on the new cost of the parent?
-
             UpdateVertex(v_id);
           }
           // std::cout << "MU: Open List Size: " << open_list.size() << "\n";
@@ -650,6 +649,23 @@ namespace hsearch
     g->CalcKey();
 
     return g->key_val;
+  }
+
+  // =========================== D* Lite =======================================
+
+  DStarLite::DStarLite(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc) : LPAStar(grid_graph, base_grid, goal_loc, start_loc)
+  { }
+
+  void DStarLite::UpdateRobotLoc(rigid2d::Vector2D robot_loc)
+  {
+    // update the robot location
+    auto old_goal = *locate_node(goal_id);
+
+    goal_id = created_graph_p->at(robot_loc.y).at(robot_loc.x).id;
+    goal_loc = known_grid_p->grid_to_world(robot_loc);
+
+    // update the stored km value
+    km += h(old_goal); // calculate the heuristic between the old start position and the new one.
   }
 
 }
