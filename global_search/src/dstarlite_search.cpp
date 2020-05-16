@@ -288,7 +288,7 @@ int main(int argc, char** argv)
       // Inform LPA* of the "sensor" readings and update all of the effected verticies
       if(!map_update.empty())
       {
-        
+        dsl_search.UpdateRobotLoc(robot_grid);
         new_info = dsl_search.MapChange(map_update);
       }
     }

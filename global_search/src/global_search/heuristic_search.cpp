@@ -356,7 +356,7 @@ namespace hsearch
     standby.erase(start_id);
 
     start.rhs_val = 0;
-    start.CalcKey();
+    start.CalcKey(km);
     start.state = Open;
 
     // Add start node to the open list
@@ -370,8 +370,8 @@ namespace hsearch
 
     expanded_nodes.clear();
     std::cout << "\n\nSTARTING NEW SEARCH =========================================== \n =============================================================== \n";
-    // std::cout << "Start ID: " << start_id << "\n";
-    // std::cout << "Goal ID: " << goal_id << "\n";
+    std::cout << "Start ID: " << start_id << "\n";
+    std::cout << "Goal ID: " << goal_id << "\n";
 
     while(open_list.size() != 0)
     {
@@ -413,7 +413,19 @@ namespace hsearch
       cur_s.state = Closed;
       standby.insert({cur_s.search_id, cur_s});
 
-      if(cur_s.g_val > cur_s.rhs_val)
+      auto k_old = cur_s.key_val;
+      cur_s.h_val = h(cur_s);
+      cur_s.CalcKey(km);
+
+      if(k_old < cur_s.key_val)
+      {
+        cur_s.state = Open;
+        open_list.push_back(cur_s);
+        standby.erase(cur_s.search_id);
+        
+        push_heap(open_list.begin(), open_list.end(), std::greater<>{});
+      }
+      else if(cur_s.g_val > cur_s.rhs_val)
       {
         standby.at(cur_s.search_id).g_val = standby.at(cur_s.search_id).rhs_val;
 
@@ -547,7 +559,7 @@ namespace hsearch
       // If rhs is INF set parent to null?
 
       u->h_val = h(*u);
-      u->CalcKey();
+      u->CalcKey(km);
     }
 
     // std::cout << "\nAfter Update: \n";
@@ -646,7 +658,7 @@ namespace hsearch
     SearchNode* g = locate_node(goal_id);
 
     g->h_val = h(*g);
-    g->CalcKey();
+    g->CalcKey(km);
 
     return g->key_val;
   }
