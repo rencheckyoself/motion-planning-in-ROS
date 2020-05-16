@@ -85,6 +85,16 @@ int main(int argc, char** argv)
   }
   else ROS_INFO_STREAM("GDSRCH: grid res: " << grid_res);
 
+  // convert the sensor range to grid cells
+  int sensor_range_grid = std::ceil((sensor_range * grid_res) / cell_size);
+
+  if(sensor_range_grid < 2)
+  {
+    ROS_WARN_STREAM("GRDSRCH: Provdied sensor range rounded up to 2 cells.");
+    sensor_range_grid = 2;
+  }
+  else ROS_INFO_STREAM("GDSRCH: Sensor Range: " << sensor_range_grid);
+
   // Build Obstacles vector
   std::vector<std::vector<rigid2d::Vector2D>> polygons;
   rigid2d::Vector2D buf_vec; // for some reason commenting out this line breaks the connection to rigid2d...
@@ -104,9 +114,6 @@ int main(int argc, char** argv)
   auto grid_graph = free_grid.get_nodes();
   auto grid_dims = free_grid.get_grid_dimensions();
 
-  // convert the sensor range to grid cells
-  int sensor_range_grid = std::round((sensor_range * grid_res) / cell_size);
-
   // convert start/goal to vector2D
   rigid2d::Vector2D start_pt(start.at(0) * grid_res, start.at(1) * grid_res);
   rigid2d::Vector2D goal_pt(goal.at(0) * grid_res, goal.at(1) * grid_res);
@@ -115,7 +122,6 @@ int main(int argc, char** argv)
   ROS_INFO_STREAM("GDSRCH: y_lims: " << map_y_lims.at(0) << ", " << map_y_lims.at(1));
   ROS_INFO_STREAM("GDSRCH: robot_radius: " << robot_radius);
   ROS_INFO_STREAM("GDSRCH: cell size: " << cell_size);
-  ROS_INFO_STREAM("GDSRCH: Sensor Range: " << sensor_range_grid);
   ROS_INFO_STREAM("GDSRCH: start coordinate: " << start_pt);
   ROS_INFO_STREAM("GDSRCH: goal coordinate: " << goal_pt);
   ROS_INFO_STREAM("GDSRCH: Loaded Params");
