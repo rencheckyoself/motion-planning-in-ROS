@@ -2,7 +2,7 @@
 \label{classhsearch_1_1HSearch}\index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
 
 
-The base class to define a heuristic based search algorithm. This class has no Compute\+Cost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the Compute\+Shortest\+Path method is virtual.  
+The base class to define a heuristic based search algorithm. This class has no Compute\+Cost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the Compute\+Shortest\+Path method is virtual. Currently this class will only plan against a precontructed graph.  
 
 
 
@@ -11,22 +11,20 @@ The base class to define a heuristic based search algorithm. This class has no C
 
 
 
-Inheritance diagram for hsearch\+:\+:H\+Search\+:
-\nopagebreak
+Inheritance diagram for hsearch\+:\+:H\+Search\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=280pt]{d3/dff/classhsearch_1_1HSearch__inherit__graph}
+\includegraphics[width=350pt]{d3/dff/classhsearch_1_1HSearch__inherit__graph}
 \end{center}
 \end{figure}
 
 
-Collaboration diagram for hsearch\+:\+:H\+Search\+:
-\nopagebreak
+Collaboration diagram for hsearch\+:\+:H\+Search\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=271pt]{df/d1e/classhsearch_1_1HSearch__coll__graph}
+\includegraphics[width=191pt]{df/d1e/classhsearch_1_1HSearch__coll__graph}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -37,7 +35,7 @@ Collaboration diagram for hsearch\+:\+:H\+Search\+:
 \begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
 \hyperlink{classhsearch_1_1HSearch_a52aed9d8d8c634bd506cfd3c14620884}{H\+Search} (std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$node\+\_\+list)
 \begin{DoxyCompactList}\small\item\em Initialize the search with a precontructed graph. \end{DoxyCompactList}\item 
-\hyperlink{classhsearch_1_1HSearch_a5342d4b1648868b600de6f2dda2e6fdc}{H\+Search} (std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$node\+\_\+list, \hyperlink{structgrid_1_1Map}{grid\+::\+Map} map)
+\hyperlink{classhsearch_1_1HSearch_a58bce8362211fa679ebf8200dc31d03d}{H\+Search} (\hyperlink{structgrid_1_1Map}{grid\+::\+Map} map)
 \begin{DoxyCompactList}\small\item\em Initialize the search with a precontructed graph. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_ab48be1a6bdbd923ce5e83f6b39323941}\label{classhsearch_1_1HSearch_ab48be1a6bdbd923ce5e83f6b39323941}} 
 virtual \hyperlink{classhsearch_1_1HSearch_ab48be1a6bdbd923ce5e83f6b39323941}{$\sim$\+H\+Search} ()=default
@@ -45,31 +43,28 @@ virtual \hyperlink{classhsearch_1_1HSearch_ab48be1a6bdbd923ce5e83f6b39323941}{$\
 virtual bool \hyperlink{classhsearch_1_1HSearch_a8641b99479bbdf017bf5a1168b763c27}{Compute\+Shortest\+Path} (const \hyperlink{structprm_1_1Node}{prm\+::\+Node} \&s\+\_\+start, const \hyperlink{structprm_1_1Node}{prm\+::\+Node} \&s\+\_\+goal)
 \begin{DoxyCompactList}\small\item\em The main routine for the search algorithm. \end{DoxyCompactList}\item 
 std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classhsearch_1_1HSearch_a2dbcfc312e89d60d9ec9b85eef271cbf}{get\+\_\+path} ()
-\begin{DoxyCompactList}\small\item\em All the user to retrive the final path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em All the user to retrive the final path. \end{DoxyCompactList}\item 
+std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classhsearch_1_1HSearch_a93b63eb8983863eb40f7bb1f28af5c36}{get\+\_\+expanded\+\_\+nodes} ()
+\begin{DoxyCompactList}\small\item\em Get all of the nodes expanded during the search. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 virtual void \hyperlink{classhsearch_1_1HSearch_a5d325955c4faedaca0c68155fd1f7e69}{Compute\+Cost} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&sp)=0
 \begin{DoxyCompactList}\small\item\em a function used to compute the cost for a pair of nodes \end{DoxyCompactList}\item 
-void \hyperlink{classhsearch_1_1HSearch_ac94c08c0f0d4cc3076f01d70c6cd7679}{assemble\+\_\+path} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} goal)
+virtual void \hyperlink{classhsearch_1_1HSearch_ac94c08c0f0d4cc3076f01d70c6cd7679}{assemble\+\_\+path} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} goal)
 \begin{DoxyCompactList}\small\item\em build the final path based on all of the saved pointers \end{DoxyCompactList}\item 
 std\+::vector$<$ double $>$ \hyperlink{classhsearch_1_1HSearch_a6ca884af67da489fa1b20592abc1dbba}{f} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} sp)
 \begin{DoxyCompactList}\small\item\em calculate the total cost of a node \end{DoxyCompactList}\item 
 double \hyperlink{classhsearch_1_1HSearch_a687960c8dcfc61e16613a72a4ff1c14d}{g} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} sp)
 \begin{DoxyCompactList}\small\item\em calculate the actual path cost \end{DoxyCompactList}\item 
 double \hyperlink{classhsearch_1_1HSearch_aa09bc55605f454f822892a40e580b164}{h} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} sp)
-\begin{DoxyCompactList}\small\item\em calculate the estimated cost to goal (heuristic) \end{DoxyCompactList}\item 
-void \hyperlink{classhsearch_1_1HSearch_a93f71cc1b8e8b126ef61ab2a1a599498}{Update\+Vertex} (\hyperlink{structhsearch_1_1SearchNode}{Search\+Node} s, \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} sp)
-\begin{DoxyCompactList}\small\item\em Compare the current node and its neighbor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em calculate the estimated cost to goal (heuristic) \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a92b4944c741acab45fc3c71661f1aa42}\label{classhsearch_1_1HSearch_a92b4944c741acab45fc3c71661f1aa42}} 
 std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$ \hyperlink{classhsearch_1_1HSearch_a92b4944c741acab45fc3c71661f1aa42}{created\+\_\+graph\+\_\+p}
 \begin{DoxyCompactList}\small\item\em pointer to a vector of created nodes \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{classhsearch_1_1HSearch_ad43c076b2d52f4e58dbf29efdb15d1b6}\label{classhsearch_1_1HSearch_ad43c076b2d52f4e58dbf29efdb15d1b6}} 
-\hyperlink{structgrid_1_1Map}{grid\+::\+Map} \hyperlink{classhsearch_1_1HSearch_ad43c076b2d52f4e58dbf29efdb15d1b6}{known\+\_\+map}
-\begin{DoxyCompactList}\small\item\em Contains all known obstacles and the bounds of the map. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a20e68d7726e57a42cb65427b7f9da89f}\label{classhsearch_1_1HSearch_a20e68d7726e57a42cb65427b7f9da89f}} 
 std\+::vector$<$ \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} $>$ \hyperlink{classhsearch_1_1HSearch_a20e68d7726e57a42cb65427b7f9da89f}{open\+\_\+list}
 \begin{DoxyCompactList}\small\item\em the open list for the current search \end{DoxyCompactList}\item 
@@ -79,19 +74,22 @@ std\+::vector$<$ \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} $>$ \hype
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a3188c5cda32b79ace51327a4ede85f33}\label{classhsearch_1_1HSearch_a3188c5cda32b79ace51327a4ede85f33}} 
 std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classhsearch_1_1HSearch_a3188c5cda32b79ace51327a4ede85f33}{final\+\_\+path}
 \begin{DoxyCompactList}\small\item\em assemble the final path based on the goal node \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classhsearch_1_1HSearch_a1c457adbfabaf7ff5f07fef685369991}\label{classhsearch_1_1HSearch_a1c457adbfabaf7ff5f07fef685369991}} 
+std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classhsearch_1_1HSearch_a1c457adbfabaf7ff5f07fef685369991}{expanded\+\_\+nodes}
+\begin{DoxyCompactList}\small\item\em a list of points that were expanded (popped off the open list) during the most recent search \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a8eedd2e1bd6e1d889fdd50e5fa53ad01}\label{classhsearch_1_1HSearch_a8eedd2e1bd6e1d889fdd50e5fa53ad01}} 
 \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \hyperlink{classhsearch_1_1HSearch_a8eedd2e1bd6e1d889fdd50e5fa53ad01}{start}
 \begin{DoxyCompactList}\small\item\em the start node for the current search \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a201d281d6a8d9fcc4158772f862d1847}\label{classhsearch_1_1HSearch_a201d281d6a8d9fcc4158772f862d1847}} 
 rigid2d\+::\+Vector2D \hyperlink{classhsearch_1_1HSearch_a201d281d6a8d9fcc4158772f862d1847}{goal\+\_\+loc}
-\begin{DoxyCompactList}\small\item\em the start node for the current search \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em the goal node for the current search \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a3b741554035ca11f6db86bb14ee329c6}\label{classhsearch_1_1HSearch_a3b741554035ca11f6db86bb14ee329c6}} 
 int \hyperlink{classhsearch_1_1HSearch_a3b741554035ca11f6db86bb14ee329c6}{id\+\_\+cnt} = 1
 \begin{DoxyCompactList}\small\item\em tracks \# nodes seen during search \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-The base class to define a heuristic based search algorithm. This class has no Compute\+Cost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the Compute\+Shortest\+Path method is virtual. 
+The base class to define a heuristic based search algorithm. This class has no Compute\+Cost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the Compute\+Shortest\+Path method is virtual. Currently this class will only plan against a precontructed graph. 
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a52aed9d8d8c634bd506cfd3c14620884}\label{classhsearch_1_1HSearch_a52aed9d8d8c634bd506cfd3c14620884}} 
@@ -109,11 +107,11 @@ Initialize the search with a precontructed graph.
 {\em node\+\_\+list} & a pointer to a graph \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classhsearch_1_1HSearch_a5342d4b1648868b600de6f2dda2e6fdc}\label{classhsearch_1_1HSearch_a5342d4b1648868b600de6f2dda2e6fdc}} 
+\mbox{\Hypertarget{classhsearch_1_1HSearch_a58bce8362211fa679ebf8200dc31d03d}\label{classhsearch_1_1HSearch_a58bce8362211fa679ebf8200dc31d03d}} 
 \index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!H\+Search@{H\+Search}}
 \index{H\+Search@{H\+Search}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
 \subsubsection{\texorpdfstring{H\+Search()}{HSearch()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily hsearch\+::\+H\+Search\+::\+H\+Search (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $\ast$}]{node\+\_\+list,  }\item[{\hyperlink{structgrid_1_1Map}{grid\+::\+Map}}]{map }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily hsearch\+::\+H\+Search\+::\+H\+Search (\begin{DoxyParamCaption}\item[{\hyperlink{structgrid_1_1Map}{grid\+::\+Map}}]{map }\end{DoxyParamCaption})}
 
 
 
@@ -121,8 +119,6 @@ Initialize the search with a precontructed graph.
 
 
 \begin{DoxyParams}{Parameters}
-{\em node\+\_\+list} & a pointer to a graph \\
-\hline
 {\em map} & the known map used to create the graph \\
 \hline
 \end{DoxyParams}
@@ -133,7 +129,7 @@ Initialize the search with a precontructed graph.
 \index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!assemble\+\_\+path@{assemble\+\_\+path}}
 \index{assemble\+\_\+path@{assemble\+\_\+path}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
 \subsubsection{\texorpdfstring{assemble\+\_\+path()}{assemble\_path()}}
-{\footnotesize\ttfamily void hsearch\+::\+H\+Search\+::assemble\+\_\+path (\begin{DoxyParamCaption}\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node}}]{goal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+{\footnotesize\ttfamily void hsearch\+::\+H\+Search\+::assemble\+\_\+path (\begin{DoxyParamCaption}\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node}}]{goal }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
 
 
 
@@ -144,6 +140,10 @@ build the final path based on all of the saved pointers
 {\em goal} & the goal node determined by the search \\
 \hline
 \end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classhsearch_1_1LPAStar_aae9f9031efbe788a83f842905b63e2aa}{hsearch\+::\+L\+P\+A\+Star}.
+
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a5d325955c4faedaca0c68155fd1f7e69}\label{classhsearch_1_1HSearch_a5d325955c4faedaca0c68155fd1f7e69}} 
 \index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!Compute\+Cost@{Compute\+Cost}}
 \index{Compute\+Cost@{Compute\+Cost}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
@@ -163,7 +163,7 @@ a function used to compute the cost for a pair of nodes
 \end{DoxyParams}
 
 
-Implemented in \hyperlink{classhsearch_1_1ThetaStar_a852af6d668cbb3f58079125ba5740853}{hsearch\+::\+Theta\+Star}, and \hyperlink{classhsearch_1_1AStar_a3a9a3c398437d9efe0b9943c29a8672b}{hsearch\+::\+A\+Star}.
+Implemented in \hyperlink{classhsearch_1_1LPAStar_aaeb55f7d05b4952247e492a7db18438d}{hsearch\+::\+L\+P\+A\+Star}, \hyperlink{classhsearch_1_1ThetaStar_a852af6d668cbb3f58079125ba5740853}{hsearch\+::\+Theta\+Star}, and \hyperlink{classhsearch_1_1AStar_a3a9a3c398437d9efe0b9943c29a8672b}{hsearch\+::\+A\+Star}.
 
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a8641b99479bbdf017bf5a1168b763c27}\label{classhsearch_1_1HSearch_a8641b99479bbdf017bf5a1168b763c27}} 
 \index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!Compute\+Shortest\+Path@{Compute\+Shortest\+Path}}
@@ -225,6 +225,19 @@ calculate the actual path cost
 \begin{DoxyReturn}{Returns}
 the actual path cost from start to sp 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classhsearch_1_1HSearch_a93b63eb8983863eb40f7bb1f28af5c36}\label{classhsearch_1_1HSearch_a93b63eb8983863eb40f7bb1f28af5c36}} 
+\index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!get\+\_\+expanded\+\_\+nodes@{get\+\_\+expanded\+\_\+nodes}}
+\index{get\+\_\+expanded\+\_\+nodes@{get\+\_\+expanded\+\_\+nodes}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
+\subsubsection{\texorpdfstring{get\+\_\+expanded\+\_\+nodes()}{get\_expanded\_nodes()}}
+{\footnotesize\ttfamily std\+::vector$<$ rigid2d\+::\+Vector2D $>$ hsearch\+::\+H\+Search\+::get\+\_\+expanded\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get all of the nodes expanded during the search. 
+
+\begin{DoxyReturn}{Returns}
+a vector of points that were expanded 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classhsearch_1_1HSearch_a2dbcfc312e89d60d9ec9b85eef271cbf}\label{classhsearch_1_1HSearch_a2dbcfc312e89d60d9ec9b85eef271cbf}} 
 \index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!get\+\_\+path@{get\+\_\+path}}
 \index{get\+\_\+path@{get\+\_\+path}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
@@ -256,23 +269,6 @@ calculate the estimated cost to goal (heuristic)
 \begin{DoxyReturn}{Returns}
 the estimated cost 
 \end{DoxyReturn}
-\mbox{\Hypertarget{classhsearch_1_1HSearch_a93f71cc1b8e8b126ef61ab2a1a599498}\label{classhsearch_1_1HSearch_a93f71cc1b8e8b126ef61ab2a1a599498}} 
-\index{hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}!Update\+Vertex@{Update\+Vertex}}
-\index{Update\+Vertex@{Update\+Vertex}!hsearch\+::\+H\+Search@{hsearch\+::\+H\+Search}}
-\subsubsection{\texorpdfstring{Update\+Vertex()}{UpdateVertex()}}
-{\footnotesize\ttfamily void hsearch\+::\+H\+Search\+::\+Update\+Vertex (\begin{DoxyParamCaption}\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node}}]{s,  }\item[{\hyperlink{structhsearch_1_1SearchNode}{Search\+Node}}]{sp }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Compare the current node and its neighbor. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em s} & the current node \\
-\hline
-{\em sp} & the neioghbor node \\
-\hline
-\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

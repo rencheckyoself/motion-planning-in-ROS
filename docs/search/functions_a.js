@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['operator_3c',['operator&lt;',['../d1/dd4/structhsearch_1_1SearchNode.html#a936d6ea25917367b88adde4748c9143c',1,'hsearch::SearchNode::operator&lt;()'],['../de/d19/structprm_1_1Node.html#ad414f13a52664be229be3a594613fb45',1,'prm::Node::operator&lt;()']]],
-  ['operator_3c_3c',['operator&lt;&lt;',['../dc/db1/heuristic__search_8hpp.html#a18e6565e8bc131f1b0121fe1c3d70f90',1,'hsearch']]],
-  ['operator_3e',['operator&gt;',['../d1/dd4/structhsearch_1_1SearchNode.html#a492955fe1a5cdfae1dc0474232cb7175',1,'hsearch::SearchNode']]]
+  ['make_5fgrid_5fmsg',['make_grid_msg',['../d1/d4e/utility_8hpp.html#ae03f3cd2b688f1a880d0f95813d66849',1,'utility']]],
+  ['make_5fmarker',['make_marker',['../d1/d4e/utility_8hpp.html#accb979ad9aa17288c646b8bb14170568',1,'utility::make_marker(rigid2d::Vector2D robot, double scale, std::vector&lt; double &gt; color)'],['../d1/d4e/utility_8hpp.html#ae3740bbfe90dd11be460ac36c7533158',1,'utility::make_marker(prm::Node node, double scale, std::vector&lt; double &gt; color)'],['../d1/d4e/utility_8hpp.html#ae0152eef7ad91c70e9fece5391acc15e',1,'utility::make_marker(std::vector&lt; rigid2d::Vector2D &gt; point_list, double scale, std::vector&lt; double &gt; color)'],['../d1/d4e/utility_8hpp.html#a0da197197906040138249e8b184fde69',1,'utility::make_marker(prm::Edge edge, double scale, std::vector&lt; double &gt; color)'],['../d1/d4e/utility_8hpp.html#aafb2424890cf16344d658bcaaf76d4c6',1,'utility::make_marker(rigid2d::Vector2D pt1, rigid2d::Vector2D pt2, int marker_id, double scale, std::vector&lt; double &gt; color, std::string ns=&quot;Path&quot;)']]],
+  ['map',['Map',['../d9/d0a/structgrid_1_1Map.html#aeedaf34b4dcd443691c796637cea73ce',1,'grid::Map::Map()'],['../d9/d0a/structgrid_1_1Map.html#a124140efcef69cee1d90f5d81d01e8fa',1,'grid::Map::Map(std::vector&lt; std::vector&lt; rigid2d::Vector2D &gt;&gt; obs, std::vector&lt; double &gt; x, std::vector&lt; double &gt; y)']]],
+  ['mapchange',['MapChange',['../d8/d70/classhsearch_1_1LPAStar.html#ad5ba304f7a500b285d4878ee2090f7c3',1,'hsearch::LPAStar']]]
 ];

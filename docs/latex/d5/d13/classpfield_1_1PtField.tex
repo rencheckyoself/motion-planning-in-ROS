@@ -1,0 +1,93 @@
+\hypertarget{classpfield_1_1PtField}{}\section{pfield\+:\+:Pt\+Field Class Reference}
+\label{classpfield_1_1PtField}\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+
+
+brief class to allow planning  
+
+
+
+
+{\ttfamily \#include $<$potential\+\_\+fields.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classpfield_1_1PtField_aee7dcc713ac6d16364e8bebe2da64681}{Pt\+Field} (\hyperlink{structgrid_1_1Map}{grid\+::\+Map} map, rigid2d\+::\+Vector2D goal, double z, double aw, double dg, double rw, double Qs)
+\begin{DoxyCompactList}\small\item\em constuctor to initialize the Potential Field Planner \end{DoxyCompactList}\item 
+rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_af1faea5a1127d6df5e06727391227ade}{Plan\+One\+Step} (rigid2d\+::\+Vector2D cur\+\_\+loc)
+\begin{DoxyCompactList}\small\item\em given the robots location, plan its next step \end{DoxyCompactList}\item 
+std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}{get\+\_\+path} ()
+\begin{DoxyCompactList}\small\item\em retrieve the whole planned path \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+brief class to allow planning 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classpfield_1_1PtField_aee7dcc713ac6d16364e8bebe2da64681}\label{classpfield_1_1PtField_aee7dcc713ac6d16364e8bebe2da64681}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!Pt\+Field@{Pt\+Field}}
+\index{Pt\+Field@{Pt\+Field}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{Pt\+Field()}{PtField()}}
+{\footnotesize\ttfamily pfield\+::\+Pt\+Field\+::\+Pt\+Field (\begin{DoxyParamCaption}\item[{\hyperlink{structgrid_1_1Map}{grid\+::\+Map}}]{map,  }\item[{rigid2d\+::\+Vector2D}]{goal,  }\item[{double}]{z,  }\item[{double}]{aw,  }\item[{double}]{dg,  }\item[{double}]{rw,  }\item[{double}]{Qs }\end{DoxyParamCaption})}
+
+
+
+constuctor to initialize the Potential Field Planner 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & the known Map \\
+\hline
+{\em goal} & the x,y location of the goal \\
+\hline
+{\em z} & the step size for gradient descent \\
+\hline
+{\em aw} & weighting factor the attactive component \\
+\hline
+{\em dg} & threshold for piecewise attractive gradient calculation \\
+\hline
+{\em rw} & weighting factor the repulsive component \\
+\hline
+{\em Qs} & threshold for obstacles range of influence \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}\label{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!get\+\_\+path@{get\+\_\+path}}
+\index{get\+\_\+path@{get\+\_\+path}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{get\+\_\+path()}{get\_path()}}
+{\footnotesize\ttfamily std\+::vector$<$ rigid2d\+::\+Vector2D $>$ pfield\+::\+Pt\+Field\+::get\+\_\+path (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+retrieve the whole planned path 
+
+\begin{DoxyReturn}{Returns}
+the planned path 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpfield_1_1PtField_af1faea5a1127d6df5e06727391227ade}\label{classpfield_1_1PtField_af1faea5a1127d6df5e06727391227ade}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!Plan\+One\+Step@{Plan\+One\+Step}}
+\index{Plan\+One\+Step@{Plan\+One\+Step}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{Plan\+One\+Step()}{PlanOneStep()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D pfield\+::\+Pt\+Field\+::\+Plan\+One\+Step (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{cur\+\_\+loc }\end{DoxyParamCaption})}
+
+
+
+given the robots location, plan its next step 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cur\+\_\+loc} & the current location of the robot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the next location to move to 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{potential__fields_8hpp}{potential\+\_\+fields.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{potential__fields_8cpp}{potential\+\_\+fields.\+cpp}\end{DoxyCompactItemize}

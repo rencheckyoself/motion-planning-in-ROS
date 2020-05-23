@@ -90,9 +90,28 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adcba03289a5d2de6e209b2a3ded5d5ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#adcba03289a5d2de6e209b2a3ded5d5ac">build_grid</a> (double cell_size, unsigned int grid_res, double robot_radius)</td></tr>
 <tr class="memdesc:adcba03289a5d2de6e209b2a3ded5d5ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to call all nessissary functions to build the grid.  <a href="#adcba03289a5d2de6e209b2a3ded5d5ac">More...</a><br /></td></tr>
 <tr class="separator:adcba03289a5d2de6e209b2a3ded5d5ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab02f152b741c1abe5cba51431f100ccf"><td class="memItemLeft" align="right" valign="top">std::vector&lt; signed char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#ab02f152b741c1abe5cba51431f100ccf">get_grid</a> () const</td></tr>
-<tr class="memdesc:ab02f152b741c1abe5cba51431f100ccf"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert the grid data into a in row major order with the first element corresponding to the lower left corner.  <a href="#ab02f152b741c1abe5cba51431f100ccf">More...</a><br /></td></tr>
-<tr class="separator:ab02f152b741c1abe5cba51431f100ccf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6620e51207bbd6ca60f868b120cb7e04"><td class="memItemLeft" align="right" valign="top"><a id="a6620e51207bbd6ca60f868b120cb7e04"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#a6620e51207bbd6ca60f868b120cb7e04">generate_centers_graph</a> ()</td></tr>
+<tr class="memdesc:a6620e51207bbd6ca60f868b120cb7e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function to generate an 8 neighbor connected graph structure based on grid cell center locations. <br /></td></tr>
+<tr class="separator:a6620e51207bbd6ca60f868b120cb7e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc9dda8d5d6bca20697790712b154cc1"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#adc9dda8d5d6bca20697790712b154cc1">update_grid</a> (std::vector&lt; std::pair&lt; rigid2d::Vector2D, signed char &gt;&gt; points)</td></tr>
+<tr class="memdesc:adc9dda8d5d6bca20697790712b154cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the existing occupancy data with new information - Note this does not update the stored <a class="el" href="../../d9/d0a/structgrid_1_1Map.html" title="Contains information about a bound map. ">Map</a> variables, so calling "build_grid" will revert the occ data based on the map used to create the grid.  <a href="#adc9dda8d5d6bca20697790712b154cc1">More...</a><br /></td></tr>
+<tr class="separator:adc9dda8d5d6bca20697790712b154cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28e01687d0e3e922607e67b3d1d862b6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#a28e01687d0e3e922607e67b3d1d862b6">get_nodes</a> () const</td></tr>
+<tr class="memdesc:a28e01687d0e3e922607e67b3d1d862b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrive the nodes in a 2D vector in the shape of the grid.  <a href="#a28e01687d0e3e922607e67b3d1d862b6">More...</a><br /></td></tr>
+<tr class="separator:a28e01687d0e3e922607e67b3d1d862b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc6f8296117527ab16f352806e9dc1d6"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#adc6f8296117527ab16f352806e9dc1d6">get_nodes_flatten</a> () const</td></tr>
+<tr class="memdesc:adc6f8296117527ab16f352806e9dc1d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrive the nodes in row major order.  <a href="#adc6f8296117527ab16f352806e9dc1d6">More...</a><br /></td></tr>
+<tr class="separator:adc6f8296117527ab16f352806e9dc1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22f08e25cb643d8813fc4332300185b7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="../../d4/db8/structprm_1_1Edge.html">prm::Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#a22f08e25cb643d8813fc4332300185b7">get_edges</a> () const</td></tr>
+<tr class="memdesc:a22f08e25cb643d8813fc4332300185b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrive the unique edges in the graph.  <a href="#a22f08e25cb643d8813fc4332300185b7">More...</a><br /></td></tr>
+<tr class="separator:a22f08e25cb643d8813fc4332300185b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9efaa72e19c8351e1979c6ac18517de4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; signed char &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#a9efaa72e19c8351e1979c6ac18517de4">get_grid</a> () const</td></tr>
+<tr class="memdesc:a9efaa72e19c8351e1979c6ac18517de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve the built grid  <a href="#a9efaa72e19c8351e1979c6ac18517de4">More...</a><br /></td></tr>
+<tr class="separator:a9efaa72e19c8351e1979c6ac18517de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c05ad9408e0ff99e36a3196136f3bb7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; signed char &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#a7c05ad9408e0ff99e36a3196136f3bb7">get_grid_flatten</a> () const</td></tr>
+<tr class="memdesc:a7c05ad9408e0ff99e36a3196136f3bb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">convert the grid data into a in row major order with the first element corresponding to the lower left corner.  <a href="#a7c05ad9408e0ff99e36a3196136f3bb7">More...</a><br /></td></tr>
+<tr class="separator:a7c05ad9408e0ff99e36a3196136f3bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5da2712457e615bb12ca6d5fc1f1b9d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d83/classgrid_1_1Grid.html#ab5da2712457e615bb12ca6d5fc1f1b9d">get_grid_dimensions</a> () const</td></tr>
 <tr class="memdesc:ab5da2712457e615bb12ca6d5fc1f1b9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">get the height and width of the grid  <a href="#ab5da2712457e615bb12ca6d5fc1f1b9d">More...</a><br /></td></tr>
 <tr class="separator:ab5da2712457e615bb12ca6d5fc1f1b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,14 +251,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ab02f152b741c1abe5cba51431f100ccf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab02f152b741c1abe5cba51431f100ccf">&#9670;&nbsp;</a></span>get_grid()</h2>
+<a id="a22f08e25cb643d8813fc4332300185b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22f08e25cb643d8813fc4332300185b7">&#9670;&nbsp;</a></span>get_edges()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; signed char &gt; grid::Grid::get_grid </td>
+          <td class="memname">std::vector&lt; <a class="el" href="../../d4/db8/structprm_1_1Edge.html">prm::Edge</a> &gt; grid::Grid::get_edges </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -247,8 +266,28 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>convert the grid data into a in row major order with the first element corresponding to the lower left corner. </p>
-<dl class="section return"><dt>Returns</dt><dd>grid occupancy data in row major order </dd></dl>
+<p>Retrive the unique edges in the graph. </p>
+<dl class="section return"><dt>Returns</dt><dd>all the unique edges </dd></dl>
+
+</div>
+</div>
+<a id="a9efaa72e19c8351e1979c6ac18517de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9efaa72e19c8351e1979c6ac18517de4">&#9670;&nbsp;</a></span>get_grid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; signed char &gt; &gt; grid::Grid::get_grid </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>retrieve the built grid </p>
+<dl class="section return"><dt>Returns</dt><dd>grid occupancy data as a vector of vectors. </dd></dl>
 
 </div>
 </div>
@@ -269,6 +308,66 @@ Public Member Functions</h2></td></tr>
 
 <p>get the height and width of the grid </p>
 <dl class="section return"><dt>Returns</dt><dd>the grid dimensions in number of cells </dd></dl>
+
+</div>
+</div>
+<a id="a7c05ad9408e0ff99e36a3196136f3bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c05ad9408e0ff99e36a3196136f3bb7">&#9670;&nbsp;</a></span>get_grid_flatten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; signed char &gt; grid::Grid::get_grid_flatten </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>convert the grid data into a in row major order with the first element corresponding to the lower left corner. </p>
+<dl class="section return"><dt>Returns</dt><dd>grid occupancy data in row major order </dd></dl>
+
+</div>
+</div>
+<a id="a28e01687d0e3e922607e67b3d1d862b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28e01687d0e3e922607e67b3d1d862b6">&#9670;&nbsp;</a></span>get_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; &gt; grid::Grid::get_nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrive the nodes in a 2D vector in the shape of the grid. </p>
+<dl class="section return"><dt>Returns</dt><dd>the nodes in a structure matching the grid </dd></dl>
+
+</div>
+</div>
+<a id="adc6f8296117527ab16f352806e9dc1d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc6f8296117527ab16f352806e9dc1d6">&#9670;&nbsp;</a></span>get_nodes_flatten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; grid::Grid::get_nodes_flatten </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retrive the nodes in row major order. </p>
+<dl class="section return"><dt>Returns</dt><dd>the nodes in a single row vector </dd></dl>
 
 </div>
 </div>
@@ -296,6 +395,33 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>matching world coordinate </dd></dl>
+
+</div>
+</div>
+<a id="adc9dda8d5d6bca20697790712b154cc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc9dda8d5d6bca20697790712b154cc1">&#9670;&nbsp;</a></span>update_grid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; int &gt; grid::Grid::update_grid </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; rigid2d::Vector2D, signed char &gt;&gt;&#160;</td>
+          <td class="paramname"><em>points</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the existing occupancy data with new information - Note this does not update the stored <a class="el" href="../../d9/d0a/structgrid_1_1Map.html" title="Contains information about a bound map. ">Map</a> variables, so calling "build_grid" will revert the occ data based on the map used to create the grid. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">points</td><td>pairs of grid cell locations and new occupancy data to potentially update. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a vector of boolean values: True if the new point info actually caused a change in the occupancy data from free to occupied, otherwise False. </dd></dl>
 
 </div>
 </div>

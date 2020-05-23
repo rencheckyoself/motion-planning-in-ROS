@@ -1,0 +1,75 @@
+\hypertarget{structhsearch_1_1Key}{}\section{hsearch\+:\+:Key Struct Reference}
+\label{structhsearch_1_1Key}\index{hsearch\+::\+Key@{hsearch\+::\+Key}}
+
+
+the key values for a given node  
+
+
+
+
+{\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{structhsearch_1_1Key_a869b0689bb15fdd6e5578f9d4fc466a6}{operator$<$} (const \hyperlink{structhsearch_1_1Key}{Key} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list by comparing the key values. \end{DoxyCompactList}\item 
+bool \hyperlink{structhsearch_1_1Key_a14fb1a53446fb9be30c4d8d584406511}{operator$>$} (const \hyperlink{structhsearch_1_1Key}{Key} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list by comparing the key values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structhsearch_1_1Key_a25799f303c869b7406796f08d0db924a}\label{structhsearch_1_1Key_a25799f303c869b7406796f08d0db924a}} 
+double \hyperlink{structhsearch_1_1Key_a25799f303c869b7406796f08d0db924a}{k1} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+\begin{DoxyCompactList}\small\item\em min(g(s), rhs(s)) + h(s, goal) =$>$ similar to f cost in non-\/incremental search \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1Key_ad759545484e29eaaf8d462852e4f9de5}\label{structhsearch_1_1Key_ad759545484e29eaaf8d462852e4f9de5}} 
+double \hyperlink{structhsearch_1_1Key_ad759545484e29eaaf8d462852e4f9de5}{k2} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+\begin{DoxyCompactList}\small\item\em min(g(s), rhs(s)) =$>$ tie breaking condition \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+the key values for a given node 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structhsearch_1_1Key_a869b0689bb15fdd6e5578f9d4fc466a6}\label{structhsearch_1_1Key_a869b0689bb15fdd6e5578f9d4fc466a6}} 
+\index{hsearch\+::\+Key@{hsearch\+::\+Key}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!hsearch\+::\+Key@{hsearch\+::\+Key}}
+\subsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily bool hsearch\+::\+Key\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structhsearch_1_1Key}{Key} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Custom function used for proper sorting of the open list by comparing the key values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & another \hyperlink{structhsearch_1_1Key}{Key} to compare against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \hyperlink{structhsearch_1_1Key}{Key} is less than rhs 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structhsearch_1_1Key_a14fb1a53446fb9be30c4d8d584406511}\label{structhsearch_1_1Key_a14fb1a53446fb9be30c4d8d584406511}} 
+\index{hsearch\+::\+Key@{hsearch\+::\+Key}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!hsearch\+::\+Key@{hsearch\+::\+Key}}
+\subsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily bool hsearch\+::\+Key\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \hyperlink{structhsearch_1_1Key}{Key} \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Custom function used for proper sorting of the open list by comparing the key values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & another \hyperlink{structhsearch_1_1Key}{Key} to compare against \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \hyperlink{structhsearch_1_1Key}{Key} is less than rhs 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}

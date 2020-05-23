@@ -64,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -73,8 +74,10 @@ $(function() {
 
 <p>A library containing classes to perform various types of search algorithms.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;memory&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 <code>#include &quot;rigid2d/rigid2d.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../da/d34/prm_8hpp_source.html">roadmap/prm.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="../../dc/d8a/grid_8hpp_source.html">roadmap/grid.hpp</a>&quot;</code><br />
@@ -83,8 +86,8 @@ Include dependency graph for heuristic_search.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d2/d80/heuristic__search_8hpp__incl.png" border="0" usemap="#global__search_2include_2global__search_2heuristic__search_8hpp" alt=""/></div>
 <map name="global__search_2include_2global__search_2heuristic__search_8hpp" id="global__search_2include_2global__search_2heuristic__search_8hpp">
-<area shape="rect" id="node5" href="../../da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="379,109,501,136"/>
-<area shape="rect" id="node8" href="../../dc/d8a/grid_8hpp.html" title="A library for building an occupancy grid. " alt="" coords="232,109,355,136"/>
+<area shape="rect" id="node7" href="../../da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="419,184,541,211"/>
+<area shape="rect" id="node9" href="../../dc/d8a/grid_8hpp.html" title="A library for building an occupancy grid. " alt="" coords="419,109,541,136"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -92,8 +95,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../d0/d88/heuristic__search_8hpp__dep__incl.png" border="0" usemap="#global__search_2include_2global__search_2heuristic__search_8hppdep" alt=""/></div>
 <map name="global__search_2include_2global__search_2heuristic__search_8hppdep" id="global__search_2include_2global__search_2heuristic__search_8hppdep">
-<area shape="rect" id="node2" href="../../dc/d40/heuristic__search_8cpp.html" title="A library containing classes to perform various types of search algorithms. " alt="" coords="5,109,197,151"/>
-<area shape="rect" id="node3" href="../../d4/d48/prm__search_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="222,109,373,151"/>
+<area shape="rect" id="node2" href="../../d0/d6d/dstarlite__search_8cpp.html" title="Node to create, draw, and plan on a changing grid map. " alt="" coords="5,109,180,151"/>
+<area shape="rect" id="node3" href="../../dc/d40/heuristic__search_8cpp.html" title="A library containing classes to perform various types of search algorithms. " alt="" coords="205,109,397,151"/>
+<area shape="rect" id="node4" href="../../da/dfc/lpastar__search_8cpp.html" title="Node to create, draw, and plan on a changing grid map. " alt="" coords="421,109,588,151"/>
+<area shape="rect" id="node5" href="../../d4/d48/prm__search_8cpp.html" title="Node to create, draw, and plan on a probabilistic road map. " alt="" coords="612,109,763,151"/>
 </map>
 </div>
 </div>
@@ -101,11 +106,14 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/db3/structhsearch_1_1Key.html">hsearch::Key</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">the key values for a given node  <a href="../../d4/db3/structhsearch_1_1Key.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">hsearch::SearchNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Information used by a search algorithm.  <a href="../../d1/dd4/structhsearch_1_1SearchNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html">hsearch::HSearch</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual.  <a href="../../d0/dde/classhsearch_1_1HSearch.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual. Currently this class will only plan against a precontructed graph.  <a href="../../d0/dde/classhsearch_1_1HSearch.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d4/d52/classhsearch_1_1AStar.html">hsearch::AStar</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A* Search class derived from the <a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html" title="The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion wh...">HSearch</a> class.  <a href="../../d4/d52/classhsearch_1_1AStar.html#details">More...</a><br /></td></tr>
@@ -113,6 +121,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dce/classhsearch_1_1ThetaStar.html">hsearch::ThetaStar</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Theta* any-angle path planner derived from the <a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html" title="The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion wh...">HSearch</a> class.  <a href="../../da/dce/classhsearch_1_1ThetaStar.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d70/classhsearch_1_1LPAStar.html">hsearch::LPAStar</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class to perform LPA* search  <a href="../../d8/d70/classhsearch_1_1LPAStar.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d60/classhsearch_1_1DStarLite.html">hsearch::DStarLite</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">a class to perform D* Lite search  <a href="../../df/d60/classhsearch_1_1DStarLite.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a44b8ad40964aabfb40ae3a0625190475"><td class="memItemLeft" align="right" valign="top"><a id="a44b8ad40964aabfb40ae3a0625190475"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db1/heuristic__search_8hpp.html#a44b8ad40964aabfb40ae3a0625190475">BIG_NUM</a>&#160;&#160;&#160;10000.0</td></tr>
+<tr class="memdesc:a44b8ad40964aabfb40ae3a0625190475"><td class="mdescLeft">&#160;</td><td class="mdescRight">A number used to represent a large cost. <br /></td></tr>
+<tr class="separator:a44b8ad40964aabfb40ae3a0625190475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -128,12 +149,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a18e6565e8bc131f1b0121fe1c3d70f90"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db1/heuristic__search_8hpp.html#a18e6565e8bc131f1b0121fe1c3d70f90">hsearch::operator&lt;&lt;</a> (std::ostream &amp;os, const SearchNode &amp;n)</td></tr>
 <tr class="memdesc:a18e6565e8bc131f1b0121fe1c3d70f90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the cout operator to print the info in a <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. ">SearchNode</a>.  <a href="../../dc/db1/heuristic__search_8hpp.html#a18e6565e8bc131f1b0121fe1c3d70f90">More...</a><br /></td></tr>
 <tr class="separator:a18e6565e8bc131f1b0121fe1c3d70f90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a849235ef03024f4779b48c2db0d5588b"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/db1/heuristic__search_8hpp.html#a849235ef03024f4779b48c2db0d5588b">hsearch::operator&lt;&lt;</a> (std::ostream &amp;os, const Key &amp;k)</td></tr>
+<tr class="memdesc:a849235ef03024f4779b48c2db0d5588b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Overload the cout operator to print the info in a <a class="el" href="../../d4/db3/structhsearch_1_1Key.html" title="the key values for a given node ">Key</a>.  <a href="../../dc/db1/heuristic__search_8hpp.html#a849235ef03024f4779b48c2db0d5588b">More...</a><br /></td></tr>
+<tr class="separator:a849235ef03024f4779b48c2db0d5588b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A library containing classes to perform various types of search algorithms. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="file_a18e6565e8bc131f1b0121fe1c3d70f90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#file_a18e6565e8bc131f1b0121fe1c3d70f90">&#9670;&nbsp;</a></span>operator<<()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a18e6565e8bc131f1b0121fe1c3d70f90">&#9670;&nbsp;</a></span>operator<<() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +186,45 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">os</td><td>the output stream </td></tr>
-    <tr><td class="paramname">n</td><td>a SearchNode reference </td></tr>
+    <tr><td class="paramname">n</td><td>SearchNode reference </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>an output stream </dd></dl>
+
+</div>
+</div>
+<a id="file_a849235ef03024f4779b48c2db0d5588b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a849235ef03024f4779b48c2db0d5588b">&#9670;&nbsp;</a></span>operator<<() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; hsearch::operator&lt;&lt; </td>
+          <td>(</td>
+          <td class="paramtype">std::ostream &amp;&#160;</td>
+          <td class="paramname"><em>os</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../d4/db3/structhsearch_1_1Key.html">Key</a> &amp;&#160;</td>
+          <td class="paramname"><em>k</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Overload the cout operator to print the info in a Key. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">os</td><td>the output stream </td></tr>
+    <tr><td class="paramname">k</td><td>a Key reference </td></tr>
   </table>
   </dd>
 </dl>

@@ -1,0 +1,4 @@
+<map id="hsearch::DStarLite" name="hsearch::DStarLite">
+<area shape="rect" id="node2" href="$d8/d70/classhsearch_1_1LPAStar.html" title="a class to perform LPA* search " alt="" coords="8,80,133,107"/>
+<area shape="rect" id="node3" href="$d0/dde/classhsearch_1_1HSearch.html" title="The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion wh..." alt="" coords="7,5,134,32"/>
+</map>

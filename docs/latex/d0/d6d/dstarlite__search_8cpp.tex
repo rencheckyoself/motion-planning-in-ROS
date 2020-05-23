@@ -1,0 +1,37 @@
+\hypertarget{dstarlite__search_8cpp}{}\section{global\+\_\+search/src/dstarlite\+\_\+search.cpp File Reference}
+\label{dstarlite__search_8cpp}\index{global\+\_\+search/src/dstarlite\+\_\+search.\+cpp@{global\+\_\+search/src/dstarlite\+\_\+search.\+cpp}}
+
+
+Node to create, draw, and plan on a changing grid map.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker\+Array.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}global\+\_\+search/heuristic\+\_\+search.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/utility.\+hpp\char`\"{}}\newline
+Include dependency graph for dstarlite\+\_\+search.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d81/dstarlite__search_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dstarlite__search_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{dstarlite__search_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Node to create, draw, and plan on a changing grid map. 
+
+P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body cell\+\_\+size (double) scaling factor for the map grid\+\_\+res (double) scaling factor for the grid cell size r (std\+::vector$<$int$>$) color values g (std\+::vector$<$int$>$) color values b (std\+::vector$<$int$>$) color values start std\+::vector$<$double$>$ two double values representing the x,y of the start point goal std\+::vector$<$double$>$ two double values representing the x,y of the goal point sensor\+\_\+range (double) double value representing the range of a simulated sensor fixed to the center of the robot P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers /grid\+\_\+map (nav\+\_\+msgs\+::\+Occupancy\+Grid) occupancy data 

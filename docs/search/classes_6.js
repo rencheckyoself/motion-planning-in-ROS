@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['node',['Node',['../de/d19/structprm_1_1Node.html',1,'prm']]]
+  ['lpastar',['LPAStar',['../d8/d70/classhsearch_1_1LPAStar.html',1,'hsearch']]]
 ];

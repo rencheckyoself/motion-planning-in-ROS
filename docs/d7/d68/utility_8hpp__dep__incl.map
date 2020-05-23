@@ -1,6 +1,9 @@
 <map id="roadmap/include/roadmap/utility.hpp" name="roadmap/include/roadmap/utility.hpp">
-<area shape="rect" id="node2" href="$d4/d48/prm__search_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="5,95,156,136"/>
-<area shape="rect" id="node3" href="$d5/d62/make__grid_8cpp.html" title="Node to create and draw a grid. " alt="" coords="180,102,363,129"/>
-<area shape="rect" id="node4" href="$d2/d55/make__roadmap_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="387,102,599,129"/>
-<area shape="rect" id="node5" href="$d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="623,95,771,136"/>
+<area shape="rect" id="node2" href="$d0/d6d/dstarlite__search_8cpp.html" title="Node to create, draw, and plan on a changing grid map. " alt="" coords="5,95,180,136"/>
+<area shape="rect" id="node3" href="$da/dfc/lpastar__search_8cpp.html" title="Node to create, draw, and plan on a changing grid map. " alt="" coords="204,95,371,136"/>
+<area shape="rect" id="node4" href="$d8/dbe/pot__field__search_8cpp.html" title="Node to plan on the map using potential fields. " alt="" coords="395,95,542,136"/>
+<area shape="rect" id="node5" href="$d4/d48/prm__search_8cpp.html" title="Node to create, draw, and plan on a probabilistic road map. " alt="" coords="567,95,717,136"/>
+<area shape="rect" id="node6" href="$d5/d62/make__grid_8cpp.html" title="Node to create and draw a grid. " alt="" coords="741,102,924,129"/>
+<area shape="rect" id="node7" href="$d2/d55/make__roadmap_8cpp.html" title="Node to create and draw a probabilistic road map. " alt="" coords="948,102,1160,129"/>
+<area shape="rect" id="node8" href="$d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="1184,95,1332,136"/>
 </map>

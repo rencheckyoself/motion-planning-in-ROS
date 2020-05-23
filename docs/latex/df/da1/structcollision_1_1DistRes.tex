@@ -12,38 +12,46 @@ Used to return information from the point to line distance function.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{structcollision_1_1DistRes_a1275e0b506edcd9aa0cdaa72a61d1ae7}{Dist\+Res} (bool status, double dist)
-\begin{DoxyCompactList}\small\item\em Create the result of the point to line distance function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{structcollision_1_1DistRes_ad71547d7a27b03b93e37fe5801ded765}\label{structcollision_1_1DistRes_ad71547d7a27b03b93e37fe5801ded765}} 
+\hyperlink{structcollision_1_1DistRes_ad71547d7a27b03b93e37fe5801ded765}{Dist\+Res} ()
+\begin{DoxyCompactList}\small\item\em default constructor -\/ initialize all to zeros \end{DoxyCompactList}\item 
+\hyperlink{structcollision_1_1DistRes_aa410e45b30d3371699c3bc4b97293437}{Dist\+Res} (bool status, double dist, rigid2d\+::\+Vector2D p)
+\begin{DoxyCompactList}\small\item\em C reate the result of the point to line distance function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structcollision_1_1DistRes_a9da4071fdc224d798adb12dcb1cfff58}\label{structcollision_1_1DistRes_a9da4071fdc224d798adb12dcb1cfff58}} 
-bool \hyperlink{structcollision_1_1DistRes_a9da4071fdc224d798adb12dcb1cfff58}{inside\+\_\+segment}
+bool \hyperlink{structcollision_1_1DistRes_a9da4071fdc224d798adb12dcb1cfff58}{inside\+\_\+segment} = false
 \begin{DoxyCompactList}\small\item\em True if the point lies inbetween the line segment bounds, False otherwise. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structcollision_1_1DistRes_a11d43615b27de89a62ef53a2075f72ee}\label{structcollision_1_1DistRes_a11d43615b27de89a62ef53a2075f72ee}} 
 double \hyperlink{structcollision_1_1DistRes_a11d43615b27de89a62ef53a2075f72ee}{distance} = 0
-\begin{DoxyCompactList}\small\item\em Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structcollision_1_1DistRes_a8bbf909cdbaba53fe0a98e4f3d312131}\label{structcollision_1_1DistRes_a8bbf909cdbaba53fe0a98e4f3d312131}} 
+rigid2d\+::\+Vector2D \hyperlink{structcollision_1_1DistRes_a8bbf909cdbaba53fe0a98e4f3d312131}{point}
+\begin{DoxyCompactList}\small\item\em the x,y coordinates of the closest point on the line or vertex \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Used to return information from the point to line distance function. 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{structcollision_1_1DistRes_a1275e0b506edcd9aa0cdaa72a61d1ae7}\label{structcollision_1_1DistRes_a1275e0b506edcd9aa0cdaa72a61d1ae7}} 
+\mbox{\Hypertarget{structcollision_1_1DistRes_aa410e45b30d3371699c3bc4b97293437}\label{structcollision_1_1DistRes_aa410e45b30d3371699c3bc4b97293437}} 
 \index{collision\+::\+Dist\+Res@{collision\+::\+Dist\+Res}!Dist\+Res@{Dist\+Res}}
 \index{Dist\+Res@{Dist\+Res}!collision\+::\+Dist\+Res@{collision\+::\+Dist\+Res}}
 \subsubsection{\texorpdfstring{Dist\+Res()}{DistRes()}}
-{\footnotesize\ttfamily collision\+::\+Dist\+Res\+::\+Dist\+Res (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{double}]{dist }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily collision\+::\+Dist\+Res\+::\+Dist\+Res (\begin{DoxyParamCaption}\item[{bool}]{status,  }\item[{double}]{dist,  }\item[{rigid2d\+::\+Vector2D}]{p }\end{DoxyParamCaption})}
 
 
 
-Create the result of the point to line distance function. 
+C reate the result of the point to line distance function. 
 
 
 \begin{DoxyParams}{Parameters}
 {\em status} & True if the point is within the line segment bounds \\
 \hline
 {\em dist} & Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex \\
+\hline
+{\em p} & point that correlates to the stored distance \\
 \hline
 \end{DoxyParams}
 

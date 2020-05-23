@@ -7,20 +7,20 @@ A library of utility functions for the various nodes and libraries of this packa
 
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include $<$Xml\+Rpc\+Value.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}nav\+\_\+msgs/\+Occupancy\+Grid.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker\+Array.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}visualization\+\_\+msgs/\+Marker.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}roadmap/grid.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
-Include dependency graph for utility.\+hpp\+:
-\nopagebreak
+{\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
+Include dependency graph for utility.\+hpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=350pt]{d1/d48/utility_8hpp__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file\+:
-\nopagebreak
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -36,11 +36,17 @@ std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{utility_8hpp_a9eb7f849405a
 \begin{DoxyCompactList}\small\item\em gerenate a vector of the 4 map verticies \end{DoxyCompactList}\item 
 geometry\+\_\+msgs\+::\+Point \hyperlink{utility_8hpp_a1e91b69142b37805ef41aee106cddf8f}{utility\+::\+Vec2\+D\+\_\+to\+\_\+\+Geo\+Pt} (rigid2d\+::\+Vector2D vec)
 \begin{DoxyCompactList}\small\item\em Convert a Vector2D into a geometry\+\_\+msgs/\+Point. \end{DoxyCompactList}\item 
+nav\+\_\+msgs\+::\+Occupancy\+Grid \hyperlink{utility_8hpp_ae03f3cd2b688f1a880d0f95813d66849}{utility\+::make\+\_\+grid\+\_\+msg} (\hyperlink{classgrid_1_1Grid}{grid\+::\+Grid} $\ast$grid, double cell\+\_\+size, double res)
+\begin{DoxyCompactList}\small\item\em Consruct a message for rviz to display a grid. \end{DoxyCompactList}\item 
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_accb979ad9aa17288c646b8bb14170568}{utility\+::make\+\_\+marker} (rigid2d\+::\+Vector2D robot, double scale, std\+::vector$<$ double $>$ color)
+\begin{DoxyCompactList}\small\item\em Create a Cube Marker based on a point. \end{DoxyCompactList}\item 
 visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_ae3740bbfe90dd11be460ac36c7533158}{utility\+::make\+\_\+marker} (\hyperlink{structprm_1_1Node}{prm\+::\+Node} node, double scale, std\+::vector$<$ double $>$ color)
 \begin{DoxyCompactList}\small\item\em Create a spherical Marker based on a node struct. \end{DoxyCompactList}\item 
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_ae0152eef7ad91c70e9fece5391acc15e}{utility\+::make\+\_\+marker} (std\+::vector$<$ rigid2d\+::\+Vector2D $>$ point\+\_\+list, double scale, std\+::vector$<$ double $>$ color)
+\begin{DoxyCompactList}\small\item\em Create a Points Marker based on a list of x,y coordinates. \end{DoxyCompactList}\item 
 visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_a0da197197906040138249e8b184fde69}{utility\+::make\+\_\+marker} (\hyperlink{structprm_1_1Edge}{prm\+::\+Edge} edge, double scale, std\+::vector$<$ double $>$ color)
 \begin{DoxyCompactList}\small\item\em Create a line Marker based on an edge struct. \end{DoxyCompactList}\item 
-visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_ae28ad60711c8cac4368b60ad407721d6}{utility\+::make\+\_\+marker} (rigid2d\+::\+Vector2D pt1, rigid2d\+::\+Vector2D pt2, int marker\+\_\+id, double scale, std\+::vector$<$ double $>$ color)
+visualization\+\_\+msgs\+::\+Marker \hyperlink{utility_8hpp_aafb2424890cf16344d658bcaaf76d4c6}{utility\+::make\+\_\+marker} (rigid2d\+::\+Vector2D pt1, rigid2d\+::\+Vector2D pt2, int marker\+\_\+id, double scale, std\+::vector$<$ double $>$ color, std\+::string ns=\char`\"{}Path\char`\"{})
 \begin{DoxyCompactList}\small\item\em Create a line Marker between two points. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -70,10 +76,54 @@ gerenate a vector of the 4 map verticies
 \begin{DoxyReturn}{Returns}
 a vector of the map verticies in ccw order 
 \end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_ae03f3cd2b688f1a880d0f95813d66849}\label{utility_8hpp_file_ae03f3cd2b688f1a880d0f95813d66849}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+grid\+\_\+msg@{make\+\_\+grid\+\_\+msg}}
+\index{make\+\_\+grid\+\_\+msg@{make\+\_\+grid\+\_\+msg}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+grid\+\_\+msg()}{make\_grid\_msg()}}
+{\footnotesize\ttfamily nav\+\_\+msgs\+::\+Occupancy\+Grid utility\+::make\+\_\+grid\+\_\+msg (\begin{DoxyParamCaption}\item[{\hyperlink{classgrid_1_1Grid}{grid\+::\+Grid} $\ast$}]{grid,  }\item[{double}]{cell\+\_\+size,  }\item[{double}]{res }\end{DoxyParamCaption})}
+
+
+
+Consruct a message for rviz to display a grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid} & a pointer to a built \hyperlink{classgrid_1_1Grid}{grid\+::\+Grid} \\
+\hline
+{\em cell\+\_\+size} & the size of a cell in meters \\
+\hline
+{\em res} & the resolution of the grid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+an Occupancy\+Grid message to publish 
+\end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_accb979ad9aa17288c646b8bb14170568}\label{utility_8hpp_file_accb979ad9aa17288c646b8bb14170568}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
+\index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{robot,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+
+
+
+Create a Cube Marker based on a point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot} & an x,y location of a robot \\
+\hline
+{\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
+\hline
+{\em color} & the r,g,b color values in a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a marker to add to the Marker\+Array 
+\end{DoxyReturn}
 \mbox{\Hypertarget{utility_8hpp_file_ae3740bbfe90dd11be460ac36c7533158}\label{utility_8hpp_file_ae3740bbfe90dd11be460ac36c7533158}} 
 \index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
 \index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
-\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
 {\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Node}{prm\+::\+Node}}]{node,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
 
 
@@ -92,10 +142,32 @@ Create a spherical Marker based on a node struct.
 \begin{DoxyReturn}{Returns}
 a marker to add to the Marker\+Array 
 \end{DoxyReturn}
+\mbox{\Hypertarget{utility_8hpp_file_ae0152eef7ad91c70e9fece5391acc15e}\label{utility_8hpp_file_ae0152eef7ad91c70e9fece5391acc15e}} 
+\index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
+\index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{std\+::vector$<$ rigid2d\+::\+Vector2D $>$}]{point\+\_\+list,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+
+
+
+Create a Points Marker based on a list of x,y coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point\+\_\+list} & a list of points to vizualize \\
+\hline
+{\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
+\hline
+{\em color} & the r,g,b color values in a vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a marker to add to the Marker\+Array 
+\end{DoxyReturn}
 \mbox{\Hypertarget{utility_8hpp_file_a0da197197906040138249e8b184fde69}\label{utility_8hpp_file_a0da197197906040138249e8b184fde69}} 
 \index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
 \index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
-\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
 {\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Edge}{prm\+::\+Edge}}]{edge,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
 
 
@@ -114,11 +186,11 @@ Create a line Marker based on an edge struct.
 \begin{DoxyReturn}{Returns}
 a marker to add to the Marker\+Array 
 \end{DoxyReturn}
-\mbox{\Hypertarget{utility_8hpp_file_ae28ad60711c8cac4368b60ad407721d6}\label{utility_8hpp_file_ae28ad60711c8cac4368b60ad407721d6}} 
+\mbox{\Hypertarget{utility_8hpp_file_aafb2424890cf16344d658bcaaf76d4c6}\label{utility_8hpp_file_aafb2424890cf16344d658bcaaf76d4c6}} 
 \index{utility.\+hpp@{utility.\+hpp}!make\+\_\+marker@{make\+\_\+marker}}
 \index{make\+\_\+marker@{make\+\_\+marker}!utility.\+hpp@{utility.\+hpp}}
-\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
-{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{pt1,  }\item[{rigid2d\+::\+Vector2D}]{pt2,  }\item[{int}]{marker\+\_\+id,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color }\end{DoxyParamCaption})}
+\subsubsection{\texorpdfstring{make\+\_\+marker()}{make\_marker()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily visualization\+\_\+msgs\+::\+Marker utility\+::make\+\_\+marker (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{pt1,  }\item[{rigid2d\+::\+Vector2D}]{pt2,  }\item[{int}]{marker\+\_\+id,  }\item[{double}]{scale,  }\item[{std\+::vector$<$ double $>$}]{color,  }\item[{std\+::string}]{ns = {\ttfamily \char`\"{}Path\char`\"{}} }\end{DoxyParamCaption})}
 
 
 
@@ -135,6 +207,8 @@ Create a line Marker between two points.
 {\em scale} & the amount to scale the preset marker size (should be graph cell size) \\
 \hline
 {\em color} & the r,g,b color values in a vector \\
+\hline
+{\em ns} & the namespace of the line segment, defaults to \char`\"{}\+Path\char`\"{} \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

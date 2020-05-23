@@ -3,6 +3,8 @@
 /// \file
 /// \brief A library containing classes to perform various types of search algorithms
 
+/// \def BIG_NUM
+/// \brief A number used to represent a large cost
 #define BIG_NUM 10000.0
 
 #include <cmath>
@@ -50,11 +52,11 @@ namespace hsearch
 
     double rhs_val = BIG_NUM; ///< another estimate of the start distance used for incremental search methods
 
-    Key key_val;
+    Key key_val; ///< key values used to sort a SearchNode in open list
 
     std::shared_ptr<prm::Node> parent_p = nullptr; ///< the parent of this node
 
-    status state = New;; ///< current status of the node
+    status state = New; ///< current status of the node
 
     /// \brief Default constructor
     SearchNode() {};
@@ -80,13 +82,13 @@ namespace hsearch
 
   /// \brief Overload the cout operator to print the info in a SearchNode
   /// \param os the output stream
-  /// \param n a SearchNode reference
+  /// \param n SearchNode reference
   /// \returns an output stream
   std::ostream & operator<<(std::ostream & os, const SearchNode & n);
 
   /// \brief Overload the cout operator to print the info in a Key
   /// \param os the output stream
-  /// \param n a Key reference
+  /// \param k a Key reference
   /// \returns an output stream
   std::ostream & operator<<(std::ostream & os, const Key & k);
 
@@ -105,12 +107,6 @@ namespace hsearch
     HSearch(std::vector<prm::Node>* node_list);
 
     /// \brief Initialize the search with a precontructed graph
-    /// \param node_list a pointer to a graph
-    /// \param map the known map used to create the graph
-    // HSearch(std::vector<prm::Node>* node_list, grid::Map map);
-
-    /// \brief Initialize the search with a precontructed graph
-    /// \param node_list a pointer to a graph
     /// \param map the known map used to create the graph
     HSearch(grid::Map map);
 
@@ -212,7 +208,7 @@ namespace hsearch
     void ComputeCost(SearchNode &s, SearchNode &sp);
   };
 
-  /// \brief a generic class to perform LPA* search
+  /// \brief a class to perform LPA* search
   class LPAStar : public HSearch
   {
   public:
@@ -222,6 +218,7 @@ namespace hsearch
 
     /// \brief provide the search with the beginning state of the map
     /// \param grid_graph reference to an existing grid
+    /// \param base_grid pointer to the Grid the search is using
     /// \param start_loc the location of the starting point in integer coordinates on the provided grid
     /// \param goal_loc the location of the goal point in integer coordinates on the provided grid
     LPAStar(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);
@@ -288,6 +285,7 @@ namespace hsearch
     bool is_consistent(SearchNode u) const;
   };
 
+  /// \brief a class to perform D* Lite search
   class DStarLite : public LPAStar
   {
   public:
@@ -297,6 +295,7 @@ namespace hsearch
 
     /// \brief provide the search with the beginning state of the map
     /// \param grid_graph reference to an existing grid
+    /// \param base_grid pointer to the Grid the search is using
     /// \param start_loc the location of the robot in integer coordinates on the provided grid
     /// \param goal_loc the location of the goal point in integer coordinates on the provided grid
     DStarLite(std::vector<std::vector<prm::Node>>* grid_graph, grid::Grid* base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc);

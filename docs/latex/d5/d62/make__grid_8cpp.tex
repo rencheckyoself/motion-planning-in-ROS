@@ -13,8 +13,7 @@ Node to create and draw a grid.
 {\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}roadmap/grid.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}roadmap/utility.\+hpp\char`\"{}}\newline
-Include dependency graph for make\+\_\+grid.\+cpp\+:
-\nopagebreak
+Include dependency graph for make\+\_\+grid.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -32,4 +31,4 @@ int {\bfseries main} (int argc, char $\ast$$\ast$argv)
 \subsection{Detailed Description}
 Node to create and draw a grid. 
 
-P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body cell\+\_\+size (double) scaling factor for the map grid\+\_\+res (double) scaling factor for the grid cell size P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers 
+P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body cell\+\_\+size (double) scaling factor for the map grid\+\_\+res (double) scaling factor for the grid cell size P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers /grid\+\_\+map (nav\+\_\+msgs\+::\+Occupancy\+Grid) occupancy data 

@@ -1,6 +1,7 @@
 <map id="roadmap/include/roadmap/collision.hpp" name="roadmap/include/roadmap/collision.hpp">
 <area shape="rect" id="node2" href="$dc/d40/heuristic__search_8cpp.html" title="A library containing classes to perform various types of search algorithms. " alt="" coords="5,95,197,136"/>
-<area shape="rect" id="node3" href="$df/d69/collision_8cpp.html" title="A library containing functions to detect various types of collisions. " alt="" coords="222,95,370,136"/>
-<area shape="rect" id="node4" href="$d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="394,95,542,136"/>
-<area shape="rect" id="node5" href="$d9/da7/prm_8cpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="566,95,714,136"/>
+<area shape="rect" id="node3" href="$d8/d34/potential__fields_8cpp.html" title="A library to plan based on a potential field. " alt="" coords="221,95,405,136"/>
+<area shape="rect" id="node4" href="$df/d69/collision_8cpp.html" title="A library containing functions to detect various types of collisions. " alt="" coords="430,95,578,136"/>
+<area shape="rect" id="node5" href="$d7/d70/grid_8cpp.html" title="A library for building an occupied grid. " alt="" coords="602,95,750,136"/>
+<area shape="rect" id="node6" href="$d9/da7/prm_8cpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="774,95,922,136"/>
 </map>

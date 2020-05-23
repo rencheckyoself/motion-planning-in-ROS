@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['sampleuniformdistribution',['sampleUniformDistribution',['../d9/da7/prm_8cpp.html#a88d1f8babd798649cc2fe9a223e48778',1,'prm']]],
-  ['searchnode',['SearchNode',['../d1/dd4/structhsearch_1_1SearchNode.html#a1e461dc25eef2e8de76dd7bd70042e22',1,'hsearch::SearchNode::SearchNode()'],['../d1/dd4/structhsearch_1_1SearchNode.html#abc34e7eab1d4b3d269f9b360b77936a5',1,'hsearch::SearchNode::SearchNode(const prm::Node &amp;n)']]]
+  ['roadmap',['RoadMap',['../d8/df3/classprm_1_1RoadMap.html#a877e89a3bd0b0df936181c94aaeacb59',1,'prm::RoadMap::RoadMap()'],['../d8/df3/classprm_1_1RoadMap.html#a95a183725f0ee0f2b0ce2643aa1ed870',1,'prm::RoadMap::RoadMap(std::vector&lt; double &gt; xboundary, std::vector&lt; double &gt; yboundary)'],['../d8/df3/classprm_1_1RoadMap.html#a1c44e6fa58b91b3b79bcf56e414dff44',1,'prm::RoadMap::RoadMap(std::vector&lt; std::vector&lt; rigid2d::Vector2D &gt;&gt; polygon_verticies, std::vector&lt; double &gt; xboundary, std::vector&lt; double &gt; yboundary)']]]
 ];

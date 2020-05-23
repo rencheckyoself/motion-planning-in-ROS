@@ -75,6 +75,14 @@ $(function() {
  <a href="../../d1/dd4/structhsearch_1_1SearchNode.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../dc/db1/heuristic__search_8hpp_source.html">heuristic_search.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for hsearch::SearchNode:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../db/d43/structhsearch_1_1SearchNode__coll__graph.png" border="0" usemap="#hsearch_1_1SearchNode_coll__map" alt="Collaboration graph"/></div>
+<map name="hsearch_1_1SearchNode_coll__map" id="hsearch_1_1SearchNode_coll__map">
+<area shape="rect" id="node2" href="../../d4/db3/structhsearch_1_1Key.html" title="the key values for a given node " alt="" coords="30,5,129,32"/>
+</map>
+<center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -85,17 +93,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abc34e7eab1d4b3d269f9b360b77936a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#abc34e7eab1d4b3d269f9b360b77936a5">SearchNode</a> (const <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &amp;n)</td></tr>
 <tr class="memdesc:abc34e7eab1d4b3d269f9b360b77936a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new start node.  <a href="#abc34e7eab1d4b3d269f9b360b77936a5">More...</a><br /></td></tr>
 <tr class="separator:abc34e7eab1d4b3d269f9b360b77936a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b8eea07c7013c327c70723182e43561"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a0b8eea07c7013c327c70723182e43561">CalcKey</a> (double km=0)</td></tr>
+<tr class="memdesc:a0b8eea07c7013c327c70723182e43561"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the key values for a node.  <a href="#a0b8eea07c7013c327c70723182e43561">More...</a><br /></td></tr>
+<tr class="separator:a0b8eea07c7013c327c70723182e43561"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a936d6ea25917367b88adde4748c9143c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a936d6ea25917367b88adde4748c9143c">operator&lt;</a> (const <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> &amp;rhs) const</td></tr>
-<tr class="memdesc:a936d6ea25917367b88adde4748c9143c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom function used for proper sorting of the open list.  <a href="#a936d6ea25917367b88adde4748c9143c">More...</a><br /></td></tr>
+<tr class="memdesc:a936d6ea25917367b88adde4748c9143c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom function used for proper sorting of the open list by comparing the key values.  <a href="#a936d6ea25917367b88adde4748c9143c">More...</a><br /></td></tr>
 <tr class="separator:a936d6ea25917367b88adde4748c9143c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a492955fe1a5cdfae1dc0474232cb7175"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a492955fe1a5cdfae1dc0474232cb7175">operator&gt;</a> (const <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> &amp;rhs) const</td></tr>
-<tr class="memdesc:a492955fe1a5cdfae1dc0474232cb7175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom function used for proper sorting of the open list.  <a href="#a492955fe1a5cdfae1dc0474232cb7175">More...</a><br /></td></tr>
+<tr class="memdesc:a492955fe1a5cdfae1dc0474232cb7175"><td class="mdescLeft">&#160;</td><td class="mdescRight">Custom function used for proper sorting of the open list by comparing the key values.  <a href="#a492955fe1a5cdfae1dc0474232cb7175">More...</a><br /></td></tr>
 <tr class="separator:a492955fe1a5cdfae1dc0474232cb7175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a891ec15f4f07e474fda39978a6ca6902"><td class="memItemLeft" align="right" valign="top"><a id="a891ec15f4f07e474fda39978a6ca6902"></a>
-std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a891ec15f4f07e474fda39978a6ca6902">node_p</a></td></tr>
+std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a891ec15f4f07e474fda39978a6ca6902">node_p</a> = nullptr</td></tr>
 <tr class="memdesc:a891ec15f4f07e474fda39978a6ca6902"><td class="mdescLeft">&#160;</td><td class="mdescRight">contains info about ID, location and, neighbors <br /></td></tr>
 <tr class="separator:a891ec15f4f07e474fda39978a6ca6902"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0e32e34e1e2682c0cc7968df6dd7b85"><td class="memItemLeft" align="right" valign="top"><a id="ab0e32e34e1e2682c0cc7968df6dd7b85"></a>
@@ -103,23 +114,31 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
 <tr class="memdesc:ab0e32e34e1e2682c0cc7968df6dd7b85"><td class="mdescLeft">&#160;</td><td class="mdescRight">a unique id for the search node created <br /></td></tr>
 <tr class="separator:ab0e32e34e1e2682c0cc7968df6dd7b85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f9510192452ac5efd6733eadfee38c2"><td class="memItemLeft" align="right" valign="top"><a id="a0f9510192452ac5efd6733eadfee38c2"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a0f9510192452ac5efd6733eadfee38c2">f_val</a></td></tr>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a0f9510192452ac5efd6733eadfee38c2">f_val</a> = <a class="el" href="../../d9/d31/potential__fields_8hpp.html#a44b8ad40964aabfb40ae3a0625190475">BIG_NUM</a></td></tr>
 <tr class="memdesc:a0f9510192452ac5efd6733eadfee38c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">total node cost <br /></td></tr>
 <tr class="separator:a0f9510192452ac5efd6733eadfee38c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc0b32b3c3c748e6585b76fc53553063"><td class="memItemLeft" align="right" valign="top"><a id="afc0b32b3c3c748e6585b76fc53553063"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#afc0b32b3c3c748e6585b76fc53553063">g_val</a></td></tr>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#afc0b32b3c3c748e6585b76fc53553063">g_val</a> = <a class="el" href="../../d9/d31/potential__fields_8hpp.html#a44b8ad40964aabfb40ae3a0625190475">BIG_NUM</a></td></tr>
 <tr class="memdesc:afc0b32b3c3c748e6585b76fc53553063"><td class="mdescLeft">&#160;</td><td class="mdescRight">path cost from start to this <br /></td></tr>
 <tr class="separator:afc0b32b3c3c748e6585b76fc53553063"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e25282237951762ced727eb0097abd9"><td class="memItemLeft" align="right" valign="top"><a id="a8e25282237951762ced727eb0097abd9"></a>
-double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a8e25282237951762ced727eb0097abd9">h_val</a></td></tr>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a8e25282237951762ced727eb0097abd9">h_val</a> = <a class="el" href="../../d9/d31/potential__fields_8hpp.html#a44b8ad40964aabfb40ae3a0625190475">BIG_NUM</a></td></tr>
 <tr class="memdesc:a8e25282237951762ced727eb0097abd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">estimated cost from this to goal <br /></td></tr>
 <tr class="separator:a8e25282237951762ced727eb0097abd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85d37c5e72aa9fd323f68467f60c5eb0"><td class="memItemLeft" align="right" valign="top"><a id="a85d37c5e72aa9fd323f68467f60c5eb0"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#a85d37c5e72aa9fd323f68467f60c5eb0">rhs_val</a> = <a class="el" href="../../d9/d31/potential__fields_8hpp.html#a44b8ad40964aabfb40ae3a0625190475">BIG_NUM</a></td></tr>
+<tr class="memdesc:a85d37c5e72aa9fd323f68467f60c5eb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">another estimate of the start distance used for incremental search methods <br /></td></tr>
+<tr class="separator:a85d37c5e72aa9fd323f68467f60c5eb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc5f4fb44ebe73e41ffdc6c5d22c526b"><td class="memItemLeft" align="right" valign="top"><a id="adc5f4fb44ebe73e41ffdc6c5d22c526b"></a>
+<a class="el" href="../../d4/db3/structhsearch_1_1Key.html">Key</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#adc5f4fb44ebe73e41ffdc6c5d22c526b">key_val</a></td></tr>
+<tr class="memdesc:adc5f4fb44ebe73e41ffdc6c5d22c526b"><td class="mdescLeft">&#160;</td><td class="mdescRight">key values used to sort a <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. ">SearchNode</a> in open list <br /></td></tr>
+<tr class="separator:adc5f4fb44ebe73e41ffdc6c5d22c526b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad651df3e918ceb891c294945e9e41598"><td class="memItemLeft" align="right" valign="top"><a id="ad651df3e918ceb891c294945e9e41598"></a>
-std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#ad651df3e918ceb891c294945e9e41598">parent_p</a></td></tr>
+std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#ad651df3e918ceb891c294945e9e41598">parent_p</a> = nullptr</td></tr>
 <tr class="memdesc:ad651df3e918ceb891c294945e9e41598"><td class="mdescLeft">&#160;</td><td class="mdescRight">the parent of this node <br /></td></tr>
 <tr class="separator:ad651df3e918ceb891c294945e9e41598"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae137174b53abd37ea386f3e3d9ebf462"><td class="memItemLeft" align="right" valign="top"><a id="ae137174b53abd37ea386f3e3d9ebf462"></a>
-<a class="el" href="../../dc/db1/heuristic__search_8hpp.html#a544e6b02038f7495f0ef622404fdfd79">status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#ae137174b53abd37ea386f3e3d9ebf462">state</a></td></tr>
+<a class="el" href="../../dc/db1/heuristic__search_8hpp.html#a544e6b02038f7495f0ef622404fdfd79">status</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html#ae137174b53abd37ea386f3e3d9ebf462">state</a> = New</td></tr>
 <tr class="memdesc:ae137174b53abd37ea386f3e3d9ebf462"><td class="mdescLeft">&#160;</td><td class="mdescRight">current status of the node <br /></td></tr>
 <tr class="separator:ae137174b53abd37ea386f3e3d9ebf462"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -153,6 +172,32 @@ std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0b8eea07c7013c327c70723182e43561"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b8eea07c7013c327c70723182e43561">&#9670;&nbsp;</a></span>CalcKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void hsearch::SearchNode::CalcKey </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>km</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update the key values for a node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">km</td><td>(optional) the key modifier used in an incremental D* search, defaults to 0 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a936d6ea25917367b88adde4748c9143c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a936d6ea25917367b88adde4748c9143c">&#9670;&nbsp;</a></span>operator<()</h2>
 
@@ -169,7 +214,7 @@ std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm
       </table>
 </div><div class="memdoc">
 
-<p>Custom function used for proper sorting of the open list. </p>
+<p>Custom function used for proper sorting of the open list by comparing the key values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rhs</td><td>another <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. ">SearchNode</a> to compare against </td></tr>
@@ -196,7 +241,7 @@ std::shared_ptr&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm
       </table>
 </div><div class="memdoc">
 
-<p>Custom function used for proper sorting of the open list. </p>
+<p>Custom function used for proper sorting of the open list by comparing the key values. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">rhs</td><td>another <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. ">SearchNode</a> to compare against </td></tr>

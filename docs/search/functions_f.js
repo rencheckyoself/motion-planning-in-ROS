@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['updatevertex',['UpdateVertex',['../d0/dde/classhsearch_1_1HSearch.html#a93f71cc1b8e8b126ef61ab2a1a599498',1,'hsearch::HSearch']]]
+  ['thetastar',['ThetaStar',['../da/dce/classhsearch_1_1ThetaStar.html#a9c3540ce3c1e93b8053eb97e62d71145',1,'hsearch::ThetaStar']]]
 ];

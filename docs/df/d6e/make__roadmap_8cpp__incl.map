@@ -1,4 +1,5 @@
 <map id="roadmap/src/make_roadmap.cpp" name="roadmap/src/make_roadmap.cpp">
-<area shape="rect" id="node9" href="$da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="79,162,201,189"/>
-<area shape="rect" id="node11" href="$d1/d4e/utility_8hpp.html" title="A library of utility functions for the various nodes and libraries of this package. " alt="" coords="277,80,409,107"/>
+<area shape="rect" id="node9" href="$da/d34/prm_8hpp.html" title="A library for building a Probabilistic Road Map. " alt="" coords="686,244,809,271"/>
+<area shape="rect" id="node11" href="$d1/d4e/utility_8hpp.html" title="A library of utility functions for the various nodes and libraries of this package. " alt="" coords="488,80,620,107"/>
+<area shape="rect" id="node13" href="$dc/d8a/grid_8hpp.html" title="A library for building an occupancy grid. " alt="" coords="534,162,657,189"/>
 </map>

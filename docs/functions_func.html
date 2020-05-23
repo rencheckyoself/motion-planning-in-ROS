@@ -66,6 +66,7 @@ $(function() {
 </li>
 <li>assemble_path()
 : <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#ac94c08c0f0d4cc3076f01d70c6cd7679">hsearch::HSearch</a>
+, <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#aae9f9031efbe788a83f842905b63e2aa">hsearch::LPAStar</a>
 </li>
 <li>AStar()
 : <a class="el" href="d4/d52/classhsearch_1_1AStar.html#ad3897420abd92fefbd9e9270689418b8">hsearch::AStar</a>
@@ -84,20 +85,35 @@ $(function() {
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>CalcKey()
+: <a class="el" href="d1/dd4/structhsearch_1_1SearchNode.html#a0b8eea07c7013c327c70723182e43561">hsearch::SearchNode</a>
+</li>
 <li>ComputeCost()
 : <a class="el" href="d4/d52/classhsearch_1_1AStar.html#a3a9a3c398437d9efe0b9943c29a8672b">hsearch::AStar</a>
 , <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a5d325955c4faedaca0c68155fd1f7e69">hsearch::HSearch</a>
+, <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#aaeb55f7d05b4952247e492a7db18438d">hsearch::LPAStar</a>
 , <a class="el" href="da/dce/classhsearch_1_1ThetaStar.html#a852af6d668cbb3f58079125ba5740853">hsearch::ThetaStar</a>
 </li>
 <li>ComputeShortestPath()
 : <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a8641b99479bbdf017bf5a1168b763c27">hsearch::HSearch</a>
+, <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#abccf3f72259c5311b62ffbfdf78a3de4">hsearch::LPAStar</a>
 </li>
 </ul>
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
 <li>DistRes()
-: <a class="el" href="df/da1/structcollision_1_1DistRes.html#a1275e0b506edcd9aa0cdaa72a61d1ae7">collision::DistRes</a>
+: <a class="el" href="df/da1/structcollision_1_1DistRes.html#ad71547d7a27b03b93e37fe5801ded765">collision::DistRes</a>
+</li>
+<li>DStarLite()
+: <a class="el" href="df/d60/classhsearch_1_1DStarLite.html#a0cbed5526d90c0d37261fb501be9cd0a">hsearch::DStarLite</a>
+</li>
+</ul>
+
+
+<h3><a id="index_e"></a>- e -</h3><ul>
+<li>edge_cost()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#a92e2fda4e5b1f8ab77297d8cd45e56a7">hsearch::LPAStar</a>
 </li>
 </ul>
 
@@ -113,23 +129,44 @@ $(function() {
 <li>g()
 : <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a687960c8dcfc61e16613a72a4ff1c14d">hsearch::HSearch</a>
 </li>
+<li>generate_centers_graph()
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a6620e51207bbd6ca60f868b120cb7e04">grid::Grid</a>
+</li>
 <li>get_edges()
-: <a class="el" href="d8/df3/classprm_1_1RoadMap.html#a9be7cb5cac090269e00125cc7dc0cfd6">prm::RoadMap</a>
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a22f08e25cb643d8813fc4332300185b7">grid::Grid</a>
+, <a class="el" href="d8/df3/classprm_1_1RoadMap.html#a9be7cb5cac090269e00125cc7dc0cfd6">prm::RoadMap</a>
+</li>
+<li>get_expanded_nodes()
+: <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a93b63eb8983863eb40f7bb1f28af5c36">hsearch::HSearch</a>
+</li>
+<li>get_goal_key()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#abffa3312bfb076a9c48ca40de32ec9b2">hsearch::LPAStar</a>
 </li>
 <li>get_grid()
-: <a class="el" href="de/d83/classgrid_1_1Grid.html#ab02f152b741c1abe5cba51431f100ccf">grid::Grid</a>
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a9efaa72e19c8351e1979c6ac18517de4">grid::Grid</a>
 </li>
 <li>get_grid_dimensions()
 : <a class="el" href="de/d83/classgrid_1_1Grid.html#ab5da2712457e615bb12ca6d5fc1f1b9d">grid::Grid</a>
 </li>
+<li>get_grid_flatten()
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a7c05ad9408e0ff99e36a3196136f3bb7">grid::Grid</a>
+</li>
 <li>get_nodes()
-: <a class="el" href="d8/df3/classprm_1_1RoadMap.html#a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0">prm::RoadMap</a>
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a28e01687d0e3e922607e67b3d1d862b6">grid::Grid</a>
+, <a class="el" href="d8/df3/classprm_1_1RoadMap.html#a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0">prm::RoadMap</a>
+</li>
+<li>get_nodes_flatten()
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#adc6f8296117527ab16f352806e9dc1d6">grid::Grid</a>
 </li>
 <li>get_path()
 : <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a2dbcfc312e89d60d9ec9b85eef271cbf">hsearch::HSearch</a>
+, <a class="el" href="d5/d13/classpfield_1_1PtField.html#ab936f2bf686f45a2a11825e5a8911356">pfield::PtField</a>
+</li>
+<li>goal_is_consistent()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#a999387c32e95f4b00a9251c5adae4aa5">hsearch::LPAStar</a>
 </li>
 <li>Grid()
-: <a class="el" href="de/d83/classgrid_1_1Grid.html#afcee115a9437842956e1efe9e202c302">grid::Grid</a>
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#a3fd6c9bb56bc7ae63d6126312e001f23">grid::Grid</a>
 </li>
 <li>grid_to_world()
 : <a class="el" href="de/d83/classgrid_1_1Grid.html#a740d72189efbdf5595c3ddaacc8cdfc4">grid::Grid</a>
@@ -142,14 +179,27 @@ $(function() {
 : <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#aa09bc55605f454f822892a40e580b164">hsearch::HSearch</a>
 </li>
 <li>HSearch()
-: <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a88c750ab9e6c9ad303f468ef270619c3">hsearch::HSearch</a>
+: <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a58bce8362211fa679ebf8200dc31d03d">hsearch::HSearch</a>
 </li>
 </ul>
 
 
 <h3><a id="index_i"></a>- i -</h3><ul>
+<li>is_consistent()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#a034b8a41e91d684932dd014139c4fcd1">hsearch::LPAStar</a>
+</li>
 <li>IsConnected()
 : <a class="el" href="de/d19/structprm_1_1Node.html#a166ab395f8fcb59f5d5367ca45f7bf51">prm::Node</a>
+</li>
+</ul>
+
+
+<h3><a id="index_l"></a>- l -</h3><ul>
+<li>locate_node()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#ad5b74c1a38d9db460324fcb1784ac114">hsearch::LPAStar</a>
+</li>
+<li>LPAStar()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#a4272517c63ee82c3b745cbaaa0b98a59">hsearch::LPAStar</a>
 </li>
 </ul>
 
@@ -158,16 +208,31 @@ $(function() {
 <li>Map()
 : <a class="el" href="d9/d0a/structgrid_1_1Map.html#aeedaf34b4dcd443691c796637cea73ce">grid::Map</a>
 </li>
+<li>MapChange()
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#ad5ba304f7a500b285d4878ee2090f7c3">hsearch::LPAStar</a>
+</li>
 </ul>
 
 
 <h3><a id="index_o"></a>- o -</h3><ul>
 <li>operator&lt;()
-: <a class="el" href="d1/dd4/structhsearch_1_1SearchNode.html#a936d6ea25917367b88adde4748c9143c">hsearch::SearchNode</a>
+: <a class="el" href="d4/db3/structhsearch_1_1Key.html#a869b0689bb15fdd6e5578f9d4fc466a6">hsearch::Key</a>
+, <a class="el" href="d1/dd4/structhsearch_1_1SearchNode.html#a936d6ea25917367b88adde4748c9143c">hsearch::SearchNode</a>
 , <a class="el" href="de/d19/structprm_1_1Node.html#ad414f13a52664be229be3a594613fb45">prm::Node</a>
 </li>
 <li>operator&gt;()
-: <a class="el" href="d1/dd4/structhsearch_1_1SearchNode.html#a492955fe1a5cdfae1dc0474232cb7175">hsearch::SearchNode</a>
+: <a class="el" href="d4/db3/structhsearch_1_1Key.html#a14fb1a53446fb9be30c4d8d584406511">hsearch::Key</a>
+, <a class="el" href="d1/dd4/structhsearch_1_1SearchNode.html#a492955fe1a5cdfae1dc0474232cb7175">hsearch::SearchNode</a>
+</li>
+</ul>
+
+
+<h3><a id="index_p"></a>- p -</h3><ul>
+<li>PlanOneStep()
+: <a class="el" href="d5/d13/classpfield_1_1PtField.html#af1faea5a1127d6df5e06727391227ade">pfield::PtField</a>
+</li>
+<li>PtField()
+: <a class="el" href="d5/d13/classpfield_1_1PtField.html#aee7dcc713ac6d16364e8bebe2da64681">pfield::PtField</a>
 </li>
 </ul>
 
@@ -194,8 +259,14 @@ $(function() {
 
 
 <h3><a id="index_u"></a>- u -</h3><ul>
+<li>update_grid()
+: <a class="el" href="de/d83/classgrid_1_1Grid.html#adc9dda8d5d6bca20697790712b154cc1">grid::Grid</a>
+</li>
+<li>UpdateRobotLoc()
+: <a class="el" href="df/d60/classhsearch_1_1DStarLite.html#ab4ed525aef3cc48661458cf0e96acfb7">hsearch::DStarLite</a>
+</li>
 <li>UpdateVertex()
-: <a class="el" href="d0/dde/classhsearch_1_1HSearch.html#a93f71cc1b8e8b126ef61ab2a1a599498">hsearch::HSearch</a>
+: <a class="el" href="d8/d70/classhsearch_1_1LPAStar.html#a41219de9a23ffe245589dc34a35e0639">hsearch::LPAStar</a>
 </li>
 </ul>
 

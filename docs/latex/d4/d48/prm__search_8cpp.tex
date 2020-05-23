@@ -2,7 +2,7 @@
 \label{prm__search_8cpp}\index{global\+\_\+search/src/prm\+\_\+search.\+cpp@{global\+\_\+search/src/prm\+\_\+search.\+cpp}}
 
 
-Node to create and draw a probabilistic road map.  
+Node to create, draw, and plan on a probabilistic road map.  
 
 
 {\ttfamily \#include $<$vector$>$}\newline
@@ -16,8 +16,7 @@ Node to create and draw a probabilistic road map.
 {\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}roadmap/prm.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}roadmap/utility.\+hpp\char`\"{}}\newline
-Include dependency graph for prm\+\_\+search.\+cpp\+:
-\nopagebreak
+Include dependency graph for prm\+\_\+search.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -33,6 +32,6 @@ int {\bfseries main} (int argc, char $\ast$$\ast$argv)
 
 
 \subsection{Detailed Description}
-Node to create and draw a probabilistic road map. 
+Node to create, draw, and plan on a probabilistic road map. 
 
-P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body k\+\_\+nearest (unsigned int) number of neighboring verticies to match to graph\+\_\+size (unsigned int) number of nodes to use to build the graph r (std\+::vector$<$int$>$) color values g (std\+::vector$<$int$>$) color values b (std\+::vector$<$int$>$) color values 
+P\+A\+R\+A\+M\+E\+T\+E\+RS\+: obstacles (std\+::vector$<$std\+::vector$<$std\+::vector$<$double$>$) a vector of polygons represented by a vector of x,y coords for the verticies map\+\_\+x\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}xmin, xmax\mbox{]} of the map map\+\_\+y\+\_\+lims (std\+::vector$<$double$>$) \mbox{[}ymin, ymax\mbox{]} of the map robot\+\_\+radius (double) buffer radius to avoid collisions with the robot body k\+\_\+nearest (unsigned int) number of neighboring verticies to match to graph\+\_\+size (unsigned int) number of nodes to use to build the graph r (std\+::vector$<$int$>$) color values g (std\+::vector$<$int$>$) color values b (std\+::vector$<$int$>$) color values start std\+::vector$<$double$>$ two double values representing the x,y of the start point goal std\+::vector$<$double$>$ two double values representing the x,y of the goal point P\+U\+B\+L\+I\+S\+H\+ES\+: /visualization\+\_\+marker\+\_\+array (visualization\+\_\+msgs\+::\+Marker\+Array) markers /grid\+\_\+map (nav\+\_\+msgs\+::\+Occupancy\+Grid) occupancy data 

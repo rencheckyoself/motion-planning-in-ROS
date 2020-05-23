@@ -21,7 +21,20 @@ Class to create a \hyperlink{classgrid_1_1Grid}{Grid} overlay for provided \hype
 \begin{DoxyCompactList}\small\item\em Initialization to construct a grid in a user defined area with obstacles. \end{DoxyCompactList}\item 
 void \hyperlink{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}{build\+\_\+grid} (double cell\+\_\+size, unsigned int grid\+\_\+res, double robot\+\_\+radius)
 \begin{DoxyCompactList}\small\item\em Function to call all nessissary functions to build the grid. \end{DoxyCompactList}\item 
-std\+::vector$<$ signed char $>$ \hyperlink{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}{get\+\_\+grid} () const
+\mbox{\Hypertarget{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}\label{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}} 
+void \hyperlink{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}{generate\+\_\+centers\+\_\+graph} ()
+\begin{DoxyCompactList}\small\item\em Function to generate an 8 neighbor connected graph structure based on grid cell center locations. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ \hyperlink{classgrid_1_1Grid_adc9dda8d5d6bca20697790712b154cc1}{update\+\_\+grid} (std\+::vector$<$ std\+::pair$<$ rigid2d\+::\+Vector2D, signed char $>$$>$ points)
+\begin{DoxyCompactList}\small\item\em Update the existing occupancy data with new information -\/ Note this does not update the stored \hyperlink{structgrid_1_1Map}{Map} variables, so calling \char`\"{}build\+\_\+grid\char`\"{} will revert the occ data based on the map used to create the grid. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $>$ \hyperlink{classgrid_1_1Grid_a28e01687d0e3e922607e67b3d1d862b6}{get\+\_\+nodes} () const
+\begin{DoxyCompactList}\small\item\em Retrive the nodes in a 2D vector in the shape of the grid. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{classgrid_1_1Grid_adc6f8296117527ab16f352806e9dc1d6}{get\+\_\+nodes\+\_\+flatten} () const
+\begin{DoxyCompactList}\small\item\em Retrive the nodes in row major order. \end{DoxyCompactList}\item 
+std\+::vector$<$ \hyperlink{structprm_1_1Edge}{prm\+::\+Edge} $>$ \hyperlink{classgrid_1_1Grid_a22f08e25cb643d8813fc4332300185b7}{get\+\_\+edges} () const
+\begin{DoxyCompactList}\small\item\em Retrive the unique edges in the graph. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ signed char $>$ $>$ \hyperlink{classgrid_1_1Grid_a9efaa72e19c8351e1979c6ac18517de4}{get\+\_\+grid} () const
+\begin{DoxyCompactList}\small\item\em retrieve the built grid \end{DoxyCompactList}\item 
+std\+::vector$<$ signed char $>$ \hyperlink{classgrid_1_1Grid_a7c05ad9408e0ff99e36a3196136f3bb7}{get\+\_\+grid\+\_\+flatten} () const
 \begin{DoxyCompactList}\small\item\em convert the grid data into a in row major order with the first element corresponding to the lower left corner. \end{DoxyCompactList}\item 
 std\+::vector$<$ int $>$ \hyperlink{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}{get\+\_\+grid\+\_\+dimensions} () const
 \begin{DoxyCompactList}\small\item\em get the height and width of the grid \end{DoxyCompactList}\item 
@@ -93,18 +106,31 @@ Function to call all nessissary functions to build the grid.
 {\em robot\+\_\+radius} & the radius to use as a buffer around the robot for collision detection \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}\label{classgrid_1_1Grid_ab02f152b741c1abe5cba51431f100ccf}} 
+\mbox{\Hypertarget{classgrid_1_1Grid_a22f08e25cb643d8813fc4332300185b7}\label{classgrid_1_1Grid_a22f08e25cb643d8813fc4332300185b7}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+edges@{get\+\_\+edges}}
+\index{get\+\_\+edges@{get\+\_\+edges}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+edges()}{get\_edges()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{structprm_1_1Edge}{prm\+::\+Edge} $>$ grid\+::\+Grid\+::get\+\_\+edges (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrive the unique edges in the graph. 
+
+\begin{DoxyReturn}{Returns}
+all the unique edges 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_a9efaa72e19c8351e1979c6ac18517de4}\label{classgrid_1_1Grid_a9efaa72e19c8351e1979c6ac18517de4}} 
 \index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+grid@{get\+\_\+grid}}
 \index{get\+\_\+grid@{get\+\_\+grid}!grid\+::\+Grid@{grid\+::\+Grid}}
 \subsubsection{\texorpdfstring{get\+\_\+grid()}{get\_grid()}}
-{\footnotesize\ttfamily std\+::vector$<$ signed char $>$ grid\+::\+Grid\+::get\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ signed char $>$ $>$ grid\+::\+Grid\+::get\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 
 
-convert the grid data into a in row major order with the first element corresponding to the lower left corner. 
+retrieve the built grid 
 
 \begin{DoxyReturn}{Returns}
-grid occupancy data in row major order 
+grid occupancy data as a vector of vectors. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}\label{classgrid_1_1Grid_ab5da2712457e615bb12ca6d5fc1f1b9d}} 
 \index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+grid\+\_\+dimensions@{get\+\_\+grid\+\_\+dimensions}}
@@ -118,6 +144,45 @@ get the height and width of the grid
 
 \begin{DoxyReturn}{Returns}
 the grid dimensions in number of cells 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_a7c05ad9408e0ff99e36a3196136f3bb7}\label{classgrid_1_1Grid_a7c05ad9408e0ff99e36a3196136f3bb7}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+grid\+\_\+flatten@{get\+\_\+grid\+\_\+flatten}}
+\index{get\+\_\+grid\+\_\+flatten@{get\+\_\+grid\+\_\+flatten}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+grid\+\_\+flatten()}{get\_grid\_flatten()}}
+{\footnotesize\ttfamily std\+::vector$<$ signed char $>$ grid\+::\+Grid\+::get\+\_\+grid\+\_\+flatten (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+convert the grid data into a in row major order with the first element corresponding to the lower left corner. 
+
+\begin{DoxyReturn}{Returns}
+grid occupancy data in row major order 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_a28e01687d0e3e922607e67b3d1d862b6}\label{classgrid_1_1Grid_a28e01687d0e3e922607e67b3d1d862b6}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+nodes@{get\+\_\+nodes}}
+\index{get\+\_\+nodes@{get\+\_\+nodes}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+nodes()}{get\_nodes()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $>$ grid\+::\+Grid\+::get\+\_\+nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrive the nodes in a 2D vector in the shape of the grid. 
+
+\begin{DoxyReturn}{Returns}
+the nodes in a structure matching the grid 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_adc6f8296117527ab16f352806e9dc1d6}\label{classgrid_1_1Grid_adc6f8296117527ab16f352806e9dc1d6}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+nodes\+\_\+flatten@{get\+\_\+nodes\+\_\+flatten}}
+\index{get\+\_\+nodes\+\_\+flatten@{get\+\_\+nodes\+\_\+flatten}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{get\+\_\+nodes\+\_\+flatten()}{get\_nodes\_flatten()}}
+{\footnotesize\ttfamily std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ grid\+::\+Grid\+::get\+\_\+nodes\+\_\+flatten (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Retrive the nodes in row major order. 
+
+\begin{DoxyReturn}{Returns}
+the nodes in a single row vector 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8cdfc4}\label{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8cdfc4}} 
 \index{grid\+::\+Grid@{grid\+::\+Grid}!grid\+\_\+to\+\_\+world@{grid\+\_\+to\+\_\+world}}
@@ -136,6 +201,24 @@ convert from grid coordinates (integers) to world coordinates (meters)
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 matching world coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classgrid_1_1Grid_adc9dda8d5d6bca20697790712b154cc1}\label{classgrid_1_1Grid_adc9dda8d5d6bca20697790712b154cc1}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!update\+\_\+grid@{update\+\_\+grid}}
+\index{update\+\_\+grid@{update\+\_\+grid}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{update\+\_\+grid()}{update\_grid()}}
+{\footnotesize\ttfamily std\+::vector$<$ int $>$ grid\+::\+Grid\+::update\+\_\+grid (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::pair$<$ rigid2d\+::\+Vector2D, signed char $>$$>$}]{points }\end{DoxyParamCaption})}
+
+
+
+Update the existing occupancy data with new information -\/ Note this does not update the stored \hyperlink{structgrid_1_1Map}{Map} variables, so calling \char`\"{}build\+\_\+grid\char`\"{} will revert the occ data based on the map used to create the grid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & pairs of grid cell locations and new occupancy data to potentially update. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of boolean values\+: True if the new point info actually caused a change in the occupancy data from free to occupied, otherwise False. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}\label{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}} 
 \index{grid\+::\+Grid@{grid\+::\+Grid}!world\+\_\+to\+\_\+grid@{world\+\_\+to\+\_\+grid}}

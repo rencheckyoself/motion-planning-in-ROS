@@ -9,6 +9,15 @@ Information used by a search algorithm.
 
 {\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
 
+
+
+Collaboration diagram for hsearch\+:\+:Search\+Node\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{db/d43/structhsearch_1_1SearchNode__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -17,33 +26,41 @@ Information used by a search algorithm.
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \hyperlink{structhsearch_1_1SearchNode_abc34e7eab1d4b3d269f9b360b77936a5}{Search\+Node} (const \hyperlink{structprm_1_1Node}{prm\+::\+Node} \&n)
 \begin{DoxyCompactList}\small\item\em Create a new start node. \end{DoxyCompactList}\item 
+void \hyperlink{structhsearch_1_1SearchNode_a0b8eea07c7013c327c70723182e43561}{Calc\+Key} (double km=0)
+\begin{DoxyCompactList}\small\item\em Update the key values for a node. \end{DoxyCompactList}\item 
 bool \hyperlink{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}{operator$<$} (const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&rhs) const
-\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list by comparing the key values. \end{DoxyCompactList}\item 
 bool \hyperlink{structhsearch_1_1SearchNode_a492955fe1a5cdfae1dc0474232cb7175}{operator$>$} (const \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} \&rhs) const
-\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Custom function used for proper sorting of the open list by comparing the key values. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}\label{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}} 
-std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}{node\+\_\+p}
+std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_a891ec15f4f07e474fda39978a6ca6902}{node\+\_\+p} = nullptr
 \begin{DoxyCompactList}\small\item\em contains info about ID, location and, neighbors \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}\label{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}} 
 int \hyperlink{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}{search\+\_\+id} = 0
 \begin{DoxyCompactList}\small\item\em a unique id for the search node created \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}\label{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}} 
-double \hyperlink{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}{f\+\_\+val}
+double \hyperlink{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}{f\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
 \begin{DoxyCompactList}\small\item\em total node cost \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}\label{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}} 
-double \hyperlink{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}{g\+\_\+val}
+double \hyperlink{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}{g\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
 \begin{DoxyCompactList}\small\item\em path cost from start to this \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}\label{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}} 
-double \hyperlink{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}{h\+\_\+val}
+double \hyperlink{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}{h\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
 \begin{DoxyCompactList}\small\item\em estimated cost from this to goal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}\label{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}} 
+double \hyperlink{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}{rhs\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+\begin{DoxyCompactList}\small\item\em another estimate of the start distance used for incremental search methods \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}\label{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}} 
+\hyperlink{structhsearch_1_1Key}{Key} \hyperlink{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}{key\+\_\+val}
+\begin{DoxyCompactList}\small\item\em key values used to sort a \hyperlink{structhsearch_1_1SearchNode}{Search\+Node} in open list \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}\label{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}} 
-std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}{parent\+\_\+p}
+std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}{parent\+\_\+p} = nullptr
 \begin{DoxyCompactList}\small\item\em the parent of this node \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}\label{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}} 
-\hyperlink{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}{status} \hyperlink{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}{state}
+\hyperlink{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}{status} \hyperlink{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}{state} = New
 \begin{DoxyCompactList}\small\item\em current status of the node \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -69,6 +86,21 @@ Create a new start node.
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{structhsearch_1_1SearchNode_a0b8eea07c7013c327c70723182e43561}\label{structhsearch_1_1SearchNode_a0b8eea07c7013c327c70723182e43561}} 
+\index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}!Calc\+Key@{Calc\+Key}}
+\index{Calc\+Key@{Calc\+Key}!hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
+\subsubsection{\texorpdfstring{Calc\+Key()}{CalcKey()}}
+{\footnotesize\ttfamily void hsearch\+::\+Search\+Node\+::\+Calc\+Key (\begin{DoxyParamCaption}\item[{double}]{km = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Update the key values for a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em km} & (optional) the key modifier used in an incremental D$\ast$ search, defaults to 0 \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}\label{structhsearch_1_1SearchNode_a936d6ea25917367b88adde4748c9143c}} 
 \index{hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}!operator$<$@{operator$<$}}
 \index{operator$<$@{operator$<$}!hsearch\+::\+Search\+Node@{hsearch\+::\+Search\+Node}}
@@ -77,7 +109,7 @@ Create a new start node.
 
 
 
-Custom function used for proper sorting of the open list. 
+Custom function used for proper sorting of the open list by comparing the key values. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -95,7 +127,7 @@ True if this node is less than rhs
 
 
 
-Custom function used for proper sorting of the open list. 
+Custom function used for proper sorting of the open list by comparing the key values. 
 
 
 \begin{DoxyParams}{Parameters}

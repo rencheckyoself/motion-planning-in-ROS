@@ -3,6 +3,8 @@
 /// \file
 /// \brief A library to plan based on a potential field
 
+/// \def BIG_NUM
+/// \brief A number used to represent a large cost
 #define BIG_NUM 10000.0
 
 #include "rigid2d/rigid2d.hpp"
@@ -17,6 +19,7 @@ namespace pfield
 
     /// \brief constuctor to initialize the Potential Field Planner
     /// \param map the known Map
+    /// \param goal the x,y location of the goal
     /// \param z the step size for gradient descent
     /// \param aw weighting factor the attactive component
     /// \param dg threshold for piecewise attractive gradient calculation

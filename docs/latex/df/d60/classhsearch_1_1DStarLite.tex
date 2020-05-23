@@ -1,0 +1,91 @@
+\hypertarget{classhsearch_1_1DStarLite}{}\section{hsearch\+:\+:D\+Star\+Lite Class Reference}
+\label{classhsearch_1_1DStarLite}\index{hsearch\+::\+D\+Star\+Lite@{hsearch\+::\+D\+Star\+Lite}}
+
+
+a class to perform D$\ast$ Lite search  
+
+
+
+
+{\ttfamily \#include $<$heuristic\+\_\+search.\+hpp$>$}
+
+
+
+Inheritance diagram for hsearch\+:\+:D\+Star\+Lite\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{d1/d7e/classhsearch_1_1DStarLite__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for hsearch\+:\+:D\+Star\+Lite\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{d4/d60/classhsearch_1_1DStarLite__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classhsearch_1_1DStarLite_a0cbed5526d90c0d37261fb501be9cd0a}\label{classhsearch_1_1DStarLite_a0cbed5526d90c0d37261fb501be9cd0a}} 
+\hyperlink{classhsearch_1_1DStarLite_a0cbed5526d90c0d37261fb501be9cd0a}{D\+Star\+Lite} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor. \end{DoxyCompactList}\item 
+\hyperlink{classhsearch_1_1DStarLite_a45691d7cc0afb3ba17e6676bfd96c878}{D\+Star\+Lite} (std\+::vector$<$ std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$$>$ $\ast$grid\+\_\+graph, \hyperlink{classgrid_1_1Grid}{grid\+::\+Grid} $\ast$base\+\_\+grid, rigid2d\+::\+Vector2D start\+\_\+loc, rigid2d\+::\+Vector2D \hyperlink{classhsearch_1_1HSearch_a201d281d6a8d9fcc4158772f862d1847}{goal\+\_\+loc})
+\begin{DoxyCompactList}\small\item\em provide the search with the beginning state of the map \end{DoxyCompactList}\item 
+void \hyperlink{classhsearch_1_1DStarLite_ab4ed525aef3cc48661458cf0e96acfb7}{Update\+Robot\+Loc} (rigid2d\+::\+Vector2D robot\+\_\+loc)
+\begin{DoxyCompactList}\small\item\em update the location the search will plan to with the robot\textquotesingle{}s current location, also updates km. Should be called directly before updating the map \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+a class to perform D$\ast$ Lite search 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classhsearch_1_1DStarLite_a45691d7cc0afb3ba17e6676bfd96c878}\label{classhsearch_1_1DStarLite_a45691d7cc0afb3ba17e6676bfd96c878}} 
+\index{hsearch\+::\+D\+Star\+Lite@{hsearch\+::\+D\+Star\+Lite}!D\+Star\+Lite@{D\+Star\+Lite}}
+\index{D\+Star\+Lite@{D\+Star\+Lite}!hsearch\+::\+D\+Star\+Lite@{hsearch\+::\+D\+Star\+Lite}}
+\subsubsection{\texorpdfstring{D\+Star\+Lite()}{DStarLite()}}
+{\footnotesize\ttfamily hsearch\+::\+D\+Star\+Lite\+::\+D\+Star\+Lite (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$$>$ $\ast$}]{grid\+\_\+graph,  }\item[{\hyperlink{classgrid_1_1Grid}{grid\+::\+Grid} $\ast$}]{base\+\_\+grid,  }\item[{rigid2d\+::\+Vector2D}]{start\+\_\+loc,  }\item[{rigid2d\+::\+Vector2D}]{goal\+\_\+loc }\end{DoxyParamCaption})}
+
+
+
+provide the search with the beginning state of the map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid\+\_\+graph} & reference to an existing grid \\
+\hline
+{\em base\+\_\+grid} & pointer to the Grid the search is using \\
+\hline
+{\em start\+\_\+loc} & the location of the robot in integer coordinates on the provided grid \\
+\hline
+{\em goal\+\_\+loc} & the location of the goal point in integer coordinates on the provided grid \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classhsearch_1_1DStarLite_ab4ed525aef3cc48661458cf0e96acfb7}\label{classhsearch_1_1DStarLite_ab4ed525aef3cc48661458cf0e96acfb7}} 
+\index{hsearch\+::\+D\+Star\+Lite@{hsearch\+::\+D\+Star\+Lite}!Update\+Robot\+Loc@{Update\+Robot\+Loc}}
+\index{Update\+Robot\+Loc@{Update\+Robot\+Loc}!hsearch\+::\+D\+Star\+Lite@{hsearch\+::\+D\+Star\+Lite}}
+\subsubsection{\texorpdfstring{Update\+Robot\+Loc()}{UpdateRobotLoc()}}
+{\footnotesize\ttfamily void hsearch\+::\+D\+Star\+Lite\+::\+Update\+Robot\+Loc (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{robot\+\_\+loc }\end{DoxyParamCaption})}
+
+
+
+update the location the search will plan to with the robot\textquotesingle{}s current location, also updates km. Should be called directly before updating the map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em robot\+\_\+loc} & the location of the robot in integer coordinates on the provided grid \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
+global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}

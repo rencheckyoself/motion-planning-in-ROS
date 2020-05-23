@@ -11,8 +11,7 @@ A library containing functions to detect various types of collisions.
 {\ttfamily \#include $<$vector$>$}\newline
 {\ttfamily \#include \char`\"{}roadmap/collision.\+hpp\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}rigid2d/rigid2d.\+hpp\char`\"{}}\newline
-Include dependency graph for collision.\+cpp\+:
-\nopagebreak
+Include dependency graph for collision.\+cpp\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -23,7 +22,7 @@ Include dependency graph for collision.\+cpp\+:
 \begin{DoxyCompactItemize}
 \item 
 Dist\+Res \hyperlink{collision_8hpp_a7ac784d9a63acc273489e7e61c45416a}{collision\+::point\+\_\+to\+\_\+line\+\_\+distance} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, rigid2d\+::\+Vector2D point)
-\begin{DoxyCompactList}\small\item\em Determine if a point is within a certain distance to a line. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculate the minimum distance to a line segment. \end{DoxyCompactList}\item 
 bool \hyperlink{collision_8hpp_aabf5aea7b02c454140c9bb242ca6e944}{collision\+::point\+\_\+to\+\_\+line\+\_\+distance} (rigid2d\+::\+Vector2D line\+\_\+start, rigid2d\+::\+Vector2D line\+\_\+end, rigid2d\+::\+Vector2D point, double threshold)
 \begin{DoxyCompactList}\small\item\em Determine if a point is within a certain distance to a line. \end{DoxyCompactList}\item 
 std\+::vector$<$ bool $>$ \hyperlink{collision_8hpp_af534ea532917e73ac2b28ca11c6cdf9f}{collision\+::point\+\_\+inside\+\_\+convex} (rigid2d\+::\+Vector2D point, std\+::vector$<$ rigid2d\+::\+Vector2D $>$ polygon, double buffer\+\_\+radius)
@@ -106,7 +105,7 @@ Determine if a point is inside of a convex polygon, the points must be provided 
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-a 2 element vector, first element is true if there is a collision, second element describes the cause\+: True for inside the shape, False for outside the shape, but in the buffer zone. 
+a 2 element vector, first element is true if there is a collision, second element describes the cause\+: True for inside the shape, False for outside the shape but in the buffer zone. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{collision_8hpp_file_aabf5aea7b02c454140c9bb242ca6e944}\label{collision_8hpp_file_aabf5aea7b02c454140c9bb242ca6e944}} 
 \index{collision.\+cpp@{collision.\+cpp}!point\+\_\+to\+\_\+line\+\_\+distance@{point\+\_\+to\+\_\+line\+\_\+distance}}
@@ -140,7 +139,7 @@ True if the distance between the point and the line is L\+E\+SS T\+H\+AN the pro
 
 
 
-Determine if a point is within a certain distance to a line. 
+Calculate the minimum distance to a line segment. 
 
 
 \begin{DoxyParams}{Parameters}

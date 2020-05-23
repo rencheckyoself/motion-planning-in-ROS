@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual.  
+<p>The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual. Currently this class will only plan against a precontructed graph.  
  <a href="../../d0/dde/classhsearch_1_1HSearch.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../dc/db1/heuristic__search_8hpp_source.html">heuristic_search.hpp</a>&gt;</code></p>
@@ -82,7 +82,9 @@ Inheritance diagram for hsearch::HSearch:</div>
 <div class="center"><img src="../../d3/dff/classhsearch_1_1HSearch__inherit__graph.png" border="0" usemap="#hsearch_1_1HSearch_inherit__map" alt="Inheritance graph"/></div>
 <map name="hsearch_1_1HSearch_inherit__map" id="hsearch_1_1HSearch_inherit__map">
 <area shape="rect" id="node2" href="../../d4/d52/classhsearch_1_1AStar.html" title="A* Search class derived from the HSearch class. " alt="" coords="5,80,115,107"/>
-<area shape="rect" id="node3" href="../../da/dce/classhsearch_1_1ThetaStar.html" title="Theta* any&#45;angle path planner derived from the HSearch class. " alt="" coords="139,80,272,107"/>
+<area shape="rect" id="node3" href="../../d8/d70/classhsearch_1_1LPAStar.html" title="a class to perform LPA* search " alt="" coords="139,80,264,107"/>
+<area shape="rect" id="node5" href="../../da/dce/classhsearch_1_1ThetaStar.html" title="Theta* any&#45;angle path planner derived from the HSearch class. " alt="" coords="288,80,421,107"/>
+<area shape="rect" id="node4" href="../../df/d60/classhsearch_1_1DStarLite.html" title="a class to perform D* Lite search " alt="" coords="136,155,267,181"/>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -90,8 +92,8 @@ Collaboration diagram for hsearch::HSearch:</div>
 <div class="dyncontent">
 <div class="center"><img src="../../df/d1e/classhsearch_1_1HSearch__coll__graph.png" border="0" usemap="#hsearch_1_1HSearch_coll__map" alt="Collaboration graph"/></div>
 <map name="hsearch_1_1HSearch_coll__map" id="hsearch_1_1HSearch_coll__map">
-<area shape="rect" id="node2" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. " alt="" coords="5,5,153,32"/>
-<area shape="rect" id="node3" href="../../d9/d0a/structgrid_1_1Map.html" title="Contains information about a bound map. " alt="" coords="177,5,253,32"/>
+<area shape="rect" id="node2" href="../../d1/dd4/structhsearch_1_1SearchNode.html" title="Information used by a search algorithm. " alt="" coords="5,95,153,121"/>
+<area shape="rect" id="node3" href="../../d4/db3/structhsearch_1_1Key.html" title="the key values for a given node " alt="" coords="30,5,129,32"/>
 </map>
 <center><span class="legend">[<a href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -104,9 +106,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a52aed9d8d8c634bd506cfd3c14620884"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a52aed9d8d8c634bd506cfd3c14620884">HSearch</a> (std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; *node_list)</td></tr>
 <tr class="memdesc:a52aed9d8d8c634bd506cfd3c14620884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the search with a precontructed graph.  <a href="#a52aed9d8d8c634bd506cfd3c14620884">More...</a><br /></td></tr>
 <tr class="separator:a52aed9d8d8c634bd506cfd3c14620884"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5342d4b1648868b600de6f2dda2e6fdc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a5342d4b1648868b600de6f2dda2e6fdc">HSearch</a> (std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; *node_list, <a class="el" href="../../d9/d0a/structgrid_1_1Map.html">grid::Map</a> map)</td></tr>
-<tr class="memdesc:a5342d4b1648868b600de6f2dda2e6fdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the search with a precontructed graph.  <a href="#a5342d4b1648868b600de6f2dda2e6fdc">More...</a><br /></td></tr>
-<tr class="separator:a5342d4b1648868b600de6f2dda2e6fdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58bce8362211fa679ebf8200dc31d03d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a58bce8362211fa679ebf8200dc31d03d">HSearch</a> (<a class="el" href="../../d9/d0a/structgrid_1_1Map.html">grid::Map</a> map)</td></tr>
+<tr class="memdesc:a58bce8362211fa679ebf8200dc31d03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the search with a precontructed graph.  <a href="#a58bce8362211fa679ebf8200dc31d03d">More...</a><br /></td></tr>
+<tr class="separator:a58bce8362211fa679ebf8200dc31d03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab48be1a6bdbd923ce5e83f6b39323941"><td class="memItemLeft" align="right" valign="top"><a id="ab48be1a6bdbd923ce5e83f6b39323941"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#ab48be1a6bdbd923ce5e83f6b39323941">~HSearch</a> ()=default</td></tr>
 <tr class="memdesc:ab48be1a6bdbd923ce5e83f6b39323941"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use default destructor for this and all derived classes. <br /></td></tr>
@@ -117,13 +119,16 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=".
 <tr class="memitem:a2dbcfc312e89d60d9ec9b85eef271cbf"><td class="memItemLeft" align="right" valign="top">std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a2dbcfc312e89d60d9ec9b85eef271cbf">get_path</a> ()</td></tr>
 <tr class="memdesc:a2dbcfc312e89d60d9ec9b85eef271cbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">All the user to retrive the final path.  <a href="#a2dbcfc312e89d60d9ec9b85eef271cbf">More...</a><br /></td></tr>
 <tr class="separator:a2dbcfc312e89d60d9ec9b85eef271cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93b63eb8983863eb40f7bb1f28af5c36"><td class="memItemLeft" align="right" valign="top">std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a93b63eb8983863eb40f7bb1f28af5c36">get_expanded_nodes</a> ()</td></tr>
+<tr class="memdesc:a93b63eb8983863eb40f7bb1f28af5c36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get all of the nodes expanded during the search.  <a href="#a93b63eb8983863eb40f7bb1f28af5c36">More...</a><br /></td></tr>
+<tr class="separator:a93b63eb8983863eb40f7bb1f28af5c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5d325955c4faedaca0c68155fd1f7e69"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a5d325955c4faedaca0c68155fd1f7e69">ComputeCost</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> &amp;s, <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> &amp;sp)=0</td></tr>
 <tr class="memdesc:a5d325955c4faedaca0c68155fd1f7e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">a function used to compute the cost for a pair of nodes  <a href="#a5d325955c4faedaca0c68155fd1f7e69">More...</a><br /></td></tr>
 <tr class="separator:a5d325955c4faedaca0c68155fd1f7e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac94c08c0f0d4cc3076f01d70c6cd7679"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#ac94c08c0f0d4cc3076f01d70c6cd7679">assemble_path</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> goal)</td></tr>
+<tr class="memitem:ac94c08c0f0d4cc3076f01d70c6cd7679"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#ac94c08c0f0d4cc3076f01d70c6cd7679">assemble_path</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> goal)</td></tr>
 <tr class="memdesc:ac94c08c0f0d4cc3076f01d70c6cd7679"><td class="mdescLeft">&#160;</td><td class="mdescRight">build the final path based on all of the saved pointers  <a href="#ac94c08c0f0d4cc3076f01d70c6cd7679">More...</a><br /></td></tr>
 <tr class="separator:ac94c08c0f0d4cc3076f01d70c6cd7679"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ca884af67da489fa1b20592abc1dbba"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a6ca884af67da489fa1b20592abc1dbba">f</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> s, <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> sp)</td></tr>
@@ -135,9 +140,6 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa09bc55605f454f822892a40e580b164"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#aa09bc55605f454f822892a40e580b164">h</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> sp)</td></tr>
 <tr class="memdesc:aa09bc55605f454f822892a40e580b164"><td class="mdescLeft">&#160;</td><td class="mdescRight">calculate the estimated cost to goal (heuristic)  <a href="#aa09bc55605f454f822892a40e580b164">More...</a><br /></td></tr>
 <tr class="separator:aa09bc55605f454f822892a40e580b164"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93f71cc1b8e8b126ef61ab2a1a599498"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a93f71cc1b8e8b126ef61ab2a1a599498">UpdateVertex</a> (<a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> s, <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> sp)</td></tr>
-<tr class="memdesc:a93f71cc1b8e8b126ef61ab2a1a599498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compare the current node and its neighbor.  <a href="#a93f71cc1b8e8b126ef61ab2a1a599498">More...</a><br /></td></tr>
-<tr class="separator:a93f71cc1b8e8b126ef61ab2a1a599498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -145,10 +147,6 @@ Protected Attributes</h2></td></tr>
 std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a92b4944c741acab45fc3c71661f1aa42">created_graph_p</a></td></tr>
 <tr class="memdesc:a92b4944c741acab45fc3c71661f1aa42"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to a vector of created nodes <br /></td></tr>
 <tr class="separator:a92b4944c741acab45fc3c71661f1aa42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad43c076b2d52f4e58dbf29efdb15d1b6"><td class="memItemLeft" align="right" valign="top"><a id="ad43c076b2d52f4e58dbf29efdb15d1b6"></a>
-<a class="el" href="../../d9/d0a/structgrid_1_1Map.html">grid::Map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#ad43c076b2d52f4e58dbf29efdb15d1b6">known_map</a></td></tr>
-<tr class="memdesc:ad43c076b2d52f4e58dbf29efdb15d1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contains all known obstacles and the bounds of the map. <br /></td></tr>
-<tr class="separator:ad43c076b2d52f4e58dbf29efdb15d1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a20e68d7726e57a42cb65427b7f9da89f"><td class="memItemLeft" align="right" valign="top"><a id="a20e68d7726e57a42cb65427b7f9da89f"></a>
 std::vector&lt; <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a20e68d7726e57a42cb65427b7f9da89f">open_list</a></td></tr>
 <tr class="memdesc:a20e68d7726e57a42cb65427b7f9da89f"><td class="mdescLeft">&#160;</td><td class="mdescRight">the open list for the current search <br /></td></tr>
@@ -161,13 +159,17 @@ std::vector&lt; <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.htm
 std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a3188c5cda32b79ace51327a4ede85f33">final_path</a></td></tr>
 <tr class="memdesc:a3188c5cda32b79ace51327a4ede85f33"><td class="mdescLeft">&#160;</td><td class="mdescRight">assemble the final path based on the goal node <br /></td></tr>
 <tr class="separator:a3188c5cda32b79ace51327a4ede85f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c457adbfabaf7ff5f07fef685369991"><td class="memItemLeft" align="right" valign="top"><a id="a1c457adbfabaf7ff5f07fef685369991"></a>
+std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a1c457adbfabaf7ff5f07fef685369991">expanded_nodes</a></td></tr>
+<tr class="memdesc:a1c457adbfabaf7ff5f07fef685369991"><td class="mdescLeft">&#160;</td><td class="mdescRight">a list of points that were expanded (popped off the open list) during the most recent search <br /></td></tr>
+<tr class="separator:a1c457adbfabaf7ff5f07fef685369991"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8eedd2e1bd6e1d889fdd50e5fa53ad01"><td class="memItemLeft" align="right" valign="top"><a id="a8eedd2e1bd6e1d889fdd50e5fa53ad01"></a>
 <a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a8eedd2e1bd6e1d889fdd50e5fa53ad01">start</a></td></tr>
 <tr class="memdesc:a8eedd2e1bd6e1d889fdd50e5fa53ad01"><td class="mdescLeft">&#160;</td><td class="mdescRight">the start node for the current search <br /></td></tr>
 <tr class="separator:a8eedd2e1bd6e1d889fdd50e5fa53ad01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a201d281d6a8d9fcc4158772f862d1847"><td class="memItemLeft" align="right" valign="top"><a id="a201d281d6a8d9fcc4158772f862d1847"></a>
 rigid2d::Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a201d281d6a8d9fcc4158772f862d1847">goal_loc</a></td></tr>
-<tr class="memdesc:a201d281d6a8d9fcc4158772f862d1847"><td class="mdescLeft">&#160;</td><td class="mdescRight">the start node for the current search <br /></td></tr>
+<tr class="memdesc:a201d281d6a8d9fcc4158772f862d1847"><td class="mdescLeft">&#160;</td><td class="mdescRight">the goal node for the current search <br /></td></tr>
 <tr class="separator:a201d281d6a8d9fcc4158772f862d1847"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b741554035ca11f6db86bb14ee329c6"><td class="memItemLeft" align="right" valign="top"><a id="a3b741554035ca11f6db86bb14ee329c6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/dde/classhsearch_1_1HSearch.html#a3b741554035ca11f6db86bb14ee329c6">id_cnt</a> = 1</td></tr>
@@ -175,7 +177,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
 <tr class="separator:a3b741554035ca11f6db86bb14ee329c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual. </p>
+<div class="textblock"><p>The base class to define a heuristic based search algorithm. This class has no ComputeCost funtion which is required to find the shortest path. This function is defined in the derived class to determine the type of search. Some searched also have a different flow for finding the shortest path, which is why the ComputeShortestPath method is virtual. Currently this class will only plan against a precontructed graph. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a52aed9d8d8c634bd506cfd3c14620884"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52aed9d8d8c634bd506cfd3c14620884">&#9670;&nbsp;</a></span>HSearch() <span class="overload">[1/2]</span></h2>
@@ -203,8 +205,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
 
 </div>
 </div>
-<a id="a5342d4b1648868b600de6f2dda2e6fdc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5342d4b1648868b600de6f2dda2e6fdc">&#9670;&nbsp;</a></span>HSearch() <span class="overload">[2/2]</span></h2>
+<a id="a58bce8362211fa679ebf8200dc31d03d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58bce8362211fa679ebf8200dc31d03d">&#9670;&nbsp;</a></span>HSearch() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,19 +214,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
         <tr>
           <td class="memname">hsearch::HSearch::HSearch </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">prm::Node</a> &gt; *&#160;</td>
-          <td class="paramname"><em>node_list</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="../../d9/d0a/structgrid_1_1Map.html">grid::Map</a>&#160;</td>
-          <td class="paramname"><em>map</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>map</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -232,7 +224,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
 <p>Initialize the search with a precontructed graph. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">node_list</td><td>a pointer to a graph </td></tr>
     <tr><td class="paramname">map</td><td>the known map used to create the graph </td></tr>
   </table>
   </dd>
@@ -260,7 +251,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -272,6 +263,8 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented in <a class="el" href="../../d8/d70/classhsearch_1_1LPAStar.html#aae9f9031efbe788a83f842905b63e2aa">hsearch::LPAStar</a>.</p>
 
 </div>
 </div>
@@ -318,7 +311,7 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../da/dce/classhsearch_1_1ThetaStar.html#a852af6d668cbb3f58079125ba5740853">hsearch::ThetaStar</a>, and <a class="el" href="../../d4/d52/classhsearch_1_1AStar.html#a3a9a3c398437d9efe0b9943c29a8672b">hsearch::AStar</a>.</p>
+<p>Implemented in <a class="el" href="../../d8/d70/classhsearch_1_1LPAStar.html#aaeb55f7d05b4952247e492a7db18438d">hsearch::LPAStar</a>, <a class="el" href="../../da/dce/classhsearch_1_1ThetaStar.html#a852af6d668cbb3f58079125ba5740853">hsearch::ThetaStar</a>, and <a class="el" href="../../d4/d52/classhsearch_1_1AStar.html#a3a9a3c398437d9efe0b9943c29a8672b">hsearch::AStar</a>.</p>
 
 </div>
 </div>
@@ -460,6 +453,26 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
 
 </div>
 </div>
+<a id="a93b63eb8983863eb40f7bb1f28af5c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93b63eb8983863eb40f7bb1f28af5c36">&#9670;&nbsp;</a></span>get_expanded_nodes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; rigid2d::Vector2D &gt; hsearch::HSearch::get_expanded_nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get all of the nodes expanded during the search. </p>
+<dl class="section return"><dt>Returns</dt><dd>a vector of points that were expanded </dd></dl>
+
+</div>
+</div>
 <a id="a2dbcfc312e89d60d9ec9b85eef271cbf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2dbcfc312e89d60d9ec9b85eef271cbf">&#9670;&nbsp;</a></span>get_path()</h2>
 
@@ -512,51 +525,6 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../..
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>the estimated cost </dd></dl>
-
-</div>
-</div>
-<a id="a93f71cc1b8e8b126ef61ab2a1a599498"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93f71cc1b8e8b126ef61ab2a1a599498">&#9670;&nbsp;</a></span>UpdateVertex()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void hsearch::HSearch::UpdateVertex </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a>&#160;</td>
-          <td class="paramname"><em>s</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="../../d1/dd4/structhsearch_1_1SearchNode.html">SearchNode</a>&#160;</td>
-          <td class="paramname"><em>sp</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Compare the current node and its neighbor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">s</td><td>the current node </td></tr>
-    <tr><td class="paramname">sp</td><td>the neioghbor node </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
