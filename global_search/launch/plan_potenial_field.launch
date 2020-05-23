@@ -1,0 +1,14 @@
+<launch>
+<!-- This launch file is used to draw the world map in rviz -->
+
+  <rosparam command="load" file="$(find roadmap)/config/map_params.yaml"/>
+  <rosparam command="load" file="$(find global_search)/config/search_params.yaml"/>
+
+  <!-- launch-prefix="gdb -''-args"   launch-prefix="gdb -ex run -''-args"-->
+  <node name="pot_field_search" pkg="global_search" type="pot_field_search"  output="screen" />
+  <node name="draw_world" pkg="roadmap" type="draw_world" output="screen"/>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 map" />
+
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args=" -d $(find roadmap)/config/prm.rviz"/>
+</launch>
