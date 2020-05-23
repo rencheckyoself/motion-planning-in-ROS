@@ -7,26 +7,26 @@
 # goal: [3, 4]
 
 # # Easy
-start: [6, 3]
-goal: [7, 26]
+# start: [6, 3]
+# goal: [7, 26]
 
 # # Moderate
 # start: [20,45]
-# goal: [31,43]
+goal: [31,43]
 
 # # Hard
-# start: [3, 3]
+start: [7, 3]
 # goal: [3, 46]
 
 ## D* Lite sensor range
 sensor_range: 0.6 # distance (in m) the robot can sense
 
 ## Potential Field parameters
-att_weight: 0.1 # weighting factor the attactive component
+att_weight: 0.6 # weighting factor the attactive component
 dgstar: 3 # piecewise threshold for attractive gradient
 
-rep_weight: 1 # weighting factor the repulsive component
-Qstar: 1 # obstacle range of influence
+rep_weight: 0.1 # weighting factor the repulsive component
+Qstar: 0.4 # obstacle range of influence
 
-epsilon: 0.1 # termination threshold
-zeta: 0.1 # step size
+epsilon: 0.05 # termination threshold
+zeta: 0.01 # step size

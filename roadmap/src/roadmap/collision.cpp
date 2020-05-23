@@ -11,10 +11,18 @@
 
 namespace collision
 {
-  DistRes::DistRes(bool status, double dist)
+  DistRes::DistRes()
+  {
+    inside_segment = false;
+    distance = 0;
+    point = rigid2d::Vector2D(0,0);
+  }
+
+  DistRes::DistRes(bool status, double dist, rigid2d::Vector2D p)
   {
     inside_segment = status;
     distance = dist;
+    point = p;
   }
 
   DistRes point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point)
@@ -30,11 +38,19 @@ namespace collision
       // point on the line closest to the vertex
       rigid2d::Vector2D p = rigid2d::Vector2D(line_start.x + c*s.x, line_start.y + c*s.y);
 
-      return DistRes(true, p.distance(point));
+      return DistRes(true, p.distance(point), p);
     }
     else
     {
-      return DistRes(false, std::min(point.distance(line_start), point.distance(line_end)));
+      // starting point is closer
+      if(point.distance(line_start) < point.distance(line_end))
+      {
+          return DistRes(false, point.distance(line_start), line_start);
+      }
+      else
+      {
+        return DistRes(false, point.distance(line_end), line_end);
+      }
     }
   }
 

@@ -11,13 +11,18 @@ namespace collision
   /// \brief Used to return information from the point to line distance function
   struct DistRes
   {
-    bool inside_segment; ///< True if the point lies inbetween the line segment bounds, False otherwise.
+    bool inside_segment = false; ///< True if the point lies inbetween the line segment bounds, False otherwise.
     double distance = 0; ///< Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex
+    rigid2d::Vector2D point; ///< the x,y coordinates of the closest point on the line or vertex
 
-    /// \brief Create the result of the point to line distance function
+    /// \brief default constructor - initialize all to zeros
+    DistRes();
+
+    /// \brief C  reate the result of the point to line distance function
     /// \param status True if the point is within the line segment bounds
     /// \param dist Min distance from the point to the linesegment. If the point is not within the line segment, the distance to the closest vertex
-    DistRes(bool status, double dist);
+    /// \param p point that correlates to the stored distance
+    DistRes(bool status, double dist, rigid2d::Vector2D p);
   };
 
   /// \brief Determine if a point is within a certain distance to a line
@@ -28,7 +33,7 @@ namespace collision
   /// \returns True if the distance between the point and the line is LESS THAN the provided threshold
   bool point_to_line_distance(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, rigid2d::Vector2D point, double threshold);
 
-  /// \brief Determine if a point is within a certain distance to a line
+  /// \brief Calculate the minimum distance to a line segment
   /// \param line_start the point of the beginning of the line segment
   /// \param line_end the point of the end of the line segment
   /// \param point the point to calculate the distance for

@@ -3,6 +3,8 @@
 /// \file
 /// \brief A library to plan based on a potential field
 
+#define BIG_NUM 10000.0
+
 #include "rigid2d/rigid2d.hpp"
 #include "roadmap/grid.hpp"
 
@@ -55,6 +57,12 @@ namespace pfield
     /// \param cur_loc the current location of the robot
     /// \returns the total repulsive gradient
     rigid2d::Vector2D calculate_u_rep(rigid2d::Vector2D cur_loc);
+
+    /// \brief Calculate the repulsive component due to a given obstacle
+    /// \param polygon a set of points that define a convex polygon
+    /// \param cur_loc the current location of the robot
+    /// \returns a vector of the repulsice gradient components for the provided obstacle
+    rigid2d::Vector2D u_rep_component(std::vector<rigid2d::Vector2D> polygon, rigid2d::Vector2D cur_loc);
   };
 }
 

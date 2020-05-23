@@ -131,10 +131,9 @@ int main(int argc, char** argv)
   markers.push_back(utility::make_marker(start_node, cell_size*2, std::vector<double>({0, 1, 0}))); // start
   markers.push_back(utility::make_marker(goal_node, cell_size*2, std::vector<double>({1, 0, 0}))); // goal
 
-  ros::Rate frames(2);
+  ros::Rate frames(1);
 
-  frames.sleep();
-  frames.sleep();
+  ros::Duration(3).sleep(); // wait for rviz
 
   // Search for the path while the robot is beyond the termination threshold
   while(cur_pos.distance(goal_pt) > epsilon && ros::ok())
@@ -148,7 +147,7 @@ int main(int argc, char** argv)
     // Draw path
     for(auto it = path.begin(); it < path.end()-1; it++)
     {
-      markers.push_back(utility::make_marker(*it, *(it+1), it-path.begin(), cell_size, std::vector<double>({0, 0, 0})));
+      markers.push_back(utility::make_marker(*it, *(it+1), it-path.begin(), cell_size, colors.at(4)));
     }
 
     pub_marks.markers = markers;
@@ -157,6 +156,6 @@ int main(int argc, char** argv)
     markers.clear();
 
     ros::spinOnce();
-    frames.sleep();
+    ros::Duration(0.01).sleep();
   }
 }
