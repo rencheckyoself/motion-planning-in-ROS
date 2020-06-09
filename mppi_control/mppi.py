@@ -36,7 +36,7 @@ class mppi():
 
         a = a.reshape(1,2)
 
-        Q = np.diagflat([100, 100, 0.01]) # keep small otherwise w will result in overflow errors
+        Q = np.diagflat([.100, .100, 0.01]) # keep small otherwise w will result in overflow errors
 
         R = np.diagflat([0.01, 0.01])
 
@@ -77,12 +77,7 @@ class mppi():
 
         J.append(self.m(temp_state))
 
-        print(J)
-        print(np.flip(J, 0))
-
         J = np.flip(np.cumsum(np.flip(J, 0), axis=0), 0)
-
-        print(J)
 
         for t in range(self.horizon):
 
@@ -147,6 +142,6 @@ def main():
     # while not control.made_it():
         control.go_to_goal()
 
-    control.get_plot()
+    # control.get_plot()
 
 main()
