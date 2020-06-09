@@ -26,10 +26,6 @@ class mppi():
         self.t_cur = 0
 
     def step(self, x, u):
-
-        # print(x)
-        # print(u)
-
         return x + self.f(x[:,2], u).T * self.dt
 
     def f(self, th, u):
@@ -40,19 +36,21 @@ class mppi():
 
         a = a.reshape(1,2)
 
-        Q = np.diagflat([0.10, 0.10, 0.01]) # keep small otherwise w will result in overflow errors
+        Q = np.diagflat([100, 100, 0.01]) # keep small otherwise w will result in overflow errors
+
+        R = np.diagflat([0.01, 0.01])
 
         for n in range(self.N):
             deltax = (x[n,:] - self.goal).reshape(len(x[n,:]), 1)
-            output[n,:] = (deltax).T.dot(Q).dot(deltax) + self.lam * a.dot(self.sig).dot(eps[n,:].reshape(len(eps[n,:]),1))
-            # output[n,:] += self.lam * a.dot(self.sig).dot(eps[n,:].reshape(len(eps[n,:]),1))
+            output[n,:] = (deltax).T.dot(Q).dot(deltax) + a.dot(R).dot(a.T) + self.lam * a.dot(self.sig).dot(eps[n,:].reshape(len(eps[n,:]),1))
+
         return output
 
     def m(self, x):
 
         output = np.zeros([self.N, 1])
 
-        P1 = np.diagflat([10.0, 10.0, 0.01])
+        P1 = np.diagflat([10.0, 10.0, 0.1])
 
         for n in range(self.N):
             deltax = (x[n,:] - self.goal).reshape(len(x[n,:]), 1)
@@ -79,7 +77,12 @@ class mppi():
 
         J.append(self.m(temp_state))
 
-        J = np.flip(np.cumsum(np.flip(J, 0), 0), 0)
+        print(J)
+        print(np.flip(J, 0))
+
+        J = np.flip(np.cumsum(np.flip(J, 0), axis=0), 0)
+
+        print(J)
 
         for t in range(self.horizon):
 
@@ -87,6 +90,8 @@ class mppi():
 
             w = np.exp(J[t]/self.lam) + 1e-8
             w /= np.sum(w)
+
+            # print(np.dot(w.T, eps[t]).shape)
             self.a[:,t] = self.a[:,t] + np.dot(w.T, eps[t])
 
         # Apply control to robot
@@ -124,10 +129,10 @@ class mppi():
 
         print(np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2))
 
-        return np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) < 3
+        return np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) < 0.2
 
 def main():
-    lam = 0.2
+    lam = 0.1
     sig = 0.2
     N = 5
     horizon = 100
@@ -138,9 +143,10 @@ def main():
 
     control = mppi(x0, a0, goal, horizon, lam, sig, N)
 
-    for i in range(200):
+    for i in range(100):
+    # while not control.made_it():
         control.go_to_goal()
 
-    # control.get_plot()
+    control.get_plot()
 
 main()
