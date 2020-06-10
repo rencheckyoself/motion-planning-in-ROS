@@ -41,14 +41,33 @@ class mppi():
         self.R = R
         self.P1 = P1
 
-    def step(self, x, u):
+    def step(self, x, u, f):
         """
         Function to propogate the robot forward one time step
         x: the current state of the robot
         """
-        return x + self.f(x[:,2], u).T * self.dt
+        return x + f(x[:,2], u).T * self.dt
 
-    def f(self, th, u):
+    def diff_drive(self, th, u):
+        """
+        Diff Drive Kinemtic model
+
+        th:the angular position of the robot
+        u: the control matrix, u1 is the left wheel, u0 is the right
+
+        """
+        # wheel radius
+        radius = 0.033
+
+        # wheel base
+        wheel_base = 0.16
+
+        return np.array([(radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
+                         (radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
+                         (radius / wheel_base) * (u[:,1] - u[:,0])])
+
+
+    def unicycle(self, th, u):
         """
         unicycle kinematic model
 
@@ -111,7 +130,7 @@ class mppi():
             J.append(self.l(temp_state, self.a[:,t], eps[-1]))
 
             # calc next state
-            temp_state = self.step(temp_state, self.a[:,t] + eps[-1])
+            temp_state = self.step(temp_state, self.a[:,t] + eps[-1], self.diff_drive)
 
         J.append(self.m(temp_state))
 
@@ -131,7 +150,7 @@ class mppi():
         self.a = savgol_filter(self.a, self.horizon - 1, 3, axis=1)
 
         # Apply control to robot
-        self.cur_state = np.squeeze(self.step(self.cur_state.reshape(1,len(self.cur_state)), self.a[:,0].reshape(1,len(self.a[:,0]))))
+        self.cur_state = np.squeeze(self.step(self.cur_state.reshape(1,len(self.cur_state)), self.a[:,0].reshape(1,len(self.a[:,0])), self.diff_drive))
 
         # print(self.cur_state)
         self.fin_path.append(self.cur_state)
@@ -184,17 +203,17 @@ class mppi():
         ax2.set(xlabel="Time (s)", ylabel="State (m or rad)")
         ax2.set_xlim(0 , self.fin_time[-1]) # fin_time is my time vector
         ax2.set_ylim(np.amin(path)-0.1 , np.amax(path)+0.1)
-        ax2.legend(["x","y",r"$\theta$"])
         line21, = ax2.plot([],[])
         line22, = ax2.plot([],[])
         line23, = ax2.plot([],[])
+        ax2.legend(["x","y",r"$\theta$"])
 
-        ax3.set(xlabel="Time (s)", ylabel="Velocity (m/s or rad/s)")
+        ax3.set(xlabel="Time (s)", ylabel="Velocity (rad/s)")
         ax3.set_xlim(0 , self.fin_time[-1])
         ax3.set_ylim(np.amin(control)-0.1 , np.amax(control)+0.1)
         line31, = ax3.plot([], [])
         line32, = ax3.plot([], [])
-        ax3.legend(["v",r"$\omega$"])
+        ax3.legend([r"$\phi_r$",r"$\phi_l$"])
 
         def animate(i):
 
@@ -222,7 +241,7 @@ class mppi():
         anim = animation.FuncAnimation(fig, animate, frames=len(self.fin_time), interval=10, repeat=False)
 
         print("saving animation as mp4...this might take a while...")
-        anim.save(filename='sim.mp4',fps=30,dpi=300)
+        anim.save(filename='sim.mp4',fps=100,dpi=300)
 
     def made_it(self, lim):
         """
@@ -232,14 +251,24 @@ class mppi():
         return np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) + abs(self.cur_state[2] - self.goal[2]) < lim
 
 def main():
-    lam = 0.1
-    sig = 0.3
-    N = 10
-    horizon = 100
 
-    Q = np.diagflat([1000., 10000., 0.1])
-    R = np.diagflat([1., .1])
-    P1 = np.diagflat([10000., 10000., 10000.])
+    # unicycle model params
+    # lam = 0.1
+    # sig = 0.3
+    # N = 10
+    # horizon = 100
+    # Q = np.diagflat([1000., 10000., 0.1])
+    # R = np.diagflat([1., .1])
+    # P1 = np.diagflat([10000., 10000., 10000.])
+
+    # diff drive model params
+    lam = 0.2
+    sig = 0.3
+    N = 13
+    horizon = 100
+    Q = np.diagflat([1000., 100000., 0])
+    R = np.diagflat([10., 10.])
+    P1 = np.diagflat([100000., 100000., 100.])
 
     x0 = np.array([0,0,np.pi/2])
     a0 = np.ones([2, horizon]) * np.array([[0, 0]]).T
@@ -249,7 +278,7 @@ def main():
 
     threshold = 0.2
 
-    # for i in range(5):
+    # for i in range(100):
     while not control.made_it(threshold):
         control.go_to_goal()
 
