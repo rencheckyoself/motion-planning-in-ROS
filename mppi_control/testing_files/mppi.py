@@ -17,8 +17,8 @@ class mppi():
         sig: sampling distribution varience
         N: number of rollouts
         """
-        self. lam = lam
-        self. sig = sig
+        self.lam = lam
+        self.sig = sig
 
         self.horizon = horizon
         self.dt = 1/horizon
@@ -66,7 +66,6 @@ class mppi():
                          (radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
                          (radius / wheel_base) * (u[:,1] - u[:,0])])
 
-
     def unicycle(self, th, u):
         """
         unicycle kinematic model
@@ -111,6 +110,15 @@ class mppi():
             output[n,:] = (deltax).T.dot(self.P1).dot(deltax)
 
         return output
+
+    def set_goal(self, goal, action_seq):
+        """
+        Function used to update the goal to drive towards
+        """
+
+        self.goal = goal
+        self.a = action_seq # 2xN
+        self.a0 = action_seq[:,0] # action to append to a after robot has been issued a control
 
     def go_to_goal(self):
         """
@@ -179,8 +187,10 @@ class mppi():
 
         ax3.plot(self.fin_time[1:], control[:,0])
         ax3.plot(self.fin_time[1:], control[:,1])
-        ax3.legend(["v",r"$\omega$"])
-        ax3.set(xlabel="Time (s)", ylabel="Velocity (m/s or rad/s)")
+        # ax3.legend(["v",r"$\omega$"])
+        # ax3.set(xlabel="Time (s)", ylabel="Velocity (m/s or rad/s)")
+        ax3.legend([r"$\phi_r$",r"$\phi_l$"])
+        ax3.set(xlabel="Time (s)", ylabel="Velocity (rad/s)")
 
         plt.show()
 
@@ -208,12 +218,14 @@ class mppi():
         line23, = ax2.plot([],[])
         ax2.legend(["x","y",r"$\theta$"])
 
-        ax3.set(xlabel="Time (s)", ylabel="Velocity (rad/s)")
         ax3.set_xlim(0 , self.fin_time[-1])
         ax3.set_ylim(np.amin(control)-0.1 , np.amax(control)+0.1)
         line31, = ax3.plot([], [])
         line32, = ax3.plot([], [])
+        # ax3.legend(["v",r"$\omega$"])
+        # ax3.set(xlabel="Time (s)", ylabel="Velocity (m/s or rad/s)")
         ax3.legend([r"$\phi_r$",r"$\phi_l$"])
+        ax3.set(xlabel="Time (s)", ylabel="Velocity (rad/s)")
 
         def animate(i):
 
@@ -247,12 +259,13 @@ class mppi():
         """
         determine the robot is at the goal location
         """
-        print(np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) + abs(self.cur_state[2] - self.goal[2]))
-        return np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) + abs(self.cur_state[2] - self.goal[2]) < lim
+        # print(np.linalg.norm(self.cur_state[0:2] - self.goal[0:2], 2) + abs(self.cur_state[2] - self.goal[2]))
+        print(np.linalg.norm(self.cur_state - self.goal, 2))
+        return np.linalg.norm(self.cur_state - self.goal, 2) < lim
 
 def main():
 
-    # unicycle model params
+    # unicycle model params - parallel parking problem
     # lam = 0.1
     # sig = 0.3
     # N = 10
@@ -261,7 +274,18 @@ def main():
     # R = np.diagflat([1., .1])
     # P1 = np.diagflat([10000., 10000., 10000.])
 
-    # diff drive model params
+    # unicycle model params - waypoint following
+    # lam = 0.1
+    # sig = 0.3
+    # N = 10
+    # horizon = 100
+    # Q = np.diagflat([10000., 10000., 0.1])
+    # R = np.diagflat([1., .1])
+    # P1 = np.diagflat([10000., 10000., 1000.])
+    #
+    # waypoints = np.array([[4, 0, np.pi/2], [4, 4, np.pi/2], [2, 6, 5*np.pi/4], [0, 4, 3*np.pi/2], [0, 0, 3*np.pi/2]])
+
+    # diff drive model params - parallel parking problem
     lam = 0.2
     sig = 0.3
     N = 13
@@ -272,15 +296,24 @@ def main():
 
     x0 = np.array([0,0,np.pi/2])
     a0 = np.ones([2, horizon]) * np.array([[0, 0]]).T
-    goal = np.array([4, 0, np.pi/2])
 
+    goal = np.array([4, 0, np.pi/2])
     control = mppi(x0, a0, goal, horizon, lam, sig, N, Q, R, P1)
+
+    waypoints = np.array([[4, 0, np.pi/2]])
 
     threshold = 0.2
 
     # for i in range(100):
-    while not control.made_it(threshold):
-        control.go_to_goal()
+    for i, point in enumerate(waypoints):
+
+        print(point)
+
+        control.set_goal(point, a0)
+        while not control.made_it(threshold):
+            control.go_to_goal()
+
+        print("Waypoint Reached: ", point)
 
     control.get_plot()
     control.get_animation()
