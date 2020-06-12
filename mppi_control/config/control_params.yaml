@@ -1,5 +1,6 @@
 sigma: 0.3 # sampling distribution varience
 lambda: 0.2 # mppi hyperparameter
+limit: 0.2 # threshold for transitioning to the next waypoint
 
 Q: [10000.0, 10000.0, 0] # The diagonal for the state weight matrix in the cost function
 R: [10.0, 10.0] # The diagonal for the control weight matrix in the cost function

@@ -194,4 +194,4 @@ class mppi():
     #
     # @returns True if the robot has arrived at the goal, otherwise False
     def made_it(self, cur_state, lim):
-        return np.linalg.norm(self.cur_state - self.goal, 2) < lim
+        return np.linalg.norm(cur_state - self.goal, 2) < lim

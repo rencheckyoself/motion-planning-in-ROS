@@ -34,7 +34,7 @@ class node_class():
 
         self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=1)
 
-        self.odom_sub = rospy.Subscriber("odom", Odometry, self.callback_odom)
+        self.odom_sub = rospy.Subscriber("odom", Odometry, self.callback_odom, queue_size=1)
 
         # loaded from repo/nuturtle_description/config
         self.wheel_radius = rospy.get_param("wheel_radius")
@@ -44,6 +44,7 @@ class node_class():
         # loaded from motionplanning/mppi_control/config
         sig = rospy.get_param("sigma")
         lam = rospy.get_param("lambda")
+        self.limit = rospy.get_param("limit")
 
         Q = np.diagflat(rospy.get_param("Q"))
         R = np.diagflat(rospy.get_param("R"))
@@ -54,11 +55,14 @@ class node_class():
 
         N = rospy.get_param("N")
 
-        waypoints = np.array(rospy.get_param("waypoints"))
-        angles = [np.pi/2, 5*np.pi/4, 5*np.pi/4, 3*np.pi/2, 3*np.pi/2]
+        self.waypoints = np.array(rospy.get_param("waypoints")) / 4.0
+        angles = [np.pi/2.0, 5.0*np.pi/4.0, 5.0*np.pi/4.0, 3.0*np.pi/2.0, 3.0*np.pi/2.0]
 
-        for i in range(len(waypoints)):
-            waypoints[i,2] = angles[i]
+        for i in range(len(self.waypoints)):
+            self.waypoints[i,2] = angles[i]
+
+        self.path_len = len(self.waypoints)
+        self.loc = 1
 
         # Create the diff drive robot object
         robot = diff_drive_robot(self.wheel_radius, self.wheel_base/2, motor_lim)
@@ -66,7 +70,7 @@ class node_class():
         a0 = np.zeros([2, horizon_steps])
 
         # create the controller object
-        self.control = mppi(a0, waypoints[0], horizon_time, horizon_steps, lam, sig, N, Q, R, P1, robot)
+        self.control = mppi(a0, self.waypoints[0], horizon_time, horizon_steps, lam, sig, N, Q, R, P1, robot)
 
         self.first_pass = True # Flag to grab the start time
 
@@ -88,7 +92,7 @@ class node_class():
         quat = (data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w)
         euler = tf.transformations.euler_from_quaternion(quat)
 
-        cur_state = np.array([data.pose.pose.position.x, data.pose.pose.position.x, euler[2]])
+        cur_state = np.array([data.pose.pose.position.x, data.pose.pose.position.y, euler[2]])
         cur_time = data.header.stamp
 
         if self.start:
@@ -102,6 +106,18 @@ class node_class():
 
             # print(cur_state)
             # print(cur_time - self.prev_time)
+
+            # check the waypoint and advance if needed
+            if self.control.made_it(cur_state, self.limit):
+                if self.path_len == self.loc:
+                    print("Finished Path!")
+                    self.start = False
+                    cmd = Twist(Vector3(0, 0, 0), Vector3(0, 0, 0))
+                else:
+                    print("Going to Waypoint: ", self.waypoints[self.loc])
+                    self.control.set_goal(self.waypoints[self.loc])
+                    self.loc += 1
+
 
             # do control
             wheel_vels = self.control.get_control(cur_state, t_cur) # output is (ur, ul)
@@ -117,6 +133,8 @@ class node_class():
 
         # publish control
         self.cmd_pub.publish(cmd)
+
+
 
 
 def main():
