@@ -74,7 +74,7 @@ The green node is the start and the red node is the goal and the robot is the bl
 
 ### Potential Fields
 
-To view the algorithm in action, launch `global_search plan_potential_fields.launch`. This will use the existing map data to plan a path from start to goal using the standard potential field algorithm. This implementation does not currently  provide a means of escaping local minima and assumes a fully known map.
+To view the algorithm in action, launch `global_search plan_potential_fields.launch`. This will use the existing map data to plan a path from start to goal using the standard potential field algorithm. This implementation does not currently provide a means of escaping local minima and assumes a fully known map.
 
 - Change the parameters in `roadmap/config/map_params.yaml` to customize the components of the map.
 - Change the parameters in `global_search/config/search_params.yaml` to change the start and goal locations and potential field parameters.
@@ -92,4 +92,44 @@ The green node is the start and the red node is the goal and the orange line is 
 
 <img src="global_search/documentation/potfield.gif" width="500">
 
+
+### MPPI
+
+To view the algorithm in action, launch `mppi_control turtlebot_mppi.launch`. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. The parameters may need tuning to yield good results. This package depends on a couple of packages located in my other `ros_navigation_from_scratch` repo. Use the included .rosinstall file to ensure you get the correct packages.
+
+- Change parameters in the mppi_control/config/control_param.yaml to tune the controller
+
+Also included in `mppi_control/testing_files` is a python-only script to perform the same algorithm. To use this script, execute the `mppi.py` file. It is currently configured to have a unicycle model robot follow waypoints. Below are some results for various robots and tasks:
+
+The first plot is using the unicycle kinematic model to solve the parallel parking problem. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.
+
+<img src="mppi_control/testing_files/unicycle.gif" width="500">
+
+The plot below is using the differential drive kinematic model to solve the parallel parking problem. The output of the control algorithm is right and left wheel velocities. See the python script for all of the parameters.
+
+<img src="mppi_control/testing_files/diff_drive.gif" width="500">
+
+The third plot is using the unicycle kinematic model to follow a series of waypoint. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.
+
+<img src="mppi_control/testing_files/waypoints-unicycle.gif" width="500">
+
 ## Background
+
+## References and Resources
+
+- LaValle, Steven M. Planning algorithms. Cambridge university press, 2006. Link
+
+- Choset, Howie M., et al. Principles of robot motion: theory, algorithms, and implementation. MIT press, 2005.
+
+- Latombe, Lydia E. Kavraki Jean-Claude. ”Probabilistic Roadmaps for Robot Path Planning.” Prati-
+cal motion planning in robotics: current aproaches and future challenges (1998): 33-53.
+
+- Daniel, Kenny, et al. ”Theta*: Any-angle path planning on grids.” Journal of Artificial In-
+telligence Research 39 (2010): 533-579.
+
+- Koenig, Sven, and Maxim Likhachev. ”Fast replanning for navigation in unknown terrain.”
+IEEE Transactions on Robotics 21.3 (2005): 354-363.
+
+- Williams, Grady, Andrew Aldrich, and Evangelos Theodorou. "Model predictive path integral control using covariance variable importance sampling." arXiv preprint arXiv:1509.01149 (2015).
+
+- Abraham, Ian, et al. "Model-Based Generalization Under Parameter Uncertainty Using Path Integral Control." IEEE Robotics and Automation Letters 5.2 (2020): 2864-2871.
