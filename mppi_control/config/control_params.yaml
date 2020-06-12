@@ -1,0 +1,13 @@
+sigma: 0.3 # sampling distribution varience
+lambda: 0.2 # mppi hyperparameter
+
+Q: [10000.0, 10000.0, 0] # The diagonal for the state weight matrix in the cost function
+R: [10.0, 10.0] # The diagonal for the control weight matrix in the cost function
+P1: [10000.0, 10000.0, 10.0] # The diagonal for the state weight matrix in the terminal cost function
+
+horizon_steps: 100 # number of descrete steps in the horizon time
+horizon_time: 1.0 # number of seconds to compute the future control for
+
+N: 13 # number of samples or rollouts to use
+
+waypoints: [[4, 0, 0], [4, 4, 0], [2, 6, 0], [0, 4, 0], [0, 0, 0]] # waypoints drive to

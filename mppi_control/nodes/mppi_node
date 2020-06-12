@@ -1,0 +1,134 @@
+#!/usr/bin/env python
+
+"""
+This file is a node to perform mppi control for the turtlebot and publish a control command
+
+PUBLISHERS:
+
+SUBSCRIBERS:
+
+SERVICES:
+    /start: (Empty) Call this service to start the simulation
+"""
+
+import numpy as np
+
+import rospy
+import tf
+
+
+from geometry_msgs.msg import Twist, Quaternion, Vector3
+from nav_msgs.msg import Odometry
+from std_srvs.srv import Empty, EmptyResponse
+
+from mppi_control import diff_drive_robot, mppi
+
+
+class node_class():
+
+    def __init__(self):
+
+        self.start = False
+
+        self.start_service = rospy.Service('start', Empty, self.callback_start)
+
+        self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=1)
+
+        self.odom_sub = rospy.Subscriber("odom", Odometry, self.callback_odom)
+
+        # loaded from repo/nuturtle_description/config
+        self.wheel_radius = rospy.get_param("wheel_radius")
+        self.wheel_base = rospy.get_param("wheel_base")
+        motor_lim = rospy.get_param("motor_lim")
+
+        # loaded from motionplanning/mppi_control/config
+        sig = rospy.get_param("sigma")
+        lam = rospy.get_param("lambda")
+
+        Q = np.diagflat(rospy.get_param("Q"))
+        R = np.diagflat(rospy.get_param("R"))
+        P1 = np.diagflat(rospy.get_param("P1"))
+
+        horizon_time = rospy.get_param("horizon_time")
+        horizon_steps = rospy.get_param("horizon_steps")
+
+        N = rospy.get_param("N")
+
+        waypoints = np.array(rospy.get_param("waypoints"))
+        angles = [np.pi/2, 5*np.pi/4, 5*np.pi/4, 3*np.pi/2, 3*np.pi/2]
+
+        for i in range(len(waypoints)):
+            waypoints[i,2] = angles[i]
+
+        # Create the diff drive robot object
+        robot = diff_drive_robot(self.wheel_radius, self.wheel_base/2, motor_lim)
+
+        a0 = np.zeros([2, horizon_steps])
+
+        # create the controller object
+        self.control = mppi(a0, waypoints[0], horizon_time, horizon_steps, lam, sig, N, Q, R, P1, robot)
+
+        self.first_pass = True # Flag to grab the start time
+
+        self.start_time = 0
+        self.prev_time = 0
+
+    def callback_start(self, req):
+        self.start = True
+        print("GO!")
+        return []
+
+    def wheelsToTwist(self, wheel_vels):
+        d = 1 / self.wheel_base
+        return Twist(Vector3((self.wheel_radius)*(.5*wheel_vels[0] + .5*wheel_vels[1]), 0, 0), Vector3(0, 0, (self.wheel_radius)*(d*wheel_vels[0] - d*wheel_vels[1])))
+
+    def callback_odom(self, data):
+
+        # convert odom data into an array
+        quat = (data.pose.pose.orientation.x, data.pose.pose.orientation.y, data.pose.pose.orientation.z, data.pose.pose.orientation.w)
+        euler = tf.transformations.euler_from_quaternion(quat)
+
+        cur_state = np.array([data.pose.pose.position.x, data.pose.pose.position.x, euler[2]])
+        cur_time = data.header.stamp
+
+        if self.start:
+
+            if self.first_pass:
+                self.start_time = cur_time
+                self.prev_time = cur_time
+                self.first_pass = False
+
+            t_cur = cur_time - self.start_time
+
+            # print(cur_state)
+            # print(cur_time - self.prev_time)
+
+            # do control
+            wheel_vels = self.control.get_control(cur_state, t_cur) # output is (ur, ul)
+
+            # convert wheel velocities into a Geometry Twist
+            # cmd = Twist(Vector3(1, 0, 0), Vector3(0, 0, 0.1))
+            cmd = self.wheelsToTwist(wheel_vels)
+
+            self.prev_time = cur_time
+
+        else:
+            cmd = Twist(Vector3(0, 0, 0), Vector3(0, 0, 0))
+
+        # publish control
+        self.cmd_pub.publish(cmd)
+
+
+def main():
+
+    rospy.init_node('mppi_node')
+
+    mppi_controller = node_class()
+
+    rospy.spin()
+
+if __name__ == '__main__':
+    try:
+        main()
+    except rospy.ROSInterruptException:
+        pass

@@ -1,6 +1,8 @@
 ## @package mppi_lib
 # This file contains a class to perform mppi control with a diff drive robot
 
+import numpy as np
+from scipy.signal import savgol_filter
 
 ## class to represent a simple diff drive robot
 class diff_drive_robot():
@@ -10,7 +12,7 @@ class diff_drive_robot():
     # @param radius the wheel radius
     # @param wheel_base the distance from the centerline to the wheel
     # @param wheel_speed_limit the max velocity the wheel can spin
-    def__init__(self, radius, wheel_base, wheel_speed_limit):
+    def __init__(self, radius, wheel_base, wheel_speed_limit):
 
         self.radius = radius
         self.wheel_base = wheel_base
@@ -21,15 +23,9 @@ class diff_drive_robot():
     # @param th the angular position of the robot, an nx1 array
     # @param u the control, an nx2 array
     def model(self, th, u):
-        # wheel radius
-        radius = 0.033
-
-        # wheel base
-        wheel_base = 0.16
-
-        return np.array([(radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
-                         (radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
-                         (radius / wheel_base) * (u[:,1] - u[:,0])])
+        return np.array([(self.radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
+                         (self.radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
+                         (self.radius / self.wheel_base) * (u[:,1] - u[:,0])])
 
 ## class for controlling a diff drive robot
 class mppi():
@@ -70,6 +66,8 @@ class mppi():
         self.Q = Q
         self.R = R
         self.P1 = P1
+
+        self.diff_drive = robot
 
 
     ## Function to perform Euler integration to take one step in time.
@@ -123,6 +121,7 @@ class mppi():
             output[n,:] = (deltax).T.dot(self.P1).dot(deltax)
 
         return output
+
     ## Function to change the target waypoint and inital action (if desired)
     #
     # @param self the object pointer
@@ -142,8 +141,8 @@ class mppi():
     # @param cur_state the current position of the robot, np.array([x, y, theta])
     # @param cur_time the current position of the robot, np.array([x, y, theta])
     #
-    # @returns wheel velocities to apply to the robot
-    # # TODO: Update how the control vector is advanced
+    # @returns wheel velocities to apply to the robot, 2x1 array
+    # # TODO: Update how the control vector is advanced to account for the code taking longer than 1 horizon step
     def get_control(self, cur_state, cur_time):
 
         J = [] # cost list
@@ -159,7 +158,7 @@ class mppi():
             J.append(self.l(temp_state, self.a[:,t], eps[-1]))
 
             # calc next state
-            temp_state = self.step(temp_state, self.a[:,t] + eps[-1], self.diff_drive)
+            temp_state = self.step(temp_state, self.a[:,t] + eps[-1], self.diff_drive.model)
 
         J.append(self.m(temp_state))
 

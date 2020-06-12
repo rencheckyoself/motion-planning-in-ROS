@@ -1,0 +1,27 @@
+<launch>
+
+  <rosparam command="load" file="$(find nuturtle_description)/config/diff_params.yaml"/>
+  <rosparam command="load" file="$(find mppi_control)/config/control_params.yaml"/>
+  <rosparam command="load" file="$(find rigid2d)/config/frame_link_names.yaml"/>
+  <rosparam command="load" file="$(find nuturtle_robot)/config/traj_params.yaml"/>
+
+  <!-- Launch Control Node to publish velocities -->
+  <node name="mppi_node" pkg="mppi_control" type="mppi_node" output="screen"/>
+
+  <!-- Launch the Encoder Node to simulate encoders -->
+  <node name="fake_diff_encoders" pkg="rigid2d" type="fake_diff_encoders" output="screen"/>
+
+  <!-- Launch Odometer node to publish the robots position -->
+  <node name="odometer" pkg="rigid2d" type="odometer" output="screen">
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="left_wheel_joint" value="left_wheel_axel"/>
+    <param name="right_wheel_joint" value="right_wheel_axel"/>
+  </node>
+
+  <!-- Launch Visualization -->
+  <param name="robot_description" command="xacro '$(find nuturtle_description)/urdf/diff_drive.urdf.xacro'"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find nuturtle_description)/config/odom_view.rviz"/>
+
+</launch>

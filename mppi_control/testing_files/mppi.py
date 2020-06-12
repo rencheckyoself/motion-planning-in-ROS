@@ -60,7 +60,7 @@ class mppi():
         radius = 0.033
 
         # wheel base
-        wheel_base = 0.16
+        wheel_base = 0.16/2
 
         return np.array([(radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
                          (radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
