@@ -118,7 +118,6 @@ class node_class():
                     self.control.set_goal(self.waypoints[self.loc])
                     self.loc += 1
 
-
             # do control
             wheel_vels = self.control.get_control(cur_state, t_cur) # output is (ur, ul)
 

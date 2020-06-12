@@ -25,7 +25,7 @@ class diff_drive_robot():
     def model(self, th, u):
         return np.array([(self.radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
                          (self.radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
-                         (self.radius / self.wheel_base) * (u[:,1] - u[:,0])])
+                         (self.radius / self.wheel_base) * (u[:,0] - u[:,1])])
 
 ## class for controlling a diff drive robot
 class mppi():
