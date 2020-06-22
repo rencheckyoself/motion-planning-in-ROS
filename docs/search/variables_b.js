@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['obstacles',['obstacles',['../d9/d0a/structgrid_1_1Map.html#ab9f49bab16cb300a8de972a412c54375',1,'grid::Map']]],
-  ['open_5flist',['open_list',['../d0/dde/classhsearch_1_1HSearch.html#a20e68d7726e57a42cb65427b7f9da89f',1,'hsearch::HSearch']]]
+  ['map_5fvector',['map_vector',['../d9/d0a/structgrid_1_1Map.html#a5ee687d67cff44b8e447b2b92603056b',1,'grid::Map']]]
 ];

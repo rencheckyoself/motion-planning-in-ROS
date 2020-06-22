@@ -81,6 +81,8 @@ $(document).ready(function(){initNavTree('d5/d13/classpfield_1_1PtField.html','.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../dc/da4/classpfield_1_1PtField-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pfield::PtField Class Reference</div>  </div>
@@ -91,6 +93,14 @@ $(document).ready(function(){initNavTree('d5/d13/classpfield_1_1PtField.html','.
  <a href="../../d5/d13/classpfield_1_1PtField.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d9/d31/potential__fields_8hpp_source.html">potential_fields.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for pfield::PtField:</div>
+<div class="dyncontent">
+<div class="center"><img src="../../df/d59/classpfield_1_1PtField__coll__graph.png" border="0" usemap="#pfield_1_1PtField_coll__map" alt="Collaboration graph"/></div>
+<map name="pfield_1_1PtField_coll__map" id="pfield_1_1PtField_coll__map">
+<area shape="rect" id="node2" href="../../d9/d0a/structgrid_1_1Map.html" title="Contains information about a bound map. " alt="" coords="19,5,95,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="../../graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -103,6 +113,53 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab936f2bf686f45a2a11825e5a8911356"><td class="memItemLeft" align="right" valign="top">std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#ab936f2bf686f45a2a11825e5a8911356">get_path</a> ()</td></tr>
 <tr class="memdesc:ab936f2bf686f45a2a11825e5a8911356"><td class="mdescLeft">&#160;</td><td class="mdescRight">retrieve the whole planned path  <a href="#ab936f2bf686f45a2a11825e5a8911356">More...</a><br /></td></tr>
 <tr class="separator:ab936f2bf686f45a2a11825e5a8911356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a1cbfedd08d4e271264f10e5b5c9b57bd"><td class="memItemLeft" align="right" valign="top">rigid2d::Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a1cbfedd08d4e271264f10e5b5c9b57bd">calculate_u_att</a> (rigid2d::Vector2D cur_loc)</td></tr>
+<tr class="memdesc:a1cbfedd08d4e271264f10e5b5c9b57bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the attractive component of the "force" based on the distance to goal.  <a href="#a1cbfedd08d4e271264f10e5b5c9b57bd">More...</a><br /></td></tr>
+<tr class="separator:a1cbfedd08d4e271264f10e5b5c9b57bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d47de5b4a724e2100c70676e683298b"><td class="memItemLeft" align="right" valign="top">rigid2d::Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a8d47de5b4a724e2100c70676e683298b">calculate_u_rep</a> (rigid2d::Vector2D cur_loc)</td></tr>
+<tr class="memdesc:a8d47de5b4a724e2100c70676e683298b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the repulsive component of the "force" based on the distance to each obstacle.  <a href="#a8d47de5b4a724e2100c70676e683298b">More...</a><br /></td></tr>
+<tr class="separator:a8d47de5b4a724e2100c70676e683298b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e3ca79a5c7eb3baeaa4b6097df2c8f"><td class="memItemLeft" align="right" valign="top">rigid2d::Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#ac8e3ca79a5c7eb3baeaa4b6097df2c8f">u_rep_component</a> (std::vector&lt; rigid2d::Vector2D &gt; polygon, rigid2d::Vector2D cur_loc)</td></tr>
+<tr class="memdesc:ac8e3ca79a5c7eb3baeaa4b6097df2c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the repulsive component due to a given obstacle.  <a href="#ac8e3ca79a5c7eb3baeaa4b6097df2c8f">More...</a><br /></td></tr>
+<tr class="separator:ac8e3ca79a5c7eb3baeaa4b6097df2c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af42c90549ef5781d7ace3750a64204fb"><td class="memItemLeft" align="right" valign="top"><a id="af42c90549ef5781d7ace3750a64204fb"></a>
+<a class="el" href="../../d9/d0a/structgrid_1_1Map.html">grid::Map</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#af42c90549ef5781d7ace3750a64204fb">known_map</a></td></tr>
+<tr class="memdesc:af42c90549ef5781d7ace3750a64204fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">the known map <br /></td></tr>
+<tr class="separator:af42c90549ef5781d7ace3750a64204fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfa912b088856926772dc828a5d62671"><td class="memItemLeft" align="right" valign="top"><a id="abfa912b088856926772dc828a5d62671"></a>
+rigid2d::Vector2D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#abfa912b088856926772dc828a5d62671">goal_loc</a></td></tr>
+<tr class="memdesc:abfa912b088856926772dc828a5d62671"><td class="mdescLeft">&#160;</td><td class="mdescRight">the goal location <br /></td></tr>
+<tr class="separator:abfa912b088856926772dc828a5d62671"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07f90e3a7188276be1f3854f11930c3a"><td class="memItemLeft" align="right" valign="top"><a id="a07f90e3a7188276be1f3854f11930c3a"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a07f90e3a7188276be1f3854f11930c3a">zeta</a></td></tr>
+<tr class="memdesc:a07f90e3a7188276be1f3854f11930c3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">the step size for gradient descent <br /></td></tr>
+<tr class="separator:a07f90e3a7188276be1f3854f11930c3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43a4e144b8906c64823e872ff270d4c5"><td class="memItemLeft" align="right" valign="top"><a id="a43a4e144b8906c64823e872ff270d4c5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a43a4e144b8906c64823e872ff270d4c5">att_weight</a></td></tr>
+<tr class="memdesc:a43a4e144b8906c64823e872ff270d4c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">weighting factor the attactive component <br /></td></tr>
+<tr class="separator:a43a4e144b8906c64823e872ff270d4c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adadbef461c9255b0c60301508f4cab37"><td class="memItemLeft" align="right" valign="top"><a id="adadbef461c9255b0c60301508f4cab37"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#adadbef461c9255b0c60301508f4cab37">dg_star</a></td></tr>
+<tr class="memdesc:adadbef461c9255b0c60301508f4cab37"><td class="mdescLeft">&#160;</td><td class="mdescRight">threshold for piecewise attractive gradient calculation <br /></td></tr>
+<tr class="separator:adadbef461c9255b0c60301508f4cab37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc129742194272617f51b200c49dcd52"><td class="memItemLeft" align="right" valign="top"><a id="acc129742194272617f51b200c49dcd52"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#acc129742194272617f51b200c49dcd52">rep_weight</a></td></tr>
+<tr class="memdesc:acc129742194272617f51b200c49dcd52"><td class="mdescLeft">&#160;</td><td class="mdescRight">weighting factor the repulsive component <br /></td></tr>
+<tr class="separator:acc129742194272617f51b200c49dcd52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1223f43ad697e3539a732b08b5d77926"><td class="memItemLeft" align="right" valign="top"><a id="a1223f43ad697e3539a732b08b5d77926"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a1223f43ad697e3539a732b08b5d77926">Qstar</a></td></tr>
+<tr class="memdesc:a1223f43ad697e3539a732b08b5d77926"><td class="mdescLeft">&#160;</td><td class="mdescRight">threshold for obstacles range of influence <br /></td></tr>
+<tr class="separator:a1223f43ad697e3539a732b08b5d77926"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a941337f34ead9c01f53427075be8a0b9"><td class="memItemLeft" align="right" valign="top"><a id="a941337f34ead9c01f53427075be8a0b9"></a>
+std::vector&lt; rigid2d::Vector2D &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d13/classpfield_1_1PtField.html#a941337f34ead9c01f53427075be8a0b9">final_path</a></td></tr>
+<tr class="memdesc:a941337f34ead9c01f53427075be8a0b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">final path determined <br /></td></tr>
+<tr class="separator:a941337f34ead9c01f53427075be8a0b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>brief class to allow planning </p>
@@ -180,6 +237,76 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1cbfedd08d4e271264f10e5b5c9b57bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cbfedd08d4e271264f10e5b5c9b57bd">&#9670;&nbsp;</a></span>calculate_u_att()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rigid2d::Vector2D pfield::PtField::calculate_u_att </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>cur_loc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the attractive component of the "force" based on the distance to goal. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cur_loc</td><td>the current location of the robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the total attrative gradient </dd></dl>
+
+</div>
+</div>
+<a id="a8d47de5b4a724e2100c70676e683298b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d47de5b4a724e2100c70676e683298b">&#9670;&nbsp;</a></span>calculate_u_rep()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rigid2d::Vector2D pfield::PtField::calculate_u_rep </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>cur_loc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the repulsive component of the "force" based on the distance to each obstacle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cur_loc</td><td>the current location of the robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the total repulsive gradient </dd></dl>
+
+</div>
+</div>
 <a id="ab936f2bf686f45a2a11825e5a8911356"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab936f2bf686f45a2a11825e5a8911356">&#9670;&nbsp;</a></span>get_path()</h2>
 
@@ -227,9 +354,55 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ac8e3ca79a5c7eb3baeaa4b6097df2c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e3ca79a5c7eb3baeaa4b6097df2c8f">&#9670;&nbsp;</a></span>u_rep_component()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">rigid2d::Vector2D pfield::PtField::u_rep_component </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; rigid2d::Vector2D &gt;&#160;</td>
+          <td class="paramname"><em>polygon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>cur_loc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculate the repulsive component due to a given obstacle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">polygon</td><td>a set of points that define a convex polygon </td></tr>
+    <tr><td class="paramname">cur_loc</td><td>the current location of the robot </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a vector of the repulsice gradient components for the provided obstacle </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>global_search/include/global_search/<a class="el" href="../../d9/d31/potential__fields_8hpp_source.html">potential_fields.hpp</a></li>
-<li>global_search/src/global_search/<a class="el" href="../../d8/d34/potential__fields_8cpp.html">potential_fields.cpp</a></li>
+<li>global_search/src/global_search/potential_fields.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

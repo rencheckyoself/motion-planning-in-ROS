@@ -14,14 +14,18 @@ class diff_drive_robot():
     # @param wheel_speed_limit the max velocity the wheel can spin
     def __init__(self, radius, wheel_base, wheel_speed_limit):
 
+        ## Wheel radius of the robot
         self.radius = radius
+        ## Distance between the wheels of the robot
         self.wheel_base = wheel_base
+        ## Speed limit of the wheels
         self.wheel_speed_limit = wheel_speed_limit
 
     ## The differential drive kinematic model
     #
     # @param th the angular position of the robot, an nx1 array
     # @param u the control, an nx2 array
+    # @returns the [x,y,th] velocities of the robot
     def model(self, th, u):
         return np.array([(self.radius / 2.0) * np.cos(th) * (u[:,0] + u[:,1]),
                          (self.radius / 2.0) * np.sin(th) * (u[:,0] + u[:,1]),
@@ -35,38 +39,50 @@ class mppi():
     # @param initial_action an inital guess at the controls for the first horizon, a 2xN array where row 0 is the right wheel velcity and row 1 is the left wheel Velocity
     # @param goal target waypoint, np.array([x, y, theta])
     # @param horizon_time defines the time to compute the control over
-    # @param horizon_steps defines the number of descrete steps durint the time horizon
+    # @param horizon_steps defines the number of descrete steps during the time horizon
     # @param lam mppi parameter
     # @param sig sampling distribution varience
     # @param N number of rollouts/samples
     # @param Q 3x3 array of the cost function state weights
     # @param R 2x2 array of the cost function control weights
     # @param P1 3x3 array of the terminal cost function state weights
-    # @robot a diff_drive_robot object, or something with a similar format
+    # @param robot a diff_drive_robot object, or something with a similar format
     def __init__(self, initial_action, goal, horizon_time, horizon_steps, lam, sig, N, Q, R, P1, robot):
 
-        self.robot = robot
-
+        ## mppi parameter
         self.lam = lam
+        ## sampling distribution varience
         self.sig = sig
 
+        ## the number of descrete steps during the time horizon
         self.horizon = horizon_steps
+        ## the time between each step in the horizon
         self.dt = horizon_time/horizon_steps
-        self.last_time = 0 # last time an action was sent to the robot
+        ## last time an action was sent to the robot
+        self.last_time = 0
 
+        ## The initial action sequence, 2xN array
         self.a = initial_action # 2xN
-        self.a0 = initial_action[:,0] # action to append to a after robot has been issued a control
+        ## The action to append to self.a after robot has been issued a control
+        self.a0 = initial_action[:,0]
 
+        ## Number of rollouts/samples
         self.N = N
 
+        ## Target waypoint
         self.goal = goal
 
-        self.t_cur = 0 # tracks the current time
+        ## the current time
+        self.t_cur = 0
 
+        ## 3x3 array of the cost function state weights
         self.Q = Q
+        ## 2x2 array of the cost function control weights
         self.R = R
+        ## 3x3 array of the terminal cost function state weights
         self.P1 = P1
 
+        ## The robot model
         self.diff_drive = robot
 
 
@@ -78,7 +94,7 @@ class mppi():
     # @param u the control state, an nx2 array.
     # @param f the function to use that defines the kinematics of the system being controlled
     #
-    # returns the simulated next state of the robot
+    # @returns the simulated next state of the robot
     def step(self, x, u, f):
         return x + f(x[:,2], u).T * self.dt
 
@@ -92,7 +108,7 @@ class mppi():
     # @param a the mean control, an array with 2 elements
     # @param eps the sampled control pertubations, an Nx2 array
     #
-    # @ returns the cost at the ith step in the horizon, an Nx1 array
+    # @returns the cost at the ith step in the horizon, an Nx1 array
     def l(self, x, a, eps):
         output = np.zeros([self.N, 1])
 
@@ -112,7 +128,7 @@ class mppi():
     # @param self the object pointer
     # @param x the state of the robot, an Nx3 array
     #
-    # @ returns the cost at the end of the horizon, an Nx1 array
+    # @returns the cost at the end of the horizon, an Nx1 array
     def m(self, x):
         output = np.zeros([self.N, 1])
 
@@ -127,6 +143,7 @@ class mppi():
     # @param self the object pointer
     # @param goal target waypoint, np.array([x, y, theta])
     # @param action_seq the inital guess for the new target. Defaults to None and will just use the existing values in the action array
+    # @returns nothing
     def set_goal(self, goal, action_seq=None):
 
         self.goal = goal
@@ -142,7 +159,6 @@ class mppi():
     # @param cur_time the current position of the robot, np.array([x, y, theta])
     #
     # @returns wheel velocities to apply to the robot, 2x1 array
-    # # TODO: Update how the control vector is advanced to account for the code taking longer than 1 horizon step
     def get_control(self, cur_state, cur_time):
 
         J = [] # cost list

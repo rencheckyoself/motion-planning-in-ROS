@@ -1,0 +1,81 @@
+\hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot}{}\section{mppi\+\_\+control.\+mppi\+\_\+lib.\+diff\+\_\+drive\+\_\+robot Class Reference}
+\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot}\index{mppi\+\_\+control.\+mppi\+\_\+lib.\+diff\+\_\+drive\+\_\+robot@{mppi\+\_\+control.\+mppi\+\_\+lib.\+diff\+\_\+drive\+\_\+robot}}
+
+
+class to represent a simple diff drive robot  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a47e8aa290b90853fc9f887e71e0ab605}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_ad5fc7c9c87985d383158121fb2705bcc}{radius}, \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_af48eec2a0d6e673a3c19b65aa803cbba}{wheel\+\_\+base}, \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a6ddb4573599b2d41a59a35fe9e949077}{wheel\+\_\+speed\+\_\+limit})
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_adcb822f7c460f713d5a4fdbb9d811fc8}{model} (self, th, u)
+\begin{DoxyCompactList}\small\item\em The differential drive kinematic model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_ad5fc7c9c87985d383158121fb2705bcc}\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_ad5fc7c9c87985d383158121fb2705bcc}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_ad5fc7c9c87985d383158121fb2705bcc}{radius}
+\begin{DoxyCompactList}\small\item\em Wheel radius of the robot. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_af48eec2a0d6e673a3c19b65aa803cbba}\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_af48eec2a0d6e673a3c19b65aa803cbba}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_af48eec2a0d6e673a3c19b65aa803cbba}{wheel\+\_\+base}
+\begin{DoxyCompactList}\small\item\em Distance between the wheels of the robot. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a6ddb4573599b2d41a59a35fe9e949077}\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a6ddb4573599b2d41a59a35fe9e949077}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a6ddb4573599b2d41a59a35fe9e949077}{wheel\+\_\+speed\+\_\+limit}
+\begin{DoxyCompactList}\small\item\em Speed limit of the wheels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class to represent a simple diff drive robot 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a47e8aa290b90853fc9f887e71e0ab605}\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_a47e8aa290b90853fc9f887e71e0ab605}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot@{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot@{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+diff\+\_\+drive\+\_\+robot.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{radius,  }\item[{}]{wheel\+\_\+base,  }\item[{}]{wheel\+\_\+speed\+\_\+limit }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & object pointer \\
+\hline
+{\em radius} & the wheel radius \\
+\hline
+{\em wheel\+\_\+base} & the distance from the centerline to the wheel \\
+\hline
+{\em wheel\+\_\+speed\+\_\+limit} & the max velocity the wheel can spin \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_adcb822f7c460f713d5a4fdbb9d811fc8}\label{classmppi__control_1_1mppi__lib_1_1diff__drive__robot_adcb822f7c460f713d5a4fdbb9d811fc8}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot@{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot}!model@{model}}
+\index{model@{model}!mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot@{mppi\+\_\+control\+::mppi\+\_\+lib\+::diff\+\_\+drive\+\_\+robot}}
+\subsubsection{\texorpdfstring{model()}{model()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+diff\+\_\+drive\+\_\+robot.\+model (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{th,  }\item[{}]{u }\end{DoxyParamCaption})}
+
+
+
+The differential drive kinematic model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em th} & the angular position of the robot, an nx1 array \\
+\hline
+{\em u} & the control, an nx2 array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{[}x,y,th\mbox{]} velocities of the robot 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mppi\+\_\+control/src/mppi\+\_\+control/mppi\+\_\+lib.\+py\end{DoxyCompactItemize}

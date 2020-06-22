@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['distance',['distance',['../df/da1/structcollision_1_1DistRes.html#a11d43615b27de89a62ef53a2075f72ee',1,'collision::DistRes::distance()'],['../d4/db8/structprm_1_1Edge.html#a7f65f07649f06a87bc16514c75b9feb2',1,'prm::Edge::distance()'],['../de/d19/structprm_1_1Node.html#a4db5966bcf026eaa4f2cd07ea22bcb4f',1,'prm::Node::distance()']]]
+  ['cell_5fsize',['cell_size',['../de/d83/classgrid_1_1Grid.html#acb1ca003a2aeafe6b554d9ac27b29109',1,'grid::Grid']]],
+  ['closed_5flist',['closed_list',['../d0/dde/classhsearch_1_1HSearch.html#ae85581fef9d5887f154d2d3b9ea3a06e',1,'hsearch::HSearch']]],
+  ['created_5fgraph_5fp',['created_graph_p',['../d0/dde/classhsearch_1_1HSearch.html#a92b4944c741acab45fc3c71661f1aa42',1,'hsearch::HSearch::created_graph_p()'],['../d8/d70/classhsearch_1_1LPAStar.html#a75e7bdc0841fd31468c41a58ac842aed',1,'hsearch::LPAStar::created_graph_p()']]]
 ];

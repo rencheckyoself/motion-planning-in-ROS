@@ -16,6 +16,10 @@ var annotated_dup =
       [ "SearchNode", "d1/dd4/structhsearch_1_1SearchNode.html", "d1/dd4/structhsearch_1_1SearchNode" ],
       [ "ThetaStar", "da/dce/classhsearch_1_1ThetaStar.html", "da/dce/classhsearch_1_1ThetaStar" ]
     ] ],
+    [ "mppi", null, [
+      [ "mppi", "d6/d5d/classmppi_1_1mppi.html", "d6/d5d/classmppi_1_1mppi" ]
+    ] ],
+    [ "mppi_control", "d0/d60/namespacemppi__control.html", "d0/d60/namespacemppi__control" ],
     [ "pfield", null, [
       [ "PtField", "d5/d13/classpfield_1_1PtField.html", "d5/d13/classpfield_1_1PtField" ]
     ] ],

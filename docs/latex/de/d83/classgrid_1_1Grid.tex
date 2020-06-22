@@ -9,6 +9,15 @@ Class to create a \hyperlink{classgrid_1_1Grid}{Grid} overlay for provided \hype
 
 {\ttfamily \#include $<$grid.\+hpp$>$}
 
+
+
+Collaboration diagram for grid\+:\+:Grid\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{dc/d43/classgrid_1_1Grid__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,7 +28,7 @@ Class to create a \hyperlink{classgrid_1_1Grid}{Grid} overlay for provided \hype
 \begin{DoxyCompactList}\small\item\em Initialization to construct a grid in an empty user defined area. \end{DoxyCompactList}\item 
 \hyperlink{classgrid_1_1Grid_a3fd6c9bb56bc7ae63d6126312e001f23}{Grid} (std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$$>$ polygon\+\_\+verticies, std\+::vector$<$ double $>$ xboundary, std\+::vector$<$ double $>$ yboundary)
 \begin{DoxyCompactList}\small\item\em Initialization to construct a grid in a user defined area with obstacles. \end{DoxyCompactList}\item 
-void \hyperlink{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}{build\+\_\+grid} (double cell\+\_\+size, unsigned int grid\+\_\+res, double robot\+\_\+radius)
+void \hyperlink{classgrid_1_1Grid_adcba03289a5d2de6e209b2a3ded5d5ac}{build\+\_\+grid} (double \hyperlink{classgrid_1_1Grid_acb1ca003a2aeafe6b554d9ac27b29109}{cell\+\_\+size}, unsigned int \hyperlink{classgrid_1_1Grid_a574ec32cb3346c1be8de79ccc38cd47b}{grid\+\_\+res}, double robot\+\_\+radius)
 \begin{DoxyCompactList}\small\item\em Function to call all nessissary functions to build the grid. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}\label{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}} 
 void \hyperlink{classgrid_1_1Grid_a6620e51207bbd6ca60f868b120cb7e04}{generate\+\_\+centers\+\_\+graph} ()
@@ -42,6 +51,44 @@ rigid2d\+::\+Vector2D \hyperlink{classgrid_1_1Grid_a740d72189efbdf5595c3ddaacc8c
 \begin{DoxyCompactList}\small\item\em convert from grid coordinates (integers) to world coordinates (meters) \end{DoxyCompactList}\item 
 rigid2d\+::\+Vector2D \hyperlink{classgrid_1_1Grid_a9aeb33485b294ab4a07178359db6e3cf}{world\+\_\+to\+\_\+grid} (rigid2d\+::\+Vector2D world\+\_\+coord)
 \begin{DoxyCompactList}\small\item\em convert from world coordinates to grid coordinates \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_af5dd6a34ea30b975c4e72304db4e6dc7}\label{classgrid_1_1Grid_af5dd6a34ea30b975c4e72304db4e6dc7}} 
+void \hyperlink{classgrid_1_1Grid_af5dd6a34ea30b975c4e72304db4e6dc7}{grid\+\_\+resize} ()
+\begin{DoxyCompactList}\small\item\em calculate the grid size based on the saved map and the grid resolution \end{DoxyCompactList}\item 
+bool \hyperlink{classgrid_1_1Grid_a5b8625b7400116c5707c0465467a597d}{cell\+\_\+near\+\_\+boarder} (rigid2d\+::\+Vector2D center, double threshold)
+\begin{DoxyCompactList}\small\item\em Determine if the cell center is within the buffer radius of the map boarder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a611cf14f1d75f0c77a7a5bcbc8fee6e0}\label{classgrid_1_1Grid_a611cf14f1d75f0c77a7a5bcbc8fee6e0}} 
+\hyperlink{structgrid_1_1Map}{Map} \hyperlink{classgrid_1_1Grid_a611cf14f1d75f0c77a7a5bcbc8fee6e0}{og\+\_\+map}
+\begin{DoxyCompactList}\small\item\em the map to initialize the grid with \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_ab990be4a53fd45a83df3f823f7098d56}\label{classgrid_1_1Grid_ab990be4a53fd45a83df3f823f7098d56}} 
+\hyperlink{structgrid_1_1Map}{Map} \hyperlink{classgrid_1_1Grid_ab990be4a53fd45a83df3f823f7098d56}{scaled\+\_\+map}
+\begin{DoxyCompactList}\small\item\em the scaled map based on the grid resolution \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a375f27f536721667f4487b74982c154a}\label{classgrid_1_1Grid_a375f27f536721667f4487b74982c154a}} 
+std\+::vector$<$ int $>$ \hyperlink{classgrid_1_1Grid_a375f27f536721667f4487b74982c154a}{grid\+\_\+dimensions}
+\begin{DoxyCompactList}\small\item\em x, y \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_aae353051de1a48dd8f29e1889d71bf88}\label{classgrid_1_1Grid_aae353051de1a48dd8f29e1889d71bf88}} 
+double \hyperlink{classgrid_1_1Grid_aae353051de1a48dd8f29e1889d71bf88}{buffer\+\_\+radius} = 0.\+0
+\begin{DoxyCompactList}\small\item\em buffer distance to incorporate when detecting collisions \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a574ec32cb3346c1be8de79ccc38cd47b}\label{classgrid_1_1Grid_a574ec32cb3346c1be8de79ccc38cd47b}} 
+unsigned int \hyperlink{classgrid_1_1Grid_a574ec32cb3346c1be8de79ccc38cd47b}{grid\+\_\+res} = 1
+\begin{DoxyCompactList}\small\item\em scale the cell size \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_acb1ca003a2aeafe6b554d9ac27b29109}\label{classgrid_1_1Grid_acb1ca003a2aeafe6b554d9ac27b29109}} 
+double \hyperlink{classgrid_1_1Grid_acb1ca003a2aeafe6b554d9ac27b29109}{cell\+\_\+size} = 1.\+0
+\begin{DoxyCompactList}\small\item\em meters per grid cell \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a970c0980c3a662ddaddd9e457f799252}\label{classgrid_1_1Grid_a970c0980c3a662ddaddd9e457f799252}} 
+std\+::vector$<$ std\+::vector$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ $>$ \hyperlink{classgrid_1_1Grid_a970c0980c3a662ddaddd9e457f799252}{nodes}
+\begin{DoxyCompactList}\small\item\em all nodes in the grid \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a80fab4482c55128e29083184c234f197}\label{classgrid_1_1Grid_a80fab4482c55128e29083184c234f197}} 
+std\+::vector$<$ \hyperlink{structprm_1_1Edge}{prm\+::\+Edge} $>$ \hyperlink{classgrid_1_1Grid_a80fab4482c55128e29083184c234f197}{all\+\_\+edges}
+\begin{DoxyCompactList}\small\item\em all edges between the grid \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgrid_1_1Grid_a640e9d8f352ebb19ec2801229e5483e4}\label{classgrid_1_1Grid_a640e9d8f352ebb19ec2801229e5483e4}} 
+std\+::vector$<$ std\+::vector$<$ signed char $>$ $>$ \hyperlink{classgrid_1_1Grid_a640e9d8f352ebb19ec2801229e5483e4}{occ\+\_\+data}
+\begin{DoxyCompactList}\small\item\em occupancy grid data, 0 is free, 50 is buffer zone, 100 is occupied \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -106,6 +153,26 @@ Function to call all nessissary functions to build the grid.
 {\em robot\+\_\+radius} & the radius to use as a buffer around the robot for collision detection \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classgrid_1_1Grid_a5b8625b7400116c5707c0465467a597d}\label{classgrid_1_1Grid_a5b8625b7400116c5707c0465467a597d}} 
+\index{grid\+::\+Grid@{grid\+::\+Grid}!cell\+\_\+near\+\_\+boarder@{cell\+\_\+near\+\_\+boarder}}
+\index{cell\+\_\+near\+\_\+boarder@{cell\+\_\+near\+\_\+boarder}!grid\+::\+Grid@{grid\+::\+Grid}}
+\subsubsection{\texorpdfstring{cell\+\_\+near\+\_\+boarder()}{cell\_near\_boarder()}}
+{\footnotesize\ttfamily bool grid\+::\+Grid\+::cell\+\_\+near\+\_\+boarder (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{center,  }\item[{double}]{threshold }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Determine if the cell center is within the buffer radius of the map boarder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em center} & location of cell to check against \\
+\hline
+{\em threshold} & grid buffer distance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the cell center is within the buffer\+\_\+radius 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classgrid_1_1Grid_a22f08e25cb643d8813fc4332300185b7}\label{classgrid_1_1Grid_a22f08e25cb643d8813fc4332300185b7}} 
 \index{grid\+::\+Grid@{grid\+::\+Grid}!get\+\_\+edges@{get\+\_\+edges}}
 \index{get\+\_\+edges@{get\+\_\+edges}!grid\+::\+Grid@{grid\+::\+Grid}}
@@ -242,5 +309,5 @@ matching grid coordinate
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-roadmap/include/roadmap/\hyperlink{grid_8hpp}{grid.\+hpp}\item 
-roadmap/src/roadmap/\hyperlink{grid_8cpp}{grid.\+cpp}\end{DoxyCompactItemize}
+roadmap/include/roadmap/grid.\+hpp\item 
+roadmap/src/roadmap/grid.\+cpp\end{DoxyCompactItemize}

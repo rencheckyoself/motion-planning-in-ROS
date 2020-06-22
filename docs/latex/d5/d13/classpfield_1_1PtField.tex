@@ -9,6 +9,15 @@ brief class to allow planning
 
 {\ttfamily \#include $<$potential\+\_\+fields.\+hpp$>$}
 
+
+
+Collaboration diagram for pfield\+:\+:Pt\+Field\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{df/d59/classpfield_1_1PtField__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -18,6 +27,42 @@ rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_af1faea5a1127d6df5e06727
 \begin{DoxyCompactList}\small\item\em given the robots location, plan its next step \end{DoxyCompactList}\item 
 std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}{get\+\_\+path} ()
 \begin{DoxyCompactList}\small\item\em retrieve the whole planned path \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_a1cbfedd08d4e271264f10e5b5c9b57bd}{calculate\+\_\+u\+\_\+att} (rigid2d\+::\+Vector2D cur\+\_\+loc)
+\begin{DoxyCompactList}\small\item\em Calculate the attractive component of the \char`\"{}force\char`\"{} based on the distance to goal. \end{DoxyCompactList}\item 
+rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_a8d47de5b4a724e2100c70676e683298b}{calculate\+\_\+u\+\_\+rep} (rigid2d\+::\+Vector2D cur\+\_\+loc)
+\begin{DoxyCompactList}\small\item\em Calculate the repulsive component of the \char`\"{}force\char`\"{} based on the distance to each obstacle. \end{DoxyCompactList}\item 
+rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_ac8e3ca79a5c7eb3baeaa4b6097df2c8f}{u\+\_\+rep\+\_\+component} (std\+::vector$<$ rigid2d\+::\+Vector2D $>$ polygon, rigid2d\+::\+Vector2D cur\+\_\+loc)
+\begin{DoxyCompactList}\small\item\em Calculate the repulsive component due to a given obstacle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_af42c90549ef5781d7ace3750a64204fb}\label{classpfield_1_1PtField_af42c90549ef5781d7ace3750a64204fb}} 
+\hyperlink{structgrid_1_1Map}{grid\+::\+Map} \hyperlink{classpfield_1_1PtField_af42c90549ef5781d7ace3750a64204fb}{known\+\_\+map}
+\begin{DoxyCompactList}\small\item\em the known map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_abfa912b088856926772dc828a5d62671}\label{classpfield_1_1PtField_abfa912b088856926772dc828a5d62671}} 
+rigid2d\+::\+Vector2D \hyperlink{classpfield_1_1PtField_abfa912b088856926772dc828a5d62671}{goal\+\_\+loc}
+\begin{DoxyCompactList}\small\item\em the goal location \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_a07f90e3a7188276be1f3854f11930c3a}\label{classpfield_1_1PtField_a07f90e3a7188276be1f3854f11930c3a}} 
+double \hyperlink{classpfield_1_1PtField_a07f90e3a7188276be1f3854f11930c3a}{zeta}
+\begin{DoxyCompactList}\small\item\em the step size for gradient descent \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_a43a4e144b8906c64823e872ff270d4c5}\label{classpfield_1_1PtField_a43a4e144b8906c64823e872ff270d4c5}} 
+double \hyperlink{classpfield_1_1PtField_a43a4e144b8906c64823e872ff270d4c5}{att\+\_\+weight}
+\begin{DoxyCompactList}\small\item\em weighting factor the attactive component \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_adadbef461c9255b0c60301508f4cab37}\label{classpfield_1_1PtField_adadbef461c9255b0c60301508f4cab37}} 
+double \hyperlink{classpfield_1_1PtField_adadbef461c9255b0c60301508f4cab37}{dg\+\_\+star}
+\begin{DoxyCompactList}\small\item\em threshold for piecewise attractive gradient calculation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_acc129742194272617f51b200c49dcd52}\label{classpfield_1_1PtField_acc129742194272617f51b200c49dcd52}} 
+double \hyperlink{classpfield_1_1PtField_acc129742194272617f51b200c49dcd52}{rep\+\_\+weight}
+\begin{DoxyCompactList}\small\item\em weighting factor the repulsive component \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_a1223f43ad697e3539a732b08b5d77926}\label{classpfield_1_1PtField_a1223f43ad697e3539a732b08b5d77926}} 
+double \hyperlink{classpfield_1_1PtField_a1223f43ad697e3539a732b08b5d77926}{Qstar}
+\begin{DoxyCompactList}\small\item\em threshold for obstacles range of influence \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpfield_1_1PtField_a941337f34ead9c01f53427075be8a0b9}\label{classpfield_1_1PtField_a941337f34ead9c01f53427075be8a0b9}} 
+std\+::vector$<$ rigid2d\+::\+Vector2D $>$ \hyperlink{classpfield_1_1PtField_a941337f34ead9c01f53427075be8a0b9}{final\+\_\+path}
+\begin{DoxyCompactList}\small\item\em final path determined \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -54,6 +99,42 @@ constuctor to initialize the Potential Field Planner
 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpfield_1_1PtField_a1cbfedd08d4e271264f10e5b5c9b57bd}\label{classpfield_1_1PtField_a1cbfedd08d4e271264f10e5b5c9b57bd}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!calculate\+\_\+u\+\_\+att@{calculate\+\_\+u\+\_\+att}}
+\index{calculate\+\_\+u\+\_\+att@{calculate\+\_\+u\+\_\+att}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{calculate\+\_\+u\+\_\+att()}{calculate\_u\_att()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D pfield\+::\+Pt\+Field\+::calculate\+\_\+u\+\_\+att (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{cur\+\_\+loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate the attractive component of the \char`\"{}force\char`\"{} based on the distance to goal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cur\+\_\+loc} & the current location of the robot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the total attrative gradient 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classpfield_1_1PtField_a8d47de5b4a724e2100c70676e683298b}\label{classpfield_1_1PtField_a8d47de5b4a724e2100c70676e683298b}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!calculate\+\_\+u\+\_\+rep@{calculate\+\_\+u\+\_\+rep}}
+\index{calculate\+\_\+u\+\_\+rep@{calculate\+\_\+u\+\_\+rep}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{calculate\+\_\+u\+\_\+rep()}{calculate\_u\_rep()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D pfield\+::\+Pt\+Field\+::calculate\+\_\+u\+\_\+rep (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{cur\+\_\+loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate the repulsive component of the \char`\"{}force\char`\"{} based on the distance to each obstacle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cur\+\_\+loc} & the current location of the robot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the total repulsive gradient 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}\label{classpfield_1_1PtField_ab936f2bf686f45a2a11825e5a8911356}} 
 \index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!get\+\_\+path@{get\+\_\+path}}
 \index{get\+\_\+path@{get\+\_\+path}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
@@ -85,9 +166,29 @@ given the robots location, plan its next step
 \begin{DoxyReturn}{Returns}
 the next location to move to 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classpfield_1_1PtField_ac8e3ca79a5c7eb3baeaa4b6097df2c8f}\label{classpfield_1_1PtField_ac8e3ca79a5c7eb3baeaa4b6097df2c8f}} 
+\index{pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}!u\+\_\+rep\+\_\+component@{u\+\_\+rep\+\_\+component}}
+\index{u\+\_\+rep\+\_\+component@{u\+\_\+rep\+\_\+component}!pfield\+::\+Pt\+Field@{pfield\+::\+Pt\+Field}}
+\subsubsection{\texorpdfstring{u\+\_\+rep\+\_\+component()}{u\_rep\_component()}}
+{\footnotesize\ttfamily rigid2d\+::\+Vector2D pfield\+::\+Pt\+Field\+::u\+\_\+rep\+\_\+component (\begin{DoxyParamCaption}\item[{std\+::vector$<$ rigid2d\+::\+Vector2D $>$}]{polygon,  }\item[{rigid2d\+::\+Vector2D}]{cur\+\_\+loc }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate the repulsive component due to a given obstacle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em polygon} & a set of points that define a convex polygon \\
+\hline
+{\em cur\+\_\+loc} & the current location of the robot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of the repulsice gradient components for the provided obstacle 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-global\+\_\+search/include/global\+\_\+search/\hyperlink{potential__fields_8hpp}{potential\+\_\+fields.\+hpp}\item 
-global\+\_\+search/src/global\+\_\+search/\hyperlink{potential__fields_8cpp}{potential\+\_\+fields.\+cpp}\end{DoxyCompactItemize}
+global\+\_\+search/include/global\+\_\+search/potential\+\_\+fields.\+hpp\item 
+global\+\_\+search/src/global\+\_\+search/potential\+\_\+fields.\+cpp\end{DoxyCompactItemize}

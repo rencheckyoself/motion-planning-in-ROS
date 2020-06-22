@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vec2d_5fto_5fgeopt',['Vec2D_to_GeoPt',['../d1/d4e/utility_8hpp.html#a1e91b69142b37805ef41aee106cddf8f',1,'utility']]]
+  ['thetastar',['ThetaStar',['../da/dce/classhsearch_1_1ThetaStar.html#a9c3540ce3c1e93b8053eb97e62d71145',1,'hsearch::ThetaStar']]]
 ];

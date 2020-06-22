@@ -1,0 +1,258 @@
+\hypertarget{classmppi__control_1_1mppi__lib_1_1mppi}{}\section{mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi Class Reference}
+\label{classmppi__control_1_1mppi__lib_1_1mppi}\index{mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi@{mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi}}
+
+
+class for controlling a diff drive robot  
+
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a76565f0e7592710c414d86b6c010460f}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, initial\+\_\+action, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a68ee5156799bb07db88f240790c5cf5f}{goal}, horizon\+\_\+time, horizon\+\_\+steps, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_ad88a6859f7ba1407c74749e3b29e479c}{lam}, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_abb18e20a9d313fe78a93c36528f7aa5b}{sig}, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a87e95b1bcdc996d76c4cb69d7ad27155}{N}, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_aeb8c77f8575d92ea4192f5a84c79ffd8}{Q}, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a67ff8a6e353fe0d6c3f6ed6fe27448da}{R}, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a930d221e939ac8f594941d05c77ab853}{P1}, robot)
+\begin{DoxyCompactList}\small\item\em The constructor. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_aa67fc09d56d7ada464f473a6f1f3bc18}{step} (self, x, u, f)
+\begin{DoxyCompactList}\small\item\em Function to perform Euler integration to take one step in time. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a68e30fe4b04af8aae056c266e89b9efb}{l} (self, x, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a1ee8d442a2e68fbd95869aeb88ede25b}{a}, eps)
+\begin{DoxyCompactList}\small\item\em Cost function. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a52f1aaeb68db93c409fad6ab39379384}{m} (self, x)
+\begin{DoxyCompactList}\small\item\em Terminal Cost function. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_aa6c892f2527dff71e2627454e135fe81}{set\+\_\+goal} (self, \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a68ee5156799bb07db88f240790c5cf5f}{goal}, action\+\_\+seq=None)
+\begin{DoxyCompactList}\small\item\em Function to change the target waypoint and inital action (if desired) \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_af8fd429f1aa4508069e7410987649100}{get\+\_\+control} (self, cur\+\_\+state, cur\+\_\+time)
+\begin{DoxyCompactList}\small\item\em The main M\+P\+PI alogrithm. \end{DoxyCompactList}\item 
+def \hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a2701aeac8683ceecbd4d86303f4c3647}{made\+\_\+it} (self, cur\+\_\+state, lim)
+\begin{DoxyCompactList}\small\item\em Function to determine if the robot is at the goal location. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_ad88a6859f7ba1407c74749e3b29e479c}\label{classmppi__control_1_1mppi__lib_1_1mppi_ad88a6859f7ba1407c74749e3b29e479c}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_ad88a6859f7ba1407c74749e3b29e479c}{lam}
+\begin{DoxyCompactList}\small\item\em mppi parameter \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_abb18e20a9d313fe78a93c36528f7aa5b}\label{classmppi__control_1_1mppi__lib_1_1mppi_abb18e20a9d313fe78a93c36528f7aa5b}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_abb18e20a9d313fe78a93c36528f7aa5b}{sig}
+\begin{DoxyCompactList}\small\item\em sampling distribution varience \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_ab60c8e4834972c05d0e919f55e1bdb36}\label{classmppi__control_1_1mppi__lib_1_1mppi_ab60c8e4834972c05d0e919f55e1bdb36}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_ab60c8e4834972c05d0e919f55e1bdb36}{horizon}
+\begin{DoxyCompactList}\small\item\em the number of descrete steps during the time horizon \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_ad188f7133ac3b810aaa39deb0677f606}\label{classmppi__control_1_1mppi__lib_1_1mppi_ad188f7133ac3b810aaa39deb0677f606}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_ad188f7133ac3b810aaa39deb0677f606}{dt}
+\begin{DoxyCompactList}\small\item\em the time between each step in the horizon \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_ac1691574dab02ec8debf400937af9048}\label{classmppi__control_1_1mppi__lib_1_1mppi_ac1691574dab02ec8debf400937af9048}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_ac1691574dab02ec8debf400937af9048}{last\+\_\+time}
+\begin{DoxyCompactList}\small\item\em last time an action was sent to the robot \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a1ee8d442a2e68fbd95869aeb88ede25b}\label{classmppi__control_1_1mppi__lib_1_1mppi_a1ee8d442a2e68fbd95869aeb88ede25b}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a1ee8d442a2e68fbd95869aeb88ede25b}{a}
+\begin{DoxyCompactList}\small\item\em The initial action sequence, 2xN array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a05d14b2217b17ee2d89968cb52f99d63}\label{classmppi__control_1_1mppi__lib_1_1mppi_a05d14b2217b17ee2d89968cb52f99d63}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a05d14b2217b17ee2d89968cb52f99d63}{a0}
+\begin{DoxyCompactList}\small\item\em The action to append to self.\+a after robot has been issued a control. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a87e95b1bcdc996d76c4cb69d7ad27155}\label{classmppi__control_1_1mppi__lib_1_1mppi_a87e95b1bcdc996d76c4cb69d7ad27155}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a87e95b1bcdc996d76c4cb69d7ad27155}{N}
+\begin{DoxyCompactList}\small\item\em Number of rollouts/samples. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a68ee5156799bb07db88f240790c5cf5f}\label{classmppi__control_1_1mppi__lib_1_1mppi_a68ee5156799bb07db88f240790c5cf5f}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a68ee5156799bb07db88f240790c5cf5f}{goal}
+\begin{DoxyCompactList}\small\item\em Target waypoint. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_af081d09b4ae3afab898e57cfe2c8fc7f}\label{classmppi__control_1_1mppi__lib_1_1mppi_af081d09b4ae3afab898e57cfe2c8fc7f}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_af081d09b4ae3afab898e57cfe2c8fc7f}{t\+\_\+cur}
+\begin{DoxyCompactList}\small\item\em the current time \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_aeb8c77f8575d92ea4192f5a84c79ffd8}\label{classmppi__control_1_1mppi__lib_1_1mppi_aeb8c77f8575d92ea4192f5a84c79ffd8}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_aeb8c77f8575d92ea4192f5a84c79ffd8}{Q}
+\begin{DoxyCompactList}\small\item\em 3x3 array of the cost function state weights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a67ff8a6e353fe0d6c3f6ed6fe27448da}\label{classmppi__control_1_1mppi__lib_1_1mppi_a67ff8a6e353fe0d6c3f6ed6fe27448da}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a67ff8a6e353fe0d6c3f6ed6fe27448da}{R}
+\begin{DoxyCompactList}\small\item\em 2x2 array of the cost function control weights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a930d221e939ac8f594941d05c77ab853}\label{classmppi__control_1_1mppi__lib_1_1mppi_a930d221e939ac8f594941d05c77ab853}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a930d221e939ac8f594941d05c77ab853}{P1}
+\begin{DoxyCompactList}\small\item\em 3x3 array of the terminal cost function state weights \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a3e8d7c700744ceab4964899506619b7c}\label{classmppi__control_1_1mppi__lib_1_1mppi_a3e8d7c700744ceab4964899506619b7c}} 
+\hyperlink{classmppi__control_1_1mppi__lib_1_1mppi_a3e8d7c700744ceab4964899506619b7c}{diff\+\_\+drive}
+\begin{DoxyCompactList}\small\item\em The robot model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class for controlling a diff drive robot 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a76565f0e7592710c414d86b6c010460f}\label{classmppi__control_1_1mppi__lib_1_1mppi_a76565f0e7592710c414d86b6c010460f}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{initial\+\_\+action,  }\item[{}]{goal,  }\item[{}]{horizon\+\_\+time,  }\item[{}]{horizon\+\_\+steps,  }\item[{}]{lam,  }\item[{}]{sig,  }\item[{}]{N,  }\item[{}]{Q,  }\item[{}]{R,  }\item[{}]{P1,  }\item[{}]{robot }\end{DoxyParamCaption})}
+
+
+
+The constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & object pointer \\
+\hline
+{\em initial\+\_\+action} & an inital guess at the controls for the first horizon, a 2xN array where row 0 is the right wheel velcity and row 1 is the left wheel Velocity \\
+\hline
+{\em goal} & target waypoint, np.\+array(\mbox{[}x, y, theta\mbox{]}) \\
+\hline
+{\em horizon\+\_\+time} & defines the time to compute the control over \\
+\hline
+{\em horizon\+\_\+steps} & defines the number of descrete steps during the time horizon \\
+\hline
+{\em lam} & mppi parameter \\
+\hline
+{\em sig} & sampling distribution varience \\
+\hline
+{\em N} & number of rollouts/samples \\
+\hline
+{\em Q} & 3x3 array of the cost function state weights \\
+\hline
+{\em R} & 2x2 array of the cost function control weights \\
+\hline
+{\em P1} & 3x3 array of the terminal cost function state weights \\
+\hline
+{\em robot} & a \hyperlink{classmppi__control_1_1mppi__lib_1_1diff__drive__robot}{diff\+\_\+drive\+\_\+robot} object, or something with a similar format \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_af8fd429f1aa4508069e7410987649100}\label{classmppi__control_1_1mppi__lib_1_1mppi_af8fd429f1aa4508069e7410987649100}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!get\+\_\+control@{get\+\_\+control}}
+\index{get\+\_\+control@{get\+\_\+control}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{get\+\_\+control()}{get\_control()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+get\+\_\+control (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{cur\+\_\+state,  }\item[{}]{cur\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+The main M\+P\+PI alogrithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em cur\+\_\+state} & the current position of the robot, np.\+array(\mbox{[}x, y, theta\mbox{]}) \\
+\hline
+{\em cur\+\_\+time} & the current position of the robot, np.\+array(\mbox{[}x, y, theta\mbox{]})\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+wheel velocities to apply to the robot, 2x1 array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a68e30fe4b04af8aae056c266e89b9efb}\label{classmppi__control_1_1mppi__lib_1_1mppi_a68e30fe4b04af8aae056c266e89b9efb}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!l@{l}}
+\index{l@{l}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{l()}{l()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+l (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{a,  }\item[{}]{eps }\end{DoxyParamCaption})}
+
+
+
+Cost function. 
+
+Uses a quadratic cost function with a regularization term for the mppi samples
+
+All inputs should correspond to the same time stamp 
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em x} & the state of the robot, an Nx3 array \\
+\hline
+{\em a} & the mean control, an array with 2 elements \\
+\hline
+{\em eps} & the sampled control pertubations, an Nx2 array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the cost at the ith step in the horizon, an Nx1 array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a52f1aaeb68db93c409fad6ab39379384}\label{classmppi__control_1_1mppi__lib_1_1mppi_a52f1aaeb68db93c409fad6ab39379384}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!m@{m}}
+\index{m@{m}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{m()}{m()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+m (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+Terminal Cost function. 
+
+Uses a quadratic cost
+
+All inputs should correspond to the same time stamp 
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em x} & the state of the robot, an Nx3 array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the cost at the end of the horizon, an Nx1 array 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_a2701aeac8683ceecbd4d86303f4c3647}\label{classmppi__control_1_1mppi__lib_1_1mppi_a2701aeac8683ceecbd4d86303f4c3647}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!made\+\_\+it@{made\+\_\+it}}
+\index{made\+\_\+it@{made\+\_\+it}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{made\+\_\+it()}{made\_it()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+made\+\_\+it (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{cur\+\_\+state,  }\item[{}]{lim }\end{DoxyParamCaption})}
+
+
+
+Function to determine if the robot is at the goal location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em cur\+\_\+state} & the current position of the robot, np.\+array(\mbox{[}x, y, theta\mbox{]}) \\
+\hline
+{\em lim} & the threshold to determine if the goal has been met\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the robot has arrived at the goal, otherwise False 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_aa6c892f2527dff71e2627454e135fe81}\label{classmppi__control_1_1mppi__lib_1_1mppi_aa6c892f2527dff71e2627454e135fe81}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!set\+\_\+goal@{set\+\_\+goal}}
+\index{set\+\_\+goal@{set\+\_\+goal}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{set\+\_\+goal()}{set\_goal()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+set\+\_\+goal (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal,  }\item[{}]{action\+\_\+seq = {\ttfamily None} }\end{DoxyParamCaption})}
+
+
+
+Function to change the target waypoint and inital action (if desired) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em goal} & target waypoint, np.\+array(\mbox{[}x, y, theta\mbox{]}) \\
+\hline
+{\em action\+\_\+seq} & the inital guess for the new target. Defaults to None and will just use the existing values in the action array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nothing 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classmppi__control_1_1mppi__lib_1_1mppi_aa67fc09d56d7ada464f473a6f1f3bc18}\label{classmppi__control_1_1mppi__lib_1_1mppi_aa67fc09d56d7ada464f473a6f1f3bc18}} 
+\index{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}!step@{step}}
+\index{step@{step}!mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi@{mppi\+\_\+control\+::mppi\+\_\+lib\+::mppi}}
+\subsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily def mppi\+\_\+control.\+mppi\+\_\+lib.\+mppi.\+step (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{u,  }\item[{}]{f }\end{DoxyParamCaption})}
+
+
+
+Function to perform Euler integration to take one step in time. 
+
+x and u should have the same number of rows 
+\begin{DoxyParams}{Parameters}
+{\em self} & the object pointer \\
+\hline
+{\em x} & the current state, an nx3 array. \\
+\hline
+{\em u} & the control state, an nx2 array. \\
+\hline
+{\em f} & the function to use that defines the kinematics of the system being controlled\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the simulated next state of the robot 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mppi\+\_\+control/src/mppi\+\_\+control/mppi\+\_\+lib.\+py\end{DoxyCompactItemize}

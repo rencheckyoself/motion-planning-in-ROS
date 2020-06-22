@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['is_5fconsistent',['is_consistent',['../d8/d70/classhsearch_1_1LPAStar.html#a034b8a41e91d684932dd014139c4fcd1',1,'hsearch::LPAStar']]],
-  ['isconnected',['IsConnected',['../de/d19/structprm_1_1Node.html#a166ab395f8fcb59f5d5367ca45f7bf51',1,'prm::Node']]]
+  ['h',['h',['../d0/dde/classhsearch_1_1HSearch.html#aa09bc55605f454f822892a40e580b164',1,'hsearch::HSearch']]],
+  ['hsearch',['HSearch',['../d0/dde/classhsearch_1_1HSearch.html#a88c750ab9e6c9ad303f468ef270619c3',1,'hsearch::HSearch::HSearch()'],['../d0/dde/classhsearch_1_1HSearch.html#a52aed9d8d8c634bd506cfd3c14620884',1,'hsearch::HSearch::HSearch(std::vector&lt; prm::Node &gt; *node_list)'],['../d0/dde/classhsearch_1_1HSearch.html#a58bce8362211fa679ebf8200dc31d03d',1,'hsearch::HSearch::HSearch(grid::Map map)']]]
 ];

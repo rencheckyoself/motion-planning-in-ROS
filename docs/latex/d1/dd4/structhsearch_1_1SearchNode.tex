@@ -11,8 +11,7 @@ Information used by a search algorithm.
 
 
 
-Collaboration diagram for hsearch\+:\+:Search\+Node\+:
-\nopagebreak
+Collaboration diagram for hsearch\+:\+:Search\+Node\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -43,16 +42,16 @@ std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hype
 int \hyperlink{structhsearch_1_1SearchNode_ab0e32e34e1e2682c0cc7968df6dd7b85}{search\+\_\+id} = 0
 \begin{DoxyCompactList}\small\item\em a unique id for the search node created \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}\label{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}} 
-double \hyperlink{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}{f\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+double \hyperlink{structhsearch_1_1SearchNode_a0f9510192452ac5efd6733eadfee38c2}{f\+\_\+val} = B\+I\+G\+\_\+\+N\+UM
 \begin{DoxyCompactList}\small\item\em total node cost \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}\label{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}} 
-double \hyperlink{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}{g\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+double \hyperlink{structhsearch_1_1SearchNode_afc0b32b3c3c748e6585b76fc53553063}{g\+\_\+val} = B\+I\+G\+\_\+\+N\+UM
 \begin{DoxyCompactList}\small\item\em path cost from start to this \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}\label{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}} 
-double \hyperlink{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}{h\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+double \hyperlink{structhsearch_1_1SearchNode_a8e25282237951762ced727eb0097abd9}{h\+\_\+val} = B\+I\+G\+\_\+\+N\+UM
 \begin{DoxyCompactList}\small\item\em estimated cost from this to goal \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}\label{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}} 
-double \hyperlink{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}{rhs\+\_\+val} = \hyperlink{potential__fields_8hpp_a44b8ad40964aabfb40ae3a0625190475}{B\+I\+G\+\_\+\+N\+UM}
+double \hyperlink{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}{rhs\+\_\+val} = B\+I\+G\+\_\+\+N\+UM
 \begin{DoxyCompactList}\small\item\em another estimate of the start distance used for incremental search methods \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}\label{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}} 
 \hyperlink{structhsearch_1_1Key}{Key} \hyperlink{structhsearch_1_1SearchNode_adc5f4fb44ebe73e41ffdc6c5d22c526b}{key\+\_\+val}
@@ -61,7 +60,7 @@ double \hyperlink{structhsearch_1_1SearchNode_a85d37c5e72aa9fd323f68467f60c5eb0}
 std\+::shared\+\_\+ptr$<$ \hyperlink{structprm_1_1Node}{prm\+::\+Node} $>$ \hyperlink{structhsearch_1_1SearchNode_ad651df3e918ceb891c294945e9e41598}{parent\+\_\+p} = nullptr
 \begin{DoxyCompactList}\small\item\em the parent of this node \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}\label{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}} 
-\hyperlink{heuristic__search_8hpp_a544e6b02038f7495f0ef622404fdfd79}{status} \hyperlink{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}{state} = New
+status \hyperlink{structhsearch_1_1SearchNode_ae137174b53abd37ea386f3e3d9ebf462}{state} = New
 \begin{DoxyCompactList}\small\item\em current status of the node \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -142,5 +141,5 @@ True if this node is greater than rhs
 
 The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-global\+\_\+search/include/global\+\_\+search/\hyperlink{heuristic__search_8hpp}{heuristic\+\_\+search.\+hpp}\item 
-global\+\_\+search/src/global\+\_\+search/\hyperlink{heuristic__search_8cpp}{heuristic\+\_\+search.\+cpp}\end{DoxyCompactItemize}
+global\+\_\+search/include/global\+\_\+search/heuristic\+\_\+search.\+hpp\item 
+global\+\_\+search/src/global\+\_\+search/heuristic\+\_\+search.\+cpp\end{DoxyCompactItemize}

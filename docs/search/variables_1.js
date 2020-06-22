@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['closed_5flist',['closed_list',['../d0/dde/classhsearch_1_1HSearch.html#ae85581fef9d5887f154d2d3b9ea3a06e',1,'hsearch::HSearch']]],
-  ['created_5fgraph_5fp',['created_graph_p',['../d0/dde/classhsearch_1_1HSearch.html#a92b4944c741acab45fc3c71661f1aa42',1,'hsearch::HSearch::created_graph_p()'],['../d8/d70/classhsearch_1_1LPAStar.html#a75e7bdc0841fd31468c41a58ac842aed',1,'hsearch::LPAStar::created_graph_p()']]]
+  ['buffer_5fradius',['buffer_radius',['../da/dce/classhsearch_1_1ThetaStar.html#aba51580af01b2cdd040b94de00046271',1,'hsearch::ThetaStar::buffer_radius()'],['../de/d83/classgrid_1_1Grid.html#aae353051de1a48dd8f29e1889d71bf88',1,'grid::Grid::buffer_radius()'],['../d8/df3/classprm_1_1RoadMap.html#a9caa7aa9541cfae82f0f848ab6accffb',1,'prm::RoadMap::buffer_radius()']]]
 ];

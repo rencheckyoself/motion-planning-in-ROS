@@ -81,6 +81,8 @@ $(document).ready(function(){initNavTree('d8/df3/classprm_1_1RoadMap.html','../.
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="../../d2/d16/classprm_1_1RoadMap-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">prm::RoadMap Class Reference</div>  </div>
@@ -116,6 +118,72 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a45f658affb0061cdfe9de396fdbd7268"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a45f658affb0061cdfe9de396fdbd7268">add_node</a> (rigid2d::Vector2D point)</td></tr>
 <tr class="memdesc:a45f658affb0061cdfe9de396fdbd7268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a user defined node into the graph and create the edges.  <a href="#a45f658affb0061cdfe9de396fdbd7268">More...</a><br /></td></tr>
 <tr class="separator:a45f658affb0061cdfe9de396fdbd7268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0d91fcf77606b05494dfcae4a4945351"><td class="memItemLeft" align="right" valign="top"><a id="a0d91fcf77606b05494dfcae4a4945351"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a0d91fcf77606b05494dfcae4a4945351">sample_config_space</a> ()</td></tr>
+<tr class="memdesc:a0d91fcf77606b05494dfcae4a4945351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Randomly Sample the configuration space to retrieve a set of nodes for the roadmap. <br /></td></tr>
+<tr class="separator:a0d91fcf77606b05494dfcae4a4945351"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c24a16d78040b0d5f247f0cf181363"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a73c24a16d78040b0d5f247f0cf181363">node_collisions</a> (rigid2d::Vector2D point)</td></tr>
+<tr class="memdesc:a73c24a16d78040b0d5f247f0cf181363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine if the node was sampled from an area inside an obstacle.  <a href="#a73c24a16d78040b0d5f247f0cf181363">More...</a><br /></td></tr>
+<tr class="separator:a73c24a16d78040b0d5f247f0cf181363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad74dcd92a949ee573310790fa8b2cae1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#ad74dcd92a949ee573310790fa8b2cae1">connect_node</a> (<a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &amp;node)</td></tr>
+<tr class="memdesc:ad74dcd92a949ee573310790fa8b2cae1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find nodes that are near the provided reference and connect them if possible.  <a href="#ad74dcd92a949ee573310790fa8b2cae1">More...</a><br /></td></tr>
+<tr class="separator:ad74dcd92a949ee573310790fa8b2cae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05eba7fbe20463c8b8a3463dfd141c30"><td class="memItemLeft" align="right" valign="top"><a id="a05eba7fbe20463c8b8a3463dfd141c30"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a05eba7fbe20463c8b8a3463dfd141c30">connect_nodes</a> ()</td></tr>
+<tr class="memdesc:a05eba7fbe20463c8b8a3463dfd141c30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find nodes that are near each other and connect them if possible. <br /></td></tr>
+<tr class="separator:a05eba7fbe20463c8b8a3463dfd141c30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a518085e457cb12dcbe63cfa3cc5942be"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a518085e457cb12dcbe63cfa3cc5942be">edge_collisions</a> (<a class="el" href="../../d4/db8/structprm_1_1Edge.html">Edge</a> edge)</td></tr>
+<tr class="memdesc:a518085e457cb12dcbe63cfa3cc5942be"><td class="mdescLeft">&#160;</td><td class="mdescRight">wrapper for all of the edge collision methods  <a href="#a518085e457cb12dcbe63cfa3cc5942be">More...</a><br /></td></tr>
+<tr class="separator:a518085e457cb12dcbe63cfa3cc5942be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88e8d2df6c41bdc5ee5df4debbd0324d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a88e8d2df6c41bdc5ee5df4debbd0324d">nearest_neighbors_bf</a> (const <a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &amp;node)</td></tr>
+<tr class="memdesc:a88e8d2df6c41bdc5ee5df4debbd0324d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Brute force k-nearest search.  <a href="#a88e8d2df6c41bdc5ee5df4debbd0324d">More...</a><br /></td></tr>
+<tr class="separator:a88e8d2df6c41bdc5ee5df4debbd0324d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a5c4bd6165645faab938831e7890d077e"><td class="memItemLeft" align="right" valign="top"><a id="a5c4bd6165645faab938831e7890d077e"></a>
+std::vector&lt; std::vector&lt; rigid2d::Vector2D &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a5c4bd6165645faab938831e7890d077e">obstacles</a></td></tr>
+<tr class="memdesc:a5c4bd6165645faab938831e7890d077e"><td class="mdescLeft">&#160;</td><td class="mdescRight">obstacles in the map <br /></td></tr>
+<tr class="separator:a5c4bd6165645faab938831e7890d077e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ad1a820114f8832cde28136385ab2d4"><td class="memItemLeft" align="right" valign="top"><a id="a2ad1a820114f8832cde28136385ab2d4"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a2ad1a820114f8832cde28136385ab2d4">x_bounds</a></td></tr>
+<tr class="memdesc:a2ad1a820114f8832cde28136385ab2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">x bounds of the map <br /></td></tr>
+<tr class="separator:a2ad1a820114f8832cde28136385ab2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74349888d97a0056b994aae47c0a4b07"><td class="memItemLeft" align="right" valign="top"><a id="a74349888d97a0056b994aae47c0a4b07"></a>
+std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a74349888d97a0056b994aae47c0a4b07">y_bounds</a></td></tr>
+<tr class="memdesc:a74349888d97a0056b994aae47c0a4b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">y bounds of the map <br /></td></tr>
+<tr class="separator:a74349888d97a0056b994aae47c0a4b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f13fcb691beb29fd4ef0b37b3c05c54"><td class="memItemLeft" align="right" valign="top"><a id="a5f13fcb691beb29fd4ef0b37b3c05c54"></a>
+std::vector&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a5f13fcb691beb29fd4ef0b37b3c05c54">nodes</a></td></tr>
+<tr class="memdesc:a5f13fcb691beb29fd4ef0b37b3c05c54"><td class="mdescLeft">&#160;</td><td class="mdescRight">all nodes in the road map <br /></td></tr>
+<tr class="separator:a5f13fcb691beb29fd4ef0b37b3c05c54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05410db39631cd38cd76aaaa72325895"><td class="memItemLeft" align="right" valign="top"><a id="a05410db39631cd38cd76aaaa72325895"></a>
+std::vector&lt; <a class="el" href="../../d4/db8/structprm_1_1Edge.html">Edge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a05410db39631cd38cd76aaaa72325895">all_edges</a></td></tr>
+<tr class="memdesc:a05410db39631cd38cd76aaaa72325895"><td class="mdescLeft">&#160;</td><td class="mdescRight">all edges in the road map <br /></td></tr>
+<tr class="separator:a05410db39631cd38cd76aaaa72325895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9caa7aa9541cfae82f0f848ab6accffb"><td class="memItemLeft" align="right" valign="top"><a id="a9caa7aa9541cfae82f0f848ab6accffb"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a9caa7aa9541cfae82f0f848ab6accffb">buffer_radius</a> = 0</td></tr>
+<tr class="memdesc:a9caa7aa9541cfae82f0f848ab6accffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">buffer distance to incorporate when detecting collisions <br /></td></tr>
+<tr class="separator:a9caa7aa9541cfae82f0f848ab6accffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03d4a7e9302f36c8e0a2bbeaeaba2c5e"><td class="memItemLeft" align="right" valign="top"><a id="a03d4a7e9302f36c8e0a2bbeaeaba2c5e"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a03d4a7e9302f36c8e0a2bbeaeaba2c5e">n</a> = 100</td></tr>
+<tr class="memdesc:a03d4a7e9302f36c8e0a2bbeaeaba2c5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nodes in the map <br /></td></tr>
+<tr class="separator:a03d4a7e9302f36c8e0a2bbeaeaba2c5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad761640fd616fead6e1943a6f493750b"><td class="memItemLeft" align="right" valign="top"><a id="ad761640fd616fead6e1943a6f493750b"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#ad761640fd616fead6e1943a6f493750b">k</a> = 10</td></tr>
+<tr class="memdesc:ad761640fd616fead6e1943a6f493750b"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nearest neighbors to find <br /></td></tr>
+<tr class="separator:ad761640fd616fead6e1943a6f493750b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5b8d4f3c026cc9e4b5bd8dff74a107e"><td class="memItemLeft" align="right" valign="top"><a id="ad5b8d4f3c026cc9e4b5bd8dff74a107e"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#ad5b8d4f3c026cc9e4b5bd8dff74a107e">edge_cnt</a> = 0</td></tr>
+<tr class="memdesc:ad5b8d4f3c026cc9e4b5bd8dff74a107e"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of edges in the graph <br /></td></tr>
+<tr class="separator:ad5b8d4f3c026cc9e4b5bd8dff74a107e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a805350e531aa3e4992d941c399461842"><td class="memItemLeft" align="right" valign="top"><a id="a805350e531aa3e4992d941c399461842"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/df3/classprm_1_1RoadMap.html#a805350e531aa3e4992d941c399461842">node_cnt</a> = 0</td></tr>
+<tr class="memdesc:a805350e531aa3e4992d941c399461842"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of nodes in the graph <br /></td></tr>
+<tr class="separator:a805350e531aa3e4992d941c399461842"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class to build a Probabilistic Road Maps based on provided Map information. </p>
@@ -273,6 +341,75 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad74dcd92a949ee573310790fa8b2cae1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad74dcd92a949ee573310790fa8b2cae1">&#9670;&nbsp;</a></span>connect_node()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void prm::RoadMap::connect_node </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Find nodes that are near the provided reference and connect them if possible. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>reference to a node </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a518085e457cb12dcbe63cfa3cc5942be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a518085e457cb12dcbe63cfa3cc5942be">&#9670;&nbsp;</a></span>edge_collisions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool prm::RoadMap::edge_collisions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d4/db8/structprm_1_1Edge.html">Edge</a>&#160;</td>
+          <td class="paramname"><em>edge</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>wrapper for all of the edge collision methods </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">edge</td><td>the edge to compare against all polygons </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the edge is valid </dd></dl>
+
+</div>
+</div>
 <a id="a9be7cb5cac090269e00125cc7dc0cfd6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9be7cb5cac090269e00125cc7dc0cfd6">&#9670;&nbsp;</a></span>get_edges()</h2>
 
@@ -313,9 +450,79 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a88e8d2df6c41bdc5ee5df4debbd0324d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88e8d2df6c41bdc5ee5df4debbd0324d">&#9670;&nbsp;</a></span>nearest_neighbors_bf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::reference_wrapper&lt; <a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &gt; &gt; prm::RoadMap::nearest_neighbors_bf </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../de/d19/structprm_1_1Node.html">Node</a> &amp;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Brute force k-nearest search. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reference</td><td>to a node object to base the search on </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>a vector of references the k-nearest nodes to the input node </dd></dl>
+
+</div>
+</div>
+<a id="a73c24a16d78040b0d5f247f0cf181363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73c24a16d78040b0d5f247f0cf181363">&#9670;&nbsp;</a></span>node_collisions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool prm::RoadMap::node_collisions </td>
+          <td>(</td>
+          <td class="paramtype">rigid2d::Vector2D&#160;</td>
+          <td class="paramname"><em>point</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Determine if the node was sampled from an area inside an obstacle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point</td><td>the configuration of a new potential node </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the node is valid </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>roadmap/include/roadmap/<a class="el" href="../../da/d34/prm_8hpp_source.html">prm.hpp</a></li>
-<li>roadmap/src/roadmap/<a class="el" href="../../d9/da7/prm_8cpp.html">prm.cpp</a></li>
+<li>roadmap/src/roadmap/prm.cpp</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

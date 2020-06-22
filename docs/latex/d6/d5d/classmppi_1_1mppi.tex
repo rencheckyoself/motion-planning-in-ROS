@@ -1,0 +1,192 @@
+\hypertarget{classmppi_1_1mppi}{}\section{mppi.\+mppi Class Reference}
+\label{classmppi_1_1mppi}\index{mppi.\+mppi@{mppi.\+mppi}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmppi_1_1mppi_ae70b7800222b3d3fa78a5c971379a7ce}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self, initial\+\_\+state, initial\+\_\+action, goal, horizon, lam, sig, N, Q, R, P1)
+\item 
+def \hyperlink{classmppi_1_1mppi_aefb1b323eed26eb12ddfaf7dfa51365b}{step} (self, x, u, f)
+\item 
+def \hyperlink{classmppi_1_1mppi_a15f30c6bfee7ffcd317c609858e28872}{diff\+\_\+drive} (self, th, u)
+\item 
+def \hyperlink{classmppi_1_1mppi_a2729bb6fc99b1f9d5e4bf0b4e266cb28}{unicycle} (self, th, u)
+\item 
+def \hyperlink{classmppi_1_1mppi_afb42580c212d2f8b3a91769c310b2a59}{l} (self, x, a, eps)
+\item 
+def \hyperlink{classmppi_1_1mppi_a4ef334166e9f0a70c4e1f10b4e09ec19}{m} (self, x)
+\item 
+def \hyperlink{classmppi_1_1mppi_ae8da14cd9e13cc8db319b60342534759}{set\+\_\+goal} (self, goal, action\+\_\+seq)
+\item 
+def \hyperlink{classmppi_1_1mppi_ae61896acd71b74fd6031675e5a810115}{go\+\_\+to\+\_\+goal} (self)
+\item 
+def \hyperlink{classmppi_1_1mppi_ac7537cf9afe61a1fd82b820439893e67}{get\+\_\+plot} (self)
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a4ec9118d61c9eeb16ab0948016496888}\label{classmppi_1_1mppi_a4ec9118d61c9eeb16ab0948016496888}} 
+def {\bfseries get\+\_\+animation} (self)
+\item 
+def \hyperlink{classmppi_1_1mppi_aa571b7cb2b4733b126a35029c1a0ee48}{made\+\_\+it} (self, lim)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a8bf075aaa5d6b4f080bb4866e30715f0}\label{classmppi_1_1mppi_a8bf075aaa5d6b4f080bb4866e30715f0}} 
+{\bfseries lam}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a7b862259ed5cd04ede10e4708f8bd8c7}\label{classmppi_1_1mppi_a7b862259ed5cd04ede10e4708f8bd8c7}} 
+{\bfseries sig}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a833dc0c7d75966bf5a4d4c079e6452b9}\label{classmppi_1_1mppi_a833dc0c7d75966bf5a4d4c079e6452b9}} 
+{\bfseries horizon}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a4ee7a37a51ba90681ae66ec355c76f15}\label{classmppi_1_1mppi_a4ee7a37a51ba90681ae66ec355c76f15}} 
+{\bfseries dt}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a265ff966968b4391198baf00c92ae0d6}\label{classmppi_1_1mppi_a265ff966968b4391198baf00c92ae0d6}} 
+{\bfseries a}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_aa882635c224af3b59b5d8750136a545b}\label{classmppi_1_1mppi_aa882635c224af3b59b5d8750136a545b}} 
+{\bfseries a0}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_af1e5845901e97b3f15dcc9392dbebd33}\label{classmppi_1_1mppi_af1e5845901e97b3f15dcc9392dbebd33}} 
+{\bfseries cur\+\_\+state}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a0f53d59fd01d066bb1e781fa9027ffc6}\label{classmppi_1_1mppi_a0f53d59fd01d066bb1e781fa9027ffc6}} 
+{\bfseries fin\+\_\+path}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a82b41efed0ef2334bc61d3b3daef3c46}\label{classmppi_1_1mppi_a82b41efed0ef2334bc61d3b3daef3c46}} 
+{\bfseries fin\+\_\+control}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a577abda0129aa6f7110a0cd5bd3420d7}\label{classmppi_1_1mppi_a577abda0129aa6f7110a0cd5bd3420d7}} 
+{\bfseries fin\+\_\+time}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_af78269c6fd0acc4c871cce7bec0a7a2d}\label{classmppi_1_1mppi_af78269c6fd0acc4c871cce7bec0a7a2d}} 
+{\bfseries N}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_ae38412e2b1e930262d447a907df4ddd2}\label{classmppi_1_1mppi_ae38412e2b1e930262d447a907df4ddd2}} 
+{\bfseries goal}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_ac0ce5467b9850d5d1b04fb3d6c939f9a}\label{classmppi_1_1mppi_ac0ce5467b9850d5d1b04fb3d6c939f9a}} 
+{\bfseries t\+\_\+cur}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_af94490dc621ccab0958c4fff71c197b0}\label{classmppi_1_1mppi_af94490dc621ccab0958c4fff71c197b0}} 
+{\bfseries Q}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_ae8cb78644a438cb735817c790d7ed21d}\label{classmppi_1_1mppi_ae8cb78644a438cb735817c790d7ed21d}} 
+{\bfseries R}
+\item 
+\mbox{\Hypertarget{classmppi_1_1mppi_a08990f801950f176c951cafd01e06ad9}\label{classmppi_1_1mppi_a08990f801950f176c951cafd01e06ad9}} 
+{\bfseries P1}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmppi_1_1mppi_ae70b7800222b3d3fa78a5c971379a7ce}\label{classmppi_1_1mppi_ae70b7800222b3d3fa78a5c971379a7ce}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{initial\+\_\+state,  }\item[{}]{initial\+\_\+action,  }\item[{}]{goal,  }\item[{}]{horizon,  }\item[{}]{lam,  }\item[{}]{sig,  }\item[{}]{N,  }\item[{}]{Q,  }\item[{}]{R,  }\item[{}]{P1 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}initial_state: the starting position of the robot
+initial_action: an inital guess at the controls for the first horizon
+goal: target waypoint
+horizon: defines the time step, dt = 1/horizon
+lam: mppi parameter
+sig: sampling distribution varience
+N: number of rollouts
+\end{DoxyVerb}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmppi_1_1mppi_a15f30c6bfee7ffcd317c609858e28872}\label{classmppi_1_1mppi_a15f30c6bfee7ffcd317c609858e28872}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!diff\+\_\+drive@{diff\+\_\+drive}}
+\index{diff\+\_\+drive@{diff\+\_\+drive}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{diff\+\_\+drive()}{diff\_drive()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+diff\+\_\+drive (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{th,  }\item[{}]{u }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Diff Drive Kinemtic model
+
+th:the angular position of the robot
+u: the control matrix, u1 is the left wheel, u0 is the right\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_ac7537cf9afe61a1fd82b820439893e67}\label{classmppi_1_1mppi_ac7537cf9afe61a1fd82b820439893e67}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!get\+\_\+plot@{get\+\_\+plot}}
+\index{get\+\_\+plot@{get\+\_\+plot}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{get\+\_\+plot()}{get\_plot()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+get\+\_\+plot (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}plot the final path and controls result
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_ae61896acd71b74fd6031675e5a810115}\label{classmppi_1_1mppi_ae61896acd71b74fd6031675e5a810115}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!go\+\_\+to\+\_\+goal@{go\+\_\+to\+\_\+goal}}
+\index{go\+\_\+to\+\_\+goal@{go\+\_\+to\+\_\+goal}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{go\+\_\+to\+\_\+goal()}{go\_to\_goal()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+go\+\_\+to\+\_\+goal (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Perform mppi algo, apply the control to the robot for 1 time step, and shift the control vecotr accordingly
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_afb42580c212d2f8b3a91769c310b2a59}\label{classmppi_1_1mppi_afb42580c212d2f8b3a91769c310b2a59}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!l@{l}}
+\index{l@{l}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{l()}{l()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+l (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{a,  }\item[{}]{eps }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}cost function
+
+All inputs should correspond to the same time stamp
+
+x: the state of the robot
+a: the control taken
+eps: the sampled control pertubations
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_a4ef334166e9f0a70c4e1f10b4e09ec19}\label{classmppi_1_1mppi_a4ef334166e9f0a70c4e1f10b4e09ec19}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!m@{m}}
+\index{m@{m}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{m()}{m()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+m (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}terminal cost function
+
+x: the state of the robot at the end of the horizon
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_aa571b7cb2b4733b126a35029c1a0ee48}\label{classmppi_1_1mppi_aa571b7cb2b4733b126a35029c1a0ee48}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!made\+\_\+it@{made\+\_\+it}}
+\index{made\+\_\+it@{made\+\_\+it}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{made\+\_\+it()}{made\_it()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+made\+\_\+it (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{lim }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}determine the robot is at the goal location
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_ae8da14cd9e13cc8db319b60342534759}\label{classmppi_1_1mppi_ae8da14cd9e13cc8db319b60342534759}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!set\+\_\+goal@{set\+\_\+goal}}
+\index{set\+\_\+goal@{set\+\_\+goal}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{set\+\_\+goal()}{set\_goal()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+set\+\_\+goal (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{goal,  }\item[{}]{action\+\_\+seq }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Function used to update the goal to drive towards
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_aefb1b323eed26eb12ddfaf7dfa51365b}\label{classmppi_1_1mppi_aefb1b323eed26eb12ddfaf7dfa51365b}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!step@{step}}
+\index{step@{step}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{step()}{step()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+step (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{u,  }\item[{}]{f }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Function to propogate the robot forward one time step
+x: the current state of the robot
+\end{DoxyVerb}
+ \mbox{\Hypertarget{classmppi_1_1mppi_a2729bb6fc99b1f9d5e4bf0b4e266cb28}\label{classmppi_1_1mppi_a2729bb6fc99b1f9d5e4bf0b4e266cb28}} 
+\index{mppi\+::mppi@{mppi\+::mppi}!unicycle@{unicycle}}
+\index{unicycle@{unicycle}!mppi\+::mppi@{mppi\+::mppi}}
+\subsubsection{\texorpdfstring{unicycle()}{unicycle()}}
+{\footnotesize\ttfamily def mppi.\+mppi.\+unicycle (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{th,  }\item[{}]{u }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}unicycle kinematic model
+
+th and u should have the same number of rows.
+
+th: angular position of the robot
+u: control matrix, where each row is a unique control
+\end{DoxyVerb}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+mppi\+\_\+control/testing\+\_\+files/mppi.\+py\end{DoxyCompactItemize}

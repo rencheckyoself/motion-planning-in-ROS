@@ -27,6 +27,56 @@ std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ \hyperlink{classprm_1_1
 \begin{DoxyCompactList}\small\item\em Wrapper function to get the vector of unique edges. \end{DoxyCompactList}\item 
 bool \hyperlink{classprm_1_1RoadMap_a45f658affb0061cdfe9de396fdbd7268}{add\+\_\+node} (rigid2d\+::\+Vector2D point)
 \begin{DoxyCompactList}\small\item\em Add a user defined node into the graph and create the edges. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a0d91fcf77606b05494dfcae4a4945351}\label{classprm_1_1RoadMap_a0d91fcf77606b05494dfcae4a4945351}} 
+void \hyperlink{classprm_1_1RoadMap_a0d91fcf77606b05494dfcae4a4945351}{sample\+\_\+config\+\_\+space} ()
+\begin{DoxyCompactList}\small\item\em Randomly Sample the configuration space to retrieve a set of nodes for the roadmap. \end{DoxyCompactList}\item 
+bool \hyperlink{classprm_1_1RoadMap_a73c24a16d78040b0d5f247f0cf181363}{node\+\_\+collisions} (rigid2d\+::\+Vector2D point)
+\begin{DoxyCompactList}\small\item\em Determine if the node was sampled from an area inside an obstacle. \end{DoxyCompactList}\item 
+void \hyperlink{classprm_1_1RoadMap_ad74dcd92a949ee573310790fa8b2cae1}{connect\+\_\+node} (\hyperlink{structprm_1_1Node}{Node} \&node)
+\begin{DoxyCompactList}\small\item\em Find nodes that are near the provided reference and connect them if possible. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a05eba7fbe20463c8b8a3463dfd141c30}\label{classprm_1_1RoadMap_a05eba7fbe20463c8b8a3463dfd141c30}} 
+void \hyperlink{classprm_1_1RoadMap_a05eba7fbe20463c8b8a3463dfd141c30}{connect\+\_\+nodes} ()
+\begin{DoxyCompactList}\small\item\em Find nodes that are near each other and connect them if possible. \end{DoxyCompactList}\item 
+bool \hyperlink{classprm_1_1RoadMap_a518085e457cb12dcbe63cfa3cc5942be}{edge\+\_\+collisions} (\hyperlink{structprm_1_1Edge}{Edge} edge)
+\begin{DoxyCompactList}\small\item\em wrapper for all of the edge collision methods \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \hyperlink{structprm_1_1Node}{Node} $>$ $>$ \hyperlink{classprm_1_1RoadMap_a88e8d2df6c41bdc5ee5df4debbd0324d}{nearest\+\_\+neighbors\+\_\+bf} (const \hyperlink{structprm_1_1Node}{Node} \&node)
+\begin{DoxyCompactList}\small\item\em Brute force k-\/nearest search. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a5c4bd6165645faab938831e7890d077e}\label{classprm_1_1RoadMap_a5c4bd6165645faab938831e7890d077e}} 
+std\+::vector$<$ std\+::vector$<$ rigid2d\+::\+Vector2D $>$ $>$ \hyperlink{classprm_1_1RoadMap_a5c4bd6165645faab938831e7890d077e}{obstacles}
+\begin{DoxyCompactList}\small\item\em obstacles in the map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a2ad1a820114f8832cde28136385ab2d4}\label{classprm_1_1RoadMap_a2ad1a820114f8832cde28136385ab2d4}} 
+std\+::vector$<$ double $>$ \hyperlink{classprm_1_1RoadMap_a2ad1a820114f8832cde28136385ab2d4}{x\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em x bounds of the map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a74349888d97a0056b994aae47c0a4b07}\label{classprm_1_1RoadMap_a74349888d97a0056b994aae47c0a4b07}} 
+std\+::vector$<$ double $>$ \hyperlink{classprm_1_1RoadMap_a74349888d97a0056b994aae47c0a4b07}{y\+\_\+bounds}
+\begin{DoxyCompactList}\small\item\em y bounds of the map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a5f13fcb691beb29fd4ef0b37b3c05c54}\label{classprm_1_1RoadMap_a5f13fcb691beb29fd4ef0b37b3c05c54}} 
+std\+::vector$<$ \hyperlink{structprm_1_1Node}{Node} $>$ \hyperlink{classprm_1_1RoadMap_a5f13fcb691beb29fd4ef0b37b3c05c54}{nodes}
+\begin{DoxyCompactList}\small\item\em all nodes in the road map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a05410db39631cd38cd76aaaa72325895}\label{classprm_1_1RoadMap_a05410db39631cd38cd76aaaa72325895}} 
+std\+::vector$<$ \hyperlink{structprm_1_1Edge}{Edge} $>$ \hyperlink{classprm_1_1RoadMap_a05410db39631cd38cd76aaaa72325895}{all\+\_\+edges}
+\begin{DoxyCompactList}\small\item\em all edges in the road map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a9caa7aa9541cfae82f0f848ab6accffb}\label{classprm_1_1RoadMap_a9caa7aa9541cfae82f0f848ab6accffb}} 
+double \hyperlink{classprm_1_1RoadMap_a9caa7aa9541cfae82f0f848ab6accffb}{buffer\+\_\+radius} = 0
+\begin{DoxyCompactList}\small\item\em buffer distance to incorporate when detecting collisions \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a03d4a7e9302f36c8e0a2bbeaeaba2c5e}\label{classprm_1_1RoadMap_a03d4a7e9302f36c8e0a2bbeaeaba2c5e}} 
+unsigned int \hyperlink{classprm_1_1RoadMap_a03d4a7e9302f36c8e0a2bbeaeaba2c5e}{n} = 100
+\begin{DoxyCompactList}\small\item\em number of nodes in the map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_ad761640fd616fead6e1943a6f493750b}\label{classprm_1_1RoadMap_ad761640fd616fead6e1943a6f493750b}} 
+unsigned int \hyperlink{classprm_1_1RoadMap_ad761640fd616fead6e1943a6f493750b}{k} = 10
+\begin{DoxyCompactList}\small\item\em number of nearest neighbors to find \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_ad5b8d4f3c026cc9e4b5bd8dff74a107e}\label{classprm_1_1RoadMap_ad5b8d4f3c026cc9e4b5bd8dff74a107e}} 
+unsigned int \hyperlink{classprm_1_1RoadMap_ad5b8d4f3c026cc9e4b5bd8dff74a107e}{edge\+\_\+cnt} = 0
+\begin{DoxyCompactList}\small\item\em number of edges in the graph \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classprm_1_1RoadMap_a805350e531aa3e4992d941c399461842}\label{classprm_1_1RoadMap_a805350e531aa3e4992d941c399461842}} 
+unsigned int \hyperlink{classprm_1_1RoadMap_a805350e531aa3e4992d941c399461842}{node\+\_\+cnt} = 0
+\begin{DoxyCompactList}\small\item\em number of nodes in the graph \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -109,6 +159,39 @@ Wrapper function to call all nessissary functions to build the P\+RM.
 {\em robot\+\_\+radius} & the radius to use as a buffer around the robot for collision detection \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{classprm_1_1RoadMap_ad74dcd92a949ee573310790fa8b2cae1}\label{classprm_1_1RoadMap_ad74dcd92a949ee573310790fa8b2cae1}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!connect\+\_\+node@{connect\+\_\+node}}
+\index{connect\+\_\+node@{connect\+\_\+node}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{connect\+\_\+node()}{connect\_node()}}
+{\footnotesize\ttfamily void prm\+::\+Road\+Map\+::connect\+\_\+node (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Node}{Node} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Find nodes that are near the provided reference and connect them if possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & reference to a node \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a518085e457cb12dcbe63cfa3cc5942be}\label{classprm_1_1RoadMap_a518085e457cb12dcbe63cfa3cc5942be}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!edge\+\_\+collisions@{edge\+\_\+collisions}}
+\index{edge\+\_\+collisions@{edge\+\_\+collisions}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{edge\+\_\+collisions()}{edge\_collisions()}}
+{\footnotesize\ttfamily bool prm\+::\+Road\+Map\+::edge\+\_\+collisions (\begin{DoxyParamCaption}\item[{\hyperlink{structprm_1_1Edge}{Edge}}]{edge }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+wrapper for all of the edge collision methods 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge} & the edge to compare against all polygons \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the edge is valid 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}\label{classprm_1_1RoadMap_a9be7cb5cac090269e00125cc7dc0cfd6}} 
 \index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!get\+\_\+edges@{get\+\_\+edges}}
 \index{get\+\_\+edges@{get\+\_\+edges}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
@@ -135,9 +218,45 @@ Wrapper function to get the vector of nodes.
 \begin{DoxyReturn}{Returns}
 the full node vector 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a88e8d2df6c41bdc5ee5df4debbd0324d}\label{classprm_1_1RoadMap_a88e8d2df6c41bdc5ee5df4debbd0324d}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!nearest\+\_\+neighbors\+\_\+bf@{nearest\+\_\+neighbors\+\_\+bf}}
+\index{nearest\+\_\+neighbors\+\_\+bf@{nearest\+\_\+neighbors\+\_\+bf}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{nearest\+\_\+neighbors\+\_\+bf()}{nearest\_neighbors\_bf()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \hyperlink{structprm_1_1Node}{Node} $>$ $>$ prm\+::\+Road\+Map\+::nearest\+\_\+neighbors\+\_\+bf (\begin{DoxyParamCaption}\item[{const \hyperlink{structprm_1_1Node}{Node} \&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Brute force k-\/nearest search. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & to a node object to base the search on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a vector of references the k-\/nearest nodes to the input node 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classprm_1_1RoadMap_a73c24a16d78040b0d5f247f0cf181363}\label{classprm_1_1RoadMap_a73c24a16d78040b0d5f247f0cf181363}} 
+\index{prm\+::\+Road\+Map@{prm\+::\+Road\+Map}!node\+\_\+collisions@{node\+\_\+collisions}}
+\index{node\+\_\+collisions@{node\+\_\+collisions}!prm\+::\+Road\+Map@{prm\+::\+Road\+Map}}
+\subsubsection{\texorpdfstring{node\+\_\+collisions()}{node\_collisions()}}
+{\footnotesize\ttfamily bool prm\+::\+Road\+Map\+::node\+\_\+collisions (\begin{DoxyParamCaption}\item[{rigid2d\+::\+Vector2D}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Determine if the node was sampled from an area inside an obstacle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & the configuration of a new potential node \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the node is valid 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-roadmap/include/roadmap/\hyperlink{prm_8hpp}{prm.\+hpp}\item 
-roadmap/src/roadmap/\hyperlink{prm_8cpp}{prm.\+cpp}\end{DoxyCompactItemize}
+roadmap/include/roadmap/prm.\+hpp\item 
+roadmap/src/roadmap/prm.\+cpp\end{DoxyCompactItemize}

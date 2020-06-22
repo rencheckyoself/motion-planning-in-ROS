@@ -5,6 +5,22 @@ var classprm_1_1RoadMap =
     [ "RoadMap", "d8/df3/classprm_1_1RoadMap.html#a1c44e6fa58b91b3b79bcf56e414dff44", null ],
     [ "add_node", "d8/df3/classprm_1_1RoadMap.html#a45f658affb0061cdfe9de396fdbd7268", null ],
     [ "build_map", "d8/df3/classprm_1_1RoadMap.html#ab81f9c73d7539b570a2164369144c41f", null ],
+    [ "connect_node", "d8/df3/classprm_1_1RoadMap.html#ad74dcd92a949ee573310790fa8b2cae1", null ],
+    [ "connect_nodes", "d8/df3/classprm_1_1RoadMap.html#a05eba7fbe20463c8b8a3463dfd141c30", null ],
+    [ "edge_collisions", "d8/df3/classprm_1_1RoadMap.html#a518085e457cb12dcbe63cfa3cc5942be", null ],
     [ "get_edges", "d8/df3/classprm_1_1RoadMap.html#a9be7cb5cac090269e00125cc7dc0cfd6", null ],
-    [ "get_nodes", "d8/df3/classprm_1_1RoadMap.html#a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0", null ]
+    [ "get_nodes", "d8/df3/classprm_1_1RoadMap.html#a9b8c5b9de9a678f1eb9a6ceaa9fd8bb0", null ],
+    [ "nearest_neighbors_bf", "d8/df3/classprm_1_1RoadMap.html#a88e8d2df6c41bdc5ee5df4debbd0324d", null ],
+    [ "node_collisions", "d8/df3/classprm_1_1RoadMap.html#a73c24a16d78040b0d5f247f0cf181363", null ],
+    [ "sample_config_space", "d8/df3/classprm_1_1RoadMap.html#a0d91fcf77606b05494dfcae4a4945351", null ],
+    [ "all_edges", "d8/df3/classprm_1_1RoadMap.html#a05410db39631cd38cd76aaaa72325895", null ],
+    [ "buffer_radius", "d8/df3/classprm_1_1RoadMap.html#a9caa7aa9541cfae82f0f848ab6accffb", null ],
+    [ "edge_cnt", "d8/df3/classprm_1_1RoadMap.html#ad5b8d4f3c026cc9e4b5bd8dff74a107e", null ],
+    [ "k", "d8/df3/classprm_1_1RoadMap.html#ad761640fd616fead6e1943a6f493750b", null ],
+    [ "n", "d8/df3/classprm_1_1RoadMap.html#a03d4a7e9302f36c8e0a2bbeaeaba2c5e", null ],
+    [ "node_cnt", "d8/df3/classprm_1_1RoadMap.html#a805350e531aa3e4992d941c399461842", null ],
+    [ "nodes", "d8/df3/classprm_1_1RoadMap.html#a5f13fcb691beb29fd4ef0b37b3c05c54", null ],
+    [ "obstacles", "d8/df3/classprm_1_1RoadMap.html#a5c4bd6165645faab938831e7890d077e", null ],
+    [ "x_bounds", "d8/df3/classprm_1_1RoadMap.html#a2ad1a820114f8832cde28136385ab2d4", null ],
+    [ "y_bounds", "d8/df3/classprm_1_1RoadMap.html#a74349888d97a0056b994aae47c0a4b07", null ]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['g_5fval',['g_val',['../d1/dd4/structhsearch_1_1SearchNode.html#afc0b32b3c3c748e6585b76fc53553063',1,'hsearch::SearchNode']]],
-  ['goal_5fid',['goal_id',['../d8/d70/classhsearch_1_1LPAStar.html#a5788af90341b229108706b497cdf24ae',1,'hsearch::LPAStar']]],
-  ['goal_5floc',['goal_loc',['../d0/dde/classhsearch_1_1HSearch.html#a201d281d6a8d9fcc4158772f862d1847',1,'hsearch::HSearch']]]
+  ['f_5fval',['f_val',['../d1/dd4/structhsearch_1_1SearchNode.html#a0f9510192452ac5efd6733eadfee38c2',1,'hsearch::SearchNode']]],
+  ['final_5fpath',['final_path',['../d0/dde/classhsearch_1_1HSearch.html#a3188c5cda32b79ace51327a4ede85f33',1,'hsearch::HSearch::final_path()'],['../d5/d13/classpfield_1_1PtField.html#a941337f34ead9c01f53427075be8a0b9',1,'pfield::PtField::final_path()']]]
 ];

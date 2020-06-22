@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['line_5fshape_5fintersection',['line_shape_intersection',['../d3/d08/collision_8hpp.html#a70c9083464a3dd4bc7c32dabe857e331',1,'collision::line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector&lt; rigid2d::Vector2D &gt; polygon)'],['../d3/d08/collision_8hpp.html#abf9b390bd1d767fe39f7d4806fae6b62',1,'collision::line_shape_intersection(rigid2d::Vector2D line_start, rigid2d::Vector2D line_end, std::vector&lt; rigid2d::Vector2D &gt; polygon, double buffer_radius)']]],
-  ['locate_5fnode',['locate_node',['../d8/d70/classhsearch_1_1LPAStar.html#ad5b74c1a38d9db460324fcb1784ac114',1,'hsearch::LPAStar']]],
-  ['lpastar',['LPAStar',['../d8/d70/classhsearch_1_1LPAStar.html',1,'hsearch::LPAStar'],['../d8/d70/classhsearch_1_1LPAStar.html#accb9219b8a08ab651d3d629a29c281a5',1,'hsearch::LPAStar::LPAStar()'],['../d8/d70/classhsearch_1_1LPAStar.html#a4272517c63ee82c3b745cbaaa0b98a59',1,'hsearch::LPAStar::LPAStar(std::vector&lt; std::vector&lt; prm::Node &gt;&gt; *grid_graph, grid::Grid *base_grid, rigid2d::Vector2D start_loc, rigid2d::Vector2D goal_loc)']]],
-  ['lpastar_5fsearch_2ecpp',['lpastar_search.cpp',['../da/dfc/lpastar__search_8cpp.html',1,'']]]
+  ['k',['k',['../d8/df3/classprm_1_1RoadMap.html#ad761640fd616fead6e1943a6f493750b',1,'prm::RoadMap']]],
+  ['k1',['k1',['../d4/db3/structhsearch_1_1Key.html#a25799f303c869b7406796f08d0db924a',1,'hsearch::Key']]],
+  ['k2',['k2',['../d4/db3/structhsearch_1_1Key.html#ad759545484e29eaaf8d462852e4f9de5',1,'hsearch::Key']]],
+  ['key',['Key',['../d4/db3/structhsearch_1_1Key.html',1,'hsearch']]],
+  ['key_5fval',['key_val',['../d1/dd4/structhsearch_1_1SearchNode.html#adc5f4fb44ebe73e41ffdc6c5d22c526b',1,'hsearch::SearchNode']]],
+  ['km',['km',['../d8/d70/classhsearch_1_1LPAStar.html#a8da37ca2b4be6ad6a64f38827fab3545',1,'hsearch::LPAStar']]],
+  ['known_5fgrid_5fp',['known_grid_p',['../d8/d70/classhsearch_1_1LPAStar.html#ad96878a72794979745566de57b9a361d',1,'hsearch::LPAStar']]],
+  ['known_5fmap',['known_map',['../da/dce/classhsearch_1_1ThetaStar.html#a90305133e71bfaa015747138383620da',1,'hsearch::ThetaStar::known_map()'],['../d5/d13/classpfield_1_1PtField.html#af42c90549ef5781d7ace3750a64204fb',1,'pfield::PtField::known_map()']]]
 ];
