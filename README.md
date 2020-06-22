@@ -95,7 +95,7 @@ The green node is the start and the red node is the goal and the orange line is 
 
 ### MPPI
 
-To view the algorithm in action, launch `mppi_control turtlebot_mppi.launch`. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. The parameters may need tuning to yield good results. This package depends on a couple of packages located in my other `ros_navigation_from_scratch` repo. Use the included .rosinstall file to ensure you get the correct packages.
+To view the algorithm in action, launch `mppi_control turtlebot_mppi.launch`. After launching, call the `/start` service from the terminal to begin the waypoint following. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. The parameters may need tuning to yield good results. This package depends on a couple of packages located in my other `ros_navigation_from_scratch` repo. Use the included .rosinstall file to ensure you get the correct packages.
 
 - Change parameters in the mppi_control/config/control_param.yaml to tune the controller
 
@@ -114,6 +114,15 @@ The third plot is using the unicycle kinematic model to follow a series of waypo
 <img src="mppi_control/testing_files/waypoints-unicycle.gif" width="500">
 
 ## Background
+
+### Probabilistic Road Map
+
+A PRM is a means to efficiently constructing a system of valid pathways through an environment as it has the advantage to plan in high dimensional configuration spaces. The assembly starts by randomly sampling states and only keeping them if they are a valid. In this implementation, a valid node is an x,y position that is not within the bounds of an obstacle or its buffer zone. After N number of valid nodes have been sampled each node is connected to it's k-nearest neighbors along valid straight line paths. In this implementation a path or edge is considered valid if it does not intersect an obstacle or it's buffer zone.
+
+The challenging part of implementing a PRM is identifying how to determine if a node/edge is valid. This implementation currently only supports convex obstacles and expects that the vertices are provided in counterclockwise order. The collision detection is as follows:
+- To determine if a sampled node is inside of an obstacle, test if the state is on the same side of all of the line segments.
+- To determine if a sampled node is inside the buffer zone, calculate that shortest distance to each line segment and compare it to the desired buffer distance.
+- To determine if an edge between two nodes is
 
 ## References and Resources
 

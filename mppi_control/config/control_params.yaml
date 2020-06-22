@@ -11,4 +11,4 @@ horizon_time: 1.0 # number of seconds to compute the future control for
 
 N: 5 # number of samples or rollouts to use
 
-waypoints: [[4, 0, 0], [4, 4, 0], [2, 6, 0], [0, 4, 0], [0, 0, 0]] # waypoints drive to
+waypoints: [[4, 0, 0], [4, 4, 0], [2, 6, 0], [0, 4, 0], [0, 0, 0]] # waypoints drive to [x,y,th]

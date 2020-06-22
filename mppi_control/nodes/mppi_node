@@ -16,8 +16,8 @@ import numpy as np
 import rospy
 import tf
 
-
-from geometry_msgs.msg import Twist, Quaternion, Vector3
+from visualization_msgs.msg import Marker
+from geometry_msgs.msg import Twist, Quaternion, Vector3, Point
 from nav_msgs.msg import Odometry
 from std_srvs.srv import Empty, EmptyResponse
 
@@ -33,6 +33,7 @@ class node_class():
         self.start_service = rospy.Service('start', Empty, self.callback_start)
 
         self.cmd_pub = rospy.Publisher("cmd_vel", Twist, queue_size=1)
+        self.marker_pub = rospy.Publisher("visualization_marker", Marker, queue_size=1)
 
         self.odom_sub = rospy.Subscriber("odom", Odometry, self.callback_odom, queue_size=1)
 
@@ -77,6 +78,44 @@ class node_class():
         self.start_time = 0
         self.prev_time = 0
 
+    def create_waypoint_markers(self):
+
+        marker = Marker()
+
+        marker.header.frame_id = "/odom"
+        marker.header.stamp = rospy.Time.now()
+
+        marker.id = 0
+        marker.type = marker.SPHERE_LIST
+        marker.action = marker.ADD
+
+        marker.scale.x = 0.2
+        marker.scale.y = 0.2
+        marker.scale.z = 0.2
+
+        marker.color.r = 1.0
+        marker.color.g = 1.0
+        marker.color.b = 1.0
+        marker.color.a = 1.0
+
+        # marker.pose.position.x = 0.0
+        # marker.pose.position.y = 0.0
+        # marker.pose.position.z = 0.0
+
+        marker.pose.orientation.x = 0.0
+        marker.pose.orientation.y = 0.0
+        marker.pose.orientation.z = 0.0
+        marker.pose.orientation.w = 1.0
+
+        for i, goal in enumerate(self.waypoints):
+            point = Point()
+            point.x = goal[0]
+            point.y = goal[1]
+            point.z = 0
+            marker.points.append(point)
+
+        self.marker_pub.publish(marker)
+
     def callback_start(self, req):
         self.start = True
         print("GO!")
@@ -100,6 +139,9 @@ class node_class():
             if self.first_pass:
                 self.start_time = cur_time
                 self.prev_time = cur_time
+
+                self.create_waypoint_markers()
+                print("Going to Waypoint: ", self.waypoints[0])
                 self.first_pass = False
 
             t_cur = cur_time - self.start_time
@@ -113,6 +155,7 @@ class node_class():
                     print("Finished Path!")
                     self.start = False
                     cmd = Twist(Vector3(0, 0, 0), Vector3(0, 0, 0))
+                    self.loc = 1
                 else:
                     print("Going to Waypoint: ", self.waypoints[self.loc])
                     self.control.set_goal(self.waypoints[self.loc])
