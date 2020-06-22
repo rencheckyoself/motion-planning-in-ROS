@@ -106,4 +106,55 @@ zeta: 0.01 # step size
 
 
 
+\subsubsection*{M\+P\+PI}
+
+To view the algorithm in action, launch {\ttfamily mppi\+\_\+control turtlebot\+\_\+mppi.\+launch}. After launching, call the {\ttfamily /start} service from the terminal to begin the waypoint following. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. This package depends on a couple of packages located in my other {\ttfamily ros\+\_\+navigation\+\_\+from\+\_\+scratch} repo. Use the included .rosinstall file to ensure you get the correct packages.
+
+
+\begin{DoxyItemize}
+\item Change parameters in the mppi\+\_\+control/config/control\+\_\+param.\+yaml to tune the controller
+\end{DoxyItemize}
+
+This example is using M\+P\+PI control to select wheel velocities for a differential drive robot to drive through consecutive waypoints. Each waypoint is an (x,y,heading) tuple. The parameters used are shown in the configuration file. Due to the random sampling each run is slightly different, but exhibit the same general behavior.
+
+
+
+Also included in {\ttfamily mppi\+\_\+control/testing\+\_\+files} is a python-\/only script to perform the same algorithm. To use this script, execute the {\ttfamily mppi.\+py} file. It is currently configured to have a unicycle model robot follow waypoints. Below are some results for various robots and tasks\+:
+
+The first plot is using the unicycle kinematic model to solve the parallel parking problem. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.
+
+
+
+The plot below is using the differential drive kinematic model to solve the parallel parking problem. The output of the control algorithm is right and left wheel velocities. See the python script for all of the parameters.
+
+
+
+The third plot is using the unicycle kinematic model to follow a series of waypoint. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.
+
+
+
 \subsection*{Background}
+
+\subsubsection*{Probabilistic Road Map}
+
+A P\+RM is a means to efficiently constructing a system of valid pathways through an environment as it has the advantage to plan in high dimensional configuration spaces. The assembly starts by randomly sampling states and only keeping them if they are a valid. In this implementation, a valid node is an x,y position that is not within the bounds of an obstacle or its buffer zone. After N number of valid nodes have been sampled each node is connected to it\textquotesingle{}s k-\/nearest neighbors along valid straight line paths. In this implementation a path or edge is considered valid if it does not intersect an obstacle or it\textquotesingle{}s buffer zone.
+
+The challenging part of implementing a P\+RM is identifying how to determine if a node/edge is valid. This implementation currently only supports convex obstacles and expects that the vertices are provided in counterclockwise order. The collision detection is as follows\+:
+\begin{DoxyItemize}
+\item To determine if a sampled node is inside of an obstacle, test if the state is on the same side of all of the line segments.
+\item To determine if a sampled node is inside the buffer zone, calculate that shortest distance to each line segment and compare it to the desired buffer distance.
+\item To determine if an edge between two nodes is
+\end{DoxyItemize}
+
+\subsection*{References and Resources}
+
+
+\begin{DoxyItemize}
+\item La\+Valle, Steven M. Planning algorithms. Cambridge university press, 2006.
+\item Choset, Howie M., et al. Principles of robot motion\+: theory, algorithms, and implementation. M\+IT press, 2005.
+\item Latombe, Lydia E. Kavraki Jean-\/\+Claude. ”\+Probabilistic Roadmaps for Robot Path Planning.\+” Prati-\/ cal motion planning in robotics\+: current aproaches and future challenges (1998)\+: 33-\/53.
+\item Daniel, Kenny, et al. ”\+Theta$\ast$\+: Any-\/angle path planning on grids.\+” Journal of Artificial In-\/ telligence Research 39 (2010)\+: 533-\/579.
+\item Koenig, Sven, and Maxim Likhachev. ”\+Fast replanning for navigation in unknown terrain.\+” I\+E\+EE Transactions on Robotics 21.\+3 (2005)\+: 354-\/363.
+\item Williams, Grady, Andrew Aldrich, and Evangelos Theodorou. \char`\"{}\+Model predictive path integral control using covariance variable importance sampling.\char`\"{} ar\+Xiv preprint ar\+Xiv\+:1509.\+01149 (2015).
+\item Abraham, Ian, et al. \char`\"{}\+Model-\/\+Based Generalization Under Parameter Uncertainty Using Path Integral Control.\char`\"{} I\+E\+EE Robotics and Automation Letters 5.\+2 (2020)\+: 2864-\/2871. 
+\end{DoxyItemize}

@@ -151,7 +151,46 @@ $(document).ready(function(){initNavTree('index.html','');});
 <div class="image">
 <img src="global_search/documentation/potfield.gif" width="500"/>
 </div>
+<h3>MPPI</h3>
+<p>To view the algorithm in action, launch <code>mppi_control turtlebot_mppi.launch</code>. After launching, call the <code>/start</code> service from the terminal to begin the waypoint following. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. This package depends on a couple of packages located in my other <code>ros_navigation_from_scratch</code> repo. Use the included .rosinstall file to ensure you get the correct packages.</p>
+<ul>
+<li>Change parameters in the mppi_control/config/control_param.yaml to tune the controller</li>
+</ul>
+<p>This example is using MPPI control to select wheel velocities for a differential drive robot to drive through consecutive waypoints. Each waypoint is an (x,y,heading) tuple. The parameters used are shown in the configuration file. Due to the random sampling each run is slightly different, but exhibit the same general behavior.</p>
+<div class="image">
+<img src="mppi_control/documentation/ROS_mppi_waypoints.gif" width="500"/>
+</div>
+<p>Also included in <code>mppi_control/testing_files</code> is a python-only script to perform the same algorithm. To use this script, execute the <code>mppi.py</code> file. It is currently configured to have a unicycle model robot follow waypoints. Below are some results for various robots and tasks:</p>
+<p>The first plot is using the unicycle kinematic model to solve the parallel parking problem. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.</p>
+<div class="image">
+<img src="mppi_control/testing_files/unicycle.gif" width="500"/>
+</div>
+<p>The plot below is using the differential drive kinematic model to solve the parallel parking problem. The output of the control algorithm is right and left wheel velocities. See the python script for all of the parameters.</p>
+<div class="image">
+<img src="mppi_control/testing_files/diff_drive.gif" width="500"/>
+</div>
+<p>The third plot is using the unicycle kinematic model to follow a series of waypoint. The output of the control algorithm is linear and angular velocities. See the python script for all of the parameters.</p>
+<div class="image">
+<img src="mppi_control/testing_files/waypoints-unicycle.gif" width="500"/>
+</div>
 <h2>Background</h2>
+<h3>Probabilistic Road Map</h3>
+<p>A PRM is a means to efficiently constructing a system of valid pathways through an environment as it has the advantage to plan in high dimensional configuration spaces. The assembly starts by randomly sampling states and only keeping them if they are a valid. In this implementation, a valid node is an x,y position that is not within the bounds of an obstacle or its buffer zone. After N number of valid nodes have been sampled each node is connected to it's k-nearest neighbors along valid straight line paths. In this implementation a path or edge is considered valid if it does not intersect an obstacle or it's buffer zone.</p>
+<p>The challenging part of implementing a PRM is identifying how to determine if a node/edge is valid. This implementation currently only supports convex obstacles and expects that the vertices are provided in counterclockwise order. The collision detection is as follows:</p><ul>
+<li>To determine if a sampled node is inside of an obstacle, test if the state is on the same side of all of the line segments.</li>
+<li>To determine if a sampled node is inside the buffer zone, calculate that shortest distance to each line segment and compare it to the desired buffer distance.</li>
+<li>To determine if an edge between two nodes is</li>
+</ul>
+<h2>References and Resources</h2>
+<ul>
+<li>LaValle, Steven M. Planning algorithms. Cambridge university press, 2006.</li>
+<li>Choset, Howie M., et al. Principles of robot motion: theory, algorithms, and implementation. MIT press, 2005.</li>
+<li>Latombe, Lydia E. Kavraki Jean-Claude. ”Probabilistic Roadmaps for Robot Path Planning.” Prati- cal motion planning in robotics: current aproaches and future challenges (1998): 33-53.</li>
+<li>Daniel, Kenny, et al. ”Theta*: Any-angle path planning on grids.” Journal of Artificial In- telligence Research 39 (2010): 533-579.</li>
+<li>Koenig, Sven, and Maxim Likhachev. ”Fast replanning for navigation in unknown terrain.” IEEE Transactions on Robotics 21.3 (2005): 354-363.</li>
+<li>Williams, Grady, Andrew Aldrich, and Evangelos Theodorou. "Model predictive path integral control using covariance variable importance sampling." arXiv preprint arXiv:1509.01149 (2015).</li>
+<li>Abraham, Ian, et al. "Model-Based Generalization Under Parameter Uncertainty Using Path Integral Control." IEEE Robotics and Automation Letters 5.2 (2020): 2864-2871. </li>
+</ul>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
