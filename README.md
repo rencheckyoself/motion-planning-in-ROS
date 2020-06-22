@@ -95,9 +95,13 @@ The green node is the start and the red node is the goal and the orange line is 
 
 ### MPPI
 
-To view the algorithm in action, launch `mppi_control turtlebot_mppi.launch`. After launching, call the `/start` service from the terminal to begin the waypoint following. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. The parameters may need tuning to yield good results. This package depends on a couple of packages located in my other `ros_navigation_from_scratch` repo. Use the included .rosinstall file to ensure you get the correct packages.
+To view the algorithm in action, launch `mppi_control turtlebot_mppi.launch`. After launching, call the `/start` service from the terminal to begin the waypoint following. This will apply the mppi control algorithm to calculate a control sequence to drive the robot to a series of waypoints. This package depends on a couple of packages located in my other `ros_navigation_from_scratch` repo. Use the included .rosinstall file to ensure you get the correct packages.
 
 - Change parameters in the mppi_control/config/control_param.yaml to tune the controller
+
+This example is using MPPI control to select wheel velocities for a differential drive robot to drive through consecutive waypoints. Each waypoint is an (x,y,heading) tuple. The parameters used are shown in the configuration file. Due to the random sampling each run is slightly different, but exhibit the same general behavior.
+
+<img src="mppi_control/documentation/ROS_mppi_waypoints.gif" width="500">
 
 Also included in `mppi_control/testing_files` is a python-only script to perform the same algorithm. To use this script, execute the `mppi.py` file. It is currently configured to have a unicycle model robot follow waypoints. Below are some results for various robots and tasks:
 
@@ -126,7 +130,7 @@ The challenging part of implementing a PRM is identifying how to determine if a 
 
 ## References and Resources
 
-- LaValle, Steven M. Planning algorithms. Cambridge university press, 2006. Link
+- LaValle, Steven M. Planning algorithms. Cambridge university press, 2006.
 
 - Choset, Howie M., et al. Principles of robot motion: theory, algorithms, and implementation. MIT press, 2005.
 
