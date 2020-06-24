@@ -2,17 +2,15 @@
 
 ## Overview
 
-This project is in progress.
-
-
   Brief Package Descriptions:
   - `roadmap`: A package with tools to generate various types of graph structured Road Maps. Currently, it supports PRMs and Grids
-
-  Planned additions:
-  - Global Planning using Theta*, D* Lite, Potential Fields
-  - Local Planning with DWA and MPC
+  - `global_search`: A package with various methods to perform global search on the different maps in the road map package
+  - `mppi_control`: A package to perform MPPI control for waypoint following
 
   See the [Full API](https://rencheckyoself.github.io/motion-planning-in-ROS/) for more info.
+
+  Future additions:
+  - A local planner package to experiment with Dynamic Window Approach.
 
 ## How to use
 
@@ -117,7 +115,7 @@ The third plot is using the unicycle kinematic model to follow a series of waypo
 
 <img src="mppi_control/testing_files/waypoints-unicycle.gif" width="500">
 
-## Background
+## A Breif Background
 
 ### Probabilistic Road Map
 
@@ -128,20 +126,41 @@ The challenging part of implementing a PRM is identifying how to determine if a 
 - To determine if a sampled node is inside the buffer zone, calculate that shortest distance to each line segment and compare it to the desired buffer distance.
 - To determine if an edge between two nodes is
 
+### Grids
+
+Another method of descretizing a continuous environment is told build an occupancy grid based on the known information. For this implementation everything inside an obstacle or within a certain distance away from the obstacle is classified as impassable. This can then be used to create a cost map of 0 for the unoccupied cells or infinity for the impassable ones. However, depending on the application, the occupancy grid data can be used to create a non-binary cost map to more accurately reflect the environment.
+
+The benefit of using a grid is that it is able to easily break up an known area, this descretization may cause a loss in map features if the resolution is too low (the cells are too large). The resolution can always be increased to capture finer details, but at the cost of more computational time required.
+
+### A*/Theta* Search
+The A* search algorithm is the genesis of most of the heuristic based search methods. It is commonly used because it is complete (a solution will be found, if one exists) and it is optimal (given the heuristic). A* fits under the best-first search category as at each step in the process the search algorithm will always choose to step toward the best available based on the cost function and the heuristic. When applying A* search to navigation, each increment of the search is limited to evaluating the connected neighbors of a a node and, as a result, the path generated often jagged and requires smoothing to obtain a usable/driveable path; this is the problem Theta* solves. Theta* is classified as an Any-Anlge planner and follows a nearly identical structure as A*, but is not constrained by only connecting immediate neighbors. The Theta* algorithm relies on determining line of sight between two points and using this information the algorithm can connect more than just immediate neighbors.
+
+This search was used on the PRM representation, but could also be applied to the grid.
+
+### LPA*/D* Lite
+Lifelong Planning A* and D* Lite are iterative heuristic based search methods and are design to efficiently replan for a changing/unknown environment. LPA* will always maintain the optimal path between a given start and end point, and for the first iteration will perform very similarly to an A* search. However, once a change in the map is detected, the LPA* algorithm is able to used the results of the previous search to replan without fully starting from scratch. D* Lite is an extension of LPA* to adapt the algorithm to a moving robot.
+
+D* Lite will always maintain the optimal path between the goal and the robots current location. As the robot travels, its sensors provide information to update the known map. Similarly to LPA*, it leverages previous information to efficiently replan until a new path is found.
+
+Because these algorithms require a map that can be updated, these algorithms were applied using the grid.
+
+### Potential Fields
+The potential fields planning method is powerful because it supports planning in a continuous environment, so no need to use a PRM or grid to traverse from the start to the finish. This method simulates "magnetic" forces that act on the robot in order to traverse the environment. The goal location acts as an attractive force, always pulling the robot towards it. Then each obstacle acts as a repulsive force that pushes the robot away if it comes to close to the obstacle. These "forces" are used to generate a velocity vector for how the robot should move. For sparse environments, the simple version of potential fields works well after tuning the parameters. However if there is a dense region of obstacles the repulsive forces can cause the robot to become stuck in a local minimum and extra logic needs to be implemented for escaping.
+
+### MPPI Control
+This control algorithm is an iterative approach to determining a sequence of commands that allow the robot to complete a task as defined by a provided cost function. It accomplishes this by planning for a sequence of controls then randomly and proportionally perturbing the sequence based on the quality of the perturbation. After the perturbations are incorporated the robot is issued the first command in the control sequence and the process is repeated. Like other optimal control algorithms, this one also requires a well formed cost function to define the desired behavior as well as properly tuning the parameters.  
+
 ## References and Resources
 
-- LaValle, Steven M. Planning algorithms. Cambridge university press, 2006.
+- LaValle, Steven M. Planning algorithms. Cambridge University press, 2006.
 
 - Choset, Howie M., et al. Principles of robot motion: theory, algorithms, and implementation. MIT press, 2005.
 
-- Latombe, Lydia E. Kavraki Jean-Claude. ”Probabilistic Roadmaps for Robot Path Planning.” Prati-
-cal motion planning in robotics: current aproaches and future challenges (1998): 33-53.
+- Latombe, Lydia E. Kavraki Jean-Claude. ”Probabilistic Roadmaps for Robot Path Planning.” Practical motion planning in robotics: current aproaches and future challenges (1998): 33-53.
 
-- Daniel, Kenny, et al. ”Theta*: Any-angle path planning on grids.” Journal of Artificial In-
-telligence Research 39 (2010): 533-579.
+- Daniel, Kenny, et al. ”Theta*: Any-angle path planning on grids.” Journal of Artificial Intelligence Research 39 (2010): 533-579.
 
-- Koenig, Sven, and Maxim Likhachev. ”Fast replanning for navigation in unknown terrain.”
-IEEE Transactions on Robotics 21.3 (2005): 354-363.
+- Koenig, Sven, and Maxim Likhachev. ”Fast replanning for navigation in unknown terrain.” IEEE Transactions on Robotics 21.3 (2005): 354-363.
 
 - Williams, Grady, Andrew Aldrich, and Evangelos Theodorou. "Model predictive path integral control using covariance variable importance sampling." arXiv preprint arXiv:1509.01149 (2015).
 
