@@ -7,12 +7,17 @@
   - `global_search`: A package with various methods to perform global search on the different maps in the road map package
   - `mppi_control`: A package to perform MPPI control for waypoint following
 
+
   See the [Full API](https://rencheckyoself.github.io/motion-planning-in-ROS/) for more info.
 
   Future additions:
   - A local planner package to experiment with Dynamic Window Approach.
 
 ## How to use
+
+Clone the repository and then use the included .rosinstall file to also download the other required packages.
+
+Source then build allow of the downloaded packages, then see below how to use each package.
 
 ### Probabilistic Road Maps
 
