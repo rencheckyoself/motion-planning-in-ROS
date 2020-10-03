@@ -122,7 +122,7 @@ The third plot is using the unicycle kinematic model to follow a series of waypo
 
 <img src="mppi_control/testing_files/waypoints-unicycle.gif" width="500">
 
-## A Breif Background
+## A Brief Background
 
 ### Probabilistic Road Map
 
